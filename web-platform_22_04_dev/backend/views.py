@@ -445,11 +445,12 @@ def api_auth_user(request):
             if req_inst.action_type == "CHANGE":
                 try:
                     # TODO get_value ###################################################################################
-                    password = req_inst.get_value("password")
-                    password2 = req_inst.get_value("password2")
                     secret_question = req_inst.get_value("secretQuestion")
                     secret_answer = req_inst.get_value("secretAnswer")
                     email = req_inst.get_value("email")
+                    avatar = req_inst.get_value("avatar")
+                    password = req_inst.get_value("password")
+                    password2 = req_inst.get_value("password2")
                     # TODO actions #####################################################################################
                     user = User.objects.get(id=req_inst.user.id)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
@@ -464,16 +465,15 @@ def api_auth_user(request):
                         user.save()
                         user_model.password_char_field = password
                         user_model.temp_password_boolean_field = False
-                        user_model.save()
                         if secret_question and secret_question != user_model.secret_question_char_field:
                             user_model.secret_question_char_field = secret_question
-                            user_model.save()
                         if secret_answer and secret_answer != user_model.secret_answer_char_field:
                             user_model.secret_answer_char_field = secret_answer
-                            user_model.save()
                         if email and email != user_model.email_field:
                             user_model.email_field = email
-                            user_model.save()
+                        if avatar and avatar != user_model.image_field:
+                            user_model.image_field = avatar
+                        user_model.save()
                         response = {"response": "Изменение успешно проведено."}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
@@ -2217,11 +2217,13 @@ def api_auth_idea(request):
                                 idea_foreign_key_field=idea
                             ).count()
                         if idea_rating_count == 0:
-                            idea_rating_count = 1
+                            idea_rating = 0
+                        else:
+                            idea_rating = round(idea_rating / idea_rating_count, 2)
                         serialized_user = backend_serializers.UserModelSerializer(instance=author, many=False).data
                         ideas.append({
                             "user_model": serialized_user,
-                            "idea_count": idea_count, "idea_rating": round(idea_rating / idea_rating_count, 2),
+                            "idea_count": idea_count, "idea_rating": idea_rating,
                             "idea_rating_count": idea_rating_count, "idea_comment_count": idea_comment_count
                         })
                     # sort

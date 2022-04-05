@@ -58,40 +58,40 @@ export const SalaryPage = () => {
                       required
                       onChange={(e) => monthSet(e.target.value)}
                     >
-                      <option className="m-0 p-0" value="1">
+                      <option className="text-center m-0 p-0" value="1">
                         Январь
                       </option>
-                      <option className="m-0 p-0" value="2">
+                      <option className="text-center m-0 p-0" value="2">
                         Февраль
                       </option>
-                      <option className="m-0 p-0" value="3">
+                      <option className="text-center m-0 p-0" value="3">
                         Март
                       </option>
-                      <option className="m-0 p-0" value="4">
+                      <option className="text-center m-0 p-0" value="4">
                         Апрель
                       </option>
-                      <option className="m-0 p-0" value="5">
+                      <option className="text-center m-0 p-0" value="5">
                         Май
                       </option>
-                      <option className="m-0 p-0" value="6">
+                      <option className="text-center m-0 p-0" value="6">
                         Июнь
                       </option>
-                      <option className="m-0 p-0" value="7">
+                      <option className="text-center m-0 p-0" value="7">
                         Июль
                       </option>
-                      <option className="m-0 p-0" value="8">
+                      <option className="text-center m-0 p-0" value="8">
                         Август
                       </option>
-                      <option className="m-0 p-0" value="9">
+                      <option className="text-center m-0 p-0" value="9">
                         Сентябрь
                       </option>
-                      <option className="m-0 p-0" value="10">
+                      <option className="text-center m-0 p-0" value="10">
                         Октябрь
                       </option>
-                      <option className="m-0 p-0" value="11">
+                      <option className="text-center m-0 p-0" value="11">
                         Ноябрь
                       </option>
-                      <option className="m-0 p-0" value="12">
+                      <option className="text-center m-0 p-0" value="12">
                         Декабрь
                       </option>
                     </select>
@@ -101,13 +101,13 @@ export const SalaryPage = () => {
                       required
                       onChange={(e) => yearSet(e.target.value)}
                     >
-                      <option className="m-0 p-0" value="2021">
+                      <option className="text-center m-0 p-0" value="2021">
                         2021
                       </option>
-                      <option className="m-0 p-0" value="2022">
+                      <option className="text-center m-0 p-0" value="2022">
                         2022
                       </option>
-                      <option className="m-0 p-0" value="2023">
+                      <option className="text-center m-0 p-0" value="2023">
                         2023
                       </option>
                     </select>

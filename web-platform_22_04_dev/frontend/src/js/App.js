@@ -33,7 +33,7 @@ import { NewsPage } from "../pages/2_main/NewsPage";
 import { TextStudyPage } from "../pages/2_main/TextStudyPage";
 import { VideoStudyPage } from "../pages/2_main/VideoStudyPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { IdeaAuthorListPage } from "../pages/3_progress/IdeaAuthorListPage";
+import { TopAuthorListPage } from "../pages/2_main/TopAuthorListPage";
 import { IdeaChangePage } from "../pages/3_progress/IdeaChangePage";
 import { IdeaCreatePage } from "../pages/3_progress/IdeaCreatePage";
 import { IdeaDetailPage } from "../pages/3_progress/IdeaDetailPage";
@@ -98,7 +98,7 @@ export const App = () => {
         <Route path="/idea_self_list" element={<IdeaSelfListPage />} />
         <Route path="/idea_change/:id" element={<IdeaChangePage />} />
         <Route path="/idea_rating" element={<IdeaRatingListPage />} />
-        <Route path="/idea_author_list" element={<IdeaAuthorListPage />} />
+        <Route path="/idea_author_list" element={<TopAuthorListPage />} />
         <Route path="/rational_template" element={<RationalTemplatePage />} />
         <Route path="/rational_create" element={<RationalCreatePage />} />
         <Route

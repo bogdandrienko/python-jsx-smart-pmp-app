@@ -16,6 +16,7 @@ export const ChangeProfilePage = () => {
   const [secretQuestion, secretQuestionSet] = useState("");
   const [secretAnswer, secretAnswerSet] = useState("");
   const [email, emailSet] = useState("");
+  const [avatar, avatarSet] = useState(null);
   const [password, passwordSet] = useState("");
   const [password2, password2Set] = useState("");
   // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -77,9 +78,10 @@ export const ChangeProfilePage = () => {
     e.preventDefault();
     const form = {
       "Action-type": "CHANGE",
-      email: email,
       secretQuestion: secretQuestion,
       secretAnswer: secretAnswer,
+      email: email,
+      avatar: avatar,
       password: password,
       password2: password2,
     };
@@ -247,6 +249,29 @@ export const ChangeProfilePage = () => {
                         {" "}
                         * длина: не более 300 символов
                       </small>
+                    </small>
+                  </label>
+                </div>
+                <div className="m-0 p-0">
+                  {dataUserDetails && dataUserDetails["user_model"] && (
+                    <img
+                      src={utils.GetStaticFile(
+                        dataUserDetails["user_model"]["image_field"]
+                      )}
+                      className="card-img-top img-fluid w-25 m-0 p-1"
+                      alt="изображение отсутствует"
+                    />
+                  )}
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Фото профиля:
+                    <input
+                      type="file"
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      accept=".jpg, .png"
+                      onChange={(e) => avatarSet(e.target.files[0])}
+                    />
+                    <small className="text-muted m-0 p-0">
+                      * не обязательно
                     </small>
                   </label>
                 </div>

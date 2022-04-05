@@ -8,7 +8,7 @@ import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
-export const IdeaAuthorListPage = () => {
+export const TopAuthorListPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
   const dispatch = useDispatch();
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,36 +206,46 @@ export const IdeaAuthorListPage = () => {
               ))}
             </div>
           ) : (
-            <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
+            <ul className="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
               {dataIdeaAuthorList.map((author, index) => (
-                <div key={index} className="col-sm-6 col-md-4 col-lg-3 m-0 p-1">
+                <div key={index} className="col-sm-6 col-md-4 col-lg-4 m-0 p-1">
                   <Link
                     to={`#`}
                     className="text-decoration-none text-dark m-0 p-0"
                   >
-                    <div className="card shadow custom-background-transparent-middle m-0 p-0">
+                    <div className="card shadow custom-background-transparent-low-middle m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
-                        <h6 className="lead fw-bold m-0 p-0">
+                        <h5 className="lead fw-bold m-0 p-0">
                           {utils.GetSliceString(
                             author["user_model"]["last_name_char_field"] +
                               " " +
                               author["user_model"]["first_name_char_field"],
                             50
                           )}
+                        </h5>
+                        <h6 className="fw-bold m-0 p-0">
+                          {utils.GetSliceString(
+                            author["user_model"]["position_char_field"],
+                            70
+                          )}
                         </h6>
                       </div>
-                      <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
+                      <div className="card-header bg-dark bg-opacity-10 m-0 p-3">
                         <h6 className="lead fw-bold m-0 p-0">
                           <div className="m-0 p-0">
                             <img
                               src={
-                                author["image_field"]
-                                  ? utils.GetStaticFile(author["image_field"])
+                                author["user_model"]["image_field"] !==
+                                  "/media/default/account/default_avatar.jpg" &&
+                                author["user_model"]["image_field"]
+                                  ? utils.GetStaticFile(
+                                      author["user_model"]["image_field"]
+                                    )
                                   : utils.GetStaticFile(
-                                      "/media/default/account/default_avatar.jpg"
+                                      "/media/default/top/default_user.png"
                                     )
                               }
-                              className="img-fluid img-thumbnail w-75 m-1 p-0"
+                              className="img-fluid w-50 m-1 p-0"
                               alt="изображение отсутствует"
                             />
                           </div>
@@ -246,38 +256,106 @@ export const IdeaAuthorListPage = () => {
                           <tbody>
                             <tr className="">
                               <td className="fw-bold text-secondary text-start">
-                                Количество идей:
+                                "Общий балл" участника:
                               </td>
                               <td className="small text-end">
-                                {author["idea_count"]}
+                                <i
+                                  className={
+                                    0 > 0
+                                      ? "fa-solid fa-list-ol text-success m-0 p-1"
+                                      : "fa-solid fa-list-ol text-danger m-0 p-1"
+                                  }
+                                >
+                                  {`  0`}
+                                </i>
                               </td>
                             </tr>
                             <tr className="">
                               <td className="fw-bold text-secondary text-start">
-                                Общий рейтинг:
+                                Количество предложений:
                               </td>
                               <td className="small text-end">
-                                {author["idea_rating"]}
+                                <i
+                                  className={
+                                    author["idea_count"] > 0
+                                      ? "fa-solid fa-list text-success m-0 p-1"
+                                      : "fa-solid fa-list text-danger m-0 p-1"
+                                  }
+                                >
+                                  {`  ${author["idea_count"]}`}
+                                </i>
                               </td>
                             </tr>
                             <tr className="">
                               <td className="fw-bold text-secondary text-start">
-                                Количество отметок:
+                                Рейтинг всех предложений:
                               </td>
                               <td className="small text-end">
-                                {author["idea_rating_count"]}
+                                <i
+                                  className={
+                                    author["idea_rating"] > 7
+                                      ? "fas fa-star text-success m-0 p-0"
+                                      : author["idea_rating"] > 4
+                                      ? "fas fa-star custom-color-warning-1 m-0 p-0"
+                                      : "fas fa-star text-danger m-0 p-0"
+                                  }
+                                >
+                                  {`  ${author["idea_rating"]}`}
+                                </i>
+                              </td>
+                            </tr>
+                            <tr className="">
+                              <td className="fw-bold text-secondary text-start">
+                                Количество всех отметок рейтинга:
+                              </td>
+                              <td className="small text-end">
+                                <i
+                                  className={
+                                    author["idea_rating_count"] > 0
+                                      ? "far fa-star text-success m-0 p-1"
+                                      : "far fa-star text-danger m-0 p-1"
+                                  }
+                                >
+                                  {`  ${author["idea_rating_count"]}`}
+                                </i>
                               </td>
                             </tr>
                             <tr className="">
                               <td className="fw-bold text-secondary text-start">
                                 Количество комментариев:
                               </td>
-                              <td className="small text-end">
-                                {author["idea_comment_count"]}
+                              <td className="w-25 small text-end">
+                                <i
+                                  className={
+                                    author["idea_comment_count"] > 0
+                                      ? "fa-solid fa-comment text-success m-0 p-1"
+                                      : "fa-solid fa-comment text-danger m-0 p-1"
+                                  }
+                                >
+                                  {`  ${author["idea_comment_count"]}`}
+                                </i>
                               </td>
                             </tr>
                           </tbody>
                         </table>
+                      </div>
+                      <div className="card-footer bg-success bg-opacity-10 m-0 p-0">
+                        <h6 className="lead text-end m-0 p-1">
+                          {index + 1 === 1 ? (
+                            <i className="fa-solid custom-color-warning-1 fa-trophy">
+                              золото
+                            </i>
+                          ) : index + 1 === 2 ? (
+                            <i className="fa-solid text-primary fa-trophy">
+                              серебро
+                            </i>
+                          ) : index + 1 === 3 ? (
+                            <i className="fa-solid fa-trophy">бронза</i>
+                          ) : (
+                            ""
+                          )}
+                          {` # ${index + 1}`}
+                        </h6>
                       </div>
                     </div>
                   </Link>
