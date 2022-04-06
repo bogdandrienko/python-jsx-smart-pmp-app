@@ -143,7 +143,12 @@ export const HeaderComponent = () => {
           {dataNotificationList && dataNotificationList.length > 0 && (
             <i className="fa-solid fa-bell text-danger m-0 p-2" />
           )}
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            className="btn btn-success text-success bg-warning bg-opacity-50"
+          >
+            <span className="navbar-toggler-icon text-success" />
+          </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav" className="m-0 p-0">
             <Nav className="me-auto m-0 p-0">
               {constants.modules.map(
@@ -277,7 +282,7 @@ export const HeaderComponent = () => {
               <small className="display-6 fw-normal m-0 p-1">{title}</small>
             </div>
             <div className="card-body m-0 p-1">
-              <p className="lead fw-normal m-0 p-1">{description}</p>
+              <p className="lead fw-normal text-muted m-0 p-1">{description}</p>
             </div>
           </div>
         </div>

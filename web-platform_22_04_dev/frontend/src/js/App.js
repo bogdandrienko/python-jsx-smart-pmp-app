@@ -13,7 +13,7 @@ import { VacancyChangePage } from "../pages/0_develop/VacancyChangePage";
 import { VacancyCreatePage } from "../pages/0_develop/VacancyCreatePage";
 import { VacancyDetailPage } from "../pages/0_develop/VacancyDetailPage";
 import { VacancyListPage } from "../pages/0_develop/VacancyListPage";
-import { TestPage } from "../pages/0_develop/TestPage";
+import { TestPage } from "../test/pages/TestPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { AdminChangeUserActivityPage } from "../pages/0_moderator/AdminChangeUserActivityPage";
 import { AdminChangeUserPasswordPage } from "../pages/0_moderator/AdminChangeUserPasswordPage";

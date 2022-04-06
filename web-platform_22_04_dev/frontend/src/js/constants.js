@@ -1,5 +1,5 @@
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 // TODO constants //////////////////////////////////////////////////////////////////////////////////////////////////////
 export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
 export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
@@ -757,9 +757,8 @@ export const modules = [
             Link: "/",
             ExternalLink: false,
             ShowLink: true,
-            Title: 'Веб-платформа АО "Костанайские Минералы" ',
-            Description:
-              "платформа для всех работников предприятия, доступная с браузера любого устройства: компьютер, ноутбук, планшет, смартфон...",
+            Title: 'Веб-платформа АО "Костанайские Минералы"',
+            Description: "платформа для всех работников предприятия!",
             Logic: true,
             Redirect: false,
             Style: "text-dark",
