@@ -67,7 +67,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'frontend/build', BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'react', BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -147,12 +147,19 @@ if DEBUG:
     STATIC_URL = '/static/'
     STATIC_ROOT = Path(BASE_DIR, 'staticroot/')
     STATIC_DIR = Path(BASE_DIR, 'static')
-    STATICFILES_DIRS = [Path(BASE_DIR, 'frontend/build/static'), Path(BASE_DIR, 'static')]
+    STATICFILES_DIRS = [
+        Path(BASE_DIR, 'react/production/static'),
+        Path(BASE_DIR, 'react/test/static'),
+        Path(BASE_DIR, 'static')
+    ]
 else:
     STATIC_URL = '/static/'
     STATIC_ROOT = Path(BASE_DIR, 'static/')
     STATIC_DIR = Path(BASE_DIR, 'static')
-    STATICFILES_DIRS = [Path(BASE_DIR, 'frontend/build/static')]
+    STATICFILES_DIRS = [
+        Path(BASE_DIR, 'react/production/static'),
+        Path(BASE_DIR, 'react/test/static'),
+    ]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = Path(BASE_DIR, 'static/media/')

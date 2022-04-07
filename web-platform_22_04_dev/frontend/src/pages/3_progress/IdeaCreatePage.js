@@ -98,11 +98,49 @@ export const IdeaCreatePage = () => {
           {
             <div className="text-center m-0 p-4">
               <ol className="text-start m-0 p-0">
-                <li className="m-0 p-1">S</li>
-                <li className="m-0 p-1">M</li>
-                <li className="m-0 p-1">A</li>
-                <li className="m-0 p-1">R</li>
-                <li className="m-0 p-1">T</li>
+                <li className="m-0 p-1">
+                  <h6 className="m-0 p-0">S - Specific</h6>
+                  <text className="m-0 p-0">
+                    конкретно формулируем цель: определяем результат, который мы
+                    хотим и можем достичь;
+                  </text>
+                </li>
+                <li className="m-0 p-1">
+                  <h6 className="m-0 p-0">M - Measurable</h6>
+                  <text className="m-0 p-0">
+                    выбираем показатели эффективности, чтобы отслеживать
+                    динамику изменений;
+                  </text>
+                </li>
+                <li className="m-0 p-1">
+                  <h6 className="m-0 p-0">A - Achievable</h6>
+                  <text className="m-0 p-0">
+                    осознаем реалистичность задачи: анализируем навыки,
+                    занятость и условия работы, при необходимости — упрощаем
+                    цель;
+                  </text>
+                </li>
+                <li className="m-0 p-1">
+                  <h6 className="m-0 p-0">R - Relevant</h6>
+                  <text className="m-0 p-0">
+                    думаем над актуальностью, чтобы оценить пользу и
+                    перспективы;
+                  </text>
+                </li>
+                <li className="m-0 p-1">
+                  <h6 className="m-0 p-0">S - Specific</h6>
+                  <text className="m-0 p-0">
+                    конкретно формулируем цель: определяем результат, который мы
+                    хотим и можем достичь;
+                  </text>
+                </li>
+                <li className="m-0 p-1">
+                  <h6 className="m-0 p-0">T - Timely</h6>
+                  <text className="m-0 p-0">
+                    ограничиваем по времени: не забываем заложить небольшой
+                    запас на ошибки в планировании и форс-мажоры.
+                  </text>
+                </li>
               </ol>
             </div>
           }

@@ -1,6 +1,6 @@
 @echo OFF
 
-npx create-react-app frontend
+npx -y create-react-app frontend
 
 
 

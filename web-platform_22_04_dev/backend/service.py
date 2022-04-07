@@ -25,78 +25,87 @@ class DjangoClass:
     class LoggingClass:
         @staticmethod
         def error(request, error):
-            if DjangoClass.DefaultSettingsClass.get_actions_print_value():
-                req_inst = DjangoClass.DRFClass.RequestClass(request=request)
-                print(f"\n\nusername: {req_inst.user}"
-                      f"\nip: {req_inst.ip}"
-                      f"\nrequest_path: {req_inst.path}"
-                      f"\nrequest_method: {req_inst.method}"
-                      f"\nrequest_action_type: {req_inst.action_type}"
-                      f"\nerror: {error}")
+            try:
+                if DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                    req_inst = DjangoClass.DRFClass.RequestClass(request=request)
+                    print(f"\n\nusername: {req_inst.user}"
+                          f"\nip: {req_inst.ip}"
+                          f"\nrequest_path: {req_inst.path}"
+                          f"\nrequest_method: {req_inst.method}"
+                          f"\nrequest_action_type: {req_inst.action_type}"
+                          f"\nerror: {error}")
 
-            if DjangoClass.DefaultSettingsClass.get_error_logging_value():
-                req_inst = DjangoClass.DRFClass.RequestClass(request=request)
-                backend_models.LoggingModel.objects.create(
-                    username_slug_field=req_inst.user,
-                    ip_genericipaddress_field=req_inst.ip,
-                    request_path_slug_field=req_inst.path,
-                    request_method_slug_field=f"ERROR | {req_inst.method} | {req_inst.action_type}",
-                    error_text_field=f'error: {error}'
-                )
-                text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type, error,
-                        datetime.datetime.now()]
-                string = ''
-                for val in text:
-                    string = string + f', {val}'
-                with open('static/media/admin/logging/logging_errors.txt', 'a') as log:
-                    log.write(f'\n{string[2:]}\n')
+                if DjangoClass.DefaultSettingsClass.get_error_logging_value():
+                    req_inst = DjangoClass.DRFClass.RequestClass(request=request)
+                    backend_models.LoggingModel.objects.create(
+                        username_slug_field=req_inst.user,
+                        ip_genericipaddress_field=req_inst.ip,
+                        request_path_slug_field=req_inst.path,
+                        request_method_slug_field=f"ERROR | {req_inst.method} | {req_inst.action_type}",
+                        error_text_field=f'error: {error}'
+                    )
+                    text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type, error,
+                            datetime.datetime.now()]
+                    string = ''
+                    for val in text:
+                        string = string + f', {val}'
+                    with open('static/media/admin/logging/logging_errors.txt', 'a') as log:
+                        log.write(f'\n{string[2:]}\n')
+            except Exception as error:
+                pass
 
         @staticmethod
         def error_local(error, function_error):
-            if DjangoClass.DefaultSettingsClass.get_actions_print_value():
-                print(f"\n\nrequest_path: error_local"
-                      f"\nrequest_method: {function_error}"
-                      f"\nerror: {error}")
+            try:
+                if DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                    print(f"\n\nrequest_path: error_local"
+                          f"\nrequest_method: {function_error}"
+                          f"\nerror: {error}")
 
-            if DjangoClass.DefaultSettingsClass.get_actions_logging_value():
-                backend_models.LoggingModel.objects.create(
-                    request_path_slug_field="error_local",
-                    request_method_slug_field=function_error,
-                    error_text_field=f'error: {error}'
-                )
-                text = ["error_local", function_error, error, datetime.datetime.now()]
-                string = ''
-                for val in text:
-                    string = string + f', {val}'
-                with open('static/media/admin/logging/logging_errors.txt', 'a') as log:
-                    log.write(f'\n{string[2:]}\n')
+                if DjangoClass.DefaultSettingsClass.get_actions_logging_value():
+                    backend_models.LoggingModel.objects.create(
+                        request_path_slug_field="error_local",
+                        request_method_slug_field=function_error,
+                        error_text_field=f'error: {error}'
+                    )
+                    text = ["error_local", function_error, error, datetime.datetime.now()]
+                    string = ''
+                    for val in text:
+                        string = string + f', {val}'
+                    with open('static/media/admin/logging/logging_errors.txt', 'a') as log:
+                        log.write(f'\n{string[2:]}\n')
+            except Exception as error:
+                pass
 
         @staticmethod
         def action(request):
-            if DjangoClass.DefaultSettingsClass.get_actions_print_value():
-                request_instance = DjangoClass.DRFClass.RequestClass(request=request)
-                print(f"\n\n{DateTimeUtils.get_current_datetime()}"
-                      f"\nrequest_path: {request_instance.path}"
-                      f"\nrequest_action_type: {request_instance.action_type}"
-                      f"\nrequest_user: {request_instance.user}"
-                      f"\nrequest.data: {request_instance.data}")
+            try:
+                if DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                    request_instance = DjangoClass.DRFClass.RequestClass(request=request)
+                    print(f"\n\n{DateTimeUtils.get_current_datetime()}"
+                          f"\nrequest_path: {request_instance.path}"
+                          f"\nrequest_action_type: {request_instance.action_type}"
+                          f"\nrequest_user: {request_instance.user}"
+                          f"\nrequest.data: {request_instance.data}")
 
-            if DjangoClass.DefaultSettingsClass.get_actions_logging_value():
-                req_inst = DjangoClass.DRFClass.RequestClass(request=request)
-                backend_models.LoggingModel.objects.create(
-                    username_slug_field=req_inst.user,
-                    ip_genericipaddress_field=req_inst.ip,
-                    request_path_slug_field=req_inst.path,
-                    request_method_slug_field=f"ACTION | {req_inst.method} | {req_inst.action_type}",
-                    error_text_field=f'-'
-                )
-                text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type,
-                        datetime.datetime.now()]
-                string = ''
-                for val in text:
-                    string = string + f', {val}'
-                with open('static/media/admin/logging/logging_actions.txt', 'a') as log:
-                    log.write(f'\n{string[2:]}\n')
+                if DjangoClass.DefaultSettingsClass.get_actions_logging_value():
+                    req_inst = DjangoClass.DRFClass.RequestClass(request=request)
+                    backend_models.LoggingModel.objects.create(
+                        username_slug_field=req_inst.user,
+                        ip_genericipaddress_field=req_inst.ip,
+                        request_path_slug_field=req_inst.path,
+                        request_method_slug_field=f"ACTION | {req_inst.method} | {req_inst.action_type}",
+                        error_text_field=f'-'
+                    )
+                    text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type,
+                            datetime.datetime.now()]
+                    string = ''
+                    for val in text:
+                        string = string + f', {val}'
+                    with open('static/media/admin/logging/logging_actions.txt', 'a') as log:
+                        log.write(f'\n{string[2:]}\n')
+            except Exception as error:
+                pass
 
         @staticmethod
         def response(request, response):

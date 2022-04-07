@@ -23,6 +23,8 @@ urlpatterns = [
     path('', backend_views.index, name=''),
     path('', backend_views.index, name='index'),
     path('home/', backend_views.index, name='home'),
+    # TODO test ########################################################################################################
+    path('test/', backend_views.test, name='test'),
     # TODO admin #######################################################################################################
     path('admin/', admin.site.urls),
     # TODO routers #####################################################################################################

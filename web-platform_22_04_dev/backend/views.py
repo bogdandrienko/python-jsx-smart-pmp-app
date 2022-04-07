@@ -47,7 +47,38 @@ def index(request):
                     response = {"response": "Данные успешно получены!"}
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return render(request, 'index.html', response)
+                    return render(request, 'production/index.html', response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return render(request, "backend/404.html")
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+# TODO test ############################################################################################################
+@permission_classes([AllowAny])
+def test(request):
+    """
+    index React Single Page Applications
+    """
+
+    try:
+        # TODO Request #################################################################################################
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        # TODO Methods #################################################################################################
+        if req_inst.method == "GET":
+            # TODO Actions #############################################################################################
+            if req_inst.action_type == "":
+                try:
+                    response = {"response": "Данные успешно получены!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return render(request, 'test/index.html', response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return render(request, "backend/404.html")
@@ -1213,11 +1244,13 @@ def api_auth_salary(request):
                                             _days += json_data['global_objects'][table][f'{__key}']['ВсегоДни']
                                             _hours += json_data['global_objects'][table][f'{__key}']['ВсегоЧасы']
                                             _summ_local = json_data['global_objects'][table][f'{__key}']['Сумма']
-                                            json_data['global_objects'][table][f'{__key}']['Сумма'] = return_float_value(
+                                            json_data['global_objects'][table][f'{__key}'][
+                                                'Сумма'] = return_float_value(
                                                 _summ_local)
                                             _summ += _summ_local
                                         except Exception as error_:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error_)
+                                            backend_service.DjangoClass.LoggingClass.error(request=request,
+                                                                                           error=error_)
                                 json_data['global_objects'][table]['Ends'] = {
                                     'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
                                     'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
@@ -1228,11 +1261,13 @@ def api_auth_salary(request):
                                     if __key != 'Fields':
                                         try:
                                             _summ_local = json_data['global_objects'][table][f'{__key}']['Сумма']
-                                            json_data['global_objects'][table][f'{__key}']['Сумма'] = return_float_value(
+                                            json_data['global_objects'][table][f'{__key}'][
+                                                'Сумма'] = return_float_value(
                                                 _summ_local)
                                             _summ += _summ_local
                                         except Exception as error_:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error_)
+                                            backend_service.DjangoClass.LoggingClass.error(request=request,
+                                                                                           error=error_)
                                 json_data['global_objects'][table]['Ends'] = {
                                     'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
                                 }
