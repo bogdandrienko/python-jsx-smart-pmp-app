@@ -46,7 +46,6 @@ def index(request):
                 try:
                     response = {"response": "Данные успешно получены!"}
                     # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return render(request, 'production/index.html', response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)

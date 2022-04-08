@@ -592,9 +592,9 @@ class DjangoClass:
                                 continue
                             new_user = False
                         except Exception as error_:
-                            for i in range(1, 6 + 1):
+                            for i in range(1, 4 + 1):
                                 password += random.choice(
-                                    "abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+                                    "abcdefghjknopqrstuvwxyzABCDEFGHJKMNOPQRSTUVWXYZ1234567890"
                                 )
                             password = "temp_" + password
                             user = User.objects.create(
@@ -655,8 +655,7 @@ class DjangoClass:
                             pass
                         index += 1
                         if DjangoClass.DefaultSettingsClass.get_actions_print_value():
-                            print(worker.username_)
-                            print(index)
+                            print(index, worker.username_)
                 except Exception as error:
                     DjangoClass.LoggingClass.error_local(
                         error=error,
