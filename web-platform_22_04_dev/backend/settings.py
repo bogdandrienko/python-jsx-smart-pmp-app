@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ywqo&h1qj$(vrw&wkv!ko-x6*0(ovqn653idp8e-(r%e44ut$7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 SQLITE = True
 
 if DEBUG:
@@ -148,6 +148,8 @@ if DEBUG:
     STATIC_ROOT = Path(BASE_DIR, 'staticroot/')
     STATIC_DIR = Path(BASE_DIR, 'static')
     STATICFILES_DIRS = [
+        Path(BASE_DIR, 'frontend/public/static'),
+        Path(BASE_DIR, 'frontend_test/public/static'),
         Path(BASE_DIR, 'react/production/static'),
         Path(BASE_DIR, 'react/test/static'),
         Path(BASE_DIR, 'static')
@@ -157,8 +159,7 @@ else:
     STATIC_ROOT = Path(BASE_DIR, 'static/')
     STATIC_DIR = Path(BASE_DIR, 'static')
     STATICFILES_DIRS = [
-        Path(BASE_DIR, 'react/production/static'),
-        Path(BASE_DIR, 'react/test/static'),
+        Path(BASE_DIR, 'static')
     ]
 
 MEDIA_URL = '/media/'

@@ -467,7 +467,7 @@ export const salaryUserAction = (form) => async (dispatch, getState) => {
     const { config } = utils.ActionsAxiosUtility({
       url: "/api/auth/salary/",
       method: "POST",
-      timeout: 30000,
+      timeout: 50000,
       form: form,
       getState: getState,
     });
