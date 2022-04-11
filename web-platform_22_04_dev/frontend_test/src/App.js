@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
+import "./App.css";
+import "./css/bootstrap_5.1.3/bootstrap.min.css";
+// TODO default exported pages /////////////////////////////////////////////////////////////////////////////////////////
+import { TestPage } from "./pages/TestPage";
+// TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<TestPage />} />
+      </Routes>
+    </Router>
   );
 }
 
