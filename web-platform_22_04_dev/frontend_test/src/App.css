@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.post1-enter {
+  opacity: 0;
+}
+.post1-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.post1-exit {
+  opacity: 1;
+}
+.post1-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
+.post-enter {
+  transform: translateX(-350px);
+}
+.post-enter-active {
+  transform: translateX(0px);
+  transition: all 500ms ease-in;
+}
+.post-exit {
+  opacity: 1;
+}
+.post-exit-active {
+  transform: translateX(-350px);
+  transition: all 500ms ease-in;
+}

@@ -1,5 +1,5 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as test from "../components/TestComponent";
 import Counter from "../components/Counter.jsx";
@@ -12,6 +12,9 @@ import MyInput from "../components/UI/input/MyInput";
 import PostForm from "../components/PostForm";
 import MySelect from "../components/UI/select/MySelect";
 import PostFilter from "../components/PostFilter";
+import MyModal from "../components/UI/modal/MyModal";
+import { usePosts } from "../hooks/usePosts";
+import axios from "axios";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const TestPage = () => {
@@ -21,55 +24,52 @@ export const TestPage = () => {
   // javascript:document.getElementsByClassName("video-stream html5-main-video")[0].playbackRate = 2.5;
   // alert(1)
 
-  const [posts, setPosts] = useState([
-    { id: 1, title: "Javascript 1", body: "Description" },
-    { id: 2, title: "Javascript 2", body: "Description" },
-    { id: 3, title: "Javascript 3", body: "Description" },
-    { id: 4, title: "Javascript 4", body: "Description" },
-    { id: 5, title: "Javascript 5", body: "Description" },
-  ]);
+  const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
+  const [modal, setModal] = useState(false);
+  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
+    setModal(false);
   };
+
+  async function fetchPost() {
+    const response = await axios.get(
+      "https://jsonplaceholder.typicode.com/posts"
+    );
+    setPosts(response.data);
+  }
 
   const removePost = (post) => {
     setPosts(posts.filter((p) => p.id !== post.id));
   };
 
-  const sortedPosts = useMemo(() => {
-    if (filter.sort) {
-      return [...posts].sort((a, b) =>
-        a[filter.sort].localeCompare(b[filter.sort])
-      );
-    }
-    return posts;
-  }, [filter.sort, posts]);
-
-  const sortedAndSearchedPosts = useMemo(() => {
-    return sortedPosts.filter((post) =>
-      post.title.toLowerCase().includes(filter.query)
-    );
-  }, [filter.query, sortedPosts]);
+  useEffect(() => {
+    fetchPost();
+  }, []);
 
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div className="m-0 p-0">
       <main>
         <div className="App">
-          <PostForm create={createPost} />
+          <MyButton style={{ marginTop: 30 }} onClick={() => fetchPost()}>
+            get Posts
+          </MyButton>
+          <MyButton style={{ marginTop: 30 }} onClick={() => setModal(true)}>
+            create
+          </MyButton>
+          <MyModal visible={modal} setVisible={setModal}>
+            <PostForm create={createPost} />
+          </MyModal>
           <hr style={{ margin: "15px 0" }} />
           <PostFilter filter={filter} setFilter={setFilter} />
-          {sortedAndSearchedPosts.length !== 0 ? (
-            <PostList
-              remove={removePost}
-              posts={sortedAndSearchedPosts}
-              title={"Post list"}
-            />
-          ) : (
-            <h1 style={{ textAlign: "center" }}>Post not found!</h1>
-          )}
+          <PostList
+            remove={removePost}
+            posts={sortedAndSearchedPosts}
+            title={"Post list"}
+          />
         </div>
         {/*<div className="container text-center w-25 m-0 p-0">*/}
         {/*  ClassCounter*/}
