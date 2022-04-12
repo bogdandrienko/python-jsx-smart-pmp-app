@@ -2363,17 +2363,50 @@ def api_auth_rational(request):
                     else:
                         count = 1
                     number = f"{count}_{backend_service.DateTimeUtils.get_current_date()}"
-                    user1 = f"{req_inst.user_model.last_name_char_field} " \
-                            f"{req_inst.user_model.first_name_char_field} " \
-                            f"{req_inst.user_model.personnel_number_slug_field} {user1}"
-                    if len(user2) < 7:
-                        user2 = None
-                    if len(user3) < 7:
-                        user3 = None
-                    if len(user4) < 7:
-                        user4 = None
-                    if len(user5) < 7:
-                        user5 = None
+                    author_1_foreign = req_inst.user_model
+                    author_1_perc = user1
+
+                    def get_user_model_from_personnel_number(personnel_number):
+                        try:
+                            user_model = backend_models.UserModel.objects.filter(
+                                personnel_number_slug_field=personnel_number
+                            )[0]
+                        except Exception as error:
+                            user_model = None
+                        return user_model
+
+                    if len(user2) > 7:
+                        user2 = user2.split(" ")
+                        author_2_foreign = get_user_model_from_personnel_number(user2[-3])
+                        author_2_perc = user2[-1]
+                    else:
+                        author_2_foreign = None
+                        author_2_perc = None
+
+                    if len(user3) > 7:
+                        user3 = user3.split(" ")
+                        author_3_foreign = get_user_model_from_personnel_number(user3[-3])
+                        author_3_perc = user3[-1]
+                    else:
+                        author_3_foreign = None
+                        author_3_perc = None
+
+                    if len(user4) > 7:
+                        user4 = user4.split(" ")
+                        author_4_foreign = get_user_model_from_personnel_number(user4[-3])
+                        author_4_perc = user4[-1]
+                    else:
+                        author_4_foreign = None
+                        author_4_perc = None
+
+                    if len(user5) > 7:
+                        user5 = user5.split(" ")
+                        author_5_foreign = get_user_model_from_personnel_number(user5[-3])
+                        author_5_perc = user5[-1]
+                    else:
+                        author_5_foreign = None
+                        author_5_perc = None
+
                     if subdivision == "автотранспортное предприятие":
                         name_slug_field = "moderator_rational_atp"
                     elif subdivision == "горно-транспортный комплекс":
@@ -2399,11 +2432,16 @@ def api_auth_rational(request):
                         additional_word_file_field=additional_word,
                         additional_pdf_file_field=additional_pdf,
                         additional_excel_file_field=additional_excel,
-                        author_1_char_field=user1,
-                        author_2_char_field=user2,
-                        author_3_char_field=user3,
-                        author_4_char_field=user4,
-                        author_5_char_field=user5,
+                        author_1_foreign_key_field=author_1_foreign,
+                        author_1_perc_char_field=author_1_perc,
+                        author_2_foreign_key_field=author_2_foreign,
+                        author_2_perc_char_field=author_2_perc,
+                        author_3_foreign_key_field=author_3_foreign,
+                        author_3_perc_char_field=author_3_perc,
+                        author_4_foreign_key_field=author_4_foreign,
+                        author_4_perc_char_field=author_4_perc,
+                        author_5_foreign_key_field=author_5_foreign,
+                        author_5_perc_char_field=author_5_perc,
                         status_moderate_char_field="на модерации",
                     )
                     backend_models.NotificationModel.objects.create(

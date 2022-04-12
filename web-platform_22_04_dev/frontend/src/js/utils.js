@@ -428,7 +428,7 @@ export const GetCurrentMonth = (withZero = false, yearMonth = 0) => {
 export const GetCurrentDay = (withZero = false) => {
   try {
     const today = new Date();
-    let day = today.getDay();
+    let day = today.getDate();
     if (withZero) {
       if (day < 10) {
         day = `0${day}`;

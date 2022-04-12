@@ -1,12 +1,11 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-import { GetCurrentDay } from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const SalaryPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -118,10 +117,11 @@ export const SalaryPage = () => {
                       </button>
                     )}
                   </div>
-              <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
-                <i className="fa-solid fa-circle-exclamation m-0 p-1" />
-                Если после ожидания данных нет, попробуйте ещё 1-2 раза или ожидайте пол часа!
-              </div>
+                  <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
+                    <i className="fa-solid fa-circle-exclamation m-0 p-1" />
+                    Если после ожидания данных нет, попробуйте ещё 1-2 раза или
+                    ожидайте пол часа!
+                  </div>
                 </div>
               </div>
             </div>

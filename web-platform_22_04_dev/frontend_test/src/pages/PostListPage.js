@@ -18,9 +18,13 @@ import axios from "axios";
 import PostServise from "../API/PostServise";
 import MyLoader from "../components/UI/loader/MyLoader";
 import { useFetching } from "../hooks/useFetching";
+import { getPageCount, getPagesArray } from "../utils/pages";
+import Pagination from "../components/UI/pagination/Pagination";
+import { Link } from "react-router-dom";
+import Navbar from "../components/UI/navbar/navbar";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
-export const TestPage = () => {
+export const PostListPage = () => {
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
   // let number = 5; // изменяемая переменная
   // const number2 = 5; // не изменяемая переменная
@@ -30,11 +34,38 @@ export const TestPage = () => {
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
+  const [totalPages, setTotalPages] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
-  const [fetchPost, isPostLoading, postError] = useFetching(async () => {
-    const posts = await PostServise.getAll();
-    setPosts(posts);
-  });
+  const [fetchPost, isPostLoading, postError] = useFetching(
+    async (limit, page) => {
+      const response = await PostServise.getAll(limit, page);
+      setPosts([...posts, ...response.data]);
+      const totalCount = response.headers["x-total-count"];
+      setTotalPages(getPageCount(totalCount, limit));
+    }
+  );
+
+  const lastElement = useRef();
+
+//   useEffect(() => {
+//     var options = {
+//     root: document.querySelector('#scrollArea'),
+//     rootMargin: '0px',
+//     threshold: 1.0
+// }
+// var callback = function(entries, observer) {
+//     /* Content excerpted, show below */
+// };
+// var observer = new IntersectionObserver(callback, options);
+
+  }, []);
+
+  const changePage = (page) => {
+    setPage(page);
+    fetchPost(limit, page);
+  };
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
@@ -46,12 +77,13 @@ export const TestPage = () => {
   };
 
   useEffect(() => {
-    fetchPost();
+    fetchPost(limit, page);
   }, []);
 
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div className="m-0 p-0">
+      <Navbar />
       <main>
         <div className="App">
           <MyButton style={{ marginTop: 30 }} onClick={() => fetchPost()}>
@@ -66,7 +98,12 @@ export const TestPage = () => {
           <hr style={{ margin: "15px 0" }} />
           <PostFilter filter={filter} setFilter={setFilter} />
           {postError && <h1>We have some error {postError}</h1>}
-          {isPostLoading ? (
+          <PostList
+            remove={removePost}
+            posts={sortedAndSearchedPosts}
+            title={"Post list"}
+          />
+          {isPostLoading && (
             <div
               style={{
                 display: "flex",
@@ -76,13 +113,19 @@ export const TestPage = () => {
             >
               <MyLoader />
             </div>
-          ) : (
-            <PostList
-              remove={removePost}
-              posts={sortedAndSearchedPosts}
-              title={"Post list"}
-            />
           )}
+          <div
+            ref={lastElement}
+            style={{
+              height: 20,
+              background: "red",
+            }}
+          ></div>
+          <Pagination
+            page={page}
+            changePage={changePage}
+            totalPages={totalPages}
+          />
         </div>
         {/*<div className="container text-center w-25 m-0 p-0">*/}
         {/*  ClassCounter*/}
