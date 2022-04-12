@@ -15,6 +15,9 @@ import PostFilter from "../components/PostFilter";
 import MyModal from "../components/UI/modal/MyModal";
 import { usePosts } from "../hooks/usePosts";
 import axios from "axios";
+import PostServise from "../API/PostServise";
+import MyLoader from "../components/UI/loader/MyLoader";
+import { useFetching } from "../hooks/useFetching";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const TestPage = () => {
@@ -28,18 +31,15 @@ export const TestPage = () => {
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+  const [fetchPost, isPostLoading, postError] = useFetching(async () => {
+    const posts = await PostServise.getAll();
+    setPosts(posts);
+  });
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
     setModal(false);
   };
-
-  async function fetchPost() {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts"
-    );
-    setPosts(response.data);
-  }
 
   const removePost = (post) => {
     setPosts(posts.filter((p) => p.id !== post.id));
@@ -65,11 +65,24 @@ export const TestPage = () => {
           </MyModal>
           <hr style={{ margin: "15px 0" }} />
           <PostFilter filter={filter} setFilter={setFilter} />
-          <PostList
-            remove={removePost}
-            posts={sortedAndSearchedPosts}
-            title={"Post list"}
-          />
+          {postError && <h1>We have some error {postError}</h1>}
+          {isPostLoading ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "50px",
+              }}
+            >
+              <MyLoader />
+            </div>
+          ) : (
+            <PostList
+              remove={removePost}
+              posts={sortedAndSearchedPosts}
+              title={"Post list"}
+            />
+          )}
         </div>
         {/*<div className="container text-center w-25 m-0 p-0">*/}
         {/*  ClassCounter*/}
