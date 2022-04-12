@@ -1,55 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useFetching } from "../hooks/useFetching";
-import PostServise from "../API/PostServise";
-import MyLoader from "../components/UI/loader/MyLoader";
-import Navbar from "../components/UI/navbar/navbar";
+import React from "react";
+import { BaseComponent1 } from "../components/UI/base";
 
-const PostPage = () => {
-  const id = useParams().id;
-
-  const [post, setPost] = useState({});
-  const [comments, setComments] = useState([]);
-  const [fetchById, isLoading, error] = useFetching(async (id) => {
-    const response = await PostServise.getById(id);
-    setPost(response.data);
-  });
-  const [fetchCommentById, isCommentLoading, errorComment] = useFetching(
-    async (id) => {
-      const response = await PostServise.getCommentById(id);
-      setComments(response.data);
-    }
-  );
-
-  useEffect(() => {
-    fetchById(id);
-    fetchCommentById(id);
-  }, []);
+export const AboutPage = () => {
   return (
-    <div>
-      <Navbar />
-      {isLoading ? (
-        <MyLoader />
-      ) : (
-        <div>
-          {post.id}. {post.title}
-        </div>
-      )}
-      {isCommentLoading ? (
-        <MyLoader />
-      ) : (
-        <div>
-          {comments.map((comm) => (
-            <div style={{ marginTop: 15 }}>
-              <h5>{comm.email}</h5>
-              <div>{comm.body}</div>
-            </div>
-          ))}
-          {post.id}. {post.title}
-        </div>
-      )}
-    </div>
+    <BaseComponent1>
+      <h1>About page</h1>
+    </BaseComponent1>
   );
 };
-
-export default PostPage;

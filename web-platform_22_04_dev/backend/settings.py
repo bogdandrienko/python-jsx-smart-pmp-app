@@ -159,7 +159,8 @@ else:
     STATIC_ROOT = Path(BASE_DIR, 'static/')
     STATIC_DIR = Path(BASE_DIR, 'static')
     STATICFILES_DIRS = [
-        Path(BASE_DIR, 'static')
+        Path(BASE_DIR, 'react/production/static'),
+        Path(BASE_DIR, 'react/test/static'),
     ]
 
 MEDIA_URL = '/media/'

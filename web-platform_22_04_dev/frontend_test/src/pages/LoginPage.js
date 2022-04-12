@@ -1,12 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useFetching } from "../hooks/useFetching";
-import PostServise from "../API/PostServise";
-import MyLoader from "../components/UI/loader/MyLoader";
-import MyInput from "../components/UI/input/MyInput";
-import MyButton from "../components/UI/button/MyButton";
-import Navbar from "../components/UI/navbar/navbar";
-import AuthContext from "../context";
+import React, { useContext } from "react";
+import AuthContext from "../components/contexts";
+import { BaseComponent1 } from "../components/UI/base";
+import { Button1 } from "../components/UI/buttons";
+import { Input1 } from "../components/UI/inputs";
 
 const PostPage = () => {
   const { isAuth, setIsAuth } = useContext(AuthContext);
@@ -16,15 +12,18 @@ const PostPage = () => {
     localStorage.setItem("auth", "true");
   };
   return (
-    <div>
-      <Navbar />
+    <BaseComponent1>
       <h1>Login to account</h1>
       <form onSubmit={login}>
-        <MyInput type="text" placeholder="Login" />
-        <MyInput type="password" placeholder="Password" />
-        <MyButton>enter</MyButton>
+        <Input1 type="text" placeholder="Login" autoComplete="username" />
+        <Input1
+          type="password"
+          placeholder="Password"
+          autoComplete="current-password"
+        />
+        <Button1>enter</Button1>
       </form>
-    </div>
+    </BaseComponent1>
   );
 };
 

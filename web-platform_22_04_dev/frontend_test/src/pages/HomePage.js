@@ -1,21 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { useFetching } from "../hooks/useFetching";
-import PostServise from "../API/PostServise";
-import MyLoader from "../components/UI/loader/MyLoader";
-import Navbar from "../components/UI/navbar/navbar";
-import Footer from "../components/UI/navbar/footer";
+import React from "react";
+import { BaseComponent1 } from "../components/UI/base";
 
-const PostPage = () => {
+const HomePage = () => {
   return (
-    <div className="custom_main_1">
-      <Navbar />
-      <div className="custom_main_2">
-        <h1>Home page</h1>
-      </div>
-      <Footer />
-    </div>
+    <BaseComponent1>
+      <h1>Home page</h1>
+    </BaseComponent1>
   );
 };
 
-export default PostPage;
+export default HomePage;
