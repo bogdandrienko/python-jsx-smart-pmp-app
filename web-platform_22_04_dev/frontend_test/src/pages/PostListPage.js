@@ -22,6 +22,7 @@ import { getPageCount, getPagesArray } from "../utils/pages";
 import Pagination from "../components/UI/pagination/Pagination";
 import { Link } from "react-router-dom";
 import Navbar from "../components/UI/navbar/navbar";
+import { useObserver } from "../hooks/useObserver";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const PostListPage = () => {
@@ -49,22 +50,8 @@ export const PostListPage = () => {
 
   const lastElement = useRef();
 
-//   useEffect(() => {
-//     var options = {
-//     root: document.querySelector('#scrollArea'),
-//     rootMargin: '0px',
-//     threshold: 1.0
-// }
-// var callback = function(entries, observer) {
-//     /* Content excerpted, show below */
-// };
-// var observer = new IntersectionObserver(callback, options);
-
-  }, []);
-
   const changePage = (page) => {
     setPage(page);
-    fetchPost(limit, page);
   };
 
   const createPost = (newPost) => {
@@ -78,7 +65,11 @@ export const PostListPage = () => {
 
   useEffect(() => {
     fetchPost(limit, page);
-  }, []);
+  }, [page, limit]);
+
+  useObserver(lastElement, page < totalPages, isPostLoading, () => {
+    setPage(page + 1);
+  });
 
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -97,6 +88,17 @@ export const PostListPage = () => {
           </MyModal>
           <hr style={{ margin: "15px 0" }} />
           <PostFilter filter={filter} setFilter={setFilter} />
+          <MySelect
+            value={limit}
+            onChange={(value) => setLimit(value)}
+            defaultValue={"limit elements"}
+            options={[
+              { value: 5, name: "5" },
+              { value: 10, name: "10" },
+              { value: 25, name: "25" },
+              { value: -1, name: "all" },
+            ]}
+          />
           {postError && <h1>We have some error {postError}</h1>}
           <PostList
             remove={removePost}
@@ -120,7 +122,7 @@ export const PostListPage = () => {
               height: 20,
               background: "red",
             }}
-          ></div>
+          />
           <Pagination
             page={page}
             changePage={changePage}
