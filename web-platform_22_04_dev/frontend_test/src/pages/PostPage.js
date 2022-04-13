@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFetching } from "../components/hooks";
-import Services from "../components/services";
-import { Loader1 } from "../components/UI/loaders";
-import { BaseComponent1 } from "../components/UI/base";
-import { Button1 } from "../components/UI/buttons";
+import { Services } from "../components/services";
+import { Loader1 } from "../components/ui/loaders";
+import { BaseComponent1 } from "../components/ui/base";
+import { Button1 } from "../components/ui/buttons";
 
 const PostPage = () => {
   const navigate = useNavigate();
@@ -14,12 +14,13 @@ const PostPage = () => {
   const [comments, setComments] = useState([]);
   const [fetchById, isLoading, error] = useFetching(async (id) => {
     const response = await Services.getById(id);
-    setPost(response.data);
+    console.log(response.data);
+    setPost(response.data.response);
   });
   const [fetchCommentById, isCommentLoading, errorComment] = useFetching(
     async (id) => {
       const response = await Services.getCommentById(id);
-      setComments(response.data);
+      setComments(response.data.response);
     }
   );
 
@@ -29,13 +30,22 @@ const PostPage = () => {
   }, []);
   return (
     <BaseComponent1>
-      <Button1 onClick={() => navigate("/posts")}> {"<="} back</Button1>
+      <Button1 onClick={() => navigate("/posts_pagination")}>
+        {" "}
+        {"<="} back
+      </Button1>
       <div className="post_detail">
         {isLoading ? (
           <Loader1 />
         ) : (
-          <div className="post_detail_header">
-            {post.id}. {post.title}
+          <div className="post">
+            <div className="post__content">
+              <strong>
+                {post.id} {post.request_method_slug_field}{" "}
+                {post.request_path_slug_field} {post.username_slug_field}
+              </strong>
+              <div>{post.error_text_field}</div>
+            </div>
           </div>
         )}
         {isCommentLoading ? (
@@ -44,7 +54,9 @@ const PostPage = () => {
           <div>
             {comments.map((comm) => (
               <div key={comm.id} className="post_detail_comment">
-                <h6>{comm.email}</h6>
+                <h6>
+                  {comm.id} {comm.title}
+                </h6>
                 <small>{comm.body}</small>
               </div>
             ))}

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useNavigate } from "react-router-dom";
-import { Button1 } from "./UI/buttons";
-import { Input1 } from "./UI/inputs";
-import { Select1 } from "./UI/selects";
+import { Button1 } from "./buttons";
+import { Input1 } from "./inputs";
+import { Select1 } from "./selects";
 
 export const PostItem = (props) => {
   const navigate = useNavigate();
@@ -16,9 +16,10 @@ export const PostItem = (props) => {
     <div className="post" onClick={() => navigate("/posts/" + props.post.id)}>
       <div className="post__content">
         <strong>
-          {props.post.id} {props.post.title}
+          {props.post.id} {props.post.request_method_slug_field}{" "}
+          {props.post.request_path_slug_field} {props.post.username_slug_field}
         </strong>
-        <div>{props.post.body}</div>
+        <div>{props.post.error_text_field}</div>
         <div className="post__btns">
           <Button1 onClick={deletePost}>delete</Button1>
         </div>

@@ -1,11 +1,11 @@
 import React from "react";
-import { BaseComponent1 } from "../components/UI/base";
+import { BaseComponent1 } from "../components/ui/base";
 import {
   TestComponent1,
   TestComponent2,
   TestComponent3,
   TestComponent4,
-} from "../components/components";
+} from "../components/ui/components";
 
 const TestPage = () => {
   return (

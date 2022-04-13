@@ -186,7 +186,11 @@ class DjangoClass:
                 except Exception as error:
                     self.method = "GET"
                 try:
-                    self.action_type = str(request.data.get("Action-type")).upper()
+                    action_type = str(request.data.get("Action-type")).upper()
+                    if action_type != "NONE":
+                        self.action_type = action_type
+                    else:
+                        self.action_type = ""
                 except Exception as error:
                     self.action_type = ""
                 try:

@@ -10,11 +10,12 @@ import "./css/font_zen/style.css";
 import PostPage from "./pages/PostPage";
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
-import { PostListPage } from "./pages/PostListPage";
+import { PostListUnlimitedScrollPage } from "./pages/PostListUnlimitedScrollPage";
+import { PostListPaginationPage } from "./pages/PostListPaginationPage";
 import { AboutPage } from "./pages/AboutPage";
 
 import AuthContext from "./components/contexts";
-import { Loader1 } from "./components/UI/loaders";
+import { Loader1 } from "./components/ui/loaders";
 import TestPage from "./pages/TestPage";
 
 export const publicRoutes = [{ path: "/login", element: <LoginPage /> }];
@@ -24,7 +25,8 @@ export const privateRoutes = [
   { path: "/home", element: <HomePage /> },
   { path: "/test", element: <TestPage /> },
   { path: "/about", element: <AboutPage /> },
-  { path: "/posts", element: <PostListPage /> },
+  { path: "/posts_pagination", element: <PostListPaginationPage /> },
+  { path: "/posts_unlimited", element: <PostListUnlimitedScrollPage /> },
   { path: "/posts/:id", element: <PostPage /> },
 ];
 

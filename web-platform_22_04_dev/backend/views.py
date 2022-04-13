@@ -8,6 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Union
 import httplib2
 import openpyxl
+from django.core.paginator import Paginator
 from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 from openpyxl.utils import get_column_letter
 # TODO django modules ##################################################################################################
@@ -2925,6 +2926,128 @@ def api_auth_resume(request):
                     # TODO actions #####################################################################################
                     backend_models.ResumeModel.objects.get(id=_id).delete()
                     response = {"response": "Успешно удалено!"}
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+# TODO routes ##########################################################################################################
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([AllowAny])
+def api_any_post(request):
+    """
+    api_any_post django-rest-framework
+    """
+
+    try:
+        # TODO Request #################################################################################################
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        # TODO Methods #################################################################################################
+        if req_inst.method == "GET":
+            # TODO Actions #############################################################################################
+            if req_inst.action_type == "":
+                try:
+                    objects = backend_models.LoggingModel.objects.filter(
+                        error_text_field__startswith="error:"
+                    )
+                    page = int(request.GET.get('page', 1))
+                    limit = int(request.GET.get('limit', 10))
+                    if limit > 0:
+                        p = Paginator(objects, limit)
+                        objects = p.page(page)
+                        num_pages = p.num_pages
+                    else:
+                        num_pages = 1
+                    response = {
+                        "response": backend_serializers.LoggingModelSerializer(instance=objects, many=True).data,
+                        "x-total-count": num_pages
+                    }
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+# TODO routes ##########################################################################################################
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([AllowAny])
+def api_any_post_id(request, post_id):
+    """
+    api_any_post_id django-rest-framework
+    """
+
+    try:
+        # TODO Request #################################################################################################
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        # TODO Methods #################################################################################################
+        if req_inst.method == "GET":
+            # TODO Actions #############################################################################################
+            if req_inst.action_type == "":
+                try:
+                    obj = backend_models.LoggingModel.objects.get(id=post_id)
+                    response = {
+                        "response": backend_serializers.LoggingModelSerializer(instance=obj, many=False).data,
+                    }
+                    # TODO response ####################################################################################
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+# TODO routes ##########################################################################################################
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([AllowAny])
+def api_any_post_id_comments(request, post_id):
+    """
+    api_any_post_id_comments django-rest-framework
+    """
+
+    try:
+        # TODO Request #################################################################################################
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        # TODO Methods #################################################################################################
+        if req_inst.method == "GET":
+            # TODO Actions #############################################################################################
+            if req_inst.action_type == "":
+                try:
+                    comment = [
+                        {"id": 1, "title": "Заголовок комментария", "body": "Текст комментария"},
+                        {"id": 2, "title": "Заголовок комментария", "body": "Текст комментария"},
+                        {"id": 3, "title": "Заголовок комментария", "body": "Текст комментария"},
+                        {"id": 4, "title": "Заголовок комментария", "body": "Текст комментария"},
+                        {"id": 5, "title": "Заголовок комментария", "body": "Текст комментария"},
+                    ]
+                    response = {
+                        "response": comment,
+                    }
                     # TODO response ####################################################################################
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)

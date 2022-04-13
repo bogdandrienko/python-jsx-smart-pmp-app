@@ -75,6 +75,12 @@ class GroupModelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class LoggingModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = backend_models.LoggingModel
+        fields = '__all__'
+
+
 class NotificationModelSerializer(serializers.ModelSerializer):
     author_foreign_key_field = serializers.SerializerMethodField(read_only=True)
     model_foreign_key_field = serializers.SerializerMethodField(read_only=True)

@@ -1,19 +1,19 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useRef, useState } from "react";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
-import { Button1 } from "../components/UI/buttons";
-import Services from "../components/services";
-import { Loader1 } from "../components/UI/loaders";
+import { Button1 } from "../components/ui/buttons";
+import { Services } from "../components/services";
+import { Loader1 } from "../components/ui/loaders";
 import { useFetching, useObserver, usePosts } from "../components/hooks";
 import { getPageCount } from "../components/utils";
-import { PostList, PostForm, PostFilter } from "../components/components";
-import { Pagination1 } from "../components/UI/paginations";
-import { BaseComponent1 } from "../components/UI/base";
-import { Modal1 } from "../components/UI/modals";
-import { Select1 } from "../components/UI/selects";
+import { PostList, PostForm, PostFilter } from "../components/ui/components";
+import { Pagination1 } from "../components/ui/paginations";
+import { BaseComponent1 } from "../components/ui/base";
+import { Modal1 } from "../components/ui/modals";
+import { Select1 } from "../components/ui/selects";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
-export const PostListPage = () => {
+export const PostListUnlimitedScrollPage = () => {
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
@@ -25,8 +25,8 @@ export const PostListPage = () => {
   const [fetchPost, isPostLoading, postError] = useFetching(
     async (limit, page) => {
       const response = await Services.getAll(limit, page);
-      setPosts([...posts, ...response.data]);
-      const totalCount = response.headers["x-total-count"];
+      const totalCount = response.data["x-total-count"];
+      setPosts([...posts, ...response.data.response]);
       setTotalPages(getPageCount(totalCount, limit));
     }
   );

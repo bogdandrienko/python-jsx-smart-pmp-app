@@ -47,7 +47,12 @@ urlpatterns = [
     path('api/auth/vacancy/', backend_views.api_auth_vacancy, name='api_auth_vacancy'),
     path('api/any/resume/', backend_views.api_any_resume, name='api_any_resume'),
     path('api/auth/resume/', backend_views.api_auth_resume, name='api_auth_resume'),
+    # path('api/any/post/', backend_views.api_any_post, name='api_any_post'),
+    re_path(r'^api/any/post/$', backend_views.api_any_post, name='api_any_post'),
+    path('api/any/post/<int:post_id>/', backend_views.api_any_post_id, name='api_any_post_id'),
+    path('api/any/post/<int:post_id>/comments/', backend_views.api_any_post_id_comments, name='api_any_post_id_comments'),
 ]
+
 
 # TODO redirect from reboot react app ##################################################################################
 urlpatterns += [re_path(r'^.*$', lambda request: redirect('', permanent=False), name='redirect')]

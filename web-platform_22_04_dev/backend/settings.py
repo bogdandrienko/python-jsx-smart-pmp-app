@@ -150,8 +150,6 @@ if DEBUG:
     STATICFILES_DIRS = [
         Path(BASE_DIR, 'frontend/public/static'),
         Path(BASE_DIR, 'frontend_test/public/static'),
-        Path(BASE_DIR, 'react/production/static'),
-        Path(BASE_DIR, 'react/test/static'),
         Path(BASE_DIR, 'static')
     ]
 else:
