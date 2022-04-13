@@ -435,15 +435,6 @@ export const FooterComponent = () => {
                   <NavDropdown.Divider />
                 </li>
                 <li>
-                  <strong className="dropdown-header">
-                    Telegram / WhatsApp
-                  </strong>
-                  <NavDropdown.Item className="dropdown-item disabled" href="#">
-                    +7 747 261 03 59
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                </li>
-                <li>
                   <strong className="dropdown-header">Почта, локальная</strong>
                   <NavDropdown.Item className="dropdown-item disabled" href="#">
                     Andryenko@km.local
