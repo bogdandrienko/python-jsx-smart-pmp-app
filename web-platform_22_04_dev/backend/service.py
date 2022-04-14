@@ -443,8 +443,6 @@ class DjangoClass:
                                    "moderator_rational_ok, moderator_rational_upravlenie, "
                                    "moderator_rational_energoupravlenie, " +
 
-                                   "moderator_vacancy, " +
-
                                    "",
                         boolean_field=True
                     )

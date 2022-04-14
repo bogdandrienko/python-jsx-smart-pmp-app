@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const NotificationListPage = () => {
@@ -45,7 +44,15 @@ export const NotificationListPage = () => {
       const form = {
         "Action-type": "NOTIFICATION_LIST",
       };
-      dispatch(actions.notificationListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/",
+          "POST",
+          30000,
+          constants.NOTIFICATION_LIST
+        )
+      );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);
@@ -63,13 +70,21 @@ export const NotificationListPage = () => {
   }, [dataNotificationDelete]);
   // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
   const handlerNotificationDeleteSubmit = async ({ id }) => {
-    const form = {
-      "Action-type": "NOTIFICATION_DELETE",
-      id: id,
-    };
     let isConfirm = window.confirm("Скрыть это уведомление?");
     if (isConfirm) {
-      dispatch(actions.notificationDeleteAction(form));
+      const form = {
+        "Action-type": "NOTIFICATION_DELETE",
+        id: id,
+      };
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/",
+          "POST",
+          30000,
+          constants.NOTIFICATION_DELETE
+        )
+      );
     }
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////

@@ -4,3 +4,25 @@ None, 192.168.1.202, /, GET, , User matching query does not exist., 2022-04-14 1
 000000000000, 192.168.1.202, /api/auth/admin/export_users/, POST, EXPORT_USERS, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/users/__init__', 2022-04-14 16:56:49.666298
 
 None, 192.168.1.202, /, GET, , User matching query does not exist., 2022-04-14 16:56:55.341274
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-14 17:30:31.906753
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-14 17:30:52.723169
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-14 17:30:56.903931
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-14 17:30:57.118224
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-14 17:30:59.764592
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-14 17:31:04.150979
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-14 17:33:02.938650
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-14 17:33:03.125651
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-14 20:24:17.870083
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-14 20:24:17.930186
+
+000000000000, 127.0.0.1, /api/auth/admin/export_users/, POST, EXPORT_USERS, [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/users/__init__', 2022-04-14 20:54:20.236233

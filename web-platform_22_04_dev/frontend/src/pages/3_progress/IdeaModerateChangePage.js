@@ -6,7 +6,7 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaModerateChangePage = () => {
@@ -85,7 +85,15 @@ export const IdeaModerateChangePage = () => {
         "Action-type": "IDEA_DETAIL",
         id: id,
       };
-      dispatch(actions.ideaDetailAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_DETAIL
+        )
+      );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);
@@ -134,7 +142,15 @@ export const IdeaModerateChangePage = () => {
       moderate: moderate,
       moderateComment: moderateComment,
     };
-    dispatch(actions.ideaModerateAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/idea/",
+        "POST",
+        30000,
+        constants.IDEA_MODERATE
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerChangeSubmit = async (e) => {
@@ -153,7 +169,15 @@ export const IdeaModerateChangePage = () => {
       place: place,
       description: description,
     };
-    dispatch(actions.ideaChangeAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/idea/",
+        "POST",
+        30000,
+        constants.IDEA_CHANGE
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerChangeReset = async (e) => {
@@ -164,13 +188,21 @@ export const IdeaModerateChangePage = () => {
   };
   //////////////////////////////////////////////////////////
   const handlerCommentDelete = async ({ commentId }) => {
-    const form = {
-      "Action-type": "IDEA_COMMENT_DELETE",
-      commentId: commentId,
-    };
     let isConfirm = window.confirm("Удалить выбранный комментарий?");
     if (isConfirm) {
-      dispatch(actions.ideaCommentDeleteAction(form));
+      const form = {
+        "Action-type": "IDEA_COMMENT_DELETE",
+        commentId: commentId,
+      };
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_COMMENT_DELETE
+        )
+      );
     }
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////

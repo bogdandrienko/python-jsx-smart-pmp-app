@@ -6,7 +6,7 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaListPage = () => {
@@ -52,7 +52,15 @@ export const IdeaListPage = () => {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(actions.UserListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/",
+          "POST",
+          30000,
+          constants.USER_LIST_ALL
+        )
+      );
     }
   }, [dataUserList]);
   //////////////////////////////////////////////////////////
@@ -68,7 +76,15 @@ export const IdeaListPage = () => {
         sort: sort,
         moderate: moderate,
       };
-      dispatch(actions.ideaListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_LIST
+        )
+      );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);
@@ -399,15 +415,17 @@ export const IdeaListPage = () => {
                   key={index}
                   className="col-sm-12 col-md-6 col-lg-4 m-0 p-1"
                 >
-                  <Link
-                    to={`/idea_detail/${idea.id}`}
-                    className="text-decoration-none text-dark m-0 p-0"
-                  >
+                  <div className="m-0 p-0">
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
-                        <h6 className="lead fw-bold m-0 p-0">
-                          {utils.GetSliceString(idea["name_char_field"], 30)}
-                        </h6>
+                        <Link
+                          to={`/idea_detail/${idea.id}`}
+                          className="text-decoration-none text-dark m-0 p-0"
+                        >
+                          <h6 className="lead fw-bold m-0 p-0">
+                            {utils.GetSliceString(idea["name_char_field"], 30)}
+                          </h6>
+                        </Link>
                       </div>
                       <div className="card-body m-0 p-0">
                         <div className="m-0 p-0">
@@ -495,14 +513,11 @@ export const IdeaListPage = () => {
                           </label>
                         </div>
                         <div className="m-0 p-0">
-                          <Link
-                            to={`#`}
-                            className="btn btn-sm btn-warning m-0 p-2"
-                          >
+                          <div className="btn btn-sm btn-warning m-0 p-2">
                             Автор: {idea["user_model"]["last_name_char_field"]}{" "}
                             {idea["user_model"]["first_name_char_field"]}{" "}
                             {idea["user_model"]["position_char_field"]}
-                          </Link>
+                          </div>
                         </div>
                         <div className="d-flex justify-content-between m-1 p-0">
                           <label className="text-muted border m-0 p-2">
@@ -743,7 +758,7 @@ export const IdeaListPage = () => {
                         </Link>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               ))}
             </ul>

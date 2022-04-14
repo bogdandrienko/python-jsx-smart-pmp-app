@@ -6,7 +6,7 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaDetailPage = () => {
@@ -73,7 +73,15 @@ export const IdeaDetailPage = () => {
         "Action-type": "IDEA_DETAIL",
         id: id,
       };
-      dispatch(actions.ideaDetailAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_DETAIL
+        )
+      );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);
@@ -108,7 +116,15 @@ export const IdeaDetailPage = () => {
       id: id,
       comment: comment,
     };
-    dispatch(actions.ideaCommentCreateAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/idea/",
+        "POST",
+        30000,
+        constants.IDEA_COMMENT_CREATE
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerRatingSubmit = async (value) => {
@@ -123,16 +139,40 @@ export const IdeaDetailPage = () => {
         "Мне не понравилась идея!"
       );
       if (prompt) {
-        dispatch(actions.ideaRatingCreateAction(form));
+        dispatch(
+          utils.ActionConstructorUtility(
+            form,
+            "/api/auth/idea/",
+            "POST",
+            30000,
+            constants.IDEA_RATING_CREATE
+          )
+        );
         const form2 = {
           "Action-type": "IDEA_COMMENT_CREATE",
           id: id,
           comment: prompt,
         };
-        dispatch(actions.ideaCommentCreateAction(form2));
+        dispatch(
+          utils.ActionConstructorUtility(
+            form2,
+            "/api/auth/idea/",
+            "POST",
+            30000,
+            constants.IDEA_COMMENT_CREATE
+          )
+        );
       }
     } else {
-      dispatch(actions.ideaRatingCreateAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_RATING_CREATE
+        )
+      );
     }
   };
   //////////////////////////////////////////////////////////
@@ -145,7 +185,15 @@ export const IdeaDetailPage = () => {
         place: place,
         description: description + `, причина: ${prompt}`,
       };
-      dispatch(actions.notificationCreateAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/",
+          "POST",
+          30000,
+          constants.NOTIFICATION_CREATE
+        )
+      );
     }
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////

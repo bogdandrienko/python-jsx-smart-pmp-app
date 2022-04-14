@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const ActionsUserPage = () => {
@@ -59,7 +59,15 @@ export const ActionsUserPage = () => {
       "Action-type": "ADMIN_CHECK_USER",
       username: username,
     };
-    dispatch(actions.adminCheckUserAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/admin/check_user/",
+        "POST",
+        30000,
+        constants.ADMIN_CHECK_USER
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerChangeUserPasswordSubmit = async (e) => {
@@ -76,7 +84,15 @@ export const ActionsUserPage = () => {
         password: "temp_" + password,
         password2: "temp_" + password2,
       };
-      dispatch(actions.adminChangeUserPasswordAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/admin/change_user_password/",
+          "POST",
+          30000,
+          constants.ADMIN_CHANGE_USER_PASSWORD
+        )
+      );
     }
   };
   //////////////////////////////////////////////////////////
@@ -93,7 +109,15 @@ export const ActionsUserPage = () => {
         username: dataAdminCheckUser["username"],
         activity: !dataAdminCheckUser["user_model"]["activity_boolean_field"],
       };
-      dispatch(actions.adminChangeUserActivityAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/admin/change_user_activity/",
+          "POST",
+          30000,
+          constants.ADMIN_CHECK_USER
+        )
+      );
     }
   };
   //////////////////////////////////////////////////////////

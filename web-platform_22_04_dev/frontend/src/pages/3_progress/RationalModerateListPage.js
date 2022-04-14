@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const RationalModerateListPage = () => {
@@ -49,7 +49,6 @@ export const RationalModerateListPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    // dispatch({ type: constants.RATIONAL_LIST.reset });
     dispatch({ type: constants.RATIONAL_LIST.reset });
   };
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,7 +57,15 @@ export const RationalModerateListPage = () => {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(actions.UserListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/",
+          "POST",
+          30000,
+          constants.USER_LIST_ALL
+        )
+      );
     }
   }, [dataUserList]);
   //////////////////////////////////////////////////////////
@@ -103,7 +110,15 @@ export const RationalModerateListPage = () => {
         sort: sort,
         moderate: moderate,
       };
-      dispatch(actions.rationalListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/rational/",
+          "POST",
+          30000,
+          constants.RATIONAL_LIST
+        )
+      );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);
@@ -454,31 +469,33 @@ export const RationalModerateListPage = () => {
                   key={index}
                   className="col-sm-12 col-md-12 col-lg-6 m-0 p-1"
                 >
-                  <Link
-                    to={`#`}
-                    className="text-decoration-none text-dark m-0 p-0"
-                  >
+                  <div className="m-0 p-0">
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
-                        <h6 className="lead fw-bold m-0 p-0">
-                          {utils.GetSliceString(
-                            rational["name_char_field"],
-                            30
-                          )}
-                        </h6>
-                        <h6 className="text-danger lead small m-0 p-0">
-                          {" [ "}
-                          {utils.GetSliceString(
-                            rational["status_moderate_char_field"],
-                            30
-                          )}
-                          {" : "}
-                          {utils.GetSliceString(
-                            rational["comment_moderate_char_field"],
-                            30
-                          )}
-                          {" ]"}
-                        </h6>
+                        <Link
+                          to={`#`}
+                          className="text-decoration-none text-dark m-0 p-0"
+                        >
+                          <h6 className="lead fw-bold m-0 p-0">
+                            {utils.GetSliceString(
+                              rational["name_char_field"],
+                              30
+                            )}
+                          </h6>
+                          <h6 className="text-danger lead small m-0 p-0">
+                            {" [ "}
+                            {utils.GetSliceString(
+                              rational["status_moderate_char_field"],
+                              30
+                            )}
+                            {" : "}
+                            {utils.GetSliceString(
+                              rational["comment_moderate_char_field"],
+                              30
+                            )}
+                            {" ]"}
+                          </h6>
+                        </Link>
                       </div>
                       <div className="card-body m-0 p-0">
                         <div className="m-0 p-0">
@@ -641,7 +658,7 @@ export const RationalModerateListPage = () => {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               ))}
             </ul>

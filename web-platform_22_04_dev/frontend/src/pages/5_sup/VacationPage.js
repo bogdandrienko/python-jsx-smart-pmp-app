@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const VacationPage = () => {
@@ -31,7 +31,15 @@ export const VacationPage = () => {
         dateTime.split("-")[2]
       }`,
     };
-    dispatch(actions.vacationUserAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/vacation/",
+        "POST",
+        30000,
+        constants.USER_VACATION
+      )
+    );
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (

@@ -1,91 +1,118 @@
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
+
+import axios from "axios";
+
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
+
 import * as constants from "./constants";
+import * as utils from "./utils";
 import * as actions from "./actions";
-// TODO base utils /////////////////////////////////////////////////////////////////////////////////////////////////////
-export const CheckAccess = (userDetailsStore, slug) => {
-  try {
-    const {
-      // load: loadUserDetails,
-      data: dataUserDetails,
-      // error: errorUserDetails,
-      // fail: failUserDetails,
-    } = userDetailsStore;
-    if (slug === "all" || slug.includes("all")) {
-      return true;
-    }
-    if (dataUserDetails) {
-      if (dataUserDetails["group_model"]) {
-        if (typeof slug === "string") {
-          return dataUserDetails["group_model"].includes(slug);
-        } else {
-          let access = false;
-          slug.forEach(function (object, index, array) {
-            if (dataUserDetails["group_model"].includes(object)) {
-              access = true;
-            }
-          });
-          return access;
+
+// TODO constructors ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+export function ActionConstructorUtility(form, url, method, timeout, constant) {
+  return async function (dispatch, getState) {
+    try {
+      dispatch({
+        type: constant.load,
+      });
+      let config = {};
+      const formData = new FormData();
+      Object.entries(form).map(([key, value]) => {
+        formData.append(key, value);
+      });
+      if (getState) {
+        const {
+          userLoginStore: { data: userLogin },
+        } = getState();
+        if (userLogin !== null) {
+          config = {
+            url: url,
+            method: method,
+            timeout: timeout,
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${userLogin.token}`,
+            },
+            data: formData,
+          };
         }
+      } else {
+        config = {
+          url: url,
+          method: method,
+          timeout: timeout,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          data: formData,
+        };
       }
-      return false;
+      const { data } = await axios(config);
+      if (data.response) {
+        const response = data.response;
+        dispatch({
+          type: constant.data,
+          payload: response,
+        });
+      } else {
+        const response = data.error;
+        dispatch({
+          type: constant.error,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: constant.fail,
+        payload: utils.ActionsFailUtility({ dispatch: dispatch, error: error }),
+      });
     }
-    return false;
+  };
+}
+
+export function ReducerConstructorUtility({ load, data, error, fail, reset }) {
+  try {
+    return function (state = {}, action = null) {
+      switch (action.type) {
+        case load:
+          return { load: true };
+        case data:
+          return {
+            load: false,
+            data: action.payload,
+          };
+        case error:
+          return {
+            load: false,
+            error: action.payload,
+          };
+        case fail:
+          return { load: false, fail: action.payload };
+        case reset:
+          return {};
+        default:
+          return state;
+      }
+    };
   } catch (error) {
     if (constants.DEBUG_CONSTANT) {
-      console.log(error);
+      console.log("ReducerConstructorUtility: ", error);
     }
-    return false;
   }
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const CheckPageAccess = (userDetailsStore, path) => {
-  const {
-    // load: loadUserDetails,
-    data: dataUserDetails,
-    // error: errorUserDetails,
-    // fail: failUserDetails,
-  } = userDetailsStore;
-  let access = false;
-  constants.modules.forEach(function (module, index, array) {
-    module.Sections.forEach(function (section, index, array) {
-      section.Links.forEach(function (link, index, array) {
-        if (link.Link.split("/")[1] === path.split("/")[1]) {
-          if (typeof link.Access === "string") {
-            if (link.Access === "all") {
-              access = true;
-              return true;
-            }
-            if (dataUserDetails && dataUserDetails["group_model"]) {
-              if (
-                dataUserDetails["group_model"].includes("superuser") ||
-                dataUserDetails["group_model"].includes(link.Access)
-              ) {
-                access = true;
-                return true;
-              }
-            }
-          } else {
-            if (link.Access.includes("all")) {
-              access = true;
-              return true;
-            }
-            if (dataUserDetails && dataUserDetails["group_model"]) {
-              link.Access.forEach(function (object, index, array) {
-                if (dataUserDetails["group_model"].includes(object)) {
-                  access = true;
-                  return true;
-                }
-              });
-            }
-          }
-        }
-      });
-    });
-  });
-  return access;
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ActionsAxiosUtility = ({
+}
+
+export function ConstantConstructorUtility(name = "") {
+  return {
+    load: name + "_LOAD_CONSTANT",
+    data: name + "_DATA_CONSTANT",
+    error: name + "_ERROR_CONSTANT",
+    fail: name + "_FAIL_CONSTANT",
+    reset: name + "_RESET_CONSTANT",
+  };
+}
+
+export const AxiosConfigConstructorUtility = ({
   url = "",
   method = "GET",
   timeout = 10000,
@@ -134,7 +161,120 @@ export const ActionsAxiosUtility = ({
     }
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TODO page ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const CheckAccess = (userDetailsStore, slug) => {
+  try {
+    const {
+      // load: loadUserDetails,
+      data: dataUserDetails,
+      // error: errorUserDetails,
+      // fail: failUserDetails,
+    } = userDetailsStore;
+    if (slug === "all" || slug.includes("all")) {
+      return true;
+    }
+    if (dataUserDetails && dataUserDetails["group_model"]) {
+      if (dataUserDetails["group_model"].includes("superuser")) {
+        return true;
+      }
+      if (typeof slug === "string") {
+        return dataUserDetails["group_model"].includes(slug);
+      } else {
+        for (let object of slug) {
+          if (dataUserDetails["group_model"].includes(object)) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return false;
+  }
+};
+
+export const CheckPageAccess = (userDetailsStore, path) => {
+  const {
+    // load: loadUserDetails,
+    data: dataUserDetails,
+    // error: errorUserDetails,
+    // fail: failUserDetails,
+  } = userDetailsStore;
+  if (dataUserDetails && dataUserDetails["group_model"]) {
+    if (dataUserDetails["group_model"].includes("superuser")) {
+      return true;
+    }
+  }
+  for (let module of constants.modules) {
+    for (let section of module.Sections) {
+      for (let link of section.Links) {
+        if (
+          !link.Link.ExternalLink &&
+          link.Link.split("/")[1] === path.split("/")[1]
+        ) {
+          if (typeof link.Access === "string") {
+            if (link.Access === "all") {
+              return true;
+            }
+            if (dataUserDetails && dataUserDetails["group_model"]) {
+              if (
+                dataUserDetails["group_model"].includes("superuser") ||
+                dataUserDetails["group_model"].includes(link.Access)
+              ) {
+                return true;
+              }
+            }
+          } else {
+            if (link.Access.includes("all")) {
+              return true;
+            }
+            if (dataUserDetails && dataUserDetails["group_model"]) {
+              for (let object of link.Access) {
+                if (dataUserDetails["group_model"].includes(object)) {
+                  return true;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+};
+
+export const GetInfoPage = (path) => {
+  for (let module of constants.modules) {
+    for (let section of module.Sections) {
+      for (let link of section.Links) {
+        if (
+          !link.Link.ExternalLink &&
+          link.Link.split("/")[1] === path.split("/")[1]
+        ) {
+          return {
+            title: link.Title,
+            description: link.Description,
+            logic: link.Logic,
+            redirect: link.Redirect,
+          };
+        }
+      }
+    }
+  }
+  return {
+    title: "Страница",
+    description: "страница веб платформы",
+    logic: true,
+    redirect: true,
+  };
+};
+
+// TODO base utils /////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const ActionsFailUtility = ({ dispatch, error }) => {
   try {
     if (constants.DEBUG_CONSTANT) {
@@ -170,104 +310,20 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
     }
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ReducersUtility = ({ load, data, error, fail, reset }) => {
+
+export const Sleep = (time = 1000) => {
   try {
-    return function (state = {}, action = null) {
-      switch (action.type) {
-        case load:
-          return { load: true };
-        case data:
-          return {
-            load: false,
-            data: action.payload,
-          };
-        case error:
-          return {
-            load: false,
-            error: action.payload,
-          };
-        case fail:
-          return { load: false, fail: action.payload };
-        case reset:
-          return {};
-        default:
-          return state;
-      }
-    };
-  } catch (error) {
-    if (constants.DEBUG_CONSTANT) {
-      console.log("ReduxReducersUtility: ", error);
-    }
-  }
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export function ConstantsUtility(name) {
-  return {
-    load: name + "_LOAD_CONSTANT",
-    data: name + "_DATA_CONSTANT",
-    error: name + "_ERROR_CONSTANT",
-    fail: name + "_FAIL_CONSTANT",
-    reset: name + "_RESET_CONSTANT",
-  };
-}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const GetInfoPage = (path) => {
-  let title = "Домашняя страница";
-  let description = "основная страница веб платформы";
-  let logic = true;
-  let redirect = false;
-  constants.modules.forEach(function (module, index, array) {
-    module.Sections.forEach(function (section, index, array) {
-      section.Links.forEach(function (link, index, array) {
-        if (link.Link.split("/")[1] === path.split("/")[1]) {
-          title = link.Title;
-          description = link.Description;
-          logic = link.Logic;
-          redirect = link.Redirect;
-        }
-      });
-    });
-  });
-  return {
-    title: title,
-    description: description,
-    logic: logic,
-    redirect: redirect,
-  };
-};
-///////////////////////////////////////////////////////////////////////////////////////////////////////TODO custom utils
-export const GetStaticFile = (path = "") => {
-  try {
-    if (path === "null" || path === "/media/null" || path == null) {
-      return "";
-    }
-    return `/static${path}`;
+    return new Promise((resolve) => setTimeout(resolve, time));
   } catch (error) {
     if (constants.DEBUG_CONSTANT) {
       console.log(error);
     }
-    return "";
+    return null;
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const GetCleanDateTime = (dateTime, withTime = true) => {
-  try {
-    const date = dateTime.split("T")[0];
-    const time = dateTime.split("T")[1].slice(0, 5);
-    if (withTime) {
-      return `${date} ${time}`;
-    } else {
-      return `${date}`;
-    }
-  } catch (error) {
-    if (constants.DEBUG_CONSTANT) {
-      console.log(error);
-    }
-    return "";
-  }
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TODO custom /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const GetSliceString = (string = "", length = 30, withDots = true) => {
   try {
     if (string == null) {
@@ -289,18 +345,38 @@ export const GetSliceString = (string = "", length = 30, withDots = true) => {
     return "";
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const Sleep = (time = 1000) => {
+
+export const GetStaticFile = (path = "") => {
   try {
-    return new Promise((resolve) => setTimeout(resolve, time));
+    if (path === "null" || path === "/media/null" || path == null) {
+      return "";
+    }
+    return `/static${path}`;
   } catch (error) {
     if (constants.DEBUG_CONSTANT) {
       console.log(error);
     }
-    return null;
+    return "";
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const GetCleanDateTime = (dateTime, withTime = true) => {
+  try {
+    const date = dateTime.split("T")[0];
+    const time = dateTime.split("T")[1].slice(0, 5);
+    if (withTime) {
+      return `${date} ${time}`;
+    } else {
+      return `${date}`;
+    }
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return "";
+  }
+};
+
 export const ChangePasswordVisibility = (objects = [""]) => {
   try {
     objects.forEach(function (object, index, array) {
@@ -316,7 +392,22 @@ export const ChangePasswordVisibility = (objects = [""]) => {
     return null;
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const ChangeObjectsByIdVisibility = (objects = [""]) => {
+  try {
+    objects.forEach(function (object, index, array) {
+      const obj = document.getElementById(object);
+      const classname = obj.getAttribute("class") === "d-none" ? "" : "d-none";
+      obj.setAttribute("class", classname);
+    });
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};
+
 export const ChangeAccordionCollapse = (objects = [""]) => {
   try {
     objects.forEach(function (object, index, array) {
@@ -334,22 +425,7 @@ export const ChangeAccordionCollapse = (objects = [""]) => {
     return null;
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ChangeObjectsByIdVisibility = (objects = [""]) => {
-  try {
-    objects.forEach(function (object, index, array) {
-      const obj = document.getElementById(object);
-      const classname = obj.getAttribute("class") === "d-none" ? "" : "d-none";
-      obj.setAttribute("class", classname);
-    });
-  } catch (error) {
-    if (constants.DEBUG_CONSTANT) {
-      console.log(error);
-    }
-    return null;
-  }
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const GetRegexType = ({
   numbers = false,
   latin = false,
@@ -399,7 +475,7 @@ export const GetRegexType = ({
     return new RegExp(`[^_]`, "g");
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const GetCurrentDate = (withTime = true, yearAppend = 0) => {
   try {
     const today = new Date();
@@ -425,7 +501,7 @@ export const GetCurrentDate = (withTime = true, yearAppend = 0) => {
     return null;
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const GetCurrentYear = (yearAppend = 0) => {
   try {
     const today = new Date();
@@ -438,7 +514,7 @@ export const GetCurrentYear = (yearAppend = 0) => {
     return null;
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const GetCurrentMonth = (withZero = false, yearMonth = 0) => {
   try {
     const today = new Date();
@@ -464,7 +540,7 @@ export const GetCurrentMonth = (withZero = false, yearMonth = 0) => {
     return null;
   }
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const GetCurrentDay = (withZero = false) => {
   try {
     const today = new Date();

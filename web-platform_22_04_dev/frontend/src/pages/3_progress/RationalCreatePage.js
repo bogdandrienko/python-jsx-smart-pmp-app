@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const RationalCreatePage = () => {
@@ -52,7 +52,15 @@ export const RationalCreatePage = () => {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(actions.UserListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/",
+          "POST",
+          30000,
+          constants.USER_LIST_ALL
+        )
+      );
     }
   }, [dataUserList, errorUserList, failUserList]);
   //////////////////////////////////////////////////////////
@@ -88,7 +96,15 @@ export const RationalCreatePage = () => {
       user4: `${user4} ${user4Perc}%`,
       user5: `${user5} ${user5Perc}%`,
     };
-    dispatch(actions.rationalCreateAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/rational/",
+        "POST",
+        30000,
+        constants.RATIONAL_CREATE
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerCreateReset = async (e) => {

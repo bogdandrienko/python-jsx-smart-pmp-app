@@ -6,9 +6,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-import axios from "axios";
+import { userLoginAction } from "../../js/actions";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const LoginPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +44,7 @@ export const LoginPage = () => {
         username: username,
         password: password,
       };
-      dispatch(actions.userLoginAction(form));
+      dispatch(userLoginAction(form));
     }
   };
   //////////////////////////////////////////////////////////

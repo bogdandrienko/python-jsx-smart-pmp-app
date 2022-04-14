@@ -6,7 +6,7 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaRatingListPage = () => {
@@ -43,7 +43,16 @@ export const IdeaRatingListPage = () => {
         moderate: moderate,
         sort: sort,
       };
-      dispatch(actions.ideaListAction(form));
+      // dispatch(actions.ideaListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_LIST
+        )
+      );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);
@@ -208,15 +217,17 @@ export const IdeaRatingListPage = () => {
                   key={index}
                   className="col-sm-12 col-md-6 col-lg-4 m-0 p-1"
                 >
-                  <Link
-                    to={`/idea_detail/${idea.id}`}
-                    className="text-decoration-none text-dark m-0 p-0"
-                  >
+                  <div className="m-0 p-0">
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
-                        <h6 className="lead fw-bold m-0 p-0">
-                          {utils.GetSliceString(idea["name_char_field"], 30)}
-                        </h6>
+                        <Link
+                          to={`/idea_detail/${idea.id}`}
+                          className="text-decoration-none text-dark m-0 p-0"
+                        >
+                          <h6 className="lead fw-bold m-0 p-0">
+                            {utils.GetSliceString(idea["name_char_field"], 30)}
+                          </h6>
+                        </Link>
                       </div>
                       <div className="card-body m-0 p-0">
                         <div className="m-0 p-0">
@@ -552,7 +563,7 @@ export const IdeaRatingListPage = () => {
                         </Link>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               ))}
             </ul>

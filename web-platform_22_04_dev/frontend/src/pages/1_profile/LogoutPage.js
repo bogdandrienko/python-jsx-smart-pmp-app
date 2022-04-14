@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
+import * as utils from "../../js/utils";
 import * as actions from "../../js/actions";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const LogoutPage = () => {

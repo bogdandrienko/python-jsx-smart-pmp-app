@@ -1,4 +1,5 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -11,24 +12,34 @@ import {
   Alert,
 } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
+
 import * as constants from "./constants";
 import * as utils from "./utils";
 import * as actions from "./actions";
-////////////////////////////////////////////////////////////////////////////////////////////////////TODO base components
+
+// TODO base ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const HeaderComponent = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
+
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
+
   const { title, description, logic, redirect } = utils.GetInfoPage(
     location.pathname
   );
+
   const [firstRefreshUserDetails, firstRefreshUserDetailsSet] = useState(true);
   const [firstRefreshNotification, firstRefreshNotificationSet] =
     useState(true);
+
   // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
+
   const userLoginStore = useSelector((state) => state.userLoginStore);
   const {
     // load: loadUserLogin,
@@ -54,22 +65,23 @@ export const HeaderComponent = () => {
     // error: errorNotificationList,
     // fail: failNotificationList,
   } = notificationListStore;
+
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
+
   useEffect(() => {
     if (!dataUserDetails) {
       const form = {
         "Action-type": "USER_DETAIL",
       };
-
       dispatch(actions.userDetailsAction(form));
     } else {
-      if (firstRefreshUserDetails && logic) {
+      if (logic && firstRefreshUserDetails) {
         firstRefreshUserDetailsSet(false);
         dispatch({ type: constants.USER_DETAILS.reset });
       }
       if (
-        !utils.CheckPageAccess(userDetailsStore, location.pathname) &&
-        redirect
+        redirect &&
+        !utils.CheckPageAccess(userDetailsStore, location.pathname)
       ) {
         navigate("/");
       }
@@ -87,7 +99,7 @@ export const HeaderComponent = () => {
   useEffect(() => {
     if (logic) {
       if (dataUserLogin == null && location.pathname !== "/login" && redirect) {
-        utils.Sleep(50).then(() => {
+        utils.Sleep(10).then(() => {
           if (
             dataUserLogin == null &&
             location.pathname !== "/login" &&
@@ -121,7 +133,15 @@ export const HeaderComponent = () => {
       const form = {
         "Action-type": "NOTIFICATION_LIST",
       };
-      dispatch(actions.notificationListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/",
+          "POST",
+          30000,
+          constants.NOTIFICATION_LIST
+        )
+      );
     } else {
       if (firstRefreshNotification) {
         firstRefreshNotificationSet(false);
@@ -129,7 +149,9 @@ export const HeaderComponent = () => {
       }
     }
   }, [dispatch, firstRefreshNotification]);
+
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <header className="header navbar-fixed-top m-0 p-0 pb-3">
       <Navbar expand="lg" className="m-0 p-0">
@@ -291,7 +313,7 @@ export const HeaderComponent = () => {
     </header>
   );
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const FooterComponent = () => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -457,7 +479,9 @@ export const FooterComponent = () => {
     </footer>
   );
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TODO components /////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const ModulesComponent = () => {
   // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
   const userDetailsStore = useSelector((state) => state.userDetailsStore);
@@ -642,7 +666,88 @@ export const ModulesComponent = () => {
     </div>
   );
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const NewsComponent = ({ count = 100 }) => {
+  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
+  return (
+    <div className="card list-group list-group-item-action list-group-flush custom-background-transparent-low-middle m-0 p-0">
+      <div className="border-bottom scrollarea m-0 p-0">
+        <LinkContainer to="/news" className="m-0 p-0">
+          <Nav.Link className="m-0 p-0">
+            <div
+              className="list-group-item active shadow m-0 p-2"
+              aria-current="true"
+            >
+              <div className="d-flex w-100 align-items-center justify-content-between m-0 p-0">
+                <strong className="lead m-0 p-0 mb-1">
+                  <i className="fa-solid fa-newspaper m-0 p-1" />
+                  Лента
+                </strong>
+                <strong className="text-warning m-0 p-0">Свежие сверху</strong>
+              </div>
+              {count !== 100 && (
+                <div className="small m-0 p-0 mb-1">
+                  (нажмите сюда для просмотра всех изменений)
+                </div>
+              )}
+            </div>
+          </Nav.Link>
+        </LinkContainer>
+        {constants.news.slice(0, count).map((news_elem, index) => (
+          <div key={index} className="custom-hover m-0 p-0">
+            <Link
+              to={news_elem.Link}
+              className={
+                news_elem.Status !== "active"
+                  ? "list-group-item list-group-item-action bg-secondary bg-opacity-10 m-0 p-1"
+                  : "list-group-item list-group-item-action bg-success bg-opacity-10 m-0 p-1"
+              }
+            >
+              <div className="d-flex w-100 align-items-center justify-content-between m-0 p-0">
+                <strong className="m-0 p-0">
+                  {news_elem.Title}
+                  {news_elem.Link !== "#" && (
+                    <small className="custom-color-primary-1 m-0 p-0">
+                      {" "}
+                      (нажмите сюда для перехода)
+                    </small>
+                  )}
+                </strong>
+                <small className="text-muted m-0 p-0">
+                  {news_elem.Status !== "active" ? (
+                    <strong className="text-secondary text-start m-0 p-0">
+                      (в разработке)
+                    </strong>
+                  ) : (
+                    <strong className="text-success text-start m-0 p-0">
+                      (завершено)
+                    </strong>
+                  )}
+                </small>
+              </div>
+              <div className="small m-0 p-0">
+                {news_elem.Description}
+                {news_elem.Helps && (
+                  <small className="text-secondary m-0 p-0">
+                    {" "}
+                    ({news_elem.Helps})
+                  </small>
+                )}
+                {news_elem.Danger && (
+                  <small className="text-danger m-0 p-0">
+                    {" "}
+                    ({news_elem.Danger})
+                  </small>
+                )}
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 export const StoreStatusComponent = ({
   storeStatus,
   keyStatus = "StoreStatus",
@@ -717,7 +822,18 @@ export const StoreStatusComponent = ({
     </div>
   );
 };
-//////////////////////////////////////////////////////////////////////////////////////////////////TODO custom components
+
+export const MessageComponent = ({ variant, children }) => {
+  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
+  return (
+    <div className="row justify-content-center m-0 p-1">
+      <Alert variant={variant} className="text-center m-0 p-1">
+        {children}
+      </Alert>
+    </div>
+  );
+};
+
 export const LoaderComponent = () => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -735,153 +851,64 @@ export const LoaderComponent = () => {
     </Spinner>
   );
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const MessageComponent = ({ variant, children }) => {
+
+export const AccordionComponent = ({
+  key_target,
+  isCollapse = true,
+  title,
+  text_style = "text-danger",
+  header_style = "bg-danger bg-opacity-10",
+  body_style = "bg-danger bg-opacity-10",
+  children,
+}) => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div className="row justify-content-center m-0 p-1">
-      <Alert variant={variant} className="text-center m-0 p-1">
-        {children}
-      </Alert>
-    </div>
-  );
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const NewsComponent = ({ count = 100 }) => {
-  const news = [
-    {
-      Title: "Личный профиль:",
-      Status: "disable",
-      Link: "#",
-      Description:
-        "расширение профиля: дополнительная информация: образование, хобби, интересы, изображение, статистика, " +
-        "достижения и участие",
-      Helps: "",
-      Danger: "",
-    },
-    {
-      Title: "Рационализаторские предложения:",
-      Status: "disable",
-      Link: "#",
-      Description:
-        "шаблон и подача рац. предложений, модерация и общий список с рейтингами и комментариями",
-      Helps: "",
-      Danger: "",
-    },
-    {
-      Title: "Банк идей:",
-      Status: "active",
-      Link: "/idea_create",
-      Description:
-        "подача и редактирование, шаблон, модерация, комментирование, рейтинги, лучшие идеи и списки лидеров...",
-      Helps: "",
-      Danger: "",
-    },
-    {
-      Title: "Инструкции: видео и текстовые",
-      Status: "active",
-      Link: "/video_study",
-      Description: "лента с информацией по веб-платформе",
-      Helps: "материал будет своевременно обновляться",
-      Danger: "",
-    },
-    {
-      Title: "Отпуска:",
-      Status: "active",
-      Link: "/vacation",
-      Description: "выгрузка Ваших данных по отпуску за выбранный период",
-      Helps: "",
-      Danger: "",
-    },
-    {
-      Title: "Расчётный лист:",
-      Status: "active",
-      Link: "/salary",
-      Description: "выгрузка Вашего расчётного листа за выбранный период",
-      Helps: "",
-      Danger: "'контрактникам' выгрузка недоступна!",
-    },
-  ];
-  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
-  return (
-    <div className="card list-group list-group-item-action list-group-flush custom-background-transparent-low-middle m-0 p-0">
-      <div className="border-bottom scrollarea m-0 p-0">
-        <LinkContainer to="/news" className="m-0 p-0">
-          <Nav.Link className="m-0 p-0">
-            <div
-              className="list-group-item active shadow m-0 p-2"
-              aria-current="true"
+    <div className="m-0 p-1">
+      <div className="accordion m-0 p-0" id="accordionExample">
+        <div className="accordion-item custom-background-transparent-middle m-0 p-0">
+          <h2
+            className="accordion-header custom-background-transparent-low m-0 p-0"
+            id="accordion_heading_1"
+          >
+            <button
+              className={`accordion-button m-0 p-0 ${header_style}`}
+              type="button"
+              data-bs-toggle=""
+              data-bs-target={`#${key_target}`}
+              aria-expanded="false"
+              aria-controls={key_target}
+              onClick={(e) => utils.ChangeAccordionCollapse([key_target])}
             >
-              <div className="d-flex w-100 align-items-center justify-content-between m-0 p-0">
-                <strong className="lead m-0 p-0 mb-1">
-                  <i className="fa-solid fa-newspaper m-0 p-1" />
-                  Лента
-                </strong>
-                <strong className="text-warning m-0 p-0">Свежие сверху</strong>
-              </div>
-              {count !== 100 && (
-                <div className="small m-0 p-0 mb-1">
-                  (нажмите сюда для просмотра всех изменений)
-                </div>
-              )}
-            </div>
-          </Nav.Link>
-        </LinkContainer>
-        {news.slice(0, count).map((news_elem, index) => (
-          <div key={index} className="custom-hover m-0 p-0">
-            <Link
-              to={news_elem.Link}
-              className={
-                news_elem.Status !== "active"
-                  ? "list-group-item list-group-item-action bg-secondary bg-opacity-10 m-0 p-1"
-                  : "list-group-item list-group-item-action bg-success bg-opacity-10 m-0 p-1"
-              }
-            >
-              <div className="d-flex w-100 align-items-center justify-content-between m-0 p-0">
-                <strong className="m-0 p-0">
-                  {news_elem.Title}
-                  {news_elem.Link !== "#" && (
-                    <small className="custom-color-primary-1 m-0 p-0">
-                      {" "}
-                      (нажмите сюда для перехода)
-                    </small>
-                  )}
-                </strong>
+              <h6 className={`lead m-0 p-3 ${text_style}`}>
+                {title}{" "}
                 <small className="text-muted m-0 p-0">
-                  {news_elem.Status !== "active" ? (
-                    <strong className="text-secondary text-start m-0 p-0">
-                      (в разработке)
-                    </strong>
-                  ) : (
-                    <strong className="text-success text-start m-0 p-0">
-                      (завершено)
-                    </strong>
-                  )}
+                  (нажмите сюда, для переключения)
                 </small>
-              </div>
-              <div className="small m-0 p-0">
-                {news_elem.Description}
-                {news_elem.Helps && (
-                  <small className="text-secondary m-0 p-0">
-                    {" "}
-                    ({news_elem.Helps})
-                  </small>
-                )}
-                {news_elem.Danger && (
-                  <small className="text-danger m-0 p-0">
-                    {" "}
-                    ({news_elem.Danger})
-                  </small>
-                )}
-              </div>
-            </Link>
+              </h6>
+            </button>
+          </h2>
+          <div
+            id={key_target}
+            className={
+              isCollapse
+                ? "accordion-collapse collapse m-0 p-0"
+                : "accordion-collapse m-0 p-0"
+            }
+            aria-labelledby={key_target}
+            data-bs-parent="#accordionExample"
+          >
+            <div className={`accordion-body m-0 p-0 ${body_style}`}>
+              {children}
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );
 };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// TODO custom /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const SalaryTableComponent = ({ tab = {} }) => {
   let header = tab[0];
   let thead_array = [];
@@ -961,297 +988,5 @@ export const SalaryTableComponent = ({ tab = {} }) => {
         </tbody>
       </table>
     </li>
-  );
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const AccordionComponent = ({
-  key_target,
-  isCollapse = true,
-  title,
-  text_style = "text-danger",
-  header_style = "bg-danger bg-opacity-10",
-  body_style = "bg-danger bg-opacity-10",
-  children,
-}) => {
-  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
-  return (
-    <div className="m-0 p-1">
-      <div className="accordion m-0 p-0" id="accordionExample">
-        <div className="accordion-item custom-background-transparent-middle m-0 p-0">
-          <h2
-            className="accordion-header custom-background-transparent-low m-0 p-0"
-            id="accordion_heading_1"
-          >
-            <button
-              className={`accordion-button m-0 p-0 ${header_style}`}
-              type="button"
-              data-bs-toggle=""
-              data-bs-target={`#${key_target}`}
-              aria-expanded="false"
-              aria-controls={key_target}
-              onClick={(e) => utils.ChangeAccordionCollapse([key_target])}
-            >
-              <h6 className={`lead m-0 p-3 ${text_style}`}>
-                {title}{" "}
-                <small className="text-muted m-0 p-0">
-                  (нажмите сюда, для переключения)
-                </small>
-              </h6>
-            </button>
-          </h2>
-          <div
-            id={key_target}
-            className={
-              isCollapse
-                ? "accordion-collapse collapse m-0 p-0"
-                : "accordion-collapse m-0 p-0"
-            }
-            aria-labelledby={key_target}
-            data-bs-parent="#accordionExample"
-          >
-            <div className={`accordion-body m-0 p-0 ${body_style}`}>
-              {children}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-////////////////////////////////////////////////////////////////////////////////////////////////////TODO test components
-export const RationalComponent = ({ object, shortView = false }) => {
-  // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
-  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
-  return (
-    <div
-      className={
-        shortView ? "card list-group-item-action shadow  " : "card shadow  "
-      }
-    >
-      <div className="card-header m-0 p-0   bg-opacity-10 bg-primary">
-        <h6 className="lead fw-bold">
-          {object["name_char_field"]}{" "}
-          {utils.CheckAccess(userDetailsStore, "rational_admin") && (
-            <small className="text-danger">
-              [{utils.GetSliceString(object["status_moderate_char_field"], 30)}]
-            </small>
-          )}
-        </h6>
-      </div>
-      <div className="card-body m-0 p-0">
-        <label className="form-control-sm m-0 p-0">
-          Подразделение:
-          <select
-            id="subdivision"
-            name="subdivision"
-            required
-            className="form-control form-control-sm"
-          >
-            <option value="">{object["subdivision_char_field"]}</option>
-          </select>
-        </label>
-        <label className="form-control-sm m-0 p-0">
-          Зарегистрировано за №{" "}
-          <strong className="btn btn-light disabled">
-            {object["number_char_field"]}
-          </strong>
-        </label>
-      </div>
-
-      <div className="card-body m-0 p-0  ">
-        <label className="form-control-sm m-0 p-1">
-          Сфера:
-          <select
-            id="sphere"
-            name="sphere"
-            required
-            className="form-control form-control-sm"
-          >
-            <option value="">{object["sphere_char_field"]}</option>
-          </select>
-        </label>
-        <label className="form-control-sm m-0 p-1">
-          Категория:
-          <select
-            id="category"
-            name="category"
-            required
-            className="form-control form-control-sm"
-          >
-            <option value="">{object["category_char_field"]}</option>
-          </select>
-        </label>
-      </div>
-      <div className="card-body m-0 p-0  ">
-        <img
-          src={utils.GetStaticFile(object["avatar_image_field"])}
-          className={
-            shortView
-              ? "card-img-top img-fluid w-25"
-              : "card-img-top img-fluid w-100"
-          }
-          alt="id"
-        />
-      </div>
-      <div className="card-body m-0 p-0  ">
-        <label className="w-100 form-control-sm">
-          Место внедрения:
-          <input
-            type="text"
-            id="name_char_field"
-            name="name_char_field"
-            required
-            placeholder="Цех / участок / отдел / лаборатория и т.п."
-            defaultValue={object["place_char_field"]}
-            readOnly={true}
-            minLength="1"
-            maxLength="100"
-            className="form-control form-control-sm"
-          />
-        </label>
-      </div>
-      <div className="card-body m-0 p-0  ">
-        <label className="w-100 form-control-sm m-0 p-1">
-          Описание:
-          <textarea
-            required
-            placeholder="Описание"
-            defaultValue={
-              !shortView
-                ? utils.GetSliceString(object["description_text_field"], 50)
-                : object["description_text_field"]
-            }
-            readOnly={true}
-            minLength="1"
-            maxLength="5000"
-            rows="3"
-            className="form-control form-control-sm"
-          />
-        </label>
-      </div>
-      {!shortView && (
-        <div className="card-body m-0 p-0  ">
-          <label className="form-control-sm m-0 p-1">
-            Word файл-приложение:
-            <a
-              className="btn btn-sm btn-primary m-0 p-1"
-              href={utils.GetStaticFile(object["additional_word_file_field"])}
-            >
-              Скачать документ
-            </a>
-          </label>
-          <label className="form-control-sm m-0 p-1">
-            Pdf файл-приложение:
-            <a
-              className="btn btn-sm btn-danger m-0 p-1"
-              href={utils.GetStaticFile(object["additional_pdf_file_field"])}
-            >
-              Скачать документ
-            </a>
-          </label>
-          <label className="form-control-sm m-0 p-1">
-            Excel файл-приложение:
-            <a
-              className="btn btn-sm btn-success m-0 p-1"
-              href={utils.GetStaticFile(object["additional_excel_file_field"])}
-            >
-              Скачать документ
-            </a>
-          </label>
-        </div>
-      )}
-      <div className="card-body m-0 p-0  ">
-        <Link to={`#`} className="text-decoration-none btn btn-sm btn-warning">
-          Автор: {object["user_model"]["last_name_char_field"]}{" "}
-          {object["user_model"]["first_name_char_field"]}{" "}
-          {object["user_model"]["patronymic_char_field"]}
-        </Link>
-      </div>
-      {!shortView && (
-        <label className="w-100 form-control-sm m-0 p-1">
-          Участники:
-          {object["user1_char_field"] &&
-            object["user1_char_field"].length > 1 && (
-              <input
-                type="text"
-                value={object["user1_char_field"]}
-                placeholder="участник № 1"
-                minLength="0"
-                maxLength="200"
-                className="form-control form-control-sm"
-              />
-            )}
-          {object["user2_char_field"] &&
-            object["user2_char_field"].length > 1 && (
-              <input
-                type="text"
-                value={object["user2_char_field"]}
-                placeholder="участник № 2"
-                minLength="0"
-                maxLength="200"
-                className="form-control form-control-sm"
-              />
-            )}
-          {object["user3_char_field"] &&
-            object["user3_char_field"].length > 1 && (
-              <input
-                type="text"
-                value={object["user3_char_field"]}
-                placeholder="участник № 3"
-                minLength="0"
-                maxLength="200"
-                className="form-control form-control-sm"
-              />
-            )}
-          {object["user4_char_field"] &&
-            object["user4_char_field"].length > 1 && (
-              <input
-                type="text"
-                value={object["user4_char_field"]}
-                placeholder="участник № 4"
-                minLength="0"
-                maxLength="200"
-                className="form-control form-control-sm"
-              />
-            )}
-          {object["user5_char_field"] &&
-            object["user5_char_field"].length > 1 && (
-              <input
-                type="text"
-                value={object["user5_char_field"]}
-                placeholder="участник № 5"
-                minLength="0"
-                maxLength="200"
-                className="form-control form-control-sm"
-              />
-            )}
-        </label>
-      )}
-      <div className="card-body m-0 p-0  ">
-        <label className="text-muted border p-1 m-0 p-1">
-          подано:{" "}
-          <p className=" ">
-            {utils.GetCleanDateTime(object["created_datetime_field"], true)}
-          </p>
-        </label>
-        <label className="text-muted border p-1 m-0 p-1">
-          зарегистрировано:{" "}
-          <p className=" ">
-            {utils.GetCleanDateTime(object["register_datetime_field"], true)}
-          </p>
-        </label>
-      </div>
-      {shortView && (
-        <div className="card-header m-0 p-0  ">
-          <Link
-            className="btn btn-sm btn-primary w-100"
-            to={`/rational_detail/${object.id}`}
-          >
-            Подробнее
-          </Link>
-        </div>
-      )}
-    </div>
   );
 };

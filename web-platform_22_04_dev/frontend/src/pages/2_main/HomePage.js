@@ -11,8 +11,8 @@ export const HomePage = () => {
     <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
-        <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 m-0 p-1">
-          <div className="embed-responsive embed-responsive-16by9 m-0 p-1">
+        <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 text-center m-0 p-1">
+          <div className="embed-responsive embed-responsive-16by9 text-center m-0 p-1">
             <div className="btn-group text-start w-100 m-0 p-0">
               <Link
                 to={"/video_study"}
@@ -27,7 +27,7 @@ export const HomePage = () => {
                 Инструкции в текстовом формате
               </Link>
             </div>
-            <div className="player-wrapper text-center bg-light bg-opacity-75 m-0 p-0">
+            <div className="player-wrapper text-center w-100 bg-light bg-opacity-75 m-0 p-0">
               <small className="lead fw-bold m-0 p-0">
                 Первый вход в систему:
               </small>
@@ -37,7 +37,7 @@ export const HomePage = () => {
                 width="100%"
                 height="100%"
                 controls={true}
-                className="m-0 p-0"
+                className="text-center m-0 p-0"
               />
             </div>
           </div>

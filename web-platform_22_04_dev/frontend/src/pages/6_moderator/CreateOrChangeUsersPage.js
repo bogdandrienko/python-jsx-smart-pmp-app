@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const CreateOrChangeUsersPage = () => {
@@ -57,7 +57,15 @@ export const CreateOrChangeUsersPage = () => {
       clearUserGroups: clearUserGroups,
       additionalExcel: additionalExcel,
     };
-    dispatch(actions.adminCreateOrChangeUsersAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/admin/create_or_change_users/",
+        "POST",
+        30000,
+        constants.ADMIN_CREATE_OR_CHANGE_USERS
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerRecoverPasswordReset = async (e) => {

@@ -6,7 +6,6 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaChangePage = () => {
@@ -78,7 +77,15 @@ export const IdeaChangePage = () => {
         "Action-type": "IDEA_DETAIL",
         id: id,
       };
-      dispatch(actions.ideaDetailAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_DETAIL
+        )
+      );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);
@@ -131,7 +138,15 @@ export const IdeaChangePage = () => {
       moderate: "на модерации",
       moderateComment: "автор внёс изменения",
     };
-    dispatch(actions.ideaChangeAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/idea/",
+        "POST",
+        30000,
+        constants.IDEA_CHANGE
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerChangeReset = async (e) => {
@@ -153,7 +168,15 @@ export const IdeaChangePage = () => {
     };
     let isConfirm = window.confirm("Вы действительно хотите скрыть свою идею?");
     if (isConfirm) {
-      dispatch(actions.ideaModerateAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_MODERATE
+        )
+      );
     }
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////

@@ -2187,34 +2187,38 @@ def api_basic_admin_user_temp(request):
 
                 # TODO actions #########################################################################################
 
-                user_models = backend_models.UserModel.objects.filter(
-                    temp_password_boolean_field=True,
-                    activity_boolean_field=True
-                )
-                if not request.user.is_superuser:
-                    response = {"error": "Your user in not superuser."}
+                if req_inst.action_type == "":
+
+                    user_models = backend_models.UserModel.objects.filter(
+                        temp_password_boolean_field=True,
+                        activity_boolean_field=True
+                    )
+                    if not request.user.is_superuser:
+                        response = {"error": "Your user in not superuser."}
+                    else:
+                        objects = []
+                        for user_model in user_models:
+                            if not user_model.user_foreign_key_field.is_superuser:
+                                objects.append(
+                                    {
+                                        f"""{base64.b64encode(
+                                            str(user_model.user_foreign_key_field.username)[::-1].encode()
+                                        ).decode()}""":
+                                            base64.b64encode(
+                                                str(f"12{user_model.password_char_field}345").encode()).decode()
+                                    }
+                                )
+                        # for obj in objects:
+                        #     for key, value in obj.items():
+                        #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
+                        response = {"response": objects}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
                 else:
-                    objects = []
-                    for user_model in user_models:
-                        if not user_model.user_foreign_key_field.is_superuser:
-                            objects.append(
-                                {
-                                    f"""{base64.b64encode(
-                                        str(user_model.user_foreign_key_field.username)[::-1].encode()
-                                    ).decode()}""":
-                                        base64.b64encode(
-                                            str(f"12{user_model.password_char_field}345").encode()).decode()
-                                }
-                            )
-                    # for obj in objects:
-                    #     for key, value in obj.items():
-                    #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
-                    response = {"response": objects}
-
-                # TODO response ########################################################################################
-
-                backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                return Response(response)
+                    return Response({"error": "This action not allowed for this method."})
             except Exception as error:
                 backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                 return Response({"error": "Произошла ошибка!"})

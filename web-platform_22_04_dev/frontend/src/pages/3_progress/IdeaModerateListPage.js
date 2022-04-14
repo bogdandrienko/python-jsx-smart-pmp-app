@@ -6,7 +6,7 @@ import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaModerateListPage = () => {
@@ -52,7 +52,15 @@ export const IdeaModerateListPage = () => {
       const form = {
         "Action-type": "USER_LIST_ALL",
       };
-      dispatch(actions.UserListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/",
+          "POST",
+          30000,
+          constants.USER_LIST_ALL
+        )
+      );
     }
   }, [dataUserList]);
   //////////////////////////////////////////////////////////
@@ -68,7 +76,16 @@ export const IdeaModerateListPage = () => {
         sort: sort,
         moderate: moderate,
       };
-      dispatch(actions.ideaListAction(form));
+      // dispatch(actions.ideaListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_LIST
+        )
+      );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);

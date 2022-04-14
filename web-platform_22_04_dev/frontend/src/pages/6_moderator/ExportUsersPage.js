@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const ExportUsersPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +27,15 @@ export const ExportUsersPage = () => {
     const form = {
       "Action-type": "EXPORT_USERS",
     };
-    dispatch(actions.adminExportUsersAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/admin/export_users/",
+        "POST",
+        30000,
+        constants.ADMIN_EXPORT_USERS
+      )
+    );
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (

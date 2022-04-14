@@ -4,9 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
-import { Link } from "react-router-dom";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const IdeaCreatePage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +64,16 @@ export const IdeaCreatePage = () => {
         description: description,
         moderate: moderate,
       };
-      dispatch(actions.ideaCreateAction(form));
+      // dispatch(actions.ideaCreateAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/idea/",
+          "POST",
+          30000,
+          constants.IDEA_CREATE
+        )
+      );
     }
   };
   //////////////////////////////////////////////////////////
@@ -102,10 +109,10 @@ export const IdeaCreatePage = () => {
                   <h6 className="m-0 p-0">
                     Коллеги, будьте "реалистами" при отправке своей идеи:
                   </h6>
-                  <text className="m-0 p-0">
+                  <small className="m-0 p-0">
                     Она должна быть реализуема, иметь какой-то положительный
                     эффект и, желательно, более конкретна!
-                  </text>
+                  </small>
                 </li>
               </ul>
             </div>

@@ -16,7 +16,7 @@ export const modules = [
     ShowInModules: true,
     Sections: [
       {
-        Header: "Новости",
+        Header: "Основное",
         Access: ["user"],
         Image: "/static/img/modules/2_module_main/section_news.png",
         Links: [
@@ -481,18 +481,18 @@ export const modules = [
   },
   {
     Header: "Модератор",
-    Access: ["superuser", "moderator_oit", "moderator_otiz"],
+    Access: ["moderator_oit", "moderator_otiz"],
     Image: "/static/img/modules/earth.png",
     ShowInModules: false,
     Sections: [
       {
         Header: "Основной функционал",
-        Access: ["superuser"],
+        Access: [""],
         Image: "/static/img/modules/earth.png",
         Links: [
           {
             Header: "Панель Администрирования",
-            Access: ["superuser"],
+            Access: [""],
             Active: true,
             Link: "/admin/",
             ExternalLink: true,
@@ -506,7 +506,7 @@ export const modules = [
           },
           {
             Header: "Api Django rest_framework",
-            Access: ["superuser"],
+            Access: [""],
             Active: true,
             Link: "/api/auth/routes/",
             ExternalLink: true,
@@ -520,7 +520,7 @@ export const modules = [
           },
           {
             Header: "127.0.0.1:3000",
-            Access: ["superuser"],
+            Access: [""],
             Active: true,
             Link: "http://127.0.0.1:3000/",
             ExternalLink: true,
@@ -534,7 +534,7 @@ export const modules = [
           },
           {
             Header: "127.0.0.1:8000",
-            Access: ["superuser"],
+            Access: [""],
             Active: true,
             Link: "http://127.0.0.1:8000/",
             ExternalLink: true,
@@ -548,7 +548,7 @@ export const modules = [
           },
           {
             Header: "127.0.0.1:8000/test/",
-            Access: ["superuser"],
+            Access: [""],
             Active: true,
             Link: "http://127.0.0.1:8000/test/",
             ExternalLink: true,
@@ -564,7 +564,7 @@ export const modules = [
       },
       {
         Header: "Аккаунты",
-        Access: ["moderator_oit", "superuser"],
+        Access: ["moderator_oit"],
         Image: "/static/img/modules/earth.png",
         Links: [
           {
@@ -584,7 +584,7 @@ export const modules = [
           },
           {
             Header: "Создать или изменить пользователей",
-            Access: ["superuser"],
+            Access: [""],
             Active: true,
             Link: "/admin_create_or_change_users",
             ExternalLink: false,
@@ -599,7 +599,7 @@ export const modules = [
           },
           {
             Header: "Выгрузить список пользователей",
-            Access: ["superuser"],
+            Access: [""],
             Active: true,
             Link: "/admin_export_users",
             ExternalLink: false,
@@ -615,12 +615,12 @@ export const modules = [
       },
       {
         Header: "Терминалы скуд",
-        Access: ["moderator_otiz", "superuser"],
+        Access: ["moderator_otiz"],
         Image: "/static/img/modules/earth.png",
         Links: [
           {
             Header: "Перезагрузка терминалов",
-            Access: ["moderator_otiz", "superuser"],
+            Access: ["moderator_otiz"],
             Active: true,
             Link: "/terminal",
             ExternalLink: false,
@@ -638,18 +638,18 @@ export const modules = [
   },
   {
     Header: "Разработка",
-    Access: ["superuser"],
+    Access: [""],
     Image: "/static/img/modules/earth.png",
     ShowInModules: false,
     Sections: [
       {
         Header: "web version",
-        Access: ["superuser"],
+        Access: [""],
         Image: "/static/img/modules/earth.png",
         Links: [
           {
             Header: "03.04.22 12:00",
-            Access: ["superuser"],
+            Access: [""],
             Active: false,
             Link: "#",
             ExternalLink: false,
@@ -663,7 +663,7 @@ export const modules = [
           },
           {
             Header: "Test",
-            Access: ["superuser"],
+            Access: [""],
             Active: true,
             Link: "/test",
             ExternalLink: false,
@@ -681,69 +681,149 @@ export const modules = [
   },
 ];
 
+// TODO news ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const news = [
+  {
+    Title: "Личный профиль:",
+    Status: "disable",
+    Link: "#",
+    Description:
+      "расширение профиля: дополнительная информация: образование, хобби, интересы, изображение, статистика, " +
+      "достижения и участие",
+    Helps: "",
+    Danger: "",
+  },
+  {
+    Title: "Рационализаторские предложения:",
+    Status: "disable",
+    Link: "#",
+    Description:
+      "шаблон и подача рац. предложений, модерация и общий список с рейтингами и комментариями",
+    Helps: "",
+    Danger: "",
+  },
+  {
+    Title: "Банк идей:",
+    Status: "active",
+    Link: "/idea_create",
+    Description:
+      "подача и редактирование, шаблон, модерация, комментирование, рейтинги, лучшие идеи и списки лидеров...",
+    Helps: "",
+    Danger: "",
+  },
+  {
+    Title: "Инструкции: видео и текстовые",
+    Status: "active",
+    Link: "/video_study",
+    Description: "лента с информацией по веб-платформе",
+    Helps: "материал будет своевременно обновляться",
+    Danger: "",
+  },
+  {
+    Title: "Отпуска:",
+    Status: "active",
+    Link: "/vacation",
+    Description: "выгрузка Ваших данных по отпуску за выбранный период",
+    Helps: "",
+    Danger: "",
+  },
+  {
+    Title: "Расчётный лист:",
+    Status: "active",
+    Link: "/salary",
+    Description: "выгрузка Вашего расчётного листа за выбранный период",
+    Helps: "",
+    Danger: "'контрактникам' выгрузка недоступна!",
+  },
+];
+
 // TODO main ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const RATINGS_LIST = utils.ConstantsUtility("RATINGS_LIST");
+export const RATINGS_LIST = utils.ConstantConstructorUtility("RATINGS_LIST");
 
 // TODO profile ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const USER_LOGIN = utils.ConstantsUtility("USER_LOGIN");
-export const USER_DETAILS = utils.ConstantsUtility("USER_DETAILS");
-export const USER_CHANGE = utils.ConstantsUtility("USER_CHANGE");
-export const USER_RECOVER_PASSWORD = utils.ConstantsUtility(
+export const USER_LOGIN = utils.ConstantConstructorUtility("USER_LOGIN");
+
+export const USER_DETAILS = utils.ConstantConstructorUtility("USER_DETAILS");
+
+export const USER_CHANGE = utils.ConstantConstructorUtility("USER_CHANGE");
+
+export const USER_RECOVER_PASSWORD = utils.ConstantConstructorUtility(
   "USER_RECOVER_PASSWORD"
 );
 
-export const USER_LIST_ALL = utils.ConstantsUtility("USER_LIST_ALL");
+export const USER_LIST_ALL = utils.ConstantConstructorUtility("USER_LIST_ALL");
 
-export const NOTIFICATION_CREATE = utils.ConstantsUtility(
+export const NOTIFICATION_CREATE = utils.ConstantConstructorUtility(
   "NOTIFICATION_CREATE"
 );
-export const NOTIFICATION_DELETE = utils.ConstantsUtility(
+
+export const NOTIFICATION_DELETE = utils.ConstantConstructorUtility(
   "NOTIFICATION_DELETE"
 );
-export const NOTIFICATION_LIST = utils.ConstantsUtility("NOTIFICATION_LIST");
+
+export const NOTIFICATION_LIST =
+  utils.ConstantConstructorUtility("NOTIFICATION_LIST");
 
 // TODO progress ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const IDEA_CREATE = utils.ConstantsUtility("IDEA_CREATE");
-export const IDEA_LIST = utils.ConstantsUtility("IDEA_LIST");
-export const IDEA_DETAIL = utils.ConstantsUtility("IDEA_DETAIL");
-export const IDEA_CHANGE = utils.ConstantsUtility("IDEA_CHANGE");
-export const IDEA_MODERATE = utils.ConstantsUtility("IDEA_MODERATE");
-export const IDEA_COMMENT_CREATE = utils.ConstantsUtility(
+export const IDEA_CREATE = utils.ConstantConstructorUtility("IDEA_CREATE");
+
+export const IDEA_LIST = utils.ConstantConstructorUtility("IDEA_LIST");
+
+export const IDEA_DETAIL = utils.ConstantConstructorUtility("IDEA_DETAIL");
+
+export const IDEA_CHANGE = utils.ConstantConstructorUtility("IDEA_CHANGE");
+
+export const IDEA_MODERATE = utils.ConstantConstructorUtility("IDEA_MODERATE");
+
+export const IDEA_COMMENT_CREATE = utils.ConstantConstructorUtility(
   "IDEA_COMMENT_CREATE"
 );
-export const IDEA_COMMENT_DELETE = utils.ConstantsUtility(
+
+export const IDEA_COMMENT_DELETE = utils.ConstantConstructorUtility(
   "IDEA_COMMENT_DELETE"
 );
-export const IDEA_RATING_CREATE = utils.ConstantsUtility("IDEA_RATING_CREATE");
+
+export const IDEA_RATING_CREATE =
+  utils.ConstantConstructorUtility("IDEA_RATING_CREATE");
 
 // TODO buhgalteria ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const USER_SALARY = utils.ConstantsUtility("USER_SALARY");
+export const USER_SALARY = utils.ConstantConstructorUtility("USER_SALARY");
 
 // TODO sup ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const USER_VACATION = utils.ConstantsUtility("USER_VACATION");
+export const USER_VACATION = utils.ConstantConstructorUtility("USER_VACATION");
 
 // TODO moderator //////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const TERMINAL_REBOOT = utils.ConstantsUtility("TERMINAL_REBOOT");
+export const TERMINAL_REBOOT =
+  utils.ConstantConstructorUtility("TERMINAL_REBOOT");
 
-export const ADMIN_CHECK_USER = utils.ConstantsUtility("ADMIN_CHECK_USER");
-export const ADMIN_CHANGE_USER_PASSWORD = utils.ConstantsUtility(
+export const ADMIN_CHECK_USER =
+  utils.ConstantConstructorUtility("ADMIN_CHECK_USER");
+
+export const ADMIN_CHANGE_USER_PASSWORD = utils.ConstantConstructorUtility(
   "ADMIN_CHANGE_USER_PASSWORD"
 );
-export const ADMIN_CHANGE_USER_ACTIVITY = utils.ConstantsUtility(
+
+export const ADMIN_CHANGE_USER_ACTIVITY = utils.ConstantConstructorUtility(
   "ADMIN_CHANGE_USER_ACTIVITY"
 );
-export const ADMIN_CREATE_OR_CHANGE_USERS = utils.ConstantsUtility(
+
+export const ADMIN_CREATE_OR_CHANGE_USERS = utils.ConstantConstructorUtility(
   "ADMIN_CREATE_OR_CHANGE_USERS"
 );
-export const ADMIN_EXPORT_USERS = utils.ConstantsUtility("ADMIN_EXPORT_USERS");
+
+export const ADMIN_EXPORT_USERS =
+  utils.ConstantConstructorUtility("ADMIN_EXPORT_USERS");
 
 // TODO develop ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const RATIONAL_CREATE = utils.ConstantsUtility("RATIONAL_CREATE");
-export const RATIONAL_LIST = utils.ConstantsUtility("RATIONAL_LIST");
+export const RATIONAL_CREATE =
+  utils.ConstantConstructorUtility("RATIONAL_CREATE");
+
+export const RATIONAL_LIST = utils.ConstantConstructorUtility("RATIONAL_LIST");

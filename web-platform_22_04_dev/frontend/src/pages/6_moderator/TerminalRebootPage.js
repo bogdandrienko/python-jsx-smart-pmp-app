@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const TerminalRebootPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -121,17 +121,25 @@ export const TerminalRebootPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    let ips = [];
-    ips.push(ip);
-    const form = {
-      "Action-type": "TERMINAL_REBOOT",
-      ips: ips,
-    };
     let isConfirm = window.confirm(
       "Вы хотите перезагрузить выбранный терминал?"
     );
     if (isConfirm) {
-      dispatch(actions.terminalRebootAction(form));
+      let ips = [];
+      ips.push(ip);
+      const form = {
+        "Action-type": "TERMINAL_REBOOT",
+        ips: ips,
+      };
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/admin/terminal_reboot/",
+          "POST",
+          30000,
+          constants.TERMINAL_REBOOT
+        )
+      );
     }
   };
   //////////////////////////////////////////////////////////
@@ -139,17 +147,25 @@ export const TerminalRebootPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    let ips = [];
-    terminals.forEach(function (object, index, array) {
-      ips.push(object.Ip);
-    });
-    const form = {
-      "Action-type": "TERMINAL_REBOOT",
-      ips: ips,
-    };
     let isConfirm = window.confirm("Вы хотите перезагрузить ВСЕ терминалы?");
     if (isConfirm) {
-      dispatch(actions.terminalRebootAction(form));
+      let ips = [];
+      terminals.forEach(function (object, index, array) {
+        ips.push(object.Ip);
+      });
+      const form = {
+        "Action-type": "TERMINAL_REBOOT",
+        ips: ips,
+      };
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/admin/terminal_reboot/",
+          "POST",
+          30000,
+          constants.TERMINAL_REBOOT
+        )
+      );
     }
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,7 +192,7 @@ export const TerminalRebootPage = () => {
         {dataTerminalReboot && (
           <ol className="bg-light bg-opacity-75">
             {dataTerminalReboot.map((term) => (
-              <li className="">
+              <li key={term} className="">
                 {term[0]}:{" "}
                 {term[1].split("<statusString>")[1].split("</statusString>")[0]}
               </li>
@@ -202,7 +218,9 @@ export const TerminalRebootPage = () => {
                       >
                         <option value="">не указано</option>
                         {terminals.map((terminal, index) => (
-                          <option value={terminal.Ip}>{terminal.Header}</option>
+                          <option key={terminal.Ip} value={terminal.Ip}>
+                            {terminal.Header}
+                          </option>
                         ))}
                       </select>
                       <button

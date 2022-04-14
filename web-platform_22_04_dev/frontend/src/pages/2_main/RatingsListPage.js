@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const RatingsListPage = () => {
@@ -40,7 +39,15 @@ export const RatingsListPage = () => {
         onlyMonth: onlyMonth,
         sort: sort,
       };
-      dispatch(actions.ratingsListAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/ratings_list/",
+          "POST",
+          30000,
+          constants.RATINGS_LIST
+        )
+      );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);

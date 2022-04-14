@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
+import * as actions from "../../js/actions";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const SalaryPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////

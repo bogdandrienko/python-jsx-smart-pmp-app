@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
+import * as actions from "../../js/actions";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const ChangePasswordPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -20,6 +20,7 @@ export const ChangePasswordPage = () => {
   const {
     // load: loadUserChange,
     data: dataUserChange,
+    actions,
     // error: errorUserChange,
     // fail: failUserChange,
   } = userChangeStore;
@@ -40,7 +41,15 @@ export const ChangePasswordPage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(actions.userChangeAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/user/",
+        "POST",
+        30000,
+        constants.USER_CHANGE
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerChangeReset = async (e) => {

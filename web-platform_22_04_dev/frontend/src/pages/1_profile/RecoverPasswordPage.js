@@ -5,7 +5,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
 import * as constants from "../../js/constants";
-import * as actions from "../../js/actions";
+
 import * as utils from "../../js/utils";
 import { Link } from "react-router-dom";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ export const RecoverPasswordPage = () => {
         "Action-type": "FIND_USER",
         username: username,
       };
-      dispatch(actions.userRecoverPasswordAction(form));
+      Recover(form);
     }
   };
   //////////////////////////////////////////////////////////
@@ -77,7 +77,7 @@ export const RecoverPasswordPage = () => {
       username: username,
       secretAnswer: secretAnswer,
     };
-    dispatch(actions.userRecoverPasswordAction(form));
+    Recover(form);
   };
   //////////////////////////////////////////////////////////
   const handlerSubmitSendEmail = (e) => {
@@ -86,7 +86,7 @@ export const RecoverPasswordPage = () => {
       "Action-type": "SEND_EMAIL_PASSWORD",
       username: username,
     };
-    dispatch(actions.userRecoverPasswordAction(form));
+    Recover(form);
   };
   //////////////////////////////////////////////////////////
   const handlerSubmitRecoverEmail = (e) => {
@@ -96,7 +96,7 @@ export const RecoverPasswordPage = () => {
       username: username,
       recoverPassword: recoverPassword,
     };
-    dispatch(actions.userRecoverPasswordAction(form));
+    Recover(form);
   };
   //////////////////////////////////////////////////////////
   const handlerRecoverPasswordSubmit = (e) => {
@@ -107,7 +107,7 @@ export const RecoverPasswordPage = () => {
       password: password,
       password2: password2,
     };
-    dispatch(actions.userRecoverPasswordAction(form));
+    Recover(form);
   };
   //////////////////////////////////////////////////////////
   const handlerRecoverPasswordReset = async (e) => {
@@ -116,6 +116,18 @@ export const RecoverPasswordPage = () => {
     } catch (error) {}
     passwordSet("");
     password2Set("");
+  };
+
+  const Recover = (form) => {
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/any/user/",
+        "POST",
+        30000,
+        constants.USER_RECOVER_PASSWORD
+      )
+    );
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
