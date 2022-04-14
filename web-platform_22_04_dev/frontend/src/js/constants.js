@@ -1,653 +1,110 @@
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
+
+import * as utils from "./utils";
+
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const DEBUG_CONSTANT = false;
-// TODO constants //////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_LOGIN_LOAD_CONSTANT = "USER_LOGIN_LOAD_CONSTANT";
-export const USER_LOGIN_DATA_CONSTANT = "USER_LOGIN_DATA_CONSTANT";
-export const USER_LOGIN_ERROR_CONSTANT = "USER_LOGIN_ERROR_CONSTANT";
-export const USER_LOGIN_FAIL_CONSTANT = "USER_LOGIN_FAIL_CONSTANT";
-export const USER_LOGIN_RESET_CONSTANT = "USER_LOGIN_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_DETAILS_LOAD_CONSTANT = "USER_DETAILS_LOAD_CONSTANT";
-export const USER_DETAILS_DATA_CONSTANT = "USER_DETAILS_DATA_CONSTANT";
-export const USER_DETAILS_ERROR_CONSTANT = "USER_DETAILS_ERROR_CONSTANT";
-export const USER_DETAILS_FAIL_CONSTANT = "USER_DETAILS_FAIL_CONSTANT";
-export const USER_DETAILS_RESET_CONSTANT = "USER_DETAILS_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_CHANGE_LOAD_CONSTANT = "USER_CHANGE_LOAD_CONSTANT";
-export const USER_CHANGE_DATA_CONSTANT = "USER_CHANGE_DATA_CONSTANT";
-export const USER_CHANGE_ERROR_CONSTANT = "USER_CHANGE_ERROR_CONSTANT";
-export const USER_CHANGE_FAIL_CONSTANT = "USER_CHANGE_FAIL_CONSTANT";
-export const USER_CHANGE_RESET_CONSTANT = "USER_CHANGE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_RECOVER_PASSWORD_LOAD_CONSTANT =
-  "USER_RECOVER_PASSWORD_LOAD_CONSTANT";
-export const USER_RECOVER_PASSWORD_DATA_CONSTANT =
-  "USER_RECOVER_PASSWORD_DATA_CONSTANT";
-export const USER_RECOVER_PASSWORD_ERROR_CONSTANT =
-  "USER_RECOVER_PASSWORD_ERROR_CONSTANT";
-export const USER_RECOVER_PASSWORD_FAIL_CONSTANT =
-  "USER_RECOVER_PASSWORD_FAIL_CONSTANT";
-export const USER_RECOVER_PASSWORD_RESET_CONSTANT =
-  "USER_RECOVER_PASSWORD_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_LIST_ALL_LOAD_CONSTANT = "USER_LIST_ALL_LOAD_CONSTANT";
-export const USER_LIST_ALL_DATA_CONSTANT = "USER_LIST_ALL_DATA_CONSTANT";
-export const USER_LIST_ALL_ERROR_CONSTANT = "USER_LIST_ALL_ERROR_CONSTANT";
-export const USER_LIST_ALL_FAIL_CONSTANT = "USER_LIST_ALL_FAIL_CONSTANT";
-export const USER_LIST_ALL_RESET_CONSTANT = "USER_LIST_ALL_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_LOAD_CONSTANT";
-export const ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_DATA_CONSTANT";
-export const ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_ERROR_CONSTANT";
-export const ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_FAIL_CONSTANT";
-export const ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT =
-  "ADMIN_CHANGE_USER_PASSWORD_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_LOAD_CONSTANT";
-export const ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_DATA_CONSTANT";
-export const ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_ERROR_CONSTANT";
-export const ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_FAIL_CONSTANT";
-export const ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT =
-  "ADMIN_CREATE_OR_CHANGE_USERS_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ADMIN_EXPORT_USERS_LOAD_CONSTANT =
-  "ADMIN_EXPORT_USERS_LOAD_CONSTANT";
-export const ADMIN_EXPORT_USERS_DATA_CONSTANT =
-  "ADMIN_EXPORT_USERS_DATA_CONSTANT";
-export const ADMIN_EXPORT_USERS_ERROR_CONSTANT =
-  "ADMIN_EXPORT_USERS_ERROR_CONSTANT";
-export const ADMIN_EXPORT_USERS_FAIL_CONSTANT =
-  "ADMIN_EXPORT_USERS_FAIL_CONSTANT";
-export const ADMIN_EXPORT_USERS_RESET_CONSTANT =
-  "ADMIN_EXPORT_USERS_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const ADMIN_CHANGE_USER_ACTIVITY_LOAD_CONSTANT =
-  "ADMIN_CHANGE_USER_ACTIVITY_LOAD_CONSTANT";
-export const ADMIN_CHANGE_USER_ACTIVITY_DATA_CONSTANT =
-  "ADMIN_CHANGE_USER_ACTIVITY_DATA_CONSTANT";
-export const ADMIN_CHANGE_USER_ACTIVITY_ERROR_CONSTANT =
-  "ADMIN_CHANGE_USER_ACTIVITY_ERROR_CONSTANT";
-export const ADMIN_CHANGE_USER_ACTIVITY_FAIL_CONSTANT =
-  "ADMIN_CHANGE_USER_ACTIVITY_FAIL_CONSTANT";
-export const ADMIN_CHANGE_USER_ACTIVITY_RESET_CONSTANT =
-  "ADMIN_CHANGE_USER_ACTIVITY_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const NOTIFICATION_CREATE_LOAD_CONSTANT =
-  "NOTIFICATION_CREATE_LOAD_CONSTANT";
-export const NOTIFICATION_CREATE_DATA_CONSTANT =
-  "NOTIFICATION_CREATE_DATA_CONSTANT";
-export const NOTIFICATION_CREATE_ERROR_CONSTANT =
-  "NOTIFICATION_CREATE_ERROR_CONSTANT";
-export const NOTIFICATION_CREATE_FAIL_CONSTANT =
-  "NOTIFICATION_CREATE_FAIL_CONSTANT";
-export const NOTIFICATION_CREATE_RESET_CONSTANT =
-  "NOTIFICATION_CREATE_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const NOTIFICATION_DELETE_LOAD_CONSTANT =
-  "NOTIFICATION_DELETE_LOAD_CONSTANT";
-export const NOTIFICATION_DELETE_DATA_CONSTANT =
-  "NOTIFICATION_DELETE_DATA_CONSTANT";
-export const NOTIFICATION_DELETE_ERROR_CONSTANT =
-  "NOTIFICATION_DELETE_ERROR_CONSTANT";
-export const NOTIFICATION_DELETE_FAIL_CONSTANT =
-  "NOTIFICATION_DELETE_FAIL_CONSTANT";
-export const NOTIFICATION_DELETE_RESET_CONSTANT =
-  "NOTIFICATION_DELETE_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const NOTIFICATION_LIST_LOAD_CONSTANT =
-  "NOTIFICATION_LIST_LOAD_CONSTANT";
-export const NOTIFICATION_LIST_DATA_CONSTANT =
-  "NOTIFICATION_LIST_DATA_CONSTANT";
-export const NOTIFICATION_LIST_ERROR_CONSTANT =
-  "NOTIFICATION_LIST_ERROR_CONSTANT";
-export const NOTIFICATION_LIST_FAIL_CONSTANT =
-  "NOTIFICATION_LIST_FAIL_CONSTANT";
-export const NOTIFICATION_LIST_RESET_CONSTANT =
-  "NOTIFICATION_LIST_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_SALARY_LOAD_CONSTANT = "USER_SALARY_LOAD_CONSTANT";
-export const USER_SALARY_DATA_CONSTANT = "USER_SALARY_DATA_CONSTANT";
-export const USER_SALARY_ERROR_CONSTANT = "USER_SALARY_ERROR_CONSTANT";
-export const USER_SALARY_FAIL_CONSTANT = "USER_SALARY_FAIL_CONSTANT";
-export const USER_SALARY_RESET_CONSTANT = "USER_SALARY_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const USER_VACATION_LOAD_CONSTANT = "USER_VACATION_LOAD_CONSTANT";
-export const USER_VACATION_DATA_CONSTANT = "USER_VACATION_DATA_CONSTANT";
-export const USER_VACATION_ERROR_CONSTANT = "USER_VACATION_ERROR_CONSTANT";
-export const USER_VACATION_FAIL_CONSTANT = "USER_VACATION_FAIL_CONSTANT";
-export const USER_VACATION_RESET_CONSTANT = "USER_VACATION_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RATIONAL_CREATE_LOAD_CONSTANT = "RATIONAL_CREATE_LOAD_CONSTANT";
-export const RATIONAL_CREATE_DATA_CONSTANT = "RATIONAL_CREATE_DATA_CONSTANT";
-export const RATIONAL_CREATE_ERROR_CONSTANT = "RATIONAL_CREATE_ERROR_CONSTANT";
-export const RATIONAL_CREATE_FAIL_CONSTANT = "RATIONAL_CREATE_FAIL_CONSTANT";
-export const RATIONAL_CREATE_RESET_CONSTANT = "RATIONAL_CREATE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RATIONAL_DETAIL_LOAD_CONSTANT = "RATIONAL_DETAIL_LOAD_CONSTANT";
-export const RATIONAL_DETAIL_DATA_CONSTANT = "RATIONAL_DETAIL_DATA_CONSTANT";
-export const RATIONAL_DETAIL_ERROR_CONSTANT = "RATIONAL_DETAIL_ERROR_CONSTANT";
-export const RATIONAL_DETAIL_FAIL_CONSTANT = "RATIONAL_DETAIL_FAIL_CONSTANT";
-export const RATIONAL_DETAIL_RESET_CONSTANT = "RATIONAL_DETAIL_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RATIONAL_LIST_LOAD_CONSTANT = "RATIONAL_LIST_LOAD_CONSTANT";
-export const RATIONAL_LIST_DATA_CONSTANT = "RATIONAL_LIST_DATA_CONSTANT";
-export const RATIONAL_LIST_ERROR_CONSTANT = "RATIONAL_LIST_ERROR_CONSTANT";
-export const RATIONAL_LIST_FAIL_CONSTANT = "RATIONAL_LIST_FAIL_CONSTANT";
-export const RATIONAL_LIST_RESET_CONSTANT = "RATIONAL_LIST_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_CREATE_LOAD_CONSTANT = "IDEA_CREATE_LOAD_CONSTANT";
-export const IDEA_CREATE_DATA_CONSTANT = "IDEA_CREATE_DATA_CONSTANT";
-export const IDEA_CREATE_ERROR_CONSTANT = "IDEA_CREATE_ERROR_CONSTANT";
-export const IDEA_CREATE_FAIL_CONSTANT = "IDEA_CREATE_FAIL_CONSTANT";
-export const IDEA_CREATE_RESET_CONSTANT = "IDEA_CREATE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_LIST_LOAD_CONSTANT = "IDEA_LIST_LOAD_CONSTANT";
-export const IDEA_LIST_DATA_CONSTANT = "IDEA_LIST_DATA_CONSTANT";
-export const IDEA_LIST_ERROR_CONSTANT = "IDEA_LIST_ERROR_CONSTANT";
-export const IDEA_LIST_FAIL_CONSTANT = "IDEA_LIST_FAIL_CONSTANT";
-export const IDEA_LIST_RESET_CONSTANT = "IDEA_LIST_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_DETAIL_LOAD_CONSTANT = "IDEA_DETAIL_LOAD_CONSTANT";
-export const IDEA_DETAIL_DATA_CONSTANT = "IDEA_DETAIL_DATA_CONSTANT";
-export const IDEA_DETAIL_ERROR_CONSTANT = "IDEA_DETAIL_ERROR_CONSTANT";
-export const IDEA_DETAIL_FAIL_CONSTANT = "IDEA_DETAIL_FAIL_CONSTANT";
-export const IDEA_DETAIL_RESET_CONSTANT = "IDEA_DETAIL_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_CHANGE_LOAD_CONSTANT = "IDEA_CHANGE_LOAD_CONSTANT";
-export const IDEA_CHANGE_DATA_CONSTANT = "IDEA_CHANGE_DATA_CONSTANT";
-export const IDEA_CHANGE_ERROR_CONSTANT = "IDEA_CHANGE_ERROR_CONSTANT";
-export const IDEA_CHANGE_FAIL_CONSTANT = "IDEA_CHANGE_FAIL_CONSTANT";
-export const IDEA_CHANGE_RESET_CONSTANT = "IDEA_CHANGE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_MODERATE_LOAD_CONSTANT = "IDEA_MODERATE_LOAD_CONSTANT";
-export const IDEA_MODERATE_DATA_CONSTANT = "IDEA_MODERATE_DATA_CONSTANT";
-export const IDEA_MODERATE_ERROR_CONSTANT = "IDEA_MODERATE_ERROR_CONSTANT";
-export const IDEA_MODERATE_FAIL_CONSTANT = "IDEA_MODERATE_FAIL_CONSTANT";
-export const IDEA_MODERATE_RESET_CONSTANT = "IDEA_MODERATE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_COMMENT_CREATE_LOAD_CONSTANT =
-  "IDEA_COMMENT_CREATE_LOAD_CONSTANT";
-export const IDEA_COMMENT_CREATE_DATA_CONSTANT =
-  "IDEA_COMMENT_CREATE_DATA_CONSTANT";
-export const IDEA_COMMENT_CREATE_ERROR_CONSTANT =
-  "IDEA_COMMENT_CREATE_ERROR_CONSTANT";
-export const IDEA_COMMENT_CREATE_FAIL_CONSTANT =
-  "IDEA_COMMENT_CREATE_FAIL_CONSTANT";
-export const IDEA_COMMENT_CREATE_RESET_CONSTANT =
-  "IDEA_COMMENT_CREATE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_COMMENT_DELETE_LOAD_CONSTANT =
-  "IDEA_COMMENT_DELETE_LOAD_CONSTANT";
-export const IDEA_COMMENT_DELETE_DATA_CONSTANT =
-  "IDEA_COMMENT_DELETE_DATA_CONSTANT";
-export const IDEA_COMMENT_DELETE_ERROR_CONSTANT =
-  "IDEA_COMMENT_DELETE_ERROR_CONSTANT";
-export const IDEA_COMMENT_DELETE_FAIL_CONSTANT =
-  "IDEA_COMMENT_DELETE_FAIL_CONSTANT";
-export const IDEA_COMMENT_DELETE_RESET_CONSTANT =
-  "IDEA_COMMENT_DELETE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_RATING_CREATE_LOAD_CONSTANT =
-  "IDEA_RATING_CREATE_LOAD_CONSTANT";
-export const IDEA_RATING_CREATE_DATA_CONSTANT =
-  "IDEA_RATING_CREATE_DATA_CONSTANT";
-export const IDEA_RATING_CREATE_ERROR_CONSTANT =
-  "IDEA_RATING_CREATE_ERROR_CONSTANT";
-export const IDEA_RATING_CREATE_FAIL_CONSTANT =
-  "IDEA_RATING_CREATE_FAIL_CONSTANT";
-export const IDEA_RATING_CREATE_RESET_CONSTANT =
-  "IDEA_RATING_CREATE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const IDEA_AUTHOR_LIST_LOAD_CONSTANT = "IDEA_AUTHOR_LIST_LOAD_CONSTANT";
-export const IDEA_AUTHOR_LIST_DATA_CONSTANT =
-  "IDEA_RATING_CREATE_DATA_CONSTANT";
-export const IDEA_AUTHOR_LIST_ERROR_CONSTANT =
-  "IDEA_AUTHOR_LIST_ERROR_CONSTANT";
-export const IDEA_AUTHOR_LIST_FAIL_CONSTANT = "IDEA_AUTHOR_LIST_FAIL_CONSTANT";
-export const IDEA_AUTHOR_LIST_RESET_CONSTANT =
-  "IDEA_AUTHOR_LIST_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const VACANCY_LIST_LOAD_CONSTANT = "VACANCY_LIST_LOAD_CONSTANT";
-export const VACANCY_LIST_DATA_CONSTANT = "VACANCY_LIST_DATA_CONSTANT";
-export const VACANCY_LIST_ERROR_CONSTANT = "VACANCY_LIST_ERROR_CONSTANT";
-export const VACANCY_LIST_FAIL_CONSTANT = "VACANCY_LIST_FAIL_CONSTANT";
-export const VACANCY_LIST_RESET_CONSTANT = "VACANCY_LIST_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const VACANCY_DETAIL_LOAD_CONSTANT = "VACANCY_DETAIL_LOAD_CONSTANT";
-export const VACANCY_DETAIL_DATA_CONSTANT = "VACANCY_DETAIL_DATA_CONSTANT";
-export const VACANCY_DETAIL_ERROR_CONSTANT = "VACANCY_DETAIL_ERROR_CONSTANT";
-export const VACANCY_DETAIL_FAIL_CONSTANT = "VACANCY_DETAIL_FAIL_CONSTANT";
-export const VACANCY_DETAIL_RESET_CONSTANT = "VACANCY_DETAIL_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const VACANCY_CREATE_LOAD_CONSTANT = "VACANCY_CREATE_LOAD_CONSTANT";
-export const VACANCY_CREATE_DATA_CONSTANT = "VACANCY_CREATE_DATA_CONSTANT";
-export const VACANCY_CREATE_ERROR_CONSTANT = "VACANCY_CREATE_ERROR_CONSTANT";
-export const VACANCY_CREATE_FAIL_CONSTANT = "VACANCY_CREATE_FAIL_CONSTANT";
-export const VACANCY_CREATE_RESET_CONSTANT = "VACANCY_CREATE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const VACANCY_CHANGE_LOAD_CONSTANT = "VACANCY_CHANGE_LOAD_CONSTANT";
-export const VACANCY_CHANGE_DATA_CONSTANT = "VACANCY_CHANGE_DATA_CONSTANT";
-export const VACANCY_CHANGE_ERROR_CONSTANT = "VACANCY_CHANGE_ERROR_CONSTANT";
-export const VACANCY_CHANGE_FAIL_CONSTANT = "VACANCY_CHANGE_FAIL_CONSTANT";
-export const VACANCY_CHANGE_RESET_CONSTANT = "VACANCY_CHANGE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const VACANCY_DELETE_LOAD_CONSTANT = "VACANCY_DELETE_LOAD_CONSTANT";
-export const VACANCY_DELETE_DATA_CONSTANT = "VACANCY_DELETE_DATA_CONSTANT";
-export const VACANCY_DELETE_ERROR_CONSTANT = "VACANCY_DELETE_ERROR_CONSTANT";
-export const VACANCY_DELETE_FAIL_CONSTANT = "VACANCY_DELETE_FAIL_CONSTANT";
-export const VACANCY_DELETE_RESET_CONSTANT = "VACANCY_DELETE_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RESUME_LIST_LOAD_CONSTANT = "RESUME_LIST_LOAD_CONSTANT";
-export const RESUME_LIST_DATA_CONSTANT = "RESUME_LIST_DATA_CONSTANT";
-export const RESUME_LIST_ERROR_CONSTANT = "RESUME_LIST_ERROR_CONSTANT";
-export const RESUME_LIST_FAIL_CONSTANT = "RESUME_LIST_FAIL_CONSTANT";
-export const RESUME_LIST_RESET_CONSTANT = "RESUME_LIST_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RESUME_DETAIL_LOAD_CONSTANT = "RESUME_DETAIL_LOAD_CONSTANT";
-export const RESUME_DETAIL_DATA_CONSTANT = "RESUME_DETAIL_DATA_CONSTANT";
-export const RESUME_DETAIL_ERROR_CONSTANT = "RESUME_DETAIL_ERROR_CONSTANT";
-export const RESUME_DETAIL_FAIL_CONSTANT = "RESUME_DETAIL_FAIL_CONSTANT";
-export const RESUME_DETAIL_RESET_CONSTANT = "RESUME_DETAIL_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RESUME_CREATE_LOAD_CONSTANT = "RESUME_CREATE_LOAD_CONSTANT";
-export const RESUME_CREATE_DATA_CONSTANT = "RESUME_CREATE_DATA_CONSTANT";
-export const RESUME_CREATE_ERROR_CONSTANT = "RESUME_CREATE_ERROR_CONSTANT";
-export const RESUME_CREATE_FAIL_CONSTANT = "RESUME_CREATE_FAIL_CONSTANT";
-export const RESUME_CREATE_RESET_CONSTANT = "RESUME_CREATE_RESET_CONSTANT";
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-export const RESUME_DELETE_LOAD_CONSTANT = "RESUME_DELETE_LOAD_CONSTANT";
-export const RESUME_DELETE_DATA_CONSTANT = "RESUME_DELETE_DATA_CONSTANT";
-export const RESUME_DELETE_ERROR_CONSTANT = "RESUME_DELETE_ERROR_CONSTANT";
-export const RESUME_DELETE_FAIL_CONSTANT = "RESUME_DELETE_FAIL_CONSTANT";
-export const RESUME_DELETE_RESET_CONSTANT = "RESUME_DELETE_RESET_CONSTANT";
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const TERMINAL_REBOOT_LOAD_CONSTANT = "TERMINAL_REBOOT_LOAD_CONSTANT";
-export const TERMINAL_REBOOT_DATA_CONSTANT = "TERMINAL_REBOOT_DATA_CONSTANT";
-export const TERMINAL_REBOOT_ERROR_CONSTANT = "TERMINAL_REBOOT_ERROR_CONSTANT";
-export const TERMINAL_REBOOT_FAIL_CONSTANT = "TERMINAL_REBOOT_FAIL_CONSTANT";
-export const TERMINAL_REBOOT_RESET_CONSTANT = "TERMINAL_REBOOT_RESET_CONSTANT";
-// TODO news ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-export const news = [
-  {
-    Title: "Личный профиль:",
-    Status: "disable",
-    Link: "#",
-    Description:
-      "расширение профиля: дополнительная информация: образование, хобби, интересы, изображение, статистика, " +
-      "достижения и участие",
-    Helps: "",
-    Danger: "",
-  },
-  {
-    Title: "Рационализаторские предложения:",
-    Status: "disable",
-    Link: "#",
-    Description:
-      "шаблон и подача рац. предложений, модерация и общий список с рейтингами и комментариями",
-    Helps: "",
-    Danger: "",
-  },
-  {
-    Title: "Банк идей:",
-    Status: "active",
-    Link: "/idea_create",
-    Description:
-      "подача и редактирование, шаблон, модерация, комментирование, рейтинги, лучшие идеи и списки лидеров...",
-    Helps: "",
-    Danger: "",
-  },
-  {
-    Title: "Инструкции: видео и текстовые",
-    Status: "active",
-    Link: "/video_study",
-    Description: "лента с информацией по веб-платформе",
-    Helps: "материал будет своевременно обновляться",
-    Danger: "",
-  },
-  {
-    Title: "Отпуска:",
-    Status: "active",
-    Link: "/vacation",
-    Description: "выгрузка Ваших данных по отпуску за выбранный период",
-    Helps: "",
-    Danger: "",
-  },
-  {
-    Title: "Расчётный лист:",
-    Status: "active",
-    Link: "/salary",
-    Description: "выгрузка Вашего расчётного листа за выбранный период",
-    Helps: "",
-    Danger: "'контрактникам' выгрузка недоступна!",
-  },
-];
+
+export const DEBUG_CONSTANT = true;
+
 // TODO modules ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const modules = [
   {
-    Header: "Разработка",
-    Access: ["superuser"],
-    Image: "/static/img/modules/earth.png",
-    ShowInModules: false,
+    Header: "Общее",
+    Access: ["all"],
+    Image: "/static/img/modules/2_module_main/module_main.png",
+    ShowInModules: true,
     Sections: [
       {
-        Header: "web version",
-        Access: ["superuser"],
-        Image: "/static/img/modules/earth.png",
+        Header: "Новости",
+        Access: ["user"],
+        Image: "/static/img/modules/2_module_main/section_news.png",
         Links: [
           {
-            Header: "03.04.22 12:00",
-            Access: ["superuser"],
-            Active: false,
-            Link: "#",
+            Header: "Домашняя страница",
+            Access: ["user"],
+            Active: true,
+            Link: "/",
             ExternalLink: false,
             ShowLink: true,
-            Title: "",
-            Description: "",
-            Logic: false,
+            Title: 'Веб-платформа АО "Костанайские Минералы"',
+            Description: "платформа для всех работников предприятия!",
+            Logic: true,
             Redirect: false,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-earth-asia m-0 p-1",
+          },
+          {
+            Header: "Новости платформы",
+            Access: ["user"],
+            Active: true,
+            Link: "/news",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Новости платформы",
+            Description: "страница новостей веб-платформы",
+            Logic: true,
+            Redirect: true,
             Style: "text-secondary",
-            LinkIcon: "fa-solid fa-circle-info m-0 p-1",
-          },
-          {
-            Header: "Test",
-            Access: ["superuser"],
-            Active: true,
-            Link: "/test",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Test",
-            Description: "test",
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+            LinkIcon: "fa-solid fa-newspaper m-0 p-1",
           },
         ],
       },
       {
-        Header: "Отдел кадров",
-        Access: ["superuser"],
-        Image: "/static/img/modules/earth.png",
+        Header: "Обучение",
+        Access: ["all"],
+        Image: "/static/img/modules/2_module_main/section_study.png",
         Links: [
           {
-            Header: "Список свободных вакансий",
-            Access: ["superuser"],
+            Header: "Видео инструкции",
+            Access: ["all"],
             Active: true,
-            Link: "/vacancy_list",
+            Link: "/video_study",
             ExternalLink: false,
             ShowLink: true,
-            Title: "Список вакансий",
+            Title: "Видео инструкции",
             Description:
-              "страница доступных вакансий с возможностью поиска и фильтрации",
+              "страница с видео инструкциями по функционалу веб-платформы",
             Logic: true,
             Redirect: false,
             Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+            LinkIcon: "fa-brands fa-sistrix m-0 p-1",
           },
           {
-            Header: "Подробности вакансии [скрыто]",
+            Header: "Текстовые инструкции",
+            Access: ["all"],
+            Active: true,
+            Link: "/text_study",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Текстовые инструкции",
+            Description:
+              "страница с текстовыми инструкциями по функционалу веб-платформы",
+            Logic: true,
+            Redirect: false,
+            Style: "text-dark",
+            LinkIcon: "fa-brands fa-sistrix m-0 p-1",
+          },
+        ],
+      },
+      {
+        Header: "Лучшие пользователи",
+        Access: ["user"],
+        Image: "/static/img/modules/2_module_main/section_ratings.png",
+        Links: [
+          {
+            Header: "Зал славы",
             Access: ["user"],
             Active: true,
-            Link: "/vacancy_detail/0",
-            ExternalLink: false,
-            ShowLink: false,
-            Title: "Описание вакансии",
-            Description: "страница подробного описания вакансии",
-            Logic: true,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Создать новую вакансию",
-            Access: ["superuser"],
-            Active: true,
-            Link: "/vacancy_create",
+            Link: "/idea_author_list",
             ExternalLink: false,
             ShowLink: true,
-            Title: "Создать вакансию",
-            Description:
-              "страница с формой для создания новой свободной вакансии",
+            Title: "Зал славы",
+            Description: "страница с лучшими и самыми активными участниками",
             Logic: true,
             Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Изменить вакансию [скрыто]",
-            Access: ["superuser"],
-            Active: true,
-            Link: "/vacancy_change/0",
-            ExternalLink: false,
-            ShowLink: false,
-            Title: "Изменить вакансию",
-            Description: "страница с формой для изменения вакансии",
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Отправить резюме",
-            Access: ["superuser"],
-            Active: true,
-            Link: "/resume_create/0",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Откликнуться на вакансию",
-            Description: "страница для отклика на вакансию и отправки резюме",
-            Logic: true,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Список резюме",
-            Access: ["superuser"],
-            Active: true,
-            Link: "/resume_list",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Список резюме",
-            Description:
-              "страница доступных резюме с возможностью поиска и фильтрации",
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Подробности резюме [скрыто]",
-            Access: ["user"],
-            Active: true,
-            Link: "/resume_detail/0",
-            ExternalLink: false,
-            ShowLink: false,
-            Title: "Описание резюме",
-            Description: "страница подробного описания резюме",
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    Header: "Модератор",
-    Access: ["moderator"],
-    Image: "/static/img/modules/earth.png",
-    ShowInModules: false,
-    Sections: [
-      {
-        Header: "Основной функционал",
-        Access: ["moderator"],
-        Image: "/static/img/modules/earth.png",
-        Links: [
-          {
-            Header: "Панель Администрирования",
-            Access: ["moderator"],
-            Active: true,
-            Link: "/admin/",
-            ExternalLink: true,
-            ShowLink: true,
-            Title: "",
-            Description: "",
-            Logic: false,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Api Django rest_framework",
-            Access: ["moderator"],
-            Active: true,
-            Link: "/api/auth/routes/",
-            ExternalLink: true,
-            ShowLink: true,
-            Title: "",
-            Description: "",
-            Logic: false,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "127.0.0.1:3000",
-            Access: ["moderator"],
-            Active: true,
-            Link: "http://127.0.0.1:3000/",
-            ExternalLink: true,
-            ShowLink: true,
-            Title: "",
-            Description: "",
-            Logic: false,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "127.0.0.1:8000",
-            Access: ["moderator"],
-            Active: true,
-            Link: "http://127.0.0.1:8000/",
-            ExternalLink: true,
-            ShowLink: true,
-            Title: "",
-            Description: "",
-            Logic: false,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "127.0.0.1:8000/test/",
-            Access: ["moderator"],
-            Active: true,
-            Link: "http://127.0.0.1:8000/test/",
-            ExternalLink: true,
-            ShowLink: true,
-            Title: "",
-            Description: "",
-            Logic: false,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-        ],
-      },
-      {
-        Header: "Аккаунты",
-        Access: ["moderator"],
-        Image: "/static/img/modules/earth.png",
-        Links: [
-          {
-            Header: "Сброс пароля пользователя",
-            Access: ["moderator"],
-            Active: true,
-            Link: "/admin_change_user_password",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Сброс пароля пользователя",
-            Description: "страница сброса пароля выбранного аккаунта",
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Создать или изменить пользователей",
-            Access: ["moderator"],
-            Active: true,
-            Link: "/admin_create_or_change_users",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Создать или изменить пользователей",
-            Description:
-              "страница с формой и настройками для создания или изменения пользователей",
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Выгрузить список пользователей",
-            Access: ["moderator"],
-            Active: true,
-            Link: "/admin_export_users",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Выгрузить список пользователей",
-            Description: "страница выгрузки всех пользователей системы",
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Активировать или деактивировать пользователя",
-            Access: ["moderator"],
-            Active: true,
-            Link: "/admin_change_user_activity",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Активировать или деактивировать пользователя",
-            Description:
-              "страница с настройками для активации или деактивации выбранного пользователя",
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-        ],
-      },
-      {
-        Header: "Терминалы скуд",
-        Access: ["moderator"],
-        Image: "/static/img/modules/earth.png",
-        Links: [
-          {
-            Header: "Перезагрузка терминалов",
-            Access: ["moderator"],
-            Active: true,
-            Link: "/terminal",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Перезагрузка терминалов",
-            Description: "страница с настройками для перезагрузки терминалов",
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+            Style: "custom-color-warning-1",
+            LinkIcon: "fa-solid fa-list-ol m-0 p-1",
           },
         ],
       },
@@ -748,107 +205,6 @@ export const modules = [
             Redirect: false,
             Style: "text-danger",
             LinkIcon: "fa-solid fa-door-open m-0 p-1",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    Header: "Общее",
-    Access: ["all"],
-    Image: "/static/img/modules/2_module_main/module_main.png",
-    ShowInModules: true,
-    Sections: [
-      {
-        Header: "Новости",
-        Access: ["user"],
-        Image: "/static/img/modules/2_module_main/section_news.png",
-        Links: [
-          {
-            Header: "Домашняя страница",
-            Access: ["user"],
-            Active: true,
-            Link: "/",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: 'Веб-платформа АО "Костанайские Минералы"',
-            Description: "платформа для всех работников предприятия!",
-            Logic: true,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-earth-asia m-0 p-1",
-          },
-          {
-            Header: "Новости платформы",
-            Access: ["user"],
-            Active: true,
-            Link: "/news",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Новости платформы",
-            Description: "страница новостей веб-платформы",
-            Logic: true,
-            Redirect: true,
-            Style: "text-secondary",
-            LinkIcon: "fa-solid fa-newspaper m-0 p-1",
-          },
-        ],
-      },
-      {
-        Header: "Обучение",
-        Access: ["all"],
-        Image: "/static/img/modules/2_module_main/section_study.png",
-        Links: [
-          {
-            Header: "Видео инструкции",
-            Access: ["all"],
-            Active: true,
-            Link: "/video_study",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Видео инструкции",
-            Description:
-              "страница с видео инструкциями по функционалу веб-платформы",
-            Logic: true,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-brands fa-sistrix m-0 p-1",
-          },
-          {
-            Header: "Текстовые инструкции",
-            Access: ["all"],
-            Active: true,
-            Link: "/text_study",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Текстовые инструкции",
-            Description:
-              "страница с текстовыми инструкциями по функционалу веб-платформы",
-            Logic: true,
-            Redirect: false,
-            Style: "text-dark",
-            LinkIcon: "fa-brands fa-sistrix m-0 p-1",
-          },
-        ],
-      },
-      {
-        Header: "Лучшие пользователи",
-        Access: ["user"],
-        Image: "/static/img/modules/2_module_main/section_ratings.png",
-        Links: [
-          {
-            Header: "Зал славы",
-            Access: ["user"],
-            Active: true,
-            Link: "/idea_author_list",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Зал славы",
-            Description: "страница с лучшими и самыми активными участниками",
-            Logic: true,
-            Redirect: true,
-            Style: "custom-color-warning-1",
-            LinkIcon: "fa-solid fa-list-ol m-0 p-1",
           },
         ],
       },
@@ -1123,102 +479,271 @@ export const modules = [
       },
     ],
   },
+  {
+    Header: "Модератор",
+    Access: ["superuser", "moderator_oit", "moderator_otiz"],
+    Image: "/static/img/modules/earth.png",
+    ShowInModules: false,
+    Sections: [
+      {
+        Header: "Основной функционал",
+        Access: ["superuser"],
+        Image: "/static/img/modules/earth.png",
+        Links: [
+          {
+            Header: "Панель Администрирования",
+            Access: ["superuser"],
+            Active: true,
+            Link: "/admin/",
+            ExternalLink: true,
+            ShowLink: true,
+            Title: "",
+            Description: "",
+            Logic: false,
+            Redirect: false,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
+            Header: "Api Django rest_framework",
+            Access: ["superuser"],
+            Active: true,
+            Link: "/api/auth/routes/",
+            ExternalLink: true,
+            ShowLink: true,
+            Title: "",
+            Description: "",
+            Logic: false,
+            Redirect: false,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
+            Header: "127.0.0.1:3000",
+            Access: ["superuser"],
+            Active: true,
+            Link: "http://127.0.0.1:3000/",
+            ExternalLink: true,
+            ShowLink: true,
+            Title: "",
+            Description: "",
+            Logic: false,
+            Redirect: false,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
+            Header: "127.0.0.1:8000",
+            Access: ["superuser"],
+            Active: true,
+            Link: "http://127.0.0.1:8000/",
+            ExternalLink: true,
+            ShowLink: true,
+            Title: "",
+            Description: "",
+            Logic: false,
+            Redirect: false,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
+            Header: "127.0.0.1:8000/test/",
+            Access: ["superuser"],
+            Active: true,
+            Link: "http://127.0.0.1:8000/test/",
+            ExternalLink: true,
+            ShowLink: true,
+            Title: "",
+            Description: "",
+            Logic: false,
+            Redirect: false,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+        ],
+      },
+      {
+        Header: "Аккаунты",
+        Access: ["moderator_oit", "superuser"],
+        Image: "/static/img/modules/earth.png",
+        Links: [
+          {
+            Header: "Действия над аккаунтом пользователя",
+            Access: ["moderator_oit"],
+            Active: true,
+            Link: "/admin_actions_user",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Действия над аккаунтом пользователя",
+            Description:
+              "страница действий модератора над аккаунтом пользователя",
+            Logic: true,
+            Redirect: true,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
+            Header: "Создать или изменить пользователей",
+            Access: ["superuser"],
+            Active: true,
+            Link: "/admin_create_or_change_users",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Создать или изменить пользователей",
+            Description:
+              "страница с формой и настройками для создания или изменения пользователей",
+            Logic: true,
+            Redirect: true,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
+            Header: "Выгрузить список пользователей",
+            Access: ["superuser"],
+            Active: true,
+            Link: "/admin_export_users",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Выгрузить список пользователей",
+            Description: "страница выгрузки всех пользователей системы",
+            Logic: true,
+            Redirect: true,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+        ],
+      },
+      {
+        Header: "Терминалы скуд",
+        Access: ["moderator_otiz", "superuser"],
+        Image: "/static/img/modules/earth.png",
+        Links: [
+          {
+            Header: "Перезагрузка терминалов",
+            Access: ["moderator_otiz", "superuser"],
+            Active: true,
+            Link: "/terminal",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Перезагрузка терминалов",
+            Description: "страница с настройками для перезагрузки терминалов",
+            Logic: true,
+            Redirect: true,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    Header: "Разработка",
+    Access: ["superuser"],
+    Image: "/static/img/modules/earth.png",
+    ShowInModules: false,
+    Sections: [
+      {
+        Header: "web version",
+        Access: ["superuser"],
+        Image: "/static/img/modules/earth.png",
+        Links: [
+          {
+            Header: "03.04.22 12:00",
+            Access: ["superuser"],
+            Active: false,
+            Link: "#",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "",
+            Description: "",
+            Logic: false,
+            Redirect: false,
+            Style: "text-secondary",
+            LinkIcon: "fa-solid fa-circle-info m-0 p-1",
+          },
+          {
+            Header: "Test",
+            Access: ["superuser"],
+            Active: true,
+            Link: "/test",
+            ExternalLink: false,
+            ShowLink: true,
+            Title: "Test",
+            Description: "test",
+            Logic: true,
+            Redirect: true,
+            Style: "text-dark",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+        ],
+      },
+    ],
+  },
 ];
-// TODO terminals //////////////////////////////////////////////////////////////////////////////////////////////////////
-export const terminals = [
-  {
-    Header: "Управление, вход",
-    Name: "1_in_upravlenie",
-    Ip: "192.168.1.207",
-  },
-  {
-    Header: "Управление, выход",
-    Name: "1_out_upravlenie",
-    Ip: "192.168.1.208",
-  },
-  {
-    Header: "АТП, вход",
-    Name: "2_in_atp",
-    Ip: "192.168.8.220",
-  },
-  {
-    Header: "АТП, выход",
-    Name: "2_out_atp",
-    Ip: "192.168.8.221",
-  },
-  {
-    Header: "ОК, вход 1",
-    Name: "3_1_in_ok",
-    Ip: "192.168.15.131",
-  },
-  {
-    Header: "ОК, выход 1",
-    Name: "3_1_out_ok",
-    Ip: "192.168.15.132",
-  },
-  {
-    Header: "ОК, вход 2",
-    Name: "3_2_in_ok",
-    Ip: "192.168.15.133",
-  },
-  {
-    Header: "ОК, выход 2",
-    Name: "3_2_out_ok",
-    Ip: "192.168.15.134",
-  },
-  {
-    Header: "ОК, вход 3",
-    Name: "3_3_in_ok",
-    Ip: "192.168.15.135",
-  },
-  {
-    Header: "ОК, выход 3",
-    Name: "3_3_out_ok",
-    Ip: "192.168.15.136",
-  },
-  {
-    Header: "АБК ОК, вход",
-    Name: "4_in_abk_ok",
-    Ip: "192.168.2.6",
-  },
-  {
-    Header: "АБК ОК, выход",
-    Name: "4_out_abk_ok",
-    Ip: "192.168.2.7",
-  },
-  {
-    Header: "ДСК",
-    Name: "5_dsk",
-    Ip: "192.168.23.251",
-  },
-  {
-    Header: "Связь",
-    Name: "6_svyaz",
-    Ip: "192.168.16.253",
-  },
-  {
-    Header: "Рудоуправление, вход",
-    Name: "7_in_rudoupravlenie",
-    Ip: "192.168.5.202",
-  },
-  {
-    Header: "Рудоуправление, выход",
-    Name: "7_out_rudoupravlenie",
-    Ip: "192.168.5.203",
-  },
-  {
-    Header: "ПЖДТ, вход",
-    Name: "8_in_pzhdt",
-    Ip: "192.168.12.207",
-  },
-  {
-    Header: "ПЖДТ, выход",
-    Name: "8_out_pzhdt",
-    Ip: "192.168.12.208",
-  },
-  {
-    Header: "Ст. Северная",
-    Name: "9_severnaya",
-    Ip: "192.168.19.253",
-  },
-];
+
+// TODO main ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const RATINGS_LIST = utils.ConstantsUtility("RATINGS_LIST");
+
+// TODO profile ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const USER_LOGIN = utils.ConstantsUtility("USER_LOGIN");
+export const USER_DETAILS = utils.ConstantsUtility("USER_DETAILS");
+export const USER_CHANGE = utils.ConstantsUtility("USER_CHANGE");
+export const USER_RECOVER_PASSWORD = utils.ConstantsUtility(
+  "USER_RECOVER_PASSWORD"
+);
+
+export const USER_LIST_ALL = utils.ConstantsUtility("USER_LIST_ALL");
+
+export const NOTIFICATION_CREATE = utils.ConstantsUtility(
+  "NOTIFICATION_CREATE"
+);
+export const NOTIFICATION_DELETE = utils.ConstantsUtility(
+  "NOTIFICATION_DELETE"
+);
+export const NOTIFICATION_LIST = utils.ConstantsUtility("NOTIFICATION_LIST");
+
+// TODO progress ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const IDEA_CREATE = utils.ConstantsUtility("IDEA_CREATE");
+export const IDEA_LIST = utils.ConstantsUtility("IDEA_LIST");
+export const IDEA_DETAIL = utils.ConstantsUtility("IDEA_DETAIL");
+export const IDEA_CHANGE = utils.ConstantsUtility("IDEA_CHANGE");
+export const IDEA_MODERATE = utils.ConstantsUtility("IDEA_MODERATE");
+export const IDEA_COMMENT_CREATE = utils.ConstantsUtility(
+  "IDEA_COMMENT_CREATE"
+);
+export const IDEA_COMMENT_DELETE = utils.ConstantsUtility(
+  "IDEA_COMMENT_DELETE"
+);
+export const IDEA_RATING_CREATE = utils.ConstantsUtility("IDEA_RATING_CREATE");
+
+// TODO buhgalteria ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const USER_SALARY = utils.ConstantsUtility("USER_SALARY");
+
+// TODO sup ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const USER_VACATION = utils.ConstantsUtility("USER_VACATION");
+
+// TODO moderator //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const TERMINAL_REBOOT = utils.ConstantsUtility("TERMINAL_REBOOT");
+
+export const ADMIN_CHECK_USER = utils.ConstantsUtility("ADMIN_CHECK_USER");
+export const ADMIN_CHANGE_USER_PASSWORD = utils.ConstantsUtility(
+  "ADMIN_CHANGE_USER_PASSWORD"
+);
+export const ADMIN_CHANGE_USER_ACTIVITY = utils.ConstantsUtility(
+  "ADMIN_CHANGE_USER_ACTIVITY"
+);
+export const ADMIN_CREATE_OR_CHANGE_USERS = utils.ConstantsUtility(
+  "ADMIN_CREATE_OR_CHANGE_USERS"
+);
+export const ADMIN_EXPORT_USERS = utils.ConstantsUtility("ADMIN_EXPORT_USERS");
+
+// TODO develop ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const RATIONAL_CREATE = utils.ConstantsUtility("RATIONAL_CREATE");
+export const RATIONAL_LIST = utils.ConstantsUtility("RATIONAL_LIST");

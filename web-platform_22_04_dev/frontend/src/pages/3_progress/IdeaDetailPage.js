@@ -54,16 +54,16 @@ export const IdeaDetailPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    dispatch({ type: constants.IDEA_DETAIL_RESET_CONSTANT });
+    dispatch({ type: constants.IDEA_DETAIL.reset });
 
     dispatch({
-      type: constants.IDEA_COMMENT_CREATE_RESET_CONSTANT,
+      type: constants.IDEA_COMMENT_CREATE.reset,
     });
     dispatch({
-      type: constants.IDEA_RATING_CREATE_RESET_CONSTANT,
+      type: constants.IDEA_RATING_CREATE.reset,
     });
     dispatch({
-      type: constants.IDEA_MODERATE_RESET_CONSTANT,
+      type: constants.IDEA_MODERATE.reset,
     });
   };
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////

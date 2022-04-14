@@ -1,17 +1,24 @@
 # TODO django modules ##################################################################################################
+
 from django.contrib import admin
+
 # TODO drf modules #####################################################################################################
+
 from rest_framework_simplejwt import token_blacklist
+
 # TODO custom modules ##################################################################################################
+
 from backend import models as backend_models
 
 # TODO default settings ################################################################################################
+
 admin.site.site_header = 'Панель управления'  # default: "Django Administration"
 admin.site.index_title = 'Администрирование сайта'  # default: "Site administration"
 admin.site.site_title = 'Администрирование'  # default: "Django site admin"
 
 
-# TODO example model admin #############################################################################################
+# TODO example #########################################################################################################
+
 class ExamplesModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'ExamplesModel' на панели администратора
@@ -168,7 +175,10 @@ class ExamplesModelAdmin(admin.ModelAdmin):
 admin.site.register(backend_models.ExamplesModel, ExamplesModelAdmin)
 
 
-# TODO base model admin ################################################################################################
+# TODO main ############################################################################################################
+
+# TODO profile #########################################################################################################
+
 class UserModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'UserModel' на панели администратора
@@ -567,7 +577,8 @@ class NotificationModelAdmin(admin.ModelAdmin):
 admin.site.register(backend_models.NotificationModel, NotificationModelAdmin)
 
 
-# TODO custom model admin ##############################################################################################
+# TODO progress ########################################################################################################
+
 class IdeaModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'IdeaModel' на панели администратора
@@ -741,7 +752,14 @@ class IdeaCommentModelAdmin(admin.ModelAdmin):
 admin.site.register(backend_models.IdeaCommentModel, IdeaCommentModelAdmin)
 
 
-# TODO test model admin ################################################################################################
+# TODO buhgalteria #####################################################################################################
+
+# TODO sup #############################################################################################################
+
+# TODO moderator #######################################################################################################
+
+# TODO develop #########################################################################################################
+
 class RationalModelAdmin(admin.ModelAdmin):
     """
     Настройки отображения, фильтрации и поиска модели:'RationalModel' на панели администратора
@@ -893,138 +911,3 @@ class RationalModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(backend_models.RationalModel, RationalModelAdmin)
-
-
-class VacancyModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'VacancyModel' на панели администратора
-    """
-
-    list_display = (
-        "author_foreign_key_field",
-        "qualification_char_field",
-        "image_field",
-        "created_datetime_field",
-        "sphere_char_field",
-        "education_char_field",
-        "rank_char_field",
-        "experience_char_field",
-        "schedule_char_field",
-        "description_text_field",
-    )
-    list_display_links = (
-        "author_foreign_key_field",
-    )
-    list_editable = (
-        "qualification_char_field",
-    )
-    list_filter = (
-        "author_foreign_key_field",
-        "qualification_char_field",
-        "image_field",
-        "created_datetime_field",
-        "sphere_char_field",
-        "education_char_field",
-        "rank_char_field",
-        "experience_char_field",
-        "schedule_char_field",
-        "description_text_field",
-    )
-    fieldsets = (
-        ("Основная информация", {"fields": (
-            "author_foreign_key_field",
-            "qualification_char_field",
-            "image_field",
-            "created_datetime_field",
-            "sphere_char_field",
-            "education_char_field",
-            "rank_char_field",
-            "experience_char_field",
-            "schedule_char_field",
-            "description_text_field",
-        )}),
-    )
-    search_fields = [
-        "author_foreign_key_field",
-        "qualification_char_field",
-        "image_field",
-        "created_datetime_field",
-        "sphere_char_field",
-        "education_char_field",
-        "rank_char_field",
-        "experience_char_field",
-        "schedule_char_field",
-        "description_text_field",
-    ]
-
-
-admin.site.register(backend_models.VacancyModel, VacancyModelAdmin)
-
-
-class ResumeModelAdmin(admin.ModelAdmin):
-    """
-    Настройки отображения, фильтрации и поиска модели:'ResumeModel' на панели администратора
-    """
-
-    list_display = (
-        "qualification_char_field",
-        "last_name_char_field",
-        "first_name_char_field",
-        "patronymic_char_field",
-        "image_field",
-        "birth_datetime_field",
-        "education_char_field",
-        "experience_char_field",
-        "sex_char_field",
-    )
-    list_display_links = (
-        "qualification_char_field",
-        "last_name_char_field",
-        "first_name_char_field",
-    )
-    list_editable = (
-        "education_char_field",
-        "experience_char_field",
-        "sex_char_field",
-    )
-    list_filter = (
-        "qualification_char_field",
-        "last_name_char_field",
-        "first_name_char_field",
-        "patronymic_char_field",
-        "image_field",
-        "birth_datetime_field",
-        "education_char_field",
-        "experience_char_field",
-        "sex_char_field",
-        "contact_data_text_field",
-    )
-    fieldsets = (
-        ("Основная информация", {"fields": (
-            "qualification_char_field",
-            "last_name_char_field",
-            "first_name_char_field",
-            "patronymic_char_field",
-            "image_field",
-            "birth_datetime_field",
-            "education_char_field",
-            "experience_char_field",
-            "sex_char_field",
-            "contact_data_text_field",
-        )}),
-    )
-    search_fields = [
-        "qualification_char_field",
-        "last_name_char_field",
-        "first_name_char_field",
-        "patronymic_char_field",
-        "image_field",
-        "birth_datetime_field",
-        "education_char_field",
-        "experience_char_field",
-        "sex_char_field",
-        "contact_data_text_field",
-    ]
-
-
-admin.site.register(backend_models.ResumeModel, ResumeModelAdmin)

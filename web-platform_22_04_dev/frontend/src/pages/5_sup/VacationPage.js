@@ -43,7 +43,7 @@ export const VacationPage = () => {
             <div className="card shadow custom-background-transparent-low text-center m-0 p-0">
               <div className="card-header text-center m-0 p-0">
                 Выберите дату и нажмите "
-                <span className="text-primary text-center">сформировать</span>"
+                <span className="text-primary text-center">получить</span>"
               </div>
               <div className="card-body text-center m-0 p-1">
                 <div className="form-control-sm input-group d-flex justify-content-between text-center m-0 p-0">
@@ -61,7 +61,7 @@ export const VacationPage = () => {
                   {!loadVacationUser && (
                     <button type="submit" className="btn btn-sm btn-primary">
                       <i className="fa-solid fa-circle-check m-0 p-1" />
-                      сформировать
+                      получить
                     </button>
                   )}
                 </div>

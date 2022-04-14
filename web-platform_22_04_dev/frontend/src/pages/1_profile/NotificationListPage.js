@@ -37,7 +37,7 @@ export const NotificationListPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    dispatch({ type: constants.NOTIFICATION_LIST_RESET_CONSTANT });
+    dispatch({ type: constants.NOTIFICATION_LIST.reset });
   };
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {

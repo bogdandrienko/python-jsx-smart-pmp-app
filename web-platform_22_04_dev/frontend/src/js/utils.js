@@ -1,7 +1,6 @@
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as constants from "./constants";
 import * as actions from "./actions";
-import axios from "axios";
 // TODO base utils /////////////////////////////////////////////////////////////////////////////////////////////////////
 export const CheckAccess = (userDetailsStore, slug) => {
   try {
@@ -128,7 +127,10 @@ export const ActionsAxiosUtility = ({
     return { config };
   } catch (error) {
     if (constants.DEBUG_CONSTANT) {
-      console.log("ActionsFormDataUtilityError: ", error);
+      console.log(
+        `ActionsFormDataUtilityError: ${url} ${form["Action-type"]}`,
+        error
+      );
     }
   }
 };
@@ -144,9 +146,6 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
         : error.response.message
         ? error.response.message
         : error.response.data.detail;
-      if (constants.DEBUG_CONSTANT) {
-        console.log("status: ", status);
-      }
       if (status && `${status}___________`.slice(0, 7) === "timeout") {
         status = "timeout";
       }
@@ -171,6 +170,47 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
     }
   }
 };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export const ReducersUtility = ({ load, data, error, fail, reset }) => {
+  try {
+    return function (state = {}, action = null) {
+      switch (action.type) {
+        case load:
+          return { load: true };
+        case data:
+          return {
+            load: false,
+            data: action.payload,
+          };
+        case error:
+          return {
+            load: false,
+            error: action.payload,
+          };
+        case fail:
+          return { load: false, fail: action.payload };
+        case reset:
+          return {};
+        default:
+          return state;
+      }
+    };
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log("ReduxReducersUtility: ", error);
+    }
+  }
+};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+export function ConstantsUtility(name) {
+  return {
+    load: name + "_LOAD_CONSTANT",
+    data: name + "_DATA_CONSTANT",
+    error: name + "_ERROR_CONSTANT",
+    fail: name + "_FAIL_CONSTANT",
+    reset: name + "_RESET_CONSTANT",
+  };
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const GetInfoPage = (path) => {
   let title = "Домашняя страница";

@@ -1,4 +1,5 @@
 # TODO download modules ################################################################################################
+
 import base64
 import datetime
 import hashlib
@@ -12,15 +13,20 @@ import openpyxl
 from django.contrib.auth.hashers import make_password
 from openpyxl.utils import get_column_letter
 from typing import Union
+
 # TODO django modules ##################################################################################################
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.core.handlers.wsgi import WSGIRequest
+
 # TODO custom modules ##################################################################################################
+
 from backend import models as backend_models
 
 
 # TODO base service ####################################################################################################
+
 class DjangoClass:
     class LoggingClass:
         @staticmethod
@@ -431,12 +437,14 @@ class DjangoClass:
                         type_char_field="scheduler_group",
                         char_field="Планировщик создания стандартных групп",
                         text_field="user, moderator, superuser, " +
-
-                                   "moderator_idea, moderator_vacancy, " +
+                                   "moderator_oit, moderator_otiz, moderator_idea, " +
 
                                    "moderator_rational, moderator_rational_atp, moderator_rational_gtk, "
                                    "moderator_rational_ok, moderator_rational_upravlenie, "
                                    "moderator_rational_energoupravlenie, " +
+
+                                   "moderator_vacancy, " +
+
                                    "",
                         boolean_field=True
                     )
@@ -569,6 +577,7 @@ class DjangoClass:
                                                    "Worker.get_value"
                                 )
                                 return ''
+
                     index = 0
                     for user in json_data["global_objects"]:
                         worker = Worker(
@@ -738,6 +747,7 @@ class DjangoClass:
 
 
 # TODO custom service ##################################################################################################
+
 class DateTimeUtils:
     @staticmethod
     def get_current_datetime():

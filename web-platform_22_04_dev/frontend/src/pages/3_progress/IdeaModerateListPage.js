@@ -44,7 +44,7 @@ export const IdeaModerateListPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    dispatch({ type: constants.IDEA_LIST_RESET_CONSTANT });
+    dispatch({ type: constants.IDEA_LIST.reset });
   };
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {

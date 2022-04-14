@@ -1,4 +1,5 @@
 # TODO download modules ################################################################################################
+
 import base64
 import datetime
 import hashlib
@@ -11,87 +12,53 @@ import openpyxl
 from django.core.paginator import Paginator
 from openpyxl.styles import Font, Alignment, Side, Border, PatternFill
 from openpyxl.utils import get_column_letter
+
 # TODO django modules ##################################################################################################
+
 from django.contrib.auth import authenticate
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User, Group, update_last_login
 from django.core.mail import send_mail
 from django.shortcuts import render
 from django.utils import timezone
+
 # TODO drf modules #####################################################################################################
+
 from rest_framework import viewsets, permissions
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
+
 # TODO custom modules ##################################################################################################
+
 from backend import models as backend_models, serializers as backend_serializers, service as backend_service, \
     settings as backend_settings
 
 
-# TODO index ###########################################################################################################
-@permission_classes([AllowAny])
-def index(request):
-    """
-    index React Single Page Applications
-    """
+# TODO viewsets ########################################################################################################
 
-    try:
-        # TODO Request #################################################################################################
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-        # TODO Methods #################################################################################################
-        if req_inst.method == "GET":
-            # TODO Actions #############################################################################################
-            if req_inst.action_type == "":
-                try:
-                    response = {"response": "Данные успешно получены!"}
-                    # TODO response ####################################################################################
-                    return render(request, 'production/index.html', response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return render(request, "backend/404.html")
-            else:
-                return Response({"error": "This action not allowed for this method."})
-        else:
-            return Response({"error": "This method not allowed for this endpoint."})
-    except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-        return render(request, "backend/404.html")
+class ExamplesModelViewSet(viewsets.ModelViewSet):
+    queryset = backend_models.ExamplesModel.objects.all()
+    serializer_class = backend_serializers.ExamplesModelSerializer
+    permission_classes = [permissions.AllowAny]
 
 
-# TODO test ############################################################################################################
-@permission_classes([AllowAny])
-def test(request):
-    """
-    index React Single Page Applications
-    """
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = backend_serializers.UserSerializer
+    permission_classes = [permissions.AllowAny]
 
-    try:
-        # TODO Request #################################################################################################
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-        # TODO Methods #################################################################################################
-        if req_inst.method == "GET":
-            # TODO Actions #############################################################################################
-            if req_inst.action_type == "":
-                try:
-                    response = {"response": "Данные успешно получены!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return render(request, 'test/index.html', response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return render(request, "backend/404.html")
-            else:
-                return Response({"error": "This action not allowed for this method."})
-        else:
-            return Response({"error": "This method not allowed for this endpoint."})
-    except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-        return render(request, "backend/404.html")
+
+class GroupViewSet(viewsets.ModelViewSet):
+    queryset = Group.objects.all()
+    serializer_class = backend_serializers.GroupSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 # TODO routes ##########################################################################################################
+
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @authentication_classes([BasicAuthentication])
 def api_auth_routes(request):
@@ -100,11 +67,17 @@ def api_auth_routes(request):
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "GET":
+
             # TODO Actions #############################################################################################
+
             if req_inst.action_type == "":
                 try:
                     response = {"response": [
@@ -163,7 +136,9 @@ def api_auth_routes(request):
                             'code': '''...'''
                         },
                     ]}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -178,26 +153,187 @@ def api_auth_routes(request):
         return render(request, "backend/404.html")
 
 
-# TODO view sets #######################################################################################################
-class ExamplesModelViewSet(viewsets.ModelViewSet):
-    queryset = backend_models.ExamplesModel.objects.all()
-    serializer_class = backend_serializers.ExamplesModelSerializer
-    permission_classes = [permissions.AllowAny]
+# TODO main ############################################################################################################
+
+@permission_classes([AllowAny])
+def index(request):
+    """
+    index React Single Page Applications
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO Actions #############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+                    response = {"response": "Данные успешно получены!"}
+
+                    # TODO response ####################################################################################
+
+                    return render(request, 'production/index.html', response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return render(request, "backend/404.html")
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = backend_serializers.UserSerializer
-    permission_classes = [permissions.AllowAny]
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_ratings_list(request):
+    """
+    api_rational django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO Actions #############################################################################################
+
+            if req_inst.action_type == "RATINGS_LIST":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    sort = req_inst.get_value("sort")
+                    only_month = req_inst.get_value("onlyMonth")
+
+                    # TODO actions #####################################################################################
+
+                    authors = []
+                    ideas = backend_models.IdeaModel.objects.filter(
+                        status_moderate_char_field="принято"
+                    ).order_by("-register_datetime_field")
+                    if only_month:
+                        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                        local_objects = []
+                        for idea in ideas:
+                            if (idea.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
+                                    >= now:
+                                local_objects.append(idea.id)
+                        ideas = backend_models.IdeaModel.objects.filter(
+                            id__in=local_objects
+                        ).order_by("-register_datetime_field")
+                    for idea in ideas:
+                        authors.append(idea.author_foreign_key_field)
+                    authors = set(authors)
+                    ideas = []
+                    for author in authors:
+                        ideas_arr = backend_models.IdeaModel.objects.filter(
+                            author_foreign_key_field=author, status_moderate_char_field="принято"
+                        )
+                        idea_count = ideas_arr.count()
+                        idea_rating = 0
+                        idea_rating_count = 0
+                        idea_comment_count = 0
+                        for idea in ideas_arr:
+                            ratings = backend_models.IdeaRatingModel.objects.filter(idea_foreign_key_field=idea)
+                            for rate in ratings:
+                                idea_rating += rate.rating_integer_field
+                            idea_rating_count += ratings.count()
+                            idea_comment_count = backend_models.IdeaCommentModel.objects.filter(
+                                idea_foreign_key_field=idea
+                            ).count()
+                        if idea_rating_count == 0:
+                            idea_rating = 0
+                        else:
+                            idea_rating = round(idea_rating / idea_rating_count, 2)
+                        serialized_user = backend_serializers.UserModelSerializer(instance=author, many=False).data
+                        ideas.append({
+                            "user_model": serialized_user,
+                            "idea_count": idea_count, "idea_rating": idea_rating,
+                            "idea_rating_count": idea_rating_count, "idea_comment_count": idea_comment_count
+                        })
+                    # sort
+                    if sort:
+                        if sort == "количеству (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "количеству (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "рейтингу (популярные в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "рейтингу (популярные в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "отметкам рейтинга (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "отметкам рейтинга (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "комментариям (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_comment_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "комментариям (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_comment_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                    response = {"response": ideas}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    queryset = Group.objects.all()
-    serializer_class = backend_serializers.GroupSerializer
-    permission_classes = [permissions.AllowAny]
+# TODO profile #########################################################################################################
 
-
-# TODO base views ######################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
 def api_any_user(request):
@@ -206,17 +342,27 @@ def api_any_user(request):
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "POST":
+
             # TODO Actions #############################################################################################
+
             if req_inst.action_type == "USER_LOGIN":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     username = req_inst.get_value("username")
                     password = req_inst.get_value("password")
+
                     # TODO actions #####################################################################################
+
                     access_count = 0
                     for log in backend_models.LoggingModel.objects.filter(
                             username_slug_field=username,
@@ -256,7 +402,10 @@ def api_any_user(request):
                             response = {"error": "Внимание, данные не совпадают!"}
                     else:
                         response = {"error": "Внимание, попыток входа можно совершать не более 20 в час!"}
+
                     # TODO response ####################################################################################
+
+                    print("response: ", response)
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -264,9 +413,13 @@ def api_any_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "FIND_USER":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     username = req_inst.get_value("username")
+
                     # TODO actions #####################################################################################
+
                     try:
                         user_model = backend_models.UserModel.objects.get(
                             user_foreign_key_field=User.objects.get(username=username)
@@ -282,7 +435,9 @@ def api_any_user(request):
                             }}
                     except Exception as error:
                         response = {"error": "Пользователя не существует или произошла ошибка!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -290,10 +445,14 @@ def api_any_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHECK_ANSWER":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     username = req_inst.get_value("username")
                     secret_answer_char_field = req_inst.get_value("secretAnswer")
+
                     # TODO actions #####################################################################################
+
                     user_model = backend_models.UserModel.objects.get(
                         user_foreign_key_field=User.objects.get(username=username)
                     )
@@ -305,7 +464,9 @@ def api_any_user(request):
                         }}
                     else:
                         response = {"error": "Секретный ответ не совпадает!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -313,9 +474,13 @@ def api_any_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "SEND_EMAIL_PASSWORD":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     username = req_inst.get_value("username")
+
                     # TODO actions #####################################################################################
+
                     user_model = backend_models.UserModel.objects.get(
                         user_foreign_key_field=User.objects.get(username=username)
                     )
@@ -369,7 +534,9 @@ def api_any_user(request):
                         }
                     else:
                         response = {"error": "Внимание, отправлять письмо можно не чаще раза в 3 минуты!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -377,10 +544,14 @@ def api_any_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHECK_EMAIL_PASSWORD":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     username = req_inst.get_value("username")
                     recover_password = req_inst.get_value("recoverPassword")
+
                     # TODO actions #####################################################################################
+
                     user_model = backend_models.UserModel.objects.get(
                         user_foreign_key_field=User.objects.get(username=username)
                     )
@@ -408,7 +579,9 @@ def api_any_user(request):
                             response = {"error": "Код не верный!"}
                     else:
                         response = {"error": "Код не верный или просрочен!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -416,11 +589,15 @@ def api_any_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE_PASSWORD":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     username = req_inst.get_value("username")
                     password = req_inst.get_value("password")
                     password2 = req_inst.get_value("password2")
+
                     # TODO actions #####################################################################################
+
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
                     if password == password2 and password != str(user_model.password_char_field).strip():
@@ -435,7 +612,9 @@ def api_any_user(request):
                         }}
                     else:
                         response = {"error": "Пароли не совпадают или старый пароль идентичный!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -458,16 +637,26 @@ def api_auth_user(request):
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "POST":
+
             # TODO Actions #############################################################################################
+
             if req_inst.action_type == "USER_DETAIL":
                 try:
+
                     # TODO actions #####################################################################################
+
                     response = {"response": backend_serializers.UserSerializer(req_inst.user, many=False).data}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -475,14 +664,18 @@ def api_auth_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     secret_question = req_inst.get_value("secretQuestion")
                     secret_answer = req_inst.get_value("secretAnswer")
                     email = req_inst.get_value("email")
                     avatar = req_inst.get_value("avatar")
                     password = req_inst.get_value("password")
                     password2 = req_inst.get_value("password2")
+
                     # TODO actions #####################################################################################
+
                     user = User.objects.get(id=req_inst.user.id)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
                     if len(password) < 1:
@@ -506,7 +699,9 @@ def api_auth_user(request):
                             user_model.image_field = avatar
                         user_model.save()
                         response = {"response": "Изменение успешно проведено."}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -514,11 +709,15 @@ def api_auth_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "CHANGE_PASSWORD":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     username = req_inst.get_value("username")
                     password = req_inst.get_value("password")
                     password2 = req_inst.get_value("password2")
+
                     # TODO actions #####################################################################################
+
                     user = User.objects.get(username=username)
                     user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
                     if password == password2 and password != str(user_model.password_char_field).strip():
@@ -533,7 +732,9 @@ def api_auth_user(request):
                         }}
                     else:
                         response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -541,11 +742,15 @@ def api_auth_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "USER_LIST_ALL":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     user_models = backend_models.UserModel.objects.filter(
                         activity_boolean_field=True
                     ).order_by("last_name_char_field")
+
                     # TODO actions #####################################################################################
+
                     users = []
                     for user_model in user_models:
                         if user_model.user_foreign_key_field.is_superuser:
@@ -553,7 +758,9 @@ def api_auth_user(request):
                         users.append(f"{user_model.last_name_char_field} {user_model.first_name_char_field} "
                                      f"{user_model.personnel_number_slug_field} ")
                     response = {"response": users}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -561,10 +768,14 @@ def api_auth_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_CREATE":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     name = req_inst.get_value("name")
                     place = req_inst.get_value("place")
+
                     # TODO actions #####################################################################################
+
                     if place == "банк идей":
                         model = backend_models.GroupModel.objects.get(name_slug_field="moderator_idea")
                     else:
@@ -578,7 +789,9 @@ def api_auth_user(request):
                         description_text_field=description,
                     )
                     response = {"response": "Успешно отправлено!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -586,15 +799,21 @@ def api_auth_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_DELETE":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     _id = req_inst.get_value("id")
+
                     # TODO actions #####################################################################################
+
                     obj = backend_models.NotificationModel.objects.get(id=_id)
                     obj.visibility_boolean_field = False
                     obj.hide_datetime_field = datetime.datetime.now()
                     obj.save()
                     response = {"response": "Успешно удалено!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -602,7 +821,9 @@ def api_auth_user(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "NOTIFICATION_LIST":
                 try:
+
                     # TODO actions #####################################################################################
+
                     objects = backend_models.NotificationModel.objects.filter(
                         model_foreign_key_field=None,
                         target_foreign_key_field=req_inst.user_model,
@@ -617,7 +838,9 @@ def api_auth_user(request):
                     ).order_by("-hide_datetime_field")
                     serializer1 = backend_serializers.NotificationModelSerializer(objects, many=True).data
                     response = {"response": serializer + serializer1}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -632,421 +855,534 @@ def api_auth_user(request):
         return render(request, "backend/404.html")
 
 
-# TODO admin views #####################################################################################################
+# TODO progress ########################################################################################################
+
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_auth_admin(request):
+def api_auth_idea(request):
     """
-    auth admin django-rest-framework
+    api_rational django-rest-framework
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "POST":
+
             # TODO Actions #############################################################################################
-            if req_inst.action_type == "CHECK_USER":
+
+            if req_inst.action_type == "IDEA_CREATE":
                 try:
+
                     # TODO get_value ###################################################################################
-                    username = req_inst.get_value("username")
+
+                    subdivision = req_inst.get_value("subdivision")
+                    sphere = req_inst.get_value("sphere")
+                    category = req_inst.get_value("category")
+                    avatar = req_inst.get_value("avatar")
+                    name = req_inst.get_value("name")
+                    place = req_inst.get_value("place")
+                    description = req_inst.get_value("description")
+                    moderate = req_inst.get_value("moderate")
+
                     # TODO actions #####################################################################################
-                    user = User.objects.get(username=username)
-                    response = {"response": {
-                        "username": str(user.username),
-                        "success": True
-                    }}
+
+                    backend_models.IdeaModel.objects.create(
+                        author_foreign_key_field=req_inst.user_model,
+                        subdivision_char_field=subdivision,
+                        sphere_char_field=sphere,
+                        category_char_field=category,
+                        image_field=avatar,
+                        name_char_field=name,
+                        place_char_field=place,
+                        description_text_field=description,
+                        status_moderate_char_field=moderate,
+                    )
+                    backend_models.NotificationModel.objects.create(
+                        author_foreign_key_field=req_inst.user_model,
+                        model_foreign_key_field=backend_models.GroupModel.objects.get(
+                            name_slug_field="moderator_idea"
+                        ),
+                        name_char_field=f"Создана новая идея",
+                        place_char_field="банк идей",
+                        description_text_field=f"название идеи: {name}",
+                    )
+                    response = {"response": "Успешно отправлено на модерацию!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "CHANGE_USER_PASSWORD":
+            if req_inst.action_type == "IDEA_LIST":
                 try:
+
                     # TODO get_value ###################################################################################
-                    username = req_inst.get_value("username")
-                    password = req_inst.get_value("password")
-                    password2 = req_inst.get_value("password2")
+
+                    moderate = req_inst.get_value("moderate")
+                    subdivision = req_inst.get_value("subdivision")
+                    sphere = req_inst.get_value("sphere")
+                    category = req_inst.get_value("category")
+                    author = req_inst.get_value("author")
+                    search = req_inst.get_value("search")
+                    sort = req_inst.get_value("sort")
+
+                    only_month = req_inst.get_value("onlyMonth")
+
                     # TODO actions #####################################################################################
-                    user = User.objects.get(username=username)
-                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
-                    if password == password2 and password != str(user_model.password_char_field).strip():
-                        user.set_password(password)
-                        user.save()
-                        user_model.password_char_field = password
-                        user_model.temp_password_boolean_field = True
-                        user_model.secret_question_char_field = ""
-                        user_model.secret_answer_char_field = ""
-                        user_model.email_field = ""
-                        user_model.save()
-                        response = {"response": {
-                            "username": str(user.username),
-                            "success": False
-                        }}
-                    else:
-                        response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "CREATE_OR_CHANGE_USERS":
-                try:
-                    # TODO get_value ###################################################################################
-                    additional_excel = req_inst.get_value("additionalExcel")
-                    change_user = req_inst.get_value("changeUser")
-                    change_user_password = req_inst.get_value("changeUserPassword")
-                    clear_user_groups = req_inst.get_value("clearUserGroups")
-                    # TODO actions #####################################################################################
-                    if additional_excel:
-                        def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
-                            if isinstance(_col, int):
-                                _col = get_column_letter(_col)
-                            if isinstance(_row, str):
-                                _row = str(_row)
-                            _value = str(_sheet[str(_col).upper() + str(_row)].value).strip()
-                            if _value.lower() == "none":
-                                return ""
-                            elif _value.lower() == "true":
-                                return True
-                            elif _value.lower() == "false":
-                                return False
-                            else:
-                                return _value
 
-                        workbook = openpyxl.load_workbook(additional_excel)
-                        sheet = workbook.active
-                        max_rows = sheet.max_row
-
-                        print("start create users")
-
-                        for row in range(1 + 1, max_rows + 1):
-                            try:
-                                subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
-                                workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
-                                department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
-                                last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
-                                first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
-                                patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
-                                personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
-                                position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
-                                category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
-                                username = get_value(_col="J", _row=row, _sheet=sheet)
-                                password_char_field = get_value(_col="K", _row=row, _sheet=sheet)
-                                is_active = get_value(_col="L", _row=row, _sheet=sheet)
-                                is_staff = get_value(_col="M", _row=row, _sheet=sheet)
-                                is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
-                                is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
-                                groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
-                                email_field = get_value(_col="Q", _row=row, _sheet=sheet)
-                                secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
-                                secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
-
-                                if len(username) <= 1:
-                                    continue
-
-                                try:
-                                    user = User.objects.get(username=username)
-                                    if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
-                                        continue
-                                    new_user = False
-                                except Exception as error:
-                                    user = User.objects.create(
-                                        username=username,
-                                        password=make_password(password=password_char_field),
-                                    )
-                                    new_user = True
-
-                                try:
-                                    user_model = backend_models.UserModel.objects.get(
-                                        user_foreign_key_field=user
-                                    )
-                                except Exception as error:
-                                    user_model = backend_models.UserModel.objects.create(
-                                        user_foreign_key_field=user
-                                    )
-
-                                if new_user:
-                                    user_model.password_char_field = password_char_field
+                    # TODO onlyMonth
+                    ideas = backend_models.IdeaModel.objects.all().order_by("-register_datetime_field")
+                    if only_month:
+                        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                        local_objects = []
+                        for idea in ideas:
+                            if (idea.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
+                                    >= now:
+                                local_objects.append(idea.id)
+                        ideas = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
+                            order_by("-register_datetime_field")
+                    # TODO search
+                    if search:
+                        ideas = ideas.filter(name_char_field__icontains=search)
+                    # TODO filter
+                    if subdivision:
+                        ideas = ideas.filter(subdivision_char_field=subdivision)
+                    if sphere:
+                        ideas = ideas.filter(sphere_char_field=sphere)
+                    if category:
+                        ideas = ideas.filter(category_char_field=category)
+                    if author:
+                        if author == "self":
+                            author = req_inst.user_model
+                        else:
+                            author = backend_models.UserModel.objects.get(
+                                personnel_number_slug_field=(str(author).split(" ")[-2]).strip()
+                            )
+                        ideas = ideas.filter(author_foreign_key_field=author)
+                    if moderate:
+                        ideas = ideas.filter(status_moderate_char_field=moderate)
+                    # TODO sort
+                    if sort:
+                        if sort == "дате публикации (свежие в начале)":
+                            ideas = ideas.order_by("-register_datetime_field")
+                        elif sort == "дате публикации (свежие в конце)":
+                            ideas = ideas.order_by("register_datetime_field")
+                        elif sort == "названию (с начала алфавита)":
+                            ideas = ideas.order_by("name_char_field")
+                        elif sort == "названию (с конца алфавита)":
+                            ideas = ideas.order_by("-name_char_field")
+                        elif sort == "рейтингу (популярные в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ratings = backend_models.IdeaRatingModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                if ratings.count() <= 0:
+                                    rate = 0
                                 else:
-                                    if change_user_password == "Изменять пароль уже существующего пользователя":
-                                        user.password = make_password(password=password_char_field)
-                                        user_model.password_char_field = password_char_field
+                                    rate = 0
+                                    for i in ratings:
+                                        rate += i.rating_integer_field
+                                    rate = round(rate / ideas.count(), 2)
+                                ideas_arr.append([rate, idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "рейтингу (популярные в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ratings = backend_models.IdeaRatingModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                if ratings.count() <= 0:
+                                    rate = 0
+                                else:
+                                    rate = 0
+                                    for i in ratings:
+                                        rate += i.rating_integer_field
+                                    rate = round(rate / ideas.count(), 2)
+                                ideas_arr.append([rate, idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "отметкам рейтинга (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ratings = backend_models.IdeaRatingModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                ideas_arr.append([ratings.count(), idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "отметкам рейтинга (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ratings = backend_models.IdeaRatingModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                ideas_arr.append([ratings.count(), idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "комментариям (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                comments = backend_models.IdeaCommentModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                ideas_arr.append([comments.count(), idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "комментариям (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                comments = backend_models.IdeaCommentModel.objects.filter(
+                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                )
+                                ideas_arr.append([comments.count(), idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                    # TODO serialize
+                    serializer = backend_serializers.IdeaModelSerializer(instance=ideas, many=True).data
+                    response = {"response": serializer}
 
-                                user.is_staff = is_staff
-                                user.is_superuser = is_superuser
-                                user.email = email_field
-                                user.last_name = last_name_char_field
-                                user.first_name = first_name_char_field
-                                user.save()
-
-                                user_model.activity_boolean_field = is_active
-                                user_model.email_field = email_field
-                                user_model.secret_question_char_field = secret_question_char_field
-                                user_model.secret_answer_char_field = secret_answer_char_field
-                                user_model.temp_password_boolean_field = is_temp_password
-                                user_model.last_name_char_field = last_name_char_field
-                                user_model.first_name_char_field = first_name_char_field
-                                user_model.patronymic_char_field = patronymic_char_field
-                                user_model.personnel_number_slug_field = personnel_number_slug_field
-                                user_model.subdivision_char_field = subdivision_char_field
-                                user_model.workshop_service_char_field = workshop_service_char_field
-                                user_model.department_site_char_field = department_site_char_field
-                                user_model.position_char_field = position_char_field
-                                user_model.category_char_field = category_char_field
-                                user_model.save()
-
-                                if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
-                                    for group in backend_models.GroupModel.objects.filter(
-                                            user_many_to_many_field=user_model
-                                    ):
-                                        try:
-                                            group.user_many_to_many_field.remove(user_model)
-                                        except Exception as error:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                                groups = [group.strip() for group in str(groups).lower().strip().split(',')]
-                                for group in groups:
-                                    if len(group) > 1:
-                                        try:
-                                            group_model = backend_models.GroupModel.objects.get_or_create(
-                                                name_slug_field=group
-                                            )[0]
-                                            group_model.user_many_to_many_field.add(user_model)
-                                        except Exception as error:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                                if backend_service.DjangoClass.DefaultSettingsClass.get_actions_print_value():
-                                    print(username)
-                                    print(row)
-                            except Exception as error:
-                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                        response = {"response": "Пользователи успешно созданы/изменены."}
-                    else:
-                        response = {"error": "Ошибка чтения файла!"}
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "EXPORT_USERS":
+            if req_inst.action_type == "IDEA_DETAIL":
                 try:
-                    # TODO actions #####################################################################################
-                    key = backend_service.UtilsClass.create_encrypted_password(
-                        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
-                        _length=24
-                    )
-                    date = backend_service.DateTimeUtils.get_current_date()
-                    path = 'media/data/temp/users'
-                    file_name = f"users_{key}_{date}.xlsx"
-                    workbook = openpyxl.Workbook()
-                    sheet = workbook.active
 
-                    # Delete old files
-                    #######################################################
-                    for root, dirs, files in os.walk(f"static/{path}", topdown=True):
-                        for file in files:
-                            try:
-                                date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
-                                if date != date_file:
-                                    os.remove(f'{path}/{file}')
-                            except Exception as error:
-                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    #######################################################
-
-                    users = User.objects.filter(is_superuser=False)
-
-                    def set_value(_col: Union[str, int], _row: Union[str, int], _value, _sheet):
-                        if isinstance(_col, int):
-                            _col = get_column_letter(_col)
-                        if isinstance(_row, str):
-                            _row = str(_row)
-                        if isinstance(_value, bool):
-                            if _value:
-                                _value = "true"
-                            else:
-                                _value = "false"
-                        if _value is None:
-                            _value = ""
-                        _sheet[str(_col).upper() + str(_row)] = str(_value)
-
-                    titles = ['Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Фамилия', 'Имя', 'Отчество',
-                              'Табельный номер', 'Должность', 'Категория работника', 'Имя пользователя',
-                              'Пароль аккаунта', 'Активность аккаунта', 'Доступ к панели управления',
-                              'Права суперпользователя', 'Временный пароль', 'Группы доступа', 'Электронная почта',
-                              'Секретный вопрос', 'Секретный ответ']
-                    for title in titles:
-                        set_value(_col=titles.index(title) + 1, _row=1, _value=title, _sheet=sheet)
-                    _index = 1
-                    for user in users:
-                        try:
-                            _index += 1
-                            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-
-                            subdivision_char_field = user_model.subdivision_char_field
-                            set_value(_col="A", _row=_index, _value=subdivision_char_field, _sheet=sheet)
-
-                            workshop_service_char_field = user_model.workshop_service_char_field
-                            set_value(_col="B", _row=_index, _value=workshop_service_char_field,
-                                      _sheet=sheet)
-
-                            department_site_char_field = user_model.department_site_char_field
-                            set_value(_col="C", _row=_index, _value=department_site_char_field,
-                                      _sheet=sheet)
-
-                            last_name_char_field = user_model.last_name_char_field
-                            set_value(_col="D", _row=_index, _value=last_name_char_field, _sheet=sheet)
-
-                            first_name_char_field = user_model.first_name_char_field
-                            set_value(_col="E", _row=_index, _value=first_name_char_field, _sheet=sheet)
-
-                            patronymic_char_field = user_model.patronymic_char_field
-                            set_value(_col="F", _row=_index, _value=patronymic_char_field, _sheet=sheet)
-
-                            personnel_number_slug_field = user_model.personnel_number_slug_field
-                            set_value(_col="G", _row=_index, _value=personnel_number_slug_field,
-                                      _sheet=sheet)
-
-                            position_char_field = user_model.position_char_field
-                            set_value(_col="H", _row=_index, _value=position_char_field, _sheet=sheet)
-
-                            category_char_field = user_model.category_char_field
-                            set_value(_col="I", _row=_index, _value=category_char_field, _sheet=sheet)
-
-                            username = user.username
-                            set_value(_col="J", _row=_index, _value=username, _sheet=sheet)
-
-                            password_char_field = user_model.password_char_field
-                            set_value(_col="K", _row=_index, _value=password_char_field, _sheet=sheet)
-
-                            is_active = user_model.activity_boolean_field
-                            set_value(_col="L", _row=_index, _value=is_active, _sheet=sheet)
-
-                            is_staff = user.is_staff
-                            set_value(_col="M", _row=_index, _value=is_staff, _sheet=sheet)
-
-                            is_superuser = user.is_superuser
-                            set_value(_col="N", _row=_index, _value=is_superuser, _sheet=sheet)
-
-                            is_temp_password = user_model.temp_password_boolean_field
-                            set_value(_col="O", _row=_index, _value=is_temp_password, _sheet=sheet)
-
-                            group_models = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
-                            groups = ""
-                            for group_model in group_models:
-                                groups += f"{str(group_model.name_slug_field).lower().strip()}, "
-                            groups = groups[:-2]
-                            set_value(_col="P", _row=_index, _value=groups, _sheet=sheet)
-
-                            email_field = user_model.email_field
-                            set_value(_col="Q", _row=_index, _value=email_field, _sheet=sheet)
-
-                            secret_question_char_field = user_model.secret_question_char_field
-                            set_value(_col="R", _row=_index, _value=secret_question_char_field,
-                                      _sheet=sheet)
-
-                            secret_answer_char_field = user_model.secret_answer_char_field
-                            set_value(_col="S", _row=_index, _value=secret_answer_char_field, _sheet=sheet)
-                        except Exception as error:
-                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    # Set font
-                    #######################################################
-                    font_b = Font(name='Arial', size=8, bold=False)
-                    for row in range(1, _index + 1):
-                        for col in [get_column_letter(x) for x in range(1, 30 + 1)]:
-                            cell = sheet[f'{col}{row}']
-                            cell.font = font_b
-                    #######################################################
-
-                    # Height and width styles
-                    #######################################################
-                    for col in [get_column_letter(x) for x in range(1, 30 + 1)]:
-                        width = 1
-                        for row in range(1, _index + 1):
-                            cell = sheet[f'{col}{row}']
-                            value = len(str(cell.value))
-                            if value > width:
-                                width = value
-                        sheet.column_dimensions[col].height = 1
-                        sheet.column_dimensions[col].width = round((width * 0.95), 3)
-                    #######################################################
-
-                    try:
-                        backend_service.ExcelClass.workbook_save(
-                            workbook=workbook,
-                            excel_file=f"static/{path}/{file_name}"
-                        )
-                    except Exception as error:
-                        pass
-                    response = {"response": {"excel": f"static/{path}/{file_name}"}}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "ACTIVITY_USER":
-                try:
                     # TODO get_value ###################################################################################
-                    username = req_inst.get_value("username")
-                    active = req_inst.get_value("active")
+
+                    _id = req_inst.get_value("id")
+
                     # TODO actions #####################################################################################
-                    user_model = backend_models.UserModel.objects.get(
-                        user_foreign_key_field=User.objects.get(username=username)
-                    )
-                    if active:
-                        user_model.activity_boolean_field = True
-                        user_model.save()
+
+                    if _id:
+                        rational = backend_models.IdeaModel.objects.get(id=_id)
                     else:
-                        user_model.activity_boolean_field = False
-                        user_model.save()
-                    response = {"response": "Успешно изменено!"}
+                        rational = backend_models.IdeaModel.objects.order_by('-id')[0]
+                    serializer = backend_serializers.IdeaModelSerializer(instance=rational, many=False).data
+                    response = {"response": serializer}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "TERMINAL_REBOOT":
+            if req_inst.action_type == "IDEA_CHANGE":
                 try:
+
                     # TODO get_value ###################################################################################
-                    ips = req_inst.get_value("ips")
+
+                    _id = req_inst.get_value("id")
+                    subdivision = req_inst.get_value("subdivision")
+                    sphere = req_inst.get_value("sphere")
+                    category = req_inst.get_value("category")
+                    clear_image = req_inst.get_value("clearImage")
+                    avatar = req_inst.get_value("avatar")
+                    name = req_inst.get_value("name")
+                    place = req_inst.get_value("place")
+                    description = req_inst.get_value("description")
+                    moderate = req_inst.get_value("moderate")
+                    moderate_comment = req_inst.get_value("moderateComment")
 
                     # TODO actions #####################################################################################
 
-                    def reboot(_ip):
-                        url = "htt" + f"p://{ip}/ISAPI/System/reboot"
-                        h = httplib2.Http(
-                            os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/reboot_terminal"
+                    idea = backend_models.IdeaModel.objects.get(id=_id)
+                    if subdivision and idea.subdivision_char_field != subdivision:
+                        idea.subdivision_char_field = subdivision
+                    if sphere and idea.sphere_char_field != sphere:
+                        idea.sphere_char_field = sphere
+                    if category and idea.category_char_field != category:
+                        idea.category_char_field = category
+                    if clear_image:
+                        idea.image_field = None
+                    if avatar and idea.image_field != avatar:
+                        idea.image_field = avatar
+                    if name and idea.name_char_field != name:
+                        idea.name_char_field = name
+                    if place and idea.place_char_field != place:
+                        idea.place_char_field = place
+                    if description and idea.description_text_field != description:
+                        idea.description_text_field = description
+                    if moderate and idea.status_moderate_char_field != moderate:
+                        idea.status_moderate_char_field = moderate
+                    if moderate_comment and idea.comment_moderate_char_field != moderate_comment:
+                        idea.comment_moderate_char_field = moderate_comment
+                    idea.register_datetime_field = timezone.now()
+                    idea.save()
+                    if req_inst.user_model == idea.author_foreign_key_field:
+                        backend_models.NotificationModel.objects.create(
+                            author_foreign_key_field=req_inst.user_model,
+                            model_foreign_key_field=backend_models.GroupModel.objects.get(
+                                name_slug_field="moderator_idea"
+                            ),
+                            name_char_field="Идея отредактирована автором",
+                            place_char_field="банк идей",
+                            description_text_field=f"название идеи: {idea.name_char_field}",
                         )
-                        login_ = 'admin'
-                        password_ = 'snrg2017'
-                        h.add_credentials(login_, password_)
-                        headers = {
-                            'Content-type': 'text/plain;charset=UTF-8',
-                            'Accept-Encoding': 'gzip, deflate',
-                            'Accept-Language': 'de,en-US;q=0.7,en;q=0.3',
-                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 '
-                                          'Firefox/75.0',
-                        }
-                        response_, content = h.request(uri=url, method="PUT", headers=headers)
-                        print(content)
+                    response = {"response": "успешно изменено!"}
 
-                    for ip in [str(str(x).strip()) for x in ips.split(",")]:
-                        if len(str(ip)) < 3:
-                            continue
-                        with ThreadPoolExecutor() as executor:
-                            executor.submit(reboot, ip)
-                    response = {"response": "Успешно перезагружено!"}
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            else:
-                return Response({"error": "This action not allowed for this method."})
+            if req_inst.action_type == "IDEA_MODERATE":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    _id = req_inst.get_value("id")
+                    moderate = req_inst.get_value("moderate")
+                    moderate_comment = req_inst.get_value("moderateComment")
+
+                    # TODO actions #####################################################################################
+
+                    idea = backend_models.IdeaModel.objects.get(id=_id)
+                    idea.status_moderate_char_field = moderate
+                    idea.moderate_foreign_key_field = req_inst.user_model
+                    idea.comment_moderate_char_field = moderate_comment
+                    idea.register_datetime_field = timezone.now()
+                    idea.save()
+                    if moderate == "принято" or moderate == "на доработку":
+                        message = "Действия с Вашей идеей"
+                        if moderate == "принято":
+                            message = "Ваша идея успешно принята и открыта в общем доступе!"
+                        if moderate == "на доработку":
+                            message = "Ваша идея отправлена на доработку! Проверьте список идей на доработку и " \
+                                      "исправьте её!"
+                        backend_models.NotificationModel.objects.create(
+                            author_foreign_key_field=req_inst.user_model,
+                            target_foreign_key_field=idea.author_foreign_key_field,
+                            name_char_field=message,
+                            place_char_field="банк идей",
+                            description_text_field=f"название идеи: {idea.name_char_field}",
+                        )
+                    elif moderate == "скрыто":
+                        message = "Действия с Вашей идеей"
+                        if moderate == "скрыто":
+                            message = "Автор скрыл свою идею!"
+                        backend_models.NotificationModel.objects.create(
+                            author_foreign_key_field=req_inst.user_model,
+                            model_foreign_key_field=backend_models.GroupModel.objects.get(
+                                name_slug_field="moderator_idea"
+                            ),
+                            name_char_field=message,
+                            place_char_field="банк идей",
+                            description_text_field=f"название идеи: {idea.name_char_field}",
+                        )
+                    response = {"response": "Модерация прошла успешно!"}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_COMMENT_CREATE":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    _id = req_inst.get_value("id")
+                    comment = req_inst.get_value("comment")
+
+                    # TODO actions #####################################################################################
+
+                    idea = backend_models.IdeaModel.objects.get(id=_id)
+                    backend_models.IdeaCommentModel.objects.create(
+                        idea_foreign_key_field=idea,
+                        author_foreign_key_field=req_inst.user_model,
+                        comment_text_field=comment,
+                    )
+                    response = {"response": "Комментарий успешно создан!"}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_COMMENT_DELETE":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    comment_id = req_inst.get_value("commentId")
+
+                    # TODO actions #####################################################################################
+
+                    backend_models.IdeaCommentModel.objects.get(
+                        id=comment_id,
+                    ).delete()
+                    response = {"response": "Комментарий успешно удалён!"}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_RATING_CREATE":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    _id = req_inst.get_value("id")
+                    rating = req_inst.get_value("rating")
+
+                    # TODO actions #####################################################################################
+
+                    idea = backend_models.IdeaModel.objects.get(id=_id)
+                    rating_obj = backend_models.IdeaRatingModel.objects.get_or_create(
+                        idea_foreign_key_field=idea, author_foreign_key_field=req_inst.user_model)[0]
+                    rating_obj.rating_integer_field = rating
+                    rating_obj.save()
+                    ideas = backend_models.IdeaCommentModel.objects.filter(
+                        idea_foreign_key_field=idea
+                    ).order_by("-created_datetime_field")
+                    serializer = backend_serializers.IdeaCommentModelSerializer(instance=ideas, many=True).data
+                    response = {"response": serializer}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            if req_inst.action_type == "IDEA_AUTHOR_LIST":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    sort = req_inst.get_value("sort")
+                    only_month = req_inst.get_value("onlyMonth")
+
+                    # TODO actions #####################################################################################
+
+                    authors = []
+                    ideas = backend_models.IdeaModel.objects.filter(
+                        status_moderate_char_field="принято"
+                    ).order_by("-register_datetime_field")
+                    if only_month:
+                        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                        local_objects = []
+                        for idea in ideas:
+                            if (idea.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
+                                    >= now:
+                                local_objects.append(idea.id)
+                        ideas = backend_models.IdeaModel.objects.filter(
+                            id__in=local_objects
+                        ).order_by("-register_datetime_field")
+                    for idea in ideas:
+                        authors.append(idea.author_foreign_key_field)
+                    authors = set(authors)
+                    ideas = []
+                    for author in authors:
+                        ideas_arr = backend_models.IdeaModel.objects.filter(
+                            author_foreign_key_field=author, status_moderate_char_field="принято"
+                        )
+                        idea_count = ideas_arr.count()
+                        idea_rating = 0
+                        idea_rating_count = 0
+                        idea_comment_count = 0
+                        for idea in ideas_arr:
+                            ratings = backend_models.IdeaRatingModel.objects.filter(idea_foreign_key_field=idea)
+                            for rate in ratings:
+                                idea_rating += rate.rating_integer_field
+                            idea_rating_count += ratings.count()
+                            idea_comment_count = backend_models.IdeaCommentModel.objects.filter(
+                                idea_foreign_key_field=idea
+                            ).count()
+                        if idea_rating_count == 0:
+                            idea_rating = 0
+                        else:
+                            idea_rating = round(idea_rating / idea_rating_count, 2)
+                        serialized_user = backend_serializers.UserModelSerializer(instance=author, many=False).data
+                        ideas.append({
+                            "user_model": serialized_user,
+                            "idea_count": idea_count, "idea_rating": idea_rating,
+                            "idea_rating_count": idea_rating_count, "idea_comment_count": idea_comment_count
+                        })
+                    # sort
+                    if sort:
+                        if sort == "количеству (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "количеству (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "рейтингу (популярные в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "рейтингу (популярные в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "отметкам рейтинга (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "отметкам рейтинга (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "комментариям (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_comment_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "комментариям (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_comment_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                    response = {"response": ideas}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
@@ -1054,58 +1390,8 @@ def api_auth_admin(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
-@authentication_classes([BasicAuthentication])
-def api_basic_admin_user_temp(request):
-    """
-    basic admin django-rest-framework
-    """
+# TODO buhgalteria #####################################################################################################
 
-    try:
-        # TODO Request #################################################################################################
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-        # TODO Methods #################################################################################################
-        if req_inst.method == "GET":
-            # TODO Actions #############################################################################################
-            try:
-                # TODO actions #########################################################################################
-                user_models = backend_models.UserModel.objects.filter(
-                    temp_password_boolean_field=True,
-                    activity_boolean_field=True
-                )
-                if not request.user.is_superuser:
-                    response = {"error": "Your user in not superuser."}
-                else:
-                    objects = []
-                    for user_model in user_models:
-                        if not user_model.user_foreign_key_field.is_superuser:
-                            objects.append(
-                                {
-                                    f"""{base64.b64encode(
-                                        str(user_model.user_foreign_key_field.username)[::-1].encode()
-                                    ).decode()}""":
-                                        base64.b64encode(
-                                            str(f"12{user_model.password_char_field}345").encode()).decode()
-                                }
-                            )
-                    # for obj in objects:
-                    #     for key, value in obj.items():
-                    #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
-                    response = {"response": objects}
-                # TODO response ########################################################################################
-                backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                return Response(response)
-            except Exception as error:
-                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                return Response({"error": "Произошла ошибка!"})
-        else:
-            return Response({"error": "Этот метод не реализован для этой точки доступа."})
-    except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-        return render(request, "backend/404.html")
-
-
-# TODO custom views ####################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_auth_salary(request):
@@ -1114,16 +1400,26 @@ def api_auth_salary(request):
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "POST":
+
             # TODO Actions #############################################################################################
+
             if req_inst.action_type == "USER_SALARY":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     date_time = req_inst.get_value("dateTime")
+
                     # TODO actions #####################################################################################
+
                     # Get json response from 1c
                     key = backend_service.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
@@ -1146,9 +1442,6 @@ def api_auth_salary(request):
                     _password = '159159qqww!'
                     h.add_credentials(_login, _password)
                     response, content = h.request(url)
-
-                    print("content: ", content)
-                    print("response: ", response)
 
                     data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
                     error_word_list = ['ошибка', 'error', 'failed']
@@ -1724,7 +2017,9 @@ def api_auth_salary(request):
                         json_data["excel_path"] = f"static/{path}/{file_name}"
 
                         response = {"response": json_data}
-                    # TODO response ###################################################################################
+
+                    # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -1739,6 +2034,8 @@ def api_auth_salary(request):
         return render(request, "backend/404.html")
 
 
+# TODO sup #############################################################################################################
+
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_auth_vacation(request):
@@ -1747,16 +2044,26 @@ def api_auth_vacation(request):
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "POST":
+
             # TODO Actions #############################################################################################
+
             if req_inst.action_type == "USER_VACATION":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     date_time = req_inst.get_value("dateTime")
+
                     # TODO actions #####################################################################################
+
                     key = backend_service.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=10
@@ -1838,7 +2145,143 @@ def api_auth_vacation(request):
                         "tables": tables,
                     }
                     response = {"response": json_data}
-                    # TODO response ###################################################################################
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+# TODO moderator #######################################################################################################
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@authentication_classes([BasicAuthentication])
+def api_basic_admin_user_temp(request):
+    """
+    basic admin django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO Actions #############################################################################################
+
+            try:
+
+                # TODO actions #########################################################################################
+
+                user_models = backend_models.UserModel.objects.filter(
+                    temp_password_boolean_field=True,
+                    activity_boolean_field=True
+                )
+                if not request.user.is_superuser:
+                    response = {"error": "Your user in not superuser."}
+                else:
+                    objects = []
+                    for user_model in user_models:
+                        if not user_model.user_foreign_key_field.is_superuser:
+                            objects.append(
+                                {
+                                    f"""{base64.b64encode(
+                                        str(user_model.user_foreign_key_field.username)[::-1].encode()
+                                    ).decode()}""":
+                                        base64.b64encode(
+                                            str(f"12{user_model.password_char_field}345").encode()).decode()
+                                }
+                            )
+                    # for obj in objects:
+                    #     for key, value in obj.items():
+                    #         print(f"{key}: {str(base64.b64decode(value).decode())[2: -3]}")
+                    response = {"response": objects}
+
+                # TODO response ########################################################################################
+
+                backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                return Response(response)
+            except Exception as error:
+                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                return Response({"error": "Произошла ошибка!"})
+        else:
+            return Response({"error": "Этот метод не реализован для этой точки доступа."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_admin_terminal_reboot(request):
+    """
+    auth admin django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO Actions #############################################################################################
+
+            if req_inst.action_type == "TERMINAL_REBOOT":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    ips = req_inst.get_value("ips")
+
+                    # TODO actions #####################################################################################
+
+                    responses = []
+
+                    def reboot(_ip):
+                        url = "htt" + f"p://{ip}/ISAPI/System/reboot"
+                        h = httplib2.Http(
+                            os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/reboot_terminal"
+                        )
+                        login_ = 'admin'
+                        password_ = 'snrg2017'
+                        h.add_credentials(login_, password_)
+                        headers = {
+                            'Content-type': 'text/plain;charset=UTF-8',
+                            'Accept-Encoding': 'gzip, deflate',
+                            'Accept-Language': 'de,en-US;q=0.7,en;q=0.3',
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:75.0) Gecko/20100101 '
+                                          'Firefox/75.0',
+                        }
+                        response_, content = h.request(uri=url, method="PUT", headers=headers)
+                        responses.append([_ip, content])
+
+                    for ip in [str(str(x).strip()) for x in ips.split(",")]:
+                        if len(str(ip)) < 3:
+                            continue
+                        with ThreadPoolExecutor() as executor:
+                            executor.submit(reboot, ip)
+                    response = {"response": responses}
+
+                    # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -1855,470 +2298,48 @@ def api_auth_vacation(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_auth_idea(request):
+def api_auth_admin_check_user(request):
     """
-    api_rational django-rest-framework
+    auth admin django-rest-framework
     """
 
     try:
-        # TODO Request #################################################################################################
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-        # TODO Methods #################################################################################################
-        if req_inst.method == "POST":
-            # TODO Actions #############################################################################################
-            if req_inst.action_type == "IDEA_CREATE":
-                try:
-                    # TODO get_value ###################################################################################
-                    subdivision = req_inst.get_value("subdivision")
-                    sphere = req_inst.get_value("sphere")
-                    category = req_inst.get_value("category")
-                    avatar = req_inst.get_value("avatar")
-                    name = req_inst.get_value("name")
-                    place = req_inst.get_value("place")
-                    description = req_inst.get_value("description")
-                    moderate = req_inst.get_value("moderate")
-                    # TODO actions #####################################################################################
-                    backend_models.IdeaModel.objects.create(
-                        author_foreign_key_field=req_inst.user_model,
-                        subdivision_char_field=subdivision,
-                        sphere_char_field=sphere,
-                        category_char_field=category,
-                        image_field=avatar,
-                        name_char_field=name,
-                        place_char_field=place,
-                        description_text_field=description,
-                        status_moderate_char_field=moderate,
-                    )
-                    backend_models.NotificationModel.objects.create(
-                        author_foreign_key_field=req_inst.user_model,
-                        model_foreign_key_field=backend_models.GroupModel.objects.get(
-                            name_slug_field="moderator_idea"
-                        ),
-                        name_char_field=f"Создана новая идея",
-                        place_char_field="банк идей",
-                        description_text_field=f"название идеи: {name}",
-                    )
-                    response = {"response": "Успешно отправлено на модерацию!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_LIST":
-                try:
-                    # TODO get_value ###################################################################################
-                    moderate = req_inst.get_value("moderate")
-                    subdivision = req_inst.get_value("subdivision")
-                    sphere = req_inst.get_value("sphere")
-                    category = req_inst.get_value("category")
-                    author = req_inst.get_value("author")
-                    search = req_inst.get_value("search")
-                    sort = req_inst.get_value("sort")
 
-                    only_month = req_inst.get_value("onlyMonth")
-                    # TODO actions #####################################################################################
-                    # TODO onlyMonth
-                    ideas = backend_models.IdeaModel.objects.all().order_by("-register_datetime_field")
-                    if only_month:
-                        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
-                        local_objects = []
-                        for idea in ideas:
-                            if (idea.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
-                                    >= now:
-                                local_objects.append(idea.id)
-                        ideas = backend_models.IdeaModel.objects.filter(id__in=local_objects). \
-                            order_by("-register_datetime_field")
-                    # TODO search
-                    if search:
-                        ideas = ideas.filter(name_char_field__icontains=search)
-                    # TODO filter
-                    if subdivision:
-                        ideas = ideas.filter(subdivision_char_field=subdivision)
-                    if sphere:
-                        ideas = ideas.filter(sphere_char_field=sphere)
-                    if category:
-                        ideas = ideas.filter(category_char_field=category)
-                    if author:
-                        if author == "self":
-                            author = req_inst.user_model
-                        else:
-                            author = backend_models.UserModel.objects.get(
-                                personnel_number_slug_field=(str(author).split(" ")[-2]).strip()
-                            )
-                        ideas = ideas.filter(author_foreign_key_field=author)
-                    if moderate:
-                        ideas = ideas.filter(status_moderate_char_field=moderate)
-                    # TODO sort
-                    if sort:
-                        if sort == "дате публикации (свежие в начале)":
-                            ideas = ideas.order_by("-register_datetime_field")
-                        elif sort == "дате публикации (свежие в конце)":
-                            ideas = ideas.order_by("register_datetime_field")
-                        elif sort == "названию (с начала алфавита)":
-                            ideas = ideas.order_by("name_char_field")
-                        elif sort == "названию (с конца алфавита)":
-                            ideas = ideas.order_by("-name_char_field")
-                        elif sort == "рейтингу (популярные в начале)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ratings = backend_models.IdeaRatingModel.objects.filter(
-                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
-                                )
-                                if ratings.count() <= 0:
-                                    rate = 0
-                                else:
-                                    rate = 0
-                                    for i in ratings:
-                                        rate += i.rating_integer_field
-                                    rate = round(rate / ideas.count(), 2)
-                                ideas_arr.append([rate, idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "рейтингу (популярные в конце)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ratings = backend_models.IdeaRatingModel.objects.filter(
-                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
-                                )
-                                if ratings.count() <= 0:
-                                    rate = 0
-                                else:
-                                    rate = 0
-                                    for i in ratings:
-                                        rate += i.rating_integer_field
-                                    rate = round(rate / ideas.count(), 2)
-                                ideas_arr.append([rate, idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "отметкам рейтинга (наибольшие в начале)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ratings = backend_models.IdeaRatingModel.objects.filter(
-                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
-                                )
-                                ideas_arr.append([ratings.count(), idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "отметкам рейтинга (наибольшие в конце)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ratings = backend_models.IdeaRatingModel.objects.filter(
-                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
-                                )
-                                ideas_arr.append([ratings.count(), idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "комментариям (наибольшие в начале)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                comments = backend_models.IdeaCommentModel.objects.filter(
-                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
-                                )
-                                ideas_arr.append([comments.count(), idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "комментариям (наибольшие в конце)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                comments = backend_models.IdeaCommentModel.objects.filter(
-                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
-                                )
-                                ideas_arr.append([comments.count(), idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
-                            ideas = [x[1] for x in ideas_arr]
-                    # TODO serialize
-                    serializer = backend_serializers.IdeaModelSerializer(instance=ideas, many=True).data
-                    response = {"response": serializer}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_DETAIL":
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO Actions #############################################################################################
+
+            if req_inst.action_type == "ADMIN_CHECK_USER":
                 try:
+
                     # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
+
+                    username = req_inst.get_value("username")
+
                     # TODO actions #####################################################################################
-                    if _id:
-                        rational = backend_models.IdeaModel.objects.get(id=_id)
+
+                    user = User.objects.get(username=username)
+                    if not user.is_superuser:
+                        serialize = backend_serializers.UserSerializer(instance=user, many=False).data
+                        response = {"response": serialize}
                     else:
-                        rational = backend_models.IdeaModel.objects.order_by('-id')[0]
-                    serializer = backend_serializers.IdeaModelSerializer(instance=rational, many=False).data
-                    response = {"response": serializer}
+                        response = {"error": "Действия над Суперпользователем запрещены!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_CHANGE":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    subdivision = req_inst.get_value("subdivision")
-                    sphere = req_inst.get_value("sphere")
-                    category = req_inst.get_value("category")
-                    clear_image = req_inst.get_value("clearImage")
-                    avatar = req_inst.get_value("avatar")
-                    name = req_inst.get_value("name")
-                    place = req_inst.get_value("place")
-                    description = req_inst.get_value("description")
-                    moderate = req_inst.get_value("moderate")
-                    moderate_comment = req_inst.get_value("moderateComment")
-                    # TODO actions #####################################################################################
-                    idea = backend_models.IdeaModel.objects.get(id=_id)
-                    if subdivision and idea.subdivision_char_field != subdivision:
-                        idea.subdivision_char_field = subdivision
-                    if sphere and idea.sphere_char_field != sphere:
-                        idea.sphere_char_field = sphere
-                    if category and idea.category_char_field != category:
-                        idea.category_char_field = category
-                    if clear_image:
-                        idea.image_field = None
-                    if avatar and idea.image_field != avatar:
-                        idea.image_field = avatar
-                    if name and idea.name_char_field != name:
-                        idea.name_char_field = name
-                    if place and idea.place_char_field != place:
-                        idea.place_char_field = place
-                    if description and idea.description_text_field != description:
-                        idea.description_text_field = description
-                    if moderate and idea.status_moderate_char_field != moderate:
-                        idea.status_moderate_char_field = moderate
-                    if moderate_comment and idea.comment_moderate_char_field != moderate_comment:
-                        idea.comment_moderate_char_field = moderate_comment
-                    idea.register_datetime_field = timezone.now()
-                    idea.save()
-                    if req_inst.user_model == idea.author_foreign_key_field:
-                        backend_models.NotificationModel.objects.create(
-                            author_foreign_key_field=req_inst.user_model,
-                            model_foreign_key_field=backend_models.GroupModel.objects.get(
-                                name_slug_field="moderator_idea"
-                            ),
-                            name_char_field="Идея отредактирована автором",
-                            place_char_field="банк идей",
-                            description_text_field=f"название идеи: {idea.name_char_field}",
-                        )
-                    response = {"response": "успешно изменено!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_MODERATE":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    moderate = req_inst.get_value("moderate")
-                    moderate_comment = req_inst.get_value("moderateComment")
-                    # TODO actions #####################################################################################
-                    idea = backend_models.IdeaModel.objects.get(id=_id)
-                    idea.status_moderate_char_field = moderate
-                    idea.moderate_foreign_key_field = req_inst.user_model
-                    idea.comment_moderate_char_field = moderate_comment
-                    idea.register_datetime_field = timezone.now()
-                    idea.save()
-                    if moderate == "принято" or moderate == "на доработку":
-                        message = "Действия с Вашей идеей"
-                        if moderate == "принято":
-                            message = "Ваша идея успешно принята и открыта в общем доступе!"
-                        if moderate == "на доработку":
-                            message = "Ваша идея отправлена на доработку! Проверьте список идей на доработку и " \
-                                      "исправьте её!"
-                        backend_models.NotificationModel.objects.create(
-                            author_foreign_key_field=req_inst.user_model,
-                            target_foreign_key_field=idea.author_foreign_key_field,
-                            name_char_field=message,
-                            place_char_field="банк идей",
-                            description_text_field=f"название идеи: {idea.name_char_field}",
-                        )
-                    elif moderate == "скрыто":
-                        message = "Действия с Вашей идеей"
-                        if moderate == "скрыто":
-                            message = "Автор скрыл свою идею!"
-                        backend_models.NotificationModel.objects.create(
-                            author_foreign_key_field=req_inst.user_model,
-                            model_foreign_key_field=backend_models.GroupModel.objects.get(
-                                name_slug_field="moderator_idea"
-                            ),
-                            name_char_field=message,
-                            place_char_field="банк идей",
-                            description_text_field=f"название идеи: {idea.name_char_field}",
-                        )
-                    response = {"response": "Модерация прошла успешно!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_COMMENT_CREATE":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    comment = req_inst.get_value("comment")
-                    # TODO actions #####################################################################################
-                    idea = backend_models.IdeaModel.objects.get(id=_id)
-                    backend_models.IdeaCommentModel.objects.create(
-                        idea_foreign_key_field=idea,
-                        author_foreign_key_field=req_inst.user_model,
-                        comment_text_field=comment,
-                    )
-                    response = {"response": "Комментарий успешно создан!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_COMMENT_DELETE":
-                try:
-                    # TODO get_value ###################################################################################
-                    comment_id = req_inst.get_value("commentId")
-                    # TODO actions #####################################################################################
-                    backend_models.IdeaCommentModel.objects.get(
-                        id=comment_id,
-                    ).delete()
-                    response = {"response": "Комментарий успешно удалён!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_RATING_CREATE":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    rating = req_inst.get_value("rating")
-                    # TODO actions #####################################################################################
-                    idea = backend_models.IdeaModel.objects.get(id=_id)
-                    rating_obj = backend_models.IdeaRatingModel.objects.get_or_create(
-                        idea_foreign_key_field=idea, author_foreign_key_field=req_inst.user_model)[0]
-                    rating_obj.rating_integer_field = rating
-                    rating_obj.save()
-                    ideas = backend_models.IdeaCommentModel.objects.filter(
-                        idea_foreign_key_field=idea
-                    ).order_by("-created_datetime_field")
-                    serializer = backend_serializers.IdeaCommentModelSerializer(instance=ideas, many=True).data
-                    response = {"response": serializer}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_AUTHOR_LIST":
-                try:
-                    # TODO get_value ###################################################################################
-                    sort = req_inst.get_value("sort")
-                    only_month = req_inst.get_value("onlyMonth")
-                    # TODO actions #####################################################################################
-                    authors = []
-                    ideas = backend_models.IdeaModel.objects.filter(
-                        status_moderate_char_field="принято"
-                    ).order_by("-register_datetime_field")
-                    if only_month:
-                        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
-                        local_objects = []
-                        for idea in ideas:
-                            if (idea.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
-                                    >= now:
-                                local_objects.append(idea.id)
-                        ideas = backend_models.IdeaModel.objects.filter(
-                            id__in=local_objects
-                        ).order_by("-register_datetime_field")
-                    for idea in ideas:
-                        authors.append(idea.author_foreign_key_field)
-                    authors = set(authors)
-                    ideas = []
-                    for author in authors:
-                        ideas_arr = backend_models.IdeaModel.objects.filter(
-                            author_foreign_key_field=author, status_moderate_char_field="принято"
-                        )
-                        idea_count = ideas_arr.count()
-                        idea_rating = 0
-                        idea_rating_count = 0
-                        idea_comment_count = 0
-                        for idea in ideas_arr:
-                            ratings = backend_models.IdeaRatingModel.objects.filter(idea_foreign_key_field=idea)
-                            for rate in ratings:
-                                idea_rating += rate.rating_integer_field
-                            idea_rating_count += ratings.count()
-                            idea_comment_count = backend_models.IdeaCommentModel.objects.filter(
-                                idea_foreign_key_field=idea
-                            ).count()
-                        if idea_rating_count == 0:
-                            idea_rating = 0
-                        else:
-                            idea_rating = round(idea_rating / idea_rating_count, 2)
-                        serialized_user = backend_serializers.UserModelSerializer(instance=author, many=False).data
-                        ideas.append({
-                            "user_model": serialized_user,
-                            "idea_count": idea_count, "idea_rating": idea_rating,
-                            "idea_rating_count": idea_rating_count, "idea_comment_count": idea_comment_count
-                        })
-                    # sort
-                    if sort:
-                        if sort == "количеству (наибольшие в начале)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ideas_arr.append([idea["idea_count"], idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "количеству (наибольшие в конце)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ideas_arr.append([idea["idea_count"], idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "рейтингу (популярные в начале)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ideas_arr.append([idea["idea_rating"], idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "рейтингу (популярные в конце)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ideas_arr.append([idea["idea_rating"], idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "отметкам рейтинга (наибольшие в начале)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ideas_arr.append([idea["idea_rating_count"], idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "отметкам рейтинга (наибольшие в конце)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ideas_arr.append([idea["idea_rating_count"], idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "комментариям (наибольшие в начале)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ideas_arr.append([idea["idea_comment_count"], idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
-                            ideas = [x[1] for x in ideas_arr]
-                        elif sort == "комментариям (наибольшие в конце)":
-                            ideas_arr = []
-                            for idea in ideas:
-                                ideas_arr.append([idea["idea_comment_count"], idea])
-                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
-                            ideas = [x[1] for x in ideas_arr]
-                    response = {"response": ideas}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            return Response({"error": "This action not allowed for this method."})
+            else:
+                return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
@@ -2326,7 +2347,491 @@ def api_auth_idea(request):
         return render(request, "backend/404.html")
 
 
-# TODO test views ######################################################################################################
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_admin_change_user_password(request):
+    """
+    auth admin django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO Actions #############################################################################################
+
+            if req_inst.action_type == "ADMIN_CHANGE_USER_PASSWORD":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    username = req_inst.get_value("username")
+                    password = req_inst.get_value("password")
+                    password2 = req_inst.get_value("password2")
+
+                    # TODO actions #####################################################################################
+
+                    user = User.objects.get(username=username)
+                    if not user.is_superuser:
+                        user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                        if password == password2 and password != str(user_model.password_char_field).strip():
+                            user.set_password(password)
+                            user.save()
+                            user_model.password_char_field = password
+                            user_model.temp_password_boolean_field = True
+                            user_model.secret_question_char_field = ""
+                            user_model.secret_answer_char_field = ""
+                            user_model.email_field = ""
+                            user_model.save()
+                            response = {"response": "Пароль успешно сброшен!"}
+                        else:
+                            response = {"error": f"Пароли не совпадают или старый пароль идентичный!"}
+                    else:
+                        response = {"error": "Действия над Суперпользователем запрещены!"}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_admin_change_user_activity(request):
+    """
+    auth admin django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO Actions #############################################################################################
+
+            if req_inst.action_type == "ADMIN_CHANGE_USER_ACTIVITY":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    username = req_inst.get_value("username")
+                    activity = req_inst.get_value("activity")
+
+                    # TODO actions #####################################################################################
+
+                    user = User.objects.get(username=username)
+                    if not user.is_superuser:
+                        user_model = backend_models.UserModel.objects.get(
+                            user_foreign_key_field=user
+                        )
+                        if activity:
+                            user_model.activity_boolean_field = True
+                            user_model.save()
+                            response = {"response": "Пользователь успешно активирован!"}
+                        else:
+                            user_model.activity_boolean_field = False
+                            user_model.save()
+                            response = {"response": "Пользователь успешно отключен!"}
+                    else:
+                        response = {"error": "Действия над Суперпользователем запрещены!"}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_admin_create_or_change_users(request):
+    """
+    auth admin django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO Actions #############################################################################################
+
+            if req_inst.action_type == "CREATE_OR_CHANGE_USERS":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    additional_excel = req_inst.get_value("additionalExcel")
+                    change_user = req_inst.get_value("changeUser")
+                    change_user_password = req_inst.get_value("changeUserPassword")
+                    clear_user_groups = req_inst.get_value("clearUserGroups")
+
+                    # TODO actions #####################################################################################
+
+                    if additional_excel:
+                        def get_value(_col: Union[str, int], _row: Union[str, int], _sheet):
+                            if isinstance(_col, int):
+                                _col = get_column_letter(_col)
+                            if isinstance(_row, str):
+                                _row = str(_row)
+                            _value = str(_sheet[str(_col).upper() + str(_row)].value).strip()
+                            if _value.lower() == "none":
+                                return ""
+                            elif _value.lower() == "true":
+                                return True
+                            elif _value.lower() == "false":
+                                return False
+                            else:
+                                return _value
+
+                        workbook = openpyxl.load_workbook(additional_excel)
+                        sheet = workbook.active
+                        max_rows = sheet.max_row
+
+                        for row in range(1 + 1, max_rows + 1):
+                            try:
+                                subdivision_char_field = get_value(_col="A", _row=row, _sheet=sheet)
+                                workshop_service_char_field = get_value(_col="B", _row=row, _sheet=sheet)
+                                department_site_char_field = get_value(_col="C", _row=row, _sheet=sheet)
+                                last_name_char_field = get_value(_col="D", _row=row, _sheet=sheet)
+                                first_name_char_field = get_value(_col="E", _row=row, _sheet=sheet)
+                                patronymic_char_field = get_value(_col="F", _row=row, _sheet=sheet)
+                                personnel_number_slug_field = get_value(_col="G", _row=row, _sheet=sheet)
+                                position_char_field = get_value(_col="H", _row=row, _sheet=sheet)
+                                category_char_field = get_value(_col="I", _row=row, _sheet=sheet)
+                                username = get_value(_col="J", _row=row, _sheet=sheet)
+                                password_char_field = get_value(_col="K", _row=row, _sheet=sheet)
+                                is_active = get_value(_col="L", _row=row, _sheet=sheet)
+                                is_staff = get_value(_col="M", _row=row, _sheet=sheet)
+                                is_superuser = get_value(_col="N", _row=row, _sheet=sheet)
+                                is_temp_password = get_value(_col="O", _row=row, _sheet=sheet)
+                                groups = get_value(_col="P", _row=row, _sheet=sheet).lower()
+                                email_field = get_value(_col="Q", _row=row, _sheet=sheet)
+                                secret_question_char_field = get_value(_col="R", _row=row, _sheet=sheet)
+                                secret_answer_char_field = get_value(_col="S", _row=row, _sheet=sheet)
+
+                                if len(username) <= 1:
+                                    continue
+
+                                try:
+                                    user = User.objects.get(username=username)
+                                    if user.is_superuser or change_user == "Не изменять уже существующего пользователя":
+                                        continue
+                                    new_user = False
+                                except Exception as error:
+                                    user = User.objects.create(
+                                        username=username,
+                                        password=make_password(password=password_char_field),
+                                    )
+                                    new_user = True
+
+                                try:
+                                    user_model = backend_models.UserModel.objects.get(
+                                        user_foreign_key_field=user
+                                    )
+                                except Exception as error:
+                                    user_model = backend_models.UserModel.objects.create(
+                                        user_foreign_key_field=user
+                                    )
+
+                                if new_user:
+                                    user_model.password_char_field = password_char_field
+                                else:
+                                    if change_user_password == "Изменять пароль уже существующего пользователя":
+                                        user.password = make_password(password=password_char_field)
+                                        user_model.password_char_field = password_char_field
+
+                                user.is_staff = is_staff
+                                user.is_superuser = is_superuser
+                                user.email = email_field
+                                user.last_name = last_name_char_field
+                                user.first_name = first_name_char_field
+                                user.save()
+
+                                user_model.activity_boolean_field = is_active
+                                user_model.email_field = email_field
+                                user_model.secret_question_char_field = secret_question_char_field
+                                user_model.secret_answer_char_field = secret_answer_char_field
+                                user_model.temp_password_boolean_field = is_temp_password
+                                user_model.last_name_char_field = last_name_char_field
+                                user_model.first_name_char_field = first_name_char_field
+                                user_model.patronymic_char_field = patronymic_char_field
+                                user_model.personnel_number_slug_field = personnel_number_slug_field
+                                user_model.subdivision_char_field = subdivision_char_field
+                                user_model.workshop_service_char_field = workshop_service_char_field
+                                user_model.department_site_char_field = department_site_char_field
+                                user_model.position_char_field = position_char_field
+                                user_model.category_char_field = category_char_field
+                                user_model.save()
+
+                                if clear_user_groups == "Добавлять новые группы доступа к предыдущим":
+                                    for group in backend_models.GroupModel.objects.filter(
+                                            user_many_to_many_field=user_model
+                                    ):
+                                        try:
+                                            group.user_many_to_many_field.remove(user_model)
+                                        except Exception as error:
+                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                groups = [group.strip() for group in str(groups).lower().strip().split(',')]
+                                for group in groups:
+                                    if len(group) > 1:
+                                        try:
+                                            group_model = backend_models.GroupModel.objects.get_or_create(
+                                                name_slug_field=group
+                                            )[0]
+                                            group_model.user_many_to_many_field.add(user_model)
+                                        except Exception as error:
+                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                if backend_service.DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                                    print(username)
+                                    print(row)
+                            except Exception as error:
+                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                        response = {"response": "Пользователи успешно созданы/изменены."}
+                    else:
+                        response = {"error": "Ошибка чтения файла!"}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_admin_export_users(request):
+    """
+    auth admin django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO Actions #############################################################################################
+
+            if req_inst.action_type == "EXPORT_USERS":
+                try:
+
+                    # TODO actions #####################################################################################
+
+                    key = backend_service.UtilsClass.create_encrypted_password(
+                        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        _length=24
+                    )
+                    date = backend_service.DateTimeUtils.get_current_date()
+                    path = 'media/data/temp/users'
+                    file_name = f"users_{key}_{date}.xlsx"
+                    workbook = openpyxl.Workbook()
+                    sheet = workbook.active
+
+                    # Delete old files
+                    #######################################################
+                    for root, dirs, files in os.walk(f"static/{path}", topdown=True):
+                        for file in files:
+                            try:
+                                date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
+                                if date != date_file:
+                                    os.remove(f'{path}/{file}')
+                            except Exception as error:
+                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    #######################################################
+
+                    users = User.objects.filter(is_superuser=False)
+
+                    def set_value(_col: Union[str, int], _row: Union[str, int], _value, _sheet):
+                        if isinstance(_col, int):
+                            _col = get_column_letter(_col)
+                        if isinstance(_row, str):
+                            _row = str(_row)
+                        if isinstance(_value, bool):
+                            if _value:
+                                _value = "true"
+                            else:
+                                _value = "false"
+                        if _value is None:
+                            _value = ""
+                        _sheet[str(_col).upper() + str(_row)] = str(_value)
+
+                    titles = ['Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Фамилия', 'Имя', 'Отчество',
+                              'Табельный номер', 'Должность', 'Категория работника', 'Имя пользователя',
+                              'Пароль аккаунта', 'Активность аккаунта', 'Доступ к панели управления',
+                              'Права суперпользователя', 'Временный пароль', 'Группы доступа', 'Электронная почта',
+                              'Секретный вопрос', 'Секретный ответ']
+                    for title in titles:
+                        set_value(_col=titles.index(title) + 1, _row=1, _value=title, _sheet=sheet)
+                    _index = 1
+                    for user in users:
+                        try:
+                            _index += 1
+                            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+
+                            subdivision_char_field = user_model.subdivision_char_field
+                            set_value(_col="A", _row=_index, _value=subdivision_char_field, _sheet=sheet)
+
+                            workshop_service_char_field = user_model.workshop_service_char_field
+                            set_value(_col="B", _row=_index, _value=workshop_service_char_field,
+                                      _sheet=sheet)
+
+                            department_site_char_field = user_model.department_site_char_field
+                            set_value(_col="C", _row=_index, _value=department_site_char_field,
+                                      _sheet=sheet)
+
+                            last_name_char_field = user_model.last_name_char_field
+                            set_value(_col="D", _row=_index, _value=last_name_char_field, _sheet=sheet)
+
+                            first_name_char_field = user_model.first_name_char_field
+                            set_value(_col="E", _row=_index, _value=first_name_char_field, _sheet=sheet)
+
+                            patronymic_char_field = user_model.patronymic_char_field
+                            set_value(_col="F", _row=_index, _value=patronymic_char_field, _sheet=sheet)
+
+                            personnel_number_slug_field = user_model.personnel_number_slug_field
+                            set_value(_col="G", _row=_index, _value=personnel_number_slug_field,
+                                      _sheet=sheet)
+
+                            position_char_field = user_model.position_char_field
+                            set_value(_col="H", _row=_index, _value=position_char_field, _sheet=sheet)
+
+                            category_char_field = user_model.category_char_field
+                            set_value(_col="I", _row=_index, _value=category_char_field, _sheet=sheet)
+
+                            username = user.username
+                            set_value(_col="J", _row=_index, _value=username, _sheet=sheet)
+
+                            password_char_field = user_model.password_char_field
+                            set_value(_col="K", _row=_index, _value=password_char_field, _sheet=sheet)
+
+                            is_active = user_model.activity_boolean_field
+                            set_value(_col="L", _row=_index, _value=is_active, _sheet=sheet)
+
+                            is_staff = user.is_staff
+                            set_value(_col="M", _row=_index, _value=is_staff, _sheet=sheet)
+
+                            is_superuser = user.is_superuser
+                            set_value(_col="N", _row=_index, _value=is_superuser, _sheet=sheet)
+
+                            is_temp_password = user_model.temp_password_boolean_field
+                            set_value(_col="O", _row=_index, _value=is_temp_password, _sheet=sheet)
+
+                            group_models = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
+                            groups = ""
+                            for group_model in group_models:
+                                groups += f"{str(group_model.name_slug_field).lower().strip()}, "
+                            groups = groups[:-2]
+                            set_value(_col="P", _row=_index, _value=groups, _sheet=sheet)
+
+                            email_field = user_model.email_field
+                            set_value(_col="Q", _row=_index, _value=email_field, _sheet=sheet)
+
+                            secret_question_char_field = user_model.secret_question_char_field
+                            set_value(_col="R", _row=_index, _value=secret_question_char_field,
+                                      _sheet=sheet)
+
+                            secret_answer_char_field = user_model.secret_answer_char_field
+                            set_value(_col="S", _row=_index, _value=secret_answer_char_field, _sheet=sheet)
+                        except Exception as error:
+                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    # Set font
+                    #######################################################
+                    font_b = Font(name='Arial', size=8, bold=False)
+                    for row in range(1, _index + 1):
+                        for col in [get_column_letter(x) for x in range(1, 30 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            cell.font = font_b
+                    #######################################################
+
+                    # Height and width styles
+                    #######################################################
+                    for col in [get_column_letter(x) for x in range(1, 30 + 1)]:
+                        width = 1
+                        for row in range(1, _index + 1):
+                            cell = sheet[f'{col}{row}']
+                            value = len(str(cell.value))
+                            if value > width:
+                                width = value
+                        sheet.column_dimensions[col].height = 1
+                        sheet.column_dimensions[col].width = round((width * 0.95), 3)
+                    #######################################################
+
+                    try:
+                        backend_service.ExcelClass.workbook_save(
+                            workbook=workbook,
+                            excel_file=f"static/{path}/{file_name}"
+                        )
+                    except Exception as error:
+                        pass
+                    response = {"response": {"excel": f"static/{path}/{file_name}"}}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+# TODO develop #########################################################################################################
+
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
 def api_auth_rational(request):
@@ -2335,14 +2840,22 @@ def api_auth_rational(request):
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "POST":
+
             # TODO Actions #############################################################################################
+
             if req_inst.action_type == "RATIONAL_CREATE":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     subdivision = req_inst.get_value("subdivision")
                     category = req_inst.get_value("category")
                     avatar = req_inst.get_value("avatar")
@@ -2357,7 +2870,9 @@ def api_auth_rational(request):
                     user3 = req_inst.get_value("user3")
                     user4 = req_inst.get_value("user4")
                     user5 = req_inst.get_value("user5")
+
                     # TODO actions #####################################################################################
+
                     count = backend_models.RationalModel.objects.order_by('-id')
                     if len(count) > 0:
                         count = count[0].id + 1
@@ -2420,7 +2935,7 @@ def api_auth_rational(request):
                         name_slug_field = "moderator_rational_energoupravlenie"
                     else:
                         name_slug_field = "moderator_rational"
-                    # TODO create ######################################################################################
+
                     backend_models.RationalModel.objects.create(
                         author_foreign_key_field=req_inst.user_model,
                         number_char_field=number,
@@ -2455,7 +2970,9 @@ def api_auth_rational(request):
                         description_text_field=f"название рац. предложения: {name}",
                     )
                     response = {"response": "Успешно отправлено на модерацию!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -2463,7 +2980,9 @@ def api_auth_rational(request):
                 return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "RATIONAL_LIST":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     moderate = req_inst.get_value("moderate")
                     subdivision = req_inst.get_value("subdivision")
                     category = req_inst.get_value("category")
@@ -2472,7 +2991,9 @@ def api_auth_rational(request):
                     sort = req_inst.get_value("sort")
 
                     only_month = req_inst.get_value("onlyMonth")
+
                     # TODO actions #####################################################################################
+
                     # TODO onlyMonth
                     objects = backend_models.RationalModel.objects.all().order_by("-register_datetime_field")
                     if only_month:
@@ -2528,7 +3049,9 @@ def api_auth_rational(request):
                     # TODO serialize
                     serializer = backend_serializers.RationalModelSerializer(instance=objects, many=True).data
                     response = {"response": serializer}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -2536,16 +3059,22 @@ def api_auth_rational(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "RATIONAL_DETAIL":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     _id = req_inst.get_value("id")
+
                     # TODO actions #####################################################################################
+
                     if _id:
                         rational = backend_models.RationalModel.objects.get(id=_id)
                     else:
                         rational = backend_models.RationalModel.objects.order_by('-id')[0]
                     serializer = backend_serializers.RationalModelSerializer(instance=rational, many=False).data
                     response = {"response": serializer}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -2553,11 +3082,15 @@ def api_auth_rational(request):
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "RATIONAL_MODERATE":
                 try:
+
                     # TODO get_value ###################################################################################
+
                     rational_id = req_inst.get_value("rationalId")
                     moderate = req_inst.get_value("moderate")
                     comment = req_inst.get_value("comment")
+
                     # TODO actions #####################################################################################
+
                     rational = backend_models.RationalModel.objects.get(id=rational_id)
                     if rational.status_moderate_char_field == "Предтехмодерация":
                         if moderate == "Принято":
@@ -2588,7 +3121,9 @@ def api_auth_rational(request):
                             rational.comment_postmoderate_char_field = comment
                     rational.save()
                     response = {"response": "Успешно"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -2602,71 +3137,35 @@ def api_auth_rational(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
-def api_any_vacancy(request):
+def test(request):
     """
-    api_rational django-rest-framework
+    index React Single Page Applications
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
-        if req_inst.method == "POST":
+
+        if req_inst.method == "GET":
+
             # TODO Actions #############################################################################################
-            if req_inst.action_type == "VACANCY_LIST":
+
+            if req_inst.action_type == "":
                 try:
-                    # TODO get_value ###################################################################################
-                    sphere = req_inst.get_value("sphere")
-                    education = req_inst.get_value("education")
-                    experience = req_inst.get_value("experience")
-                    sort = req_inst.get_value("sort")
-                    search = req_inst.get_value("search")
-                    # TODO actions #####################################################################################
-                    objects = backend_models.VacancyModel.objects.all().order_by("-id")
-                    if sphere:
-                        objects = objects.filter(sphere_char_field=sphere)
-                    if education:
-                        objects = objects.filter(education_char_field=education)
-                    if experience:
-                        objects = objects.filter(experience_char_field=experience)
-                    if sort:
-                        if sort == "Дате публикации (сначала свежие)":
-                            objects = objects.order_by("-datetime_field")
-                        elif sort == "Дате публикации (сначала старые)":
-                            objects = objects.order_by("datetime_field")
-                        elif sort == "Названию (С начала алфавита)":
-                            objects = objects.order_by("qualification_char_field")
-                        elif sort == "Названию (С конца алфавита)":
-                            objects = objects.order_by("-qualification_char_field")
-                    if search:
-                        objects = objects.filter(qualification_char_field__icontains=search)
-                    serializer = backend_serializers.VacancyModelSerializer(instance=objects, many=True).data
-                    response = {"response": serializer}
+                    response = {"response": "Данные успешно получены!"}
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
+                    return render(request, 'test/index.html', response)
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "VACANCY_DETAIL":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    # TODO actions #####################################################################################
-                    if _id:
-                        vacancy = backend_models.VacancyModel.objects.get(id=_id)
-                    else:
-                        vacancy = backend_models.VacancyModel.objects.order_by('-id')[0]
-                    serializer = backend_serializers.VacancyModelSerializer(instance=vacancy, many=False).data
-                    response = {"response": serializer}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
+                    return render(request, "backend/404.html")
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
@@ -2676,272 +3175,6 @@ def api_any_vacancy(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
-@permission_classes([IsAuthenticated])
-def api_auth_vacancy(request):
-    """
-    api_rational django-rest-framework
-    """
-
-    try:
-        # TODO Request #################################################################################################
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-        # TODO Methods #################################################################################################
-        if req_inst.method == "POST":
-            # TODO Actions #############################################################################################
-            if req_inst.action_type == "VACANCY_CREATE":
-                try:
-                    # TODO get_value ###################################################################################
-                    qualification = req_inst.get_value("qualification")
-                    rank = req_inst.get_value("rank")
-                    sphere = req_inst.get_value("sphere")
-                    education = req_inst.get_value("education")
-                    experience = req_inst.get_value("experience")
-                    schedule = req_inst.get_value("schedule")
-                    image = req_inst.get_value("image")
-                    description = req_inst.get_value("description")
-                    # TODO actions #####################################################################################
-                    if image and image != "null":
-                        pass
-                    else:
-                        image = None
-                    backend_models.VacancyModel.objects.create(
-                        author_foreign_key_field=req_inst.user_model,
-                        qualification_char_field=qualification,
-                        rank_char_field=rank,
-                        sphere_char_field=sphere,
-                        education_char_field=education,
-                        experience_char_field=experience,
-                        schedule_char_field=schedule,
-                        image_field=image,
-                        description_text_field=description,
-                    )
-                    response = {"response": "Успешно создано!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "VACANCY_CHANGE":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    qualification = req_inst.get_value("qualification")
-                    rank = req_inst.get_value("rank")
-                    sphere = req_inst.get_value("sphere")
-                    education = req_inst.get_value("education")
-                    experience = req_inst.get_value("experience")
-                    schedule = req_inst.get_value("schedule")
-                    image = req_inst.get_value("image")
-                    clear_image = req_inst.get_value("clearImage")
-                    description = req_inst.get_value("description")
-                    # TODO actions #####################################################################################
-                    if image and image != "null":
-                        pass
-                    else:
-                        image = None
-                    vacancy = backend_models.VacancyModel.objects.get(id=_id)
-                    if req_inst.user_model and vacancy.author_foreign_key_field != req_inst.user_model:
-                        vacancy.author_foreign_key_field = req_inst.user_model
-                    if qualification and vacancy.qualification_char_field != qualification:
-                        vacancy.qualification_char_field = qualification
-                    if rank and vacancy.rank_char_field != rank:
-                        vacancy.rank_char_field = rank
-                    if sphere and vacancy.sphere_char_field != sphere:
-                        vacancy.sphere_char_field = sphere
-                    if education and vacancy.education_char_field != education:
-                        vacancy.education_char_field = education
-                    if experience and vacancy.experience_char_field != experience:
-                        vacancy.experience_char_field = experience
-                    if schedule and vacancy.schedule_char_field != schedule:
-                        vacancy.schedule_char_field = schedule
-                    if clear_image:
-                        vacancy.image_field = None
-                    if image and vacancy.image_field != image:
-                        vacancy.image_field = image
-                    if description and vacancy.description_text_field != description:
-                        vacancy.description_text_field = description
-                    vacancy.save()
-                    response = {"response": "Успешно изменено!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "VACANCY_DELETE":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    # TODO actions #####################################################################################
-                    backend_models.VacancyModel.objects.get(id=_id).delete()
-                    response = {"response": "Успешно удалено!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            else:
-                return Response({"error": "This action not allowed for this method."})
-        else:
-            return Response({"error": "This method not allowed for this endpoint."})
-    except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-        return render(request, "backend/404.html")
-
-
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
-@permission_classes([AllowAny])
-def api_any_resume(request):
-    """
-    api_rational django-rest-framework
-    """
-
-    try:
-        # TODO Request #################################################################################################
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-        # TODO Methods #################################################################################################
-        if req_inst.method == "POST":
-            # TODO Actions #############################################################################################
-            if req_inst.action_type == "RESUME_CREATE":
-                try:
-                    # TODO get_value ###################################################################################
-                    qualification = req_inst.get_value("qualification")
-                    last_name = req_inst.get_value("lastName")
-                    first_name = req_inst.get_value("firstName")
-                    patronymic = req_inst.get_value("patronymic")
-                    image = req_inst.get_value("image")
-                    birth_date = req_inst.get_value("birthDate")
-                    education = req_inst.get_value("education")
-                    experience = req_inst.get_value("experience")
-                    sex = req_inst.get_value("sex")
-                    contact_data = req_inst.get_value("contactData")
-                    # TODO actions #####################################################################################
-                    if image and image != "null":
-                        pass
-                    else:
-                        image = None
-                    backend_models.ResumeModel.objects.create(
-                        qualification_char_field=qualification,
-                        last_name_char_field=last_name,
-                        first_name_char_field=first_name,
-                        patronymic_char_field=patronymic,
-                        image_field=image,
-                        birth_datetime_field=birth_date,
-                        education_char_field=education,
-                        experience_char_field=experience,
-                        sex_char_field=sex,
-                        contact_data_text_field=contact_data,
-                    )
-                    response = {"response": "Ваше резюме успешно сохранено!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            else:
-                return Response({"error": "This action not allowed for this method."})
-        else:
-            return Response({"error": "This method not allowed for this endpoint."})
-    except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-        return render(request, "backend/404.html")
-
-
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
-@permission_classes([IsAuthenticated])
-def api_auth_resume(request):
-    """
-    api_rational django-rest-framework
-    """
-
-    try:
-        # TODO Request #################################################################################################
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
-        # TODO Methods #################################################################################################
-        if req_inst.method == "POST":
-            # TODO Actions #############################################################################################
-            if req_inst.action_type == "RESUME_LIST":
-                try:
-                    # TODO get_value ###################################################################################
-                    education = req_inst.get_value("education")
-                    experience = req_inst.get_value("experience")
-                    sex = req_inst.get_value("sex")
-                    sort = req_inst.get_value("sort")
-                    search_qualification = req_inst.get_value("searchQualification")
-                    search_last_name = req_inst.get_value("searchLastName")
-                    # TODO actions #####################################################################################
-                    resume_list = backend_models.ResumeModel.objects.all().order_by("-id")
-                    if education:
-                        resume_list = resume_list.filter(education_char_field=education)
-                    if experience:
-                        resume_list = resume_list.filter(experience_char_field=experience)
-                    if sex:
-                        resume_list = resume_list.filter(sex_char_field=sex)
-                    if sort:
-                        if sort == "Дате публикации (сначала свежие)":
-                            resume_list = resume_list.order_by("-create_datetime_field")
-                        elif sort == "Дате публикации (сначала старые)":
-                            resume_list = resume_list.order_by("create_datetime_field")
-                        elif sort == "Названию вакансии (С начала алфавита)":
-                            resume_list = resume_list.order_by("qualification_char_field")
-                        elif sort == "Названию вакансии (С конца алфавита)":
-                            resume_list = resume_list.order_by("-qualification_char_field")
-                    if search_qualification:
-                        resume_list = resume_list.filter(qualification_char_field__icontains=search_qualification)
-                    if search_last_name:
-                        resume_list = resume_list.filter(last_name_char_field__icontains=search_last_name)
-                    serializer = backend_serializers.ResumeModelSerializer(instance=resume_list, many=True).data
-                    response = {"response": serializer}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "RESUME_DETAIL":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    # TODO actions #####################################################################################
-                    if _id:
-                        vacancy = backend_models.ResumeModel.objects.get(id=_id)
-                    else:
-                        vacancy = backend_models.ResumeModel.objects.order_by('-id')[0]
-                    serializer = backend_serializers.ResumeModelSerializer(instance=vacancy, many=False).data
-                    response = {"response": serializer}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "RESUME_DELETE":
-                try:
-                    # TODO get_value ###################################################################################
-                    _id = req_inst.get_value("id")
-                    # TODO actions #####################################################################################
-                    backend_models.ResumeModel.objects.get(id=_id).delete()
-                    response = {"response": "Успешно удалено!"}
-                    # TODO response ####################################################################################
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
-            else:
-                return Response({"error": "This action not allowed for this method."})
-        else:
-            return Response({"error": "This method not allowed for this endpoint."})
-    except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-        return render(request, "backend/404.html")
-
-
-# TODO routes ##########################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
 def api_any_post(request):
@@ -2950,11 +3183,17 @@ def api_any_post(request):
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "GET":
+
             # TODO Actions #############################################################################################
+
             if req_inst.action_type == "":
                 try:
                     objects = backend_models.LoggingModel.objects.filter(
@@ -2972,7 +3211,9 @@ def api_any_post(request):
                         "response": backend_serializers.LoggingModelSerializer(instance=objects, many=True).data,
                         "x-total-count": num_pages
                     }
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -2987,7 +3228,6 @@ def api_any_post(request):
         return render(request, "backend/404.html")
 
 
-# TODO routes ##########################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
 def api_any_post_id(request, post_id):
@@ -2996,18 +3236,26 @@ def api_any_post_id(request, post_id):
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "GET":
+
             # TODO Actions #############################################################################################
+
             if req_inst.action_type == "":
                 try:
                     obj = backend_models.LoggingModel.objects.get(id=post_id)
                     response = {
                         "response": backend_serializers.LoggingModelSerializer(instance=obj, many=False).data,
                     }
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -3022,7 +3270,6 @@ def api_any_post_id(request, post_id):
         return render(request, "backend/404.html")
 
 
-# TODO routes ##########################################################################################################
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
 def api_any_post_id_comments(request, post_id):
@@ -3031,11 +3278,17 @@ def api_any_post_id_comments(request, post_id):
     """
 
     try:
+
         # TODO Request #################################################################################################
+
         req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
         # TODO Methods #################################################################################################
+
         if req_inst.method == "GET":
+
             # TODO Actions #############################################################################################
+
             if req_inst.action_type == "":
                 try:
                     comment = [
@@ -3048,7 +3301,9 @@ def api_any_post_id_comments(request, post_id):
                     response = {
                         "response": comment,
                     }
+
                     # TODO response ####################################################################################
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:

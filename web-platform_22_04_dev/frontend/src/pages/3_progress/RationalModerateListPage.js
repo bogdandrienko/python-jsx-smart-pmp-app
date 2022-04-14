@@ -49,7 +49,8 @@ export const RationalModerateListPage = () => {
     try {
       e.preventDefault();
     } catch (error) {}
-    dispatch({ type: constants.RATIONAL_LIST_RESET_CONSTANT });
+    // dispatch({ type: constants.RATIONAL_LIST.reset });
+    dispatch({ type: constants.RATIONAL_LIST.reset });
   };
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {

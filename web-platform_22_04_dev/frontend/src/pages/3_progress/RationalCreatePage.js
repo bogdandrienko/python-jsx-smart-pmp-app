@@ -60,7 +60,7 @@ export const RationalCreatePage = () => {
     if (dataRationalCreate) {
       utils.Sleep(2000).then(() => {
         dispatch({
-          type: constants.RATIONAL_CREATE_RESET_CONSTANT,
+          type: constants.RATIONAL_CREATE.reset,
         });
         handlerCreateReset();
       });

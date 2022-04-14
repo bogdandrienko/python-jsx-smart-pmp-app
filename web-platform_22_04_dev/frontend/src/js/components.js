@@ -60,11 +60,12 @@ export const HeaderComponent = () => {
       const form = {
         "Action-type": "USER_DETAIL",
       };
+
       dispatch(actions.userDetailsAction(form));
     } else {
       if (firstRefreshUserDetails && logic) {
         firstRefreshUserDetailsSet(false);
-        dispatch({ type: constants.USER_DETAILS_RESET_CONSTANT });
+        dispatch({ type: constants.USER_DETAILS.reset });
       }
       if (
         !utils.CheckPageAccess(userDetailsStore, location.pathname) &&
@@ -124,7 +125,7 @@ export const HeaderComponent = () => {
     } else {
       if (firstRefreshNotification) {
         firstRefreshNotificationSet(false);
-        dispatch({ type: constants.NOTIFICATION_LIST_RESET_CONSTANT });
+        dispatch({ type: constants.NOTIFICATION_LIST.reset });
       }
     }
   }, [dispatch, firstRefreshNotification]);
@@ -133,8 +134,8 @@ export const HeaderComponent = () => {
     <header className="header navbar-fixed-top m-0 p-0 pb-3">
       <Navbar expand="lg" className="m-0 p-0">
         <Container>
-          <a className="w-25 m-0 p-0" href="https://km.kz/">
-            <img src="/static/img/logo.svg" className="w-25 m-0 p-0" alt="id" />
+          <a className="w-25 m-0 p-0" href="https://web.km.kz/">
+            <img src="/static/img/logo.svg" className="w-50 m-0 p-0" alt="id" />
           </a>
           <a className="btn btn-outline-light navbar-brand m-0 p-2" href="/">
             <i className="fa-solid fa-earth-asia m-0 p-1" />
@@ -747,6 +748,60 @@ export const MessageComponent = ({ variant, children }) => {
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 export const NewsComponent = ({ count = 100 }) => {
+  const news = [
+    {
+      Title: "Личный профиль:",
+      Status: "disable",
+      Link: "#",
+      Description:
+        "расширение профиля: дополнительная информация: образование, хобби, интересы, изображение, статистика, " +
+        "достижения и участие",
+      Helps: "",
+      Danger: "",
+    },
+    {
+      Title: "Рационализаторские предложения:",
+      Status: "disable",
+      Link: "#",
+      Description:
+        "шаблон и подача рац. предложений, модерация и общий список с рейтингами и комментариями",
+      Helps: "",
+      Danger: "",
+    },
+    {
+      Title: "Банк идей:",
+      Status: "active",
+      Link: "/idea_create",
+      Description:
+        "подача и редактирование, шаблон, модерация, комментирование, рейтинги, лучшие идеи и списки лидеров...",
+      Helps: "",
+      Danger: "",
+    },
+    {
+      Title: "Инструкции: видео и текстовые",
+      Status: "active",
+      Link: "/video_study",
+      Description: "лента с информацией по веб-платформе",
+      Helps: "материал будет своевременно обновляться",
+      Danger: "",
+    },
+    {
+      Title: "Отпуска:",
+      Status: "active",
+      Link: "/vacation",
+      Description: "выгрузка Ваших данных по отпуску за выбранный период",
+      Helps: "",
+      Danger: "",
+    },
+    {
+      Title: "Расчётный лист:",
+      Status: "active",
+      Link: "/salary",
+      Description: "выгрузка Вашего расчётного листа за выбранный период",
+      Helps: "",
+      Danger: "'контрактникам' выгрузка недоступна!",
+    },
+  ];
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div className="card list-group list-group-item-action list-group-flush custom-background-transparent-low-middle m-0 p-0">
@@ -772,7 +827,7 @@ export const NewsComponent = ({ count = 100 }) => {
             </div>
           </Nav.Link>
         </LinkContainer>
-        {constants.news.slice(0, count).map((news_elem, index) => (
+        {news.slice(0, count).map((news_elem, index) => (
           <div key={index} className="custom-hover m-0 p-0">
             <Link
               to={news_elem.Link}

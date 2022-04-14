@@ -8,6 +8,7 @@ import * as components from "../../js/components";
 import * as constants from "../../js/constants";
 import * as actions from "../../js/actions";
 import * as utils from "../../js/utils";
+import axios from "axios";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const LoginPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +35,7 @@ export const LoginPage = () => {
     }
   }, [dataUserLogin]);
   // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
-  const handlerLoginSubmit = (e) => {
+  const handlerLoginSubmit = async (e) => {
     try {
       e.preventDefault();
     } catch (error) {}

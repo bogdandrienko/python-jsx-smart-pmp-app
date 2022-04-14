@@ -67,15 +67,15 @@ export const IdeaModerateChangePage = () => {
       e.preventDefault();
     } catch (error) {}
     clearImageSet(false);
-    dispatch({ type: constants.IDEA_DETAIL_RESET_CONSTANT });
+    dispatch({ type: constants.IDEA_DETAIL.reset });
     dispatch({
-      type: constants.IDEA_MODERATE_RESET_CONSTANT,
+      type: constants.IDEA_MODERATE.reset,
     });
     dispatch({
-      type: constants.IDEA_CHANGE_RESET_CONSTANT,
+      type: constants.IDEA_CHANGE.reset,
     });
     dispatch({
-      type: constants.IDEA_COMMENT_DELETE_RESET_CONSTANT,
+      type: constants.IDEA_COMMENT_DELETE.reset,
     });
   };
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////

@@ -6,20 +6,12 @@ import "../css/bootstrap_5.1.3/bootstrap.min.css";
 import "../css/font_awesome_6_0_0/css/all.min.css";
 import "../css/font_zen/style.css";
 // TODO default exported pages /////////////////////////////////////////////////////////////////////////////////////////
-import { ResumeCreatePage } from "../pages/0_develop/ResumeCreatePage";
-import { ResumeDetailPage } from "../pages/0_develop/ResumeDetailPage";
-import { ResumeListPage } from "../pages/0_develop/ResumeListPage";
-import { VacancyChangePage } from "../pages/0_develop/VacancyChangePage";
-import { VacancyCreatePage } from "../pages/0_develop/VacancyCreatePage";
-import { VacancyDetailPage } from "../pages/0_develop/VacancyDetailPage";
-import { VacancyListPage } from "../pages/0_develop/VacancyListPage";
 import { TestPage } from "../test/pages/TestPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { AdminChangeUserActivityPage } from "../pages/0_moderator/AdminChangeUserActivityPage";
-import { AdminChangeUserPasswordPage } from "../pages/0_moderator/AdminChangeUserPasswordPage";
-import { AdminCreateOrChangeUsersPage } from "../pages/0_moderator/AdminCreateOrChangeUsersPage";
-import { AdminExportUsersPage } from "../pages/0_moderator/AdminExportUsersPage";
-import { TerminalRebootPage } from "../pages/0_moderator/TerminalRebootPage";
+import { ActionsUserPage } from "../pages/6_moderator/ActionsUserPage";
+import { CreateOrChangeUsersPage } from "../pages/6_moderator/CreateOrChangeUsersPage";
+import { ExportUsersPage } from "../pages/6_moderator/ExportUsersPage";
+import { TerminalRebootPage } from "../pages/6_moderator/TerminalRebootPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 import { ChangePasswordPage } from "../pages/1_profile/ChangePasswordPage";
 import { ChangeProfilePage } from "../pages/1_profile/ChangeProfilePage";
@@ -33,7 +25,7 @@ import { NewsPage } from "../pages/2_main/NewsPage";
 import { TextStudyPage } from "../pages/2_main/TextStudyPage";
 import { VideoStudyPage } from "../pages/2_main/VideoStudyPage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-import { TopAuthorListPage } from "../pages/2_main/TopAuthorListPage";
+import { RatingsListPage } from "../pages/2_main/RatingsListPage";
 import { IdeaChangePage } from "../pages/3_progress/IdeaChangePage";
 import { IdeaCreatePage } from "../pages/3_progress/IdeaCreatePage";
 import { IdeaDetailPage } from "../pages/3_progress/IdeaDetailPage";
@@ -55,28 +47,14 @@ export const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/resume_create/:id" element={<ResumeCreatePage />} />
-        <Route path="/resume_list" element={<ResumeListPage />} />
-        <Route path="/resume_detail/:id" element={<ResumeDetailPage />} />
-        <Route path="/vacancy_list" element={<VacancyListPage />} />
-        <Route path="/vacancy_detail/:id" element={<VacancyDetailPage />} />
-        <Route path="/vacancy_create" element={<VacancyCreatePage />} />
-        <Route path="/vacancy_change/:id" element={<VacancyChangePage />} />
         <Route path="/test" element={<TestPage />} />
 
-        <Route
-          path="/admin_change_user_password"
-          element={<AdminChangeUserPasswordPage />}
-        />
+        <Route path="/admin_actions_user" element={<ActionsUserPage />} />
         <Route
           path="/admin_create_or_change_users"
-          element={<AdminCreateOrChangeUsersPage />}
+          element={<CreateOrChangeUsersPage />}
         />
-        <Route path="/admin_export_users" element={<AdminExportUsersPage />} />
-        <Route
-          path="/admin_change_user_activity"
-          element={<AdminChangeUserActivityPage />}
-        />
+        <Route path="/admin_export_users" element={<ExportUsersPage />} />
         <Route path="/terminal" element={<TerminalRebootPage />} />
 
         <Route path="/login" element={<LoginPage />} />
@@ -98,7 +76,7 @@ export const App = () => {
         <Route path="/idea_self_list" element={<IdeaSelfListPage />} />
         <Route path="/idea_change/:id" element={<IdeaChangePage />} />
         <Route path="/idea_rating" element={<IdeaRatingListPage />} />
-        <Route path="/idea_author_list" element={<TopAuthorListPage />} />
+        <Route path="/idea_author_list" element={<RatingsListPage />} />
         <Route path="/rational_template" element={<RationalTemplatePage />} />
         <Route path="/rational_create" element={<RationalCreatePage />} />
         <Route

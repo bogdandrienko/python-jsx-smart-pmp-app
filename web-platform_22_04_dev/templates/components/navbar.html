@@ -21,7 +21,7 @@
                             {% if product %}
                                 <a class="dropdown-item" href="{% url 'home' %}">product</a>
                             {% endif %}
-                            {% access_tag '0_develop' as develop %}
+                            {% access_tag '7_develop' as develop %}
                             {% if develop %}
                                 <a class="dropdown-item" href="http://localhost:3000/">develop</a>
                             {% endif %}

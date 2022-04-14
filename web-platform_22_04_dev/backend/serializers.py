@@ -1,20 +1,29 @@
 # TODO django modules ##################################################################################################
+
 from django.contrib.auth.models import User, Group
+
 # TODO drf modules #####################################################################################################
+
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
+
 # TODO custom modules ##################################################################################################
+
 from backend import models as backend_models
 
 
-# TODO example model serializer ########################################################################################
+# TODO example #########################################################################################################
+
 class ExamplesModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = backend_models.ExamplesModel
         fields = '__all__'
 
 
-# TODO base model serializer ###########################################################################################
+# TODO main ############################################################################################################
+
+# TODO profile #########################################################################################################
+
 class UserSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
     group_model = serializers.SerializerMethodField(read_only=True)
@@ -121,7 +130,14 @@ class NotificationModelSerializer(serializers.ModelSerializer):
             return None
 
 
-# TODO custom model serializer #########################################################################################
+# TODO buhgalteria #####################################################################################################
+
+# TODO sup #############################################################################################################
+
+# TODO moderator #######################################################################################################
+
+# TODO progress ########################################################################################################
+
 class IdeaModelSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
     comments = serializers.SerializerMethodField(read_only=True)
@@ -197,7 +213,8 @@ class IdeaCommentModelSerializer(serializers.ModelSerializer):
         return user_model_serializer.data
 
 
-# TODO test model serializer ###########################################################################################
+# TODO develop #########################################################################################################
+
 class RationalModelSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
 
@@ -211,15 +228,3 @@ class RationalModelSerializer(serializers.ModelSerializer):
         if not user_model_serializer.data:
             user_model_serializer = {'data': None}
         return user_model_serializer.data
-
-
-class VacancyModelSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = backend_models.VacancyModel
-        fields = '__all__'
-
-
-class ResumeModelSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = backend_models.ResumeModel
-        fields = '__all__'

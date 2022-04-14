@@ -34,7 +34,7 @@ export const IdeaCreatePage = () => {
       e.preventDefault();
     } catch (error) {}
     dispatch({
-      type: constants.IDEA_CREATE_RESET_CONSTANT,
+      type: constants.IDEA_CREATE.reset,
     });
   };
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
