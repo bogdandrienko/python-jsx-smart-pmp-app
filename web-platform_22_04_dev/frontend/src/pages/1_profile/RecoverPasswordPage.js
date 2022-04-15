@@ -125,7 +125,8 @@ export const RecoverPasswordPage = () => {
         "/api/any/user/",
         "POST",
         30000,
-        constants.USER_RECOVER_PASSWORD
+        constants.USER_RECOVER_PASSWORD,
+        false
       )
     );
   };
@@ -141,9 +142,7 @@ export const RecoverPasswordPage = () => {
           showLoad={true}
           loadText={""}
           showData={true}
-          dataText={
-            "Пользователь найден или введённые данные успешно совпадают!"
-          }
+          dataText={"Успешно!"}
           showError={true}
           errorText={""}
           showFail={true}
@@ -219,154 +218,186 @@ export const RecoverPasswordPage = () => {
           ) : (
             ""
           )}
-          {!success && secretQuestion && email ? (
-            <div className="row shadow m-0 p-0">
-              <div className="col m-0 p-0">
-                <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 justify-content-center text-center m-0 p-1">
-                  <form className="m-0 p-0" onSubmit={handlerSubmitCheckAnswer}>
-                    <div className="card shadow custom-background-transparent-low m-0 p-0">
-                      <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
-                        Восстановление через секретный вопрос:
-                      </div>
-                      <div className="card-body m-0 p-0">
-                        <div className="m-0 p-1">
-                          <label className="form-control-sm text-center m-0 p-1">
-                            <div className="text-danger">
-                              <i className="fa-solid fa-question-circle m-0 p-1" />
-                              Секретный вопрос:
-                              <small className="custom-color-warning-1 fw-bold">
-                                <i className="fa-solid fa-message m-0 p-1" />'
-                                {`${secretQuestion}`}'
-                              </small>
-                            </div>
-                            <input
-                              type="text"
-                              className="form-control form-control-sm text-center m-0 p-1"
-                              id="secretAnswer"
-                              name="secretAnswer"
-                              required
-                              placeholder="введите секретный ответ тут..."
-                              value={secretAnswer}
-                              onChange={(e) =>
-                                secretAnswerSet(
-                                  e.target.value.replace(
-                                    utils.GetRegexType({
-                                      numbers: true,
-                                      cyrillic: true,
-                                      space: true,
-                                    }),
-                                    ""
-                                  )
-                                )
-                              }
-                              minLength="4"
-                              maxLength="32"
-                            />
-                            <small className="text-danger m-0 p-0">
-                              * обязательно
-                              <small className="custom-color-warning-1 m-0 p-0">
-                                {" "}
-                                * только кириллица, цифры и пробел
-                              </small>
-                              <small className="text-muted m-0 p-0">
-                                {" "}
-                                * длина: от 4 до 32 символов
-                              </small>
-                            </small>
-                          </label>
-                        </div>
-                      </div>
-                      <div className="card-footer m-0 p-0">
-                        <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
-                          <button
-                            className="btn btn-sm btn-primary m-1 p-2"
-                            type="submit"
-                          >
-                            <i className="fa-solid fa-circle-check m-0 p-1" />
-                            проверить ответ
-                          </button>
-                        </ul>
-                      </div>
-                    </div>
-                  </form>
-                </ul>
-              </div>
-              <div className="col m-0 p-0">
-                <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 justify-content-center text-center m-0 p-1">
-                  <form
-                    className="m-0 p-0"
-                    onSubmit={handlerSubmitRecoverEmail}
-                  >
-                    <div className="card shadow custom-background-transparent-low m-0 p-0">
-                      <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
-                        Восстановление через почту:
-                      </div>
-                      <div className="card-header bg-secondary bg-opacity-10 text-muted m-0 p-1">
-                        Часть почты, куда будет отправлено письмо: '
-                        <small className="custom-color-warning-1">
-                          {email &&
-                            `${email.slice(0, 4)} ... ${email.slice(-5)}`}
+          {!success && (secretQuestion || email) ? (
+            <div className="shadow m-0 p-0">
+              <components.AccordionComponent
+                key_target={"accordion1"}
+                isCollapse={false}
+                title={"Регламент восстановления:"}
+                text_style="custom-color-warning-1"
+                header_style="bg-warning bg-opacity-10 custom-background-transparent-low"
+                body_style="bg-light bg-opacity-10 custom-background-transparent-low"
+              >
+                {
+                  <div className="text-center m-0 p-4">
+                    <ul className="text-start m-0 p-0">
+                      <li className="m-0 p-1">
+                        <h6 className="m-0 p-0">
+                          Если Вам не удаётся восстановить доступ через
+                          секретный вопрос и/или почту:
+                        </h6>
+                        <small className="m-0 p-0">
+                          Вы можете обратиться к закреплённому системному
+                          администратору, он может сбросить Вам пароль и
+                          сообщить новый временный пароль Вашему начальнику!
                         </small>
-                        '
-                      </div>
-                      <div className="card-body m-0 p-0">
-                        <div className="m-0 p-1">
-                          <label className="form-control-sm text-center m-0 p-1">
-                            <i className="fa-solid fa-unlock m-0 p-1" />
-                            Код восстановления отправленный на почту
-                            <input
-                              type="text"
-                              id="recoverPassword"
-                              name="recoverPassword"
-                              required
-                              placeholder="введите код с почты тут..."
-                              value={recoverPassword}
-                              onChange={(e) =>
-                                recoverPasswordSet(e.target.value)
-                              }
-                              minLength="1"
-                              maxLength="300"
-                              className="form-control form-control-sm text-center m-0 p-1"
-                            />
-                            <small className="text-danger m-0 p-0">
-                              * обязательно
-                              <small className="custom-color-warning-1 m-0 p-0">
-                                {" "}
-                                * вводить без кавычек
+                      </li>
+                    </ul>
+                  </div>
+                }
+              </components.AccordionComponent>
+              <div className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 shadow m-0 p-0">
+                <div className="col-6 m-0 p-0">
+                  <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 justify-content-center text-center m-0 p-1">
+                    <form
+                      className="m-0 p-0"
+                      onSubmit={handlerSubmitCheckAnswer}
+                    >
+                      <div className="card shadow custom-background-transparent-low m-0 p-0">
+                        <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
+                          Восстановление через секретный вопрос:
+                        </div>
+                        <div className="card-body m-0 p-0">
+                          <div className="m-0 p-1">
+                            <label className="form-control-sm text-center m-0 p-1">
+                              <div className="text-danger">
+                                <i className="fa-solid fa-question-circle m-0 p-1" />
+                                Секретный вопрос:
+                                <small className="custom-color-warning-1 fw-bold">
+                                  <i className="fa-solid fa-message m-0 p-1" />'
+                                  {`${secretQuestion}`}'
+                                </small>
+                              </div>
+                              <input
+                                type="text"
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                id="secretAnswer"
+                                name="secretAnswer"
+                                required
+                                placeholder="введите секретный ответ тут..."
+                                value={secretAnswer}
+                                onChange={(e) =>
+                                  secretAnswerSet(
+                                    e.target.value.replace(
+                                      utils.GetRegexType({
+                                        numbers: true,
+                                        cyrillic: true,
+                                        space: true,
+                                      }),
+                                      ""
+                                    )
+                                  )
+                                }
+                                minLength="4"
+                                maxLength="32"
+                              />
+                              <small className="text-danger m-0 p-0">
+                                * обязательно
+                                <small className="custom-color-warning-1 m-0 p-0">
+                                  {" "}
+                                  * только кириллица, цифры и пробел
+                                </small>
+                                <small className="text-muted m-0 p-0">
+                                  {" "}
+                                  * длина: от 4 до 32 символов
+                                </small>
                               </small>
-                              <small className="text-muted m-0 p-0">
-                                {" "}
-                                * длина: не более 300 символов
-                              </small>
-                            </small>
-                            <p className="text-danger m-0 p-0">
-                              * код действует в течении часа с момента отправки
-                            </p>
-                          </label>
+                            </label>
+                          </div>
+                        </div>
+                        <div className="card-footer m-0 p-0">
+                          <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
+                            <button
+                              className="btn btn-sm btn-primary m-1 p-2"
+                              type="submit"
+                            >
+                              <i className="fa-solid fa-circle-check m-0 p-1" />
+                              проверить ответ
+                            </button>
+                          </ul>
                         </div>
                       </div>
-                      <div className="card-footer m-0 p-0">
-                        <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
-                          <button
-                            className="btn btn-sm btn-primary m-1 p-2"
-                            type="submit"
-                          >
-                            <i className="fa-solid fa-circle-check m-0 p-1" />
-                            проверить код
-                          </button>
-                          <button
-                            type="button"
-                            onClick={handlerSubmitSendEmail}
-                            className="btn btn-sm btn-danger m-1 p-2"
-                          >
-                            <i className="fa-solid fa-envelope m-0 p-1" />
-                            отправить код на почту
-                          </button>
-                        </ul>
+                    </form>
+                  </ul>
+                </div>
+                <div className="col-6 m-0 p-0">
+                  <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 justify-content-center text-center m-0 p-1">
+                    <form
+                      className="m-0 p-0"
+                      onSubmit={handlerSubmitRecoverEmail}
+                    >
+                      <div className="card shadow custom-background-transparent-low m-0 p-0">
+                        <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
+                          Восстановление через почту:
+                        </div>
+                        <div className="card-header bg-secondary bg-opacity-10 text-muted m-0 p-1">
+                          Часть почты, куда будет отправлено письмо: '
+                          <small className="custom-color-warning-1">
+                            {email &&
+                              `${email.slice(0, 4)} ... ${email.slice(-5)}`}
+                          </small>
+                          '
+                        </div>
+                        <div className="card-body m-0 p-0">
+                          <div className="m-0 p-1">
+                            <label className="form-control-sm text-center m-0 p-1">
+                              <i className="fa-solid fa-unlock m-0 p-1" />
+                              Код восстановления отправленный на почту
+                              <input
+                                type="text"
+                                id="recoverPassword"
+                                name="recoverPassword"
+                                required
+                                placeholder="введите код с почты тут..."
+                                value={recoverPassword}
+                                onChange={(e) =>
+                                  recoverPasswordSet(e.target.value)
+                                }
+                                minLength="1"
+                                maxLength="300"
+                                className="form-control form-control-sm text-center m-0 p-1"
+                              />
+                              <small className="text-danger m-0 p-0">
+                                * обязательно
+                                <small className="custom-color-warning-1 m-0 p-0">
+                                  {" "}
+                                  * вводить без кавычек
+                                </small>
+                                <small className="text-muted m-0 p-0">
+                                  {" "}
+                                  * длина: не более 300 символов
+                                </small>
+                              </small>
+                              <p className="text-danger m-0 p-0">
+                                * код действует в течении часа с момента
+                                отправки
+                              </p>
+                            </label>
+                          </div>
+                        </div>
+                        <div className="card-footer m-0 p-0">
+                          <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
+                            <button
+                              className="btn btn-sm btn-primary m-1 p-2"
+                              type="submit"
+                            >
+                              <i className="fa-solid fa-circle-check m-0 p-1" />
+                              проверить код
+                            </button>
+                            <button
+                              type="button"
+                              onClick={handlerSubmitSendEmail}
+                              className="btn btn-sm btn-danger m-1 p-2"
+                            >
+                              <i className="fa-solid fa-envelope m-0 p-1" />
+                              отправить код на почту
+                            </button>
+                          </ul>
+                        </div>
                       </div>
-                    </div>
-                  </form>
-                </ul>
+                    </form>
+                  </ul>
+                </div>
               </div>
             </div>
           ) : (

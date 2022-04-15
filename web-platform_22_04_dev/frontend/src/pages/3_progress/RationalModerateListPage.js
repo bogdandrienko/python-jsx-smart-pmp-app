@@ -473,7 +473,7 @@ export const RationalModerateListPage = () => {
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <Link
-                          to={`#`}
+                          to={`/rational_moderate_change/${rational["id"]}`}
                           className="text-decoration-none text-dark m-0 p-0"
                         >
                           <h6 className="lead fw-bold m-0 p-0">
@@ -622,7 +622,7 @@ export const RationalModerateListPage = () => {
                         </div>
                         <div className="m-0 p-0">
                           <Link
-                            to={`#`}
+                            to={`/rational_moderate_change/${rational["id"]}`}
                             className="btn btn-sm btn-warning m-0 p-2"
                           >
                             Автор:{" "}
@@ -653,9 +653,12 @@ export const RationalModerateListPage = () => {
                         </div>
                       </div>
                       <div className="m-0 p-0">
-                        <p className="btn btn-sm btn-primary w-100 m-0 p-1">
+                        <Link
+                          to={`/rational_moderate_change/${rational["id"]}`}
+                          className="btn btn-sm btn-primary w-100 m-0 p-1"
+                        >
                           редактировать
-                        </p>
+                        </Link>
                       </div>
                     </div>
                   </div>

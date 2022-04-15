@@ -10,7 +10,14 @@ import * as actions from "./actions";
 
 // TODO constructors ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-export function ActionConstructorUtility(form, url, method, timeout, constant) {
+export function ActionConstructorUtility(
+  form,
+  url,
+  method,
+  timeout,
+  constant,
+  auth = true
+) {
   return async function (dispatch, getState) {
     try {
       dispatch({
@@ -21,7 +28,7 @@ export function ActionConstructorUtility(form, url, method, timeout, constant) {
       Object.entries(form).map(([key, value]) => {
         formData.append(key, value);
       });
-      if (getState) {
+      if (auth) {
         const {
           userLoginStore: { data: userLogin },
         } = getState();
@@ -326,7 +333,7 @@ export const Sleep = (time = 1000) => {
 
 export const GetSliceString = (string = "", length = 30, withDots = true) => {
   try {
-    if (string == null) {
+    if (string == null || string === "null") {
       return "";
     }
     if (`${string}`.length >= length) {

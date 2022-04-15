@@ -94,6 +94,9 @@ const globalReducer = combineReducers({
   rationalCreateStore: utils.ReducerConstructorUtility(
     constants.RATIONAL_CREATE
   ),
+  rationalDetailStore: utils.ReducerConstructorUtility(
+    constants.RATIONAL_DETAIL
+  ),
   rationalListStore: utils.ReducerConstructorUtility(constants.RATIONAL_LIST),
 });
 

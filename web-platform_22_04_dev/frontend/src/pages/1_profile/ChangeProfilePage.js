@@ -77,7 +77,7 @@ export const ChangeProfilePage = () => {
   const handlerChangeSubmit = (e) => {
     e.preventDefault();
     const form = {
-      "Action-type": "CHANGE",
+      "Action-type": "USER_CHANGE",
       secretQuestion: secretQuestion,
       secretAnswer: secretAnswer,
       email: email,
@@ -260,29 +260,29 @@ export const ChangeProfilePage = () => {
                     </small>
                   </label>
                 </div>
-                <div className="m-0 p-0">
-                  {dataUserDetails && dataUserDetails["user_model"] && (
-                    <img
-                      src={utils.GetStaticFile(
-                        dataUserDetails["user_model"]["image_field"]
-                      )}
-                      className="card-img-top img-fluid w-25 m-0 p-1"
-                      alt="изображение отсутствует"
-                    />
-                  )}
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Фото профиля:
-                    <input
-                      type="file"
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      accept=".jpg, .png"
-                      onChange={(e) => avatarSet(e.target.files[0])}
-                    />
-                    <small className="text-muted m-0 p-0">
-                      * не обязательно
-                    </small>
-                  </label>
-                </div>
+                {/*<div className="m-0 p-0">*/}
+                {/*  {dataUserDetails && dataUserDetails["user_model"] && (*/}
+                {/*    <img*/}
+                {/*      src={utils.GetStaticFile(*/}
+                {/*        dataUserDetails["user_model"]["image_field"]*/}
+                {/*      )}*/}
+                {/*      className="card-img-top img-fluid w-25 m-0 p-1"*/}
+                {/*      alt="изображение отсутствует"*/}
+                {/*    />*/}
+                {/*  )}*/}
+                {/*  <label className="form-control-sm text-center m-0 p-1">*/}
+                {/*    Фото профиля:*/}
+                {/*    <input*/}
+                {/*      type="file"*/}
+                {/*      className="form-control form-control-sm text-center m-0 p-1"*/}
+                {/*      accept=".jpg, .png"*/}
+                {/*      onChange={(e) => avatarSet(e.target.files[0])}*/}
+                {/*    />*/}
+                {/*    <small className="text-muted m-0 p-0">*/}
+                {/*      * не обязательно*/}
+                {/*    </small>*/}
+                {/*  </label>*/}
+                {/*</div>*/}
                 <div className="m-0 p-1">
                   <label className="form-control-sm text-center m-0 p-1">
                     <i className="fa-solid fa-key m-0 p-1" />

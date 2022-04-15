@@ -64,7 +64,6 @@ export const IdeaCreatePage = () => {
         description: description,
         moderate: moderate,
       };
-      // dispatch(actions.ideaCreateAction(form));
       dispatch(
         utils.ActionConstructorUtility(
           form,

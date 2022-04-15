@@ -2674,11 +2674,11 @@ class IdeaRatingModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        # default=timezone.now,
+        default=timezone.now,
         verbose_name='Дата и время создания',
         help_text='<small class="text-muted">created_datetime_field</small><hr><br>',
 
-        auto_now=True,
+        auto_now=False,
         auto_now_add=False,
     )
 
@@ -2762,11 +2762,11 @@ class IdeaCommentModel(models.Model):
         editable=True,
         blank=True,
         null=True,
-        # default=timezone.now,
+        default=timezone.now,
         verbose_name='Дата и время создания',
         help_text='<small class="text-muted">created_datetime_field</small><hr><br>',
 
-        auto_now=True,
+        auto_now=False,
         auto_now_add=False,
     )
 

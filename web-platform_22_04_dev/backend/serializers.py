@@ -217,6 +217,11 @@ class IdeaCommentModelSerializer(serializers.ModelSerializer):
 
 class RationalModelSerializer(serializers.ModelSerializer):
     user_model = serializers.SerializerMethodField(read_only=True)
+    author_1_foreign_key_field = serializers.SerializerMethodField(read_only=True)
+    author_2_foreign_key_field = serializers.SerializerMethodField(read_only=True)
+    author_3_foreign_key_field = serializers.SerializerMethodField(read_only=True)
+    author_4_foreign_key_field = serializers.SerializerMethodField(read_only=True)
+    author_5_foreign_key_field = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = backend_models.RationalModel
@@ -228,3 +233,63 @@ class RationalModelSerializer(serializers.ModelSerializer):
         if not user_model_serializer.data:
             user_model_serializer = {'data': None}
         return user_model_serializer.data
+
+    def get_author_1_foreign_key_field(self, obj):
+        try:
+            user_model = backend_models.UserModel.objects.get(id=obj.author_1_foreign_key_field.id)
+            user_model_serializer = UserModelSerializer(instance=user_model, many=False).data
+            if not user_model_serializer:
+                response = None
+            else:
+                response = user_model_serializer
+            return response
+        except Exception as error:
+            return None
+
+    def get_author_2_foreign_key_field(self, obj):
+        try:
+            user_model = backend_models.UserModel.objects.get(id=obj.author_2_foreign_key_field.id)
+            user_model_serializer = UserModelSerializer(instance=user_model, many=False).data
+            if not user_model_serializer:
+                response = None
+            else:
+                response = user_model_serializer
+            return response
+        except Exception as error:
+            return None
+
+    def get_author_3_foreign_key_field(self, obj):
+        try:
+            user_model = backend_models.UserModel.objects.get(id=obj.author_3_foreign_key_field.id)
+            user_model_serializer = UserModelSerializer(instance=user_model, many=False).data
+            if not user_model_serializer:
+                response = None
+            else:
+                response = user_model_serializer
+            return response
+        except Exception as error:
+            return None
+
+    def get_author_4_foreign_key_field(self, obj):
+        try:
+            user_model = backend_models.UserModel.objects.get(id=obj.author_4_foreign_key_field.id)
+            user_model_serializer = UserModelSerializer(instance=user_model, many=False).data
+            if not user_model_serializer:
+                response = None
+            else:
+                response = user_model_serializer
+            return response
+        except Exception as error:
+            return None
+
+    def get_author_5_foreign_key_field(self, obj):
+        try:
+            user_model = backend_models.UserModel.objects.get(id=obj.author_5_foreign_key_field.id)
+            user_model_serializer = UserModelSerializer(instance=user_model, many=False).data
+            if not user_model_serializer:
+                response = None
+            else:
+                response = user_model_serializer
+            return response
+        except Exception as error:
+            return None

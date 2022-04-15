@@ -115,7 +115,7 @@ export const ActionsUserPage = () => {
           "/api/auth/admin/change_user_activity/",
           "POST",
           30000,
-          constants.ADMIN_CHECK_USER
+          constants.ADMIN_CHANGE_USER_ACTIVITY
         )
       );
     }

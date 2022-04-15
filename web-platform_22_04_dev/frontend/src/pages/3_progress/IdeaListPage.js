@@ -391,7 +391,7 @@ export const IdeaListPage = () => {
                   className="text-decoration-none m-0 p-0"
                 >
                   <li className="border list-group-item-action text-start small m-0 p-1">
-                    {utils.GetSliceString(idea["name_char_field"], 30)}
+                    {utils.GetSliceString(idea["name_char_field"], 50)}
                     {utils.GetCleanDateTime(
                       " | " + idea["register_datetime_field"],
                       true
@@ -423,7 +423,7 @@ export const IdeaListPage = () => {
                           className="text-decoration-none text-dark m-0 p-0"
                         >
                           <h6 className="lead fw-bold m-0 p-0">
-                            {utils.GetSliceString(idea["name_char_field"], 30)}
+                            {utils.GetSliceString(idea["name_char_field"], 50)}
                           </h6>
                         </Link>
                       </div>

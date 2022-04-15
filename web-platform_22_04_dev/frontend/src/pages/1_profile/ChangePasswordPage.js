@@ -37,7 +37,7 @@ export const ChangePasswordPage = () => {
   const handlerChangeSubmit = (e) => {
     e.preventDefault();
     const form = {
-      "Action-type": "CHANGE",
+      "Action-type": "USER_CHANGE",
       password: password,
       password2: password2,
     };

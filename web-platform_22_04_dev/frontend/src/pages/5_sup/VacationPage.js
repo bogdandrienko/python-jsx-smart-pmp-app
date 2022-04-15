@@ -73,6 +73,11 @@ export const VacationPage = () => {
                     </button>
                   )}
                 </div>
+                <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
+                  <i className="fa-solid fa-circle-exclamation m-0 p-1" />
+                  Если после ожидания данных нет, попробуйте ещё 1-2 раза или
+                  ожидайте пол часа!
+                </div>
               </div>
             </div>
           </form>

@@ -4,7 +4,7 @@ import * as utils from "./utils";
 
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const DEBUG_CONSTANT = true;
+export const DEBUG_CONSTANT = false;
 
 // TODO modules ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -278,6 +278,28 @@ export const modules = [
             Redirect: true,
             Style: "text-danger",
             LinkIcon: "fa-solid fa-screwdriver-wrench m-0 p-1",
+          },
+          {
+            Header:
+              "Модерация рационализаторских предложений [модератор] [скрыто]",
+            Access: [
+              "moderator_rational",
+              "moderator_rational_atp",
+              "moderator_rational_gtk",
+              "moderator_rational_ok",
+              "moderator_rational_upravlenie",
+              "moderator_rational_energoupravlenie",
+            ],
+            Active: true,
+            Link: "/rational_moderate_change/0",
+            ExternalLink: false,
+            ShowLink: false,
+            Title: "Модерация рационализаторского предложения",
+            Description: "модерация рационализаторского предложения",
+            Logic: true,
+            Redirect: true,
+            Style: "text-muted",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
         ],
       },
@@ -825,5 +847,8 @@ export const ADMIN_EXPORT_USERS =
 
 export const RATIONAL_CREATE =
   utils.ConstantConstructorUtility("RATIONAL_CREATE");
+
+export const RATIONAL_DETAIL =
+  utils.ConstantConstructorUtility("RATIONAL_DETAIL");
 
 export const RATIONAL_LIST = utils.ConstantConstructorUtility("RATIONAL_LIST");

@@ -513,7 +513,7 @@ def api_any_user(request):
                         )
                         subject = 'Восстановление пароля от веб платформы'
                         message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
-                                    f'перейдите по ссылке: https://web.km.kz/ => войти => ' \
+                                    f'перейдите по ссылке: https://web.km.kz/recover_password => войти => ' \
                                     f'восстановить доступ к аккаунту => введите Ваш ИИН и затем в окне восстановления' \
                                     f' через почту введите этот код восстановления (без кавычек): "{encrypt_text}". ' \
                                     f'Внимание! Этот код действует в течении часа с момента отправки!'
@@ -662,7 +662,7 @@ def api_auth_user(request):
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "CHANGE":
+            if req_inst.action_type == "USER_CHANGE":
                 try:
 
                     # TODO get_value ###################################################################################
@@ -2495,7 +2495,7 @@ def api_auth_admin_create_or_change_users(request):
 
             # TODO Actions #############################################################################################
 
-            if req_inst.action_type == "CREATE_OR_CHANGE_USERS":
+            if req_inst.action_type == "ADMIN_CREATE_OR_CHANGE_USERS":
                 try:
 
                     # TODO get_value ###################################################################################
@@ -2622,8 +2622,7 @@ def api_auth_admin_create_or_change_users(request):
                                         except Exception as error:
                                             backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                                 if backend_service.DjangoClass.DefaultSettingsClass.get_actions_print_value():
-                                    print(username)
-                                    print(row)
+                                    print(row, username)
                             except Exception as error:
                                 backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                         response = {"response": "Пользователи успешно созданы/изменены."}
@@ -2665,7 +2664,7 @@ def api_auth_admin_export_users(request):
 
             # TODO Actions #############################################################################################
 
-            if req_inst.action_type == "EXPORT_USERS":
+            if req_inst.action_type == "ADMIN_EXPORT_USERS":
                 try:
 
                     # TODO actions #####################################################################################

@@ -42,7 +42,6 @@ export const IdeaSelfListPage = () => {
         sort: sort,
         author: author,
       };
-      // dispatch(actions.ideaListAction(form));
       dispatch(
         utils.ActionConstructorUtility(
           form,
@@ -95,11 +94,11 @@ export const IdeaSelfListPage = () => {
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <Link
-                          to={`/idea_detail/${idea.id}`}
+                          to={`/idea_change/${idea.id}`}
                           className="text-decoration-none text-dark m-0 p-0"
                         >
                           <h6 className="lead fw-bold m-0 p-0">
-                            {utils.GetSliceString(idea["name_char_field"], 30)}
+                            {utils.GetSliceString(idea["name_char_field"], 50)}
                           </h6>
                           <h6 className="text-danger lead small m-0 p-0">
                             {" [ комментарий модератора: "}
@@ -437,9 +436,12 @@ export const IdeaSelfListPage = () => {
                         </div>
                       </div>
                       <div className="m-0 p-0">
-                        <p className="btn btn-sm btn-primary w-100 m-0 p-1">
+                        <Link
+                          to={`/idea_change/${idea.id}`}
+                          className="btn btn-sm btn-primary w-100 m-0 p-1"
+                        >
                           редактировать
-                        </p>
+                        </Link>
                       </div>
                     </div>
                   </div>

@@ -674,6 +674,7 @@ class IdeaRatingModelAdmin(admin.ModelAdmin):
         "idea_foreign_key_field",
         "author_foreign_key_field",
         "rating_integer_field",
+        "created_datetime_field",
     )
     list_display_links = (
         "idea_foreign_key_field",
@@ -686,6 +687,7 @@ class IdeaRatingModelAdmin(admin.ModelAdmin):
         "idea_foreign_key_field",
         "author_foreign_key_field",
         "rating_integer_field",
+        "created_datetime_field",
     )
     fieldsets = (
         ("Основная информация", {"fields": (
@@ -694,6 +696,7 @@ class IdeaRatingModelAdmin(admin.ModelAdmin):
             "rating_integer_field",
         )}),
         ("Дополнительные данные", {"fields": (
+            "created_datetime_field",
         )}),
     )
     search_fields = [

@@ -27,7 +27,7 @@ export const HomePage = () => {
                 Инструкции в текстовом формате
               </Link>
             </div>
-            <div className="player-wrapper text-center w-100 bg-light bg-opacity-75 m-0 p-0">
+            <div className="player-wrapper w-100 bg-light bg-opacity-75 m-0 p-0">
               <small className="lead fw-bold m-0 p-0">
                 Первый вход в систему:
               </small>
@@ -37,7 +37,8 @@ export const HomePage = () => {
                 width="100%"
                 height="100%"
                 controls={true}
-                className="text-center m-0 p-0"
+                pip={true}
+                className="react-player"
               />
             </div>
           </div>

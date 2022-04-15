@@ -136,6 +136,31 @@ export const RationalCreatePage = () => {
     <div className="m-0 p-0">
       <components.HeaderComponent />
       <main>
+        <components.AccordionComponent
+          key_target={"accordion1"}
+          isCollapse={false}
+          title={"Регламент подачи:"}
+          text_style="custom-color-warning-1"
+          header_style="bg-warning bg-opacity-10 custom-background-transparent-low"
+          body_style="bg-light bg-opacity-10 custom-background-transparent-low"
+        >
+          {
+            <div className="text-center m-0 p-4">
+              <ul className="text-start m-0 p-0">
+                <li className="m-0 p-1">
+                  <h6 className="m-0 p-0">
+                    Коллеги, будьте "реалистами" при отправке своего
+                    рационализаторского предложения:
+                  </h6>
+                  <small className="m-0 p-0">
+                    Оно должно быть достаточно обоснованно, иметь какой-то
+                    положительный эффект, в том числе экономический!
+                  </small>
+                </li>
+              </ul>
+            </div>
+          }
+        </components.AccordionComponent>
         <components.StoreStatusComponent
           storeStatus={rationalCreateStore}
           key={"rationalCreateStore"}
@@ -510,21 +535,23 @@ export const RationalCreatePage = () => {
                             )}
                           </div>
                           <div className="m-0 p-0">
-                            <label className="form-control-sm text-center m-0 p-1">
-                              участник №3:
-                              <select
-                                className="form-control form-control-sm text-center m-0 p-1"
-                                value={user3}
-                                onChange={(e) => user3Set(e.target.value)}
-                              >
-                                <option value="">Не выбрано</option>
-                                {dataUserList.map((user, index) => (
-                                  <option key={index} value={user}>
-                                    {user}
-                                  </option>
-                                ))}
-                              </select>
-                            </label>
+                            {user2 && (
+                              <label className="form-control-sm text-center m-0 p-1">
+                                участник №3:
+                                <select
+                                  className="form-control form-control-sm text-center m-0 p-1"
+                                  value={user3}
+                                  onChange={(e) => user3Set(e.target.value)}
+                                >
+                                  <option value="">Не выбрано</option>
+                                  {dataUserList.map((user, index) => (
+                                    <option key={index} value={user}>
+                                      {user}
+                                    </option>
+                                  ))}
+                                </select>
+                              </label>
+                            )}
                             {user3 && (
                               <label className="form-control-sm text-center m-0 p-1">
                                 % Вклада 3 участника
@@ -542,21 +569,23 @@ export const RationalCreatePage = () => {
                             )}
                           </div>
                           <div className="m-0 p-0">
-                            <label className="form-control-sm text-center m-0 p-1">
-                              участник №4:
-                              <select
-                                className="form-control form-control-sm text-center m-0 p-1"
-                                value={user4}
-                                onChange={(e) => user4Set(e.target.value)}
-                              >
-                                <option value="">Не выбрано</option>
-                                {dataUserList.map((user, index) => (
-                                  <option key={index} value={user}>
-                                    {user}
-                                  </option>
-                                ))}
-                              </select>
-                            </label>
+                            {user3 && (
+                              <label className="form-control-sm text-center m-0 p-1">
+                                участник №4:
+                                <select
+                                  className="form-control form-control-sm text-center m-0 p-1"
+                                  value={user4}
+                                  onChange={(e) => user4Set(e.target.value)}
+                                >
+                                  <option value="">Не выбрано</option>
+                                  {dataUserList.map((user, index) => (
+                                    <option key={index} value={user}>
+                                      {user}
+                                    </option>
+                                  ))}
+                                </select>
+                              </label>
+                            )}
                             {user4 && (
                               <label className="form-control-sm text-center m-0 p-1">
                                 % Вклада 4 участника
@@ -574,21 +603,23 @@ export const RationalCreatePage = () => {
                             )}
                           </div>
                           <div className="m-0 p-0">
-                            <label className="form-control-sm text-center m-0 p-1">
-                              участник №5:
-                              <select
-                                className="form-control form-control-sm text-center m-0 p-1"
-                                value={user5}
-                                onChange={(e) => user5Set(e.target.value)}
-                              >
-                                <option value="">Не выбрано</option>
-                                {dataUserList.map((user, index) => (
-                                  <option key={index} value={user}>
-                                    {user}
-                                  </option>
-                                ))}
-                              </select>
-                            </label>
+                            {user4 && (
+                              <label className="form-control-sm text-center m-0 p-1">
+                                участник №5:
+                                <select
+                                  className="form-control form-control-sm text-center m-0 p-1"
+                                  value={user5}
+                                  onChange={(e) => user5Set(e.target.value)}
+                                >
+                                  <option value="">Не выбрано</option>
+                                  {dataUserList.map((user, index) => (
+                                    <option key={index} value={user}>
+                                      {user}
+                                    </option>
+                                  ))}
+                                </select>
+                              </label>
+                            )}
                             {user5 && (
                               <label className="form-control-sm text-center m-0 p-1">
                                 % Вклада 5 участника

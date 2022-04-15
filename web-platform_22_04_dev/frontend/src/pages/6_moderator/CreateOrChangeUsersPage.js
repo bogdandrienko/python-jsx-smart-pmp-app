@@ -51,7 +51,7 @@ export const CreateOrChangeUsersPage = () => {
       e.preventDefault();
     } catch (error) {}
     const form = {
-      "Action-type": "CREATE_OR_CHANGE_USERS",
+      "Action-type": "ADMIN_CREATE_OR_CHANGE_USERS",
       changeUser: changeUser,
       changeUserPassword: changeUserPassword,
       clearUserGroups: clearUserGroups,

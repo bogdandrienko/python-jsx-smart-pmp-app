@@ -36,6 +36,7 @@ import { IdeaRatingListPage } from "../pages/3_progress/IdeaRatingListPage";
 import { IdeaSelfListPage } from "../pages/3_progress/IdeaSelfListPage";
 import { IdeaTemplatePage } from "../pages/3_progress/IdeaTemplatePage";
 import { RationalCreatePage } from "../pages/3_progress/RationalCreatePage";
+import { RationalModerateChangePage } from "../pages/3_progress/RationalModerateChangePage";
 import { RationalModerateListPage } from "../pages/3_progress/RationalModerateListPage";
 import { RationalTemplatePage } from "../pages/3_progress/RationalTemplatePage";
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,6 +80,10 @@ export const App = () => {
         <Route path="/idea_author_list" element={<RatingsListPage />} />
         <Route path="/rational_template" element={<RationalTemplatePage />} />
         <Route path="/rational_create" element={<RationalCreatePage />} />
+        <Route
+          path="/rational_moderate_change/:id"
+          element={<RationalModerateChangePage />}
+        />
         <Route
           path="/rational_moderate_list"
           element={<RationalModerateListPage />}

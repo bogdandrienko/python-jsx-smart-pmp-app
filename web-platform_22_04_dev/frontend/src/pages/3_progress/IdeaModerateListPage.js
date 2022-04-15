@@ -76,7 +76,6 @@ export const IdeaModerateListPage = () => {
         sort: sort,
         moderate: moderate,
       };
-      // dispatch(actions.ideaListAction(form));
       dispatch(
         utils.ActionConstructorUtility(
           form,
@@ -419,7 +418,7 @@ export const IdeaModerateListPage = () => {
                   className="text-decoration-none m-0 p-0"
                 >
                   <li className="border list-group-item-action text-start small m-0 p-1">
-                    {utils.GetSliceString(idea["name_char_field"], 30)}
+                    {utils.GetSliceString(idea["name_char_field"], 50)}
                     {utils.GetCleanDateTime(
                       " | " + idea["register_datetime_field"],
                       true
@@ -458,7 +457,7 @@ export const IdeaModerateListPage = () => {
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                         <h6 className="lead fw-bold m-0 p-0">
-                          {utils.GetSliceString(idea["name_char_field"], 30)}
+                          {utils.GetSliceString(idea["name_char_field"], 50)}
                         </h6>
                         <h6 className="text-danger lead small m-0 p-0">
                           {" [ "}
@@ -800,9 +799,12 @@ export const IdeaModerateListPage = () => {
                         </div>
                       </div>
                       <div className="m-0 p-0">
-                        <p className="btn btn-sm btn-primary w-100 m-0 p-1">
+                        <Link
+                          to={`/idea_moderate_change/${idea.id}`}
+                          className="btn btn-sm btn-primary w-100 m-0 p-1"
+                        >
                           редактировать
-                        </p>
+                        </Link>
                       </div>
                     </div>
                   </Link>

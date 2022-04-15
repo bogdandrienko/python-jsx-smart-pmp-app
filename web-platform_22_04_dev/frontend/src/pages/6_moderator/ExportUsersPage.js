@@ -25,7 +25,7 @@ export const ExportUsersPage = () => {
       e.preventDefault();
     } catch (error) {}
     const form = {
-      "Action-type": "EXPORT_USERS",
+      "Action-type": "ADMIN_EXPORT_USERS",
     };
     dispatch(
       utils.ActionConstructorUtility(
