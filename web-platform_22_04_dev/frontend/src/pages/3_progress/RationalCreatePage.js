@@ -163,7 +163,7 @@ export const RationalCreatePage = () => {
         </components.AccordionComponent>
         <components.StoreStatusComponent
           storeStatus={rationalCreateStore}
-          key={"rationalCreateStore"}
+          keyStatus={"rationalCreateStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}
@@ -463,7 +463,7 @@ export const RationalCreatePage = () => {
                     <label className="form-control-sm text-center m-0 p-1">
                       <components.StoreStatusComponent
                         storeStatus={UserListStore}
-                        key={"UserListStore"}
+                        keyStatus={"UserListStore"}
                         consoleLog={constants.DEBUG_CONSTANT}
                         showLoad={true}
                         loadText={""}

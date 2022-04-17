@@ -138,7 +138,7 @@ export const ActionsUserPage = () => {
         </components.MessageComponent>
         <components.StoreStatusComponent
           storeStatus={adminCheckUserStore}
-          key={"adminCheckUserStore"}
+          keyStatus={"adminCheckUserStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}
@@ -151,7 +151,7 @@ export const ActionsUserPage = () => {
         />
         <components.StoreStatusComponent
           storeStatus={adminChangeUserPasswordStore}
-          key={"adminChangeUserPasswordStore"}
+          keyStatus={"adminChangeUserPasswordStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}
@@ -164,7 +164,7 @@ export const ActionsUserPage = () => {
         />
         <components.StoreStatusComponent
           storeStatus={adminChangeUserActivityStore}
-          key={"adminChangeUserActivityStore"}
+          keyStatus={"adminChangeUserActivityStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}

@@ -83,7 +83,7 @@ export const CreateOrChangeUsersPage = () => {
       <main>
         <components.StoreStatusComponent
           storeStatus={adminCreateOrChangeUsersStore}
-          key={"adminCreateOrChangeUsersStore"}
+          keyStatus={"adminCreateOrChangeUsersStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}

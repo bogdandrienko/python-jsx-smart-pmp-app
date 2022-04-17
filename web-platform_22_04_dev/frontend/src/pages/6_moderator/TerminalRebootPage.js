@@ -178,7 +178,7 @@ export const TerminalRebootPage = () => {
         </components.MessageComponent>
         <components.StoreStatusComponent
           storeStatus={terminalRebootStore}
-          key={"terminalRebootStore"}
+          keyStatus={"terminalRebootStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}

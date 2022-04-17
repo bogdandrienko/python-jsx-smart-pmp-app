@@ -44,7 +44,7 @@ export const ExportUsersPage = () => {
       <main>
         <components.StoreStatusComponent
           storeStatus={adminExportUsersStore}
-          key={"adminExportUsersStore"}
+          keyStatus={"adminExportUsersStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}

@@ -409,7 +409,7 @@ export const RationalModerateListPage = () => {
         </components.AccordionComponent>
         <components.StoreStatusComponent
           storeStatus={rationalListStore}
-          key={"rationalListStore"}
+          keyStatus={"rationalListStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={false}
           loadText={""}

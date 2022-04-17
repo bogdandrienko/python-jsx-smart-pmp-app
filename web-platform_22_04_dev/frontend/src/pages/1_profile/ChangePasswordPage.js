@@ -70,7 +70,7 @@ export const ChangePasswordPage = () => {
               <div className="card-header m-0 p-0">
                 <components.StoreStatusComponent
                   storeStatus={userChangeStore}
-                  key={"userChangeStore"}
+                  keyStatus={"userChangeStore"}
                   consoleLog={constants.DEBUG_CONSTANT}
                   showLoad={true}
                   loadText={""}

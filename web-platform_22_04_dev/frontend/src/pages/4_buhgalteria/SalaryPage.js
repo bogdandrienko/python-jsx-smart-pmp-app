@@ -41,10 +41,9 @@ export const SalaryPage = () => {
         "POST",
         30000,
         constants.USER_SALARY,
-        false
+        true
       )
     );
-    // dispatch(actions.salaryUserAction(form));
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
@@ -140,7 +139,7 @@ export const SalaryPage = () => {
         <hr />
         <components.StoreStatusComponent
           storeStatus={salaryUserStore}
-          key={"salaryUserStore"}
+          keyStatus={"salaryUserStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}

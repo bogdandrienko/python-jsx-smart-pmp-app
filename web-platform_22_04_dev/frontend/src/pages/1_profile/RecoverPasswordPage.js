@@ -137,7 +137,7 @@ export const RecoverPasswordPage = () => {
       <main>
         <components.StoreStatusComponent
           storeStatus={userRecoverPasswordStore}
-          key={"userRecoverPasswordStore"}
+          keyStatus={"userRecoverPasswordStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}

@@ -85,7 +85,7 @@ export const VacationPage = () => {
         <hr />
         <components.StoreStatusComponent
           storeStatus={vacationUserStore}
-          key={"vacationUserStore"}
+          keyStatus={"vacationUserStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={true}
           loadText={""}

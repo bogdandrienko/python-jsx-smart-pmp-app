@@ -2072,7 +2072,7 @@ def api_auth_user_salary(request):
                             pass
 
                         headers = []
-                        for x in json_data.items():
+                        for x in json_data.keys():
                             if x != "global_objects":
                                 headers.append([x, json_data[x]])
                         tables = [
@@ -2085,7 +2085,6 @@ def api_auth_user_salary(request):
                             ["4.Выплачено", json_data["global_objects"]["4.Выплачено"]],
                             ["5.Налоговые вычеты", json_data["global_objects"]["5.Налоговые вычеты"]]
                         ]
-
                         data = {"excelPath": f"static/{path}/{file_name}", "headers": headers, "tables": tables}
 
                         response = {"response": data}

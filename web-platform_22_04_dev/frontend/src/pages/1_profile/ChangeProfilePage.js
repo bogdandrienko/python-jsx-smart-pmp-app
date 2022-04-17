@@ -122,7 +122,7 @@ export const ChangeProfilePage = () => {
       <main>
         <components.StoreStatusComponent
           storeStatus={userDetailsStore}
-          key={"userDetailsStore"}
+          keyStatus={"userDetailsStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={false}
           loadText={""}
@@ -143,7 +143,7 @@ export const ChangeProfilePage = () => {
               <div className="card-header m-0 p-0">
                 <components.StoreStatusComponent
                   storeStatus={userChangeStore}
-                  key={"userChangeStore"}
+                  keyStatus={"userChangeStore"}
                   consoleLog={constants.DEBUG_CONSTANT}
                   showLoad={true}
                   loadText={""}
