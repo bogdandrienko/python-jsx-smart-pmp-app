@@ -287,8 +287,12 @@ export const ActionsUserPage = () => {
                 <tr>
                   <td>Последний вход</td>
                   <td>
-                    {dataAdminCheckUser["last_login"].split("T")[0]}{" "}
-                    {dataAdminCheckUser["last_login"].split("T")[1].slice(0, 8)}
+                    {dataAdminCheckUser["last_login"] &&
+                      dataAdminCheckUser["last_login"].split("T")[0] +
+                        " " +
+                        dataAdminCheckUser["last_login"]
+                          .split("T")[1]
+                          .slice(0, 8)}
                   </td>
                 </tr>
                 <tr>

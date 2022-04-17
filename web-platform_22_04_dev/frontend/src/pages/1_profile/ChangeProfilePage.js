@@ -59,7 +59,16 @@ export const ChangeProfilePage = () => {
       const form = {
         "Action-type": "USER_DETAIL",
       };
-      dispatch(actions.userDetailsAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/detail/",
+          "POST",
+          30000,
+          constants.USER_DETAIL,
+          false
+        )
+      );
       passwordSet("");
       password2Set("");
     }

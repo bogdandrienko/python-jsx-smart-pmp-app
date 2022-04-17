@@ -336,7 +336,7 @@ def api_auth_ratings_list(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([AllowAny])
-def api_any_user(request):
+def api_any_user_login(request):
     """
     any user django-rest-framework
     """
@@ -411,6 +411,76 @@ def api_any_user(request):
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([IsAuthenticated])
+def api_auth_user_detail(request):
+    """
+    any user django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO Actions #############################################################################################
+
+            if req_inst.action_type == "USER_DETAIL":
+                try:
+
+                    # TODO actions #####################################################################################
+
+                    response = {"response": backend_serializers.UserSerializer(req_inst.user, many=False).data}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            else:
+                return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@permission_classes([AllowAny])
+def api_any_user(request):
+    """
+    any user django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO Actions #############################################################################################
+
             if req_inst.action_type == "FIND_USER":
                 try:
 
@@ -648,20 +718,6 @@ def api_auth_user(request):
 
             # TODO Actions #############################################################################################
 
-            if req_inst.action_type == "USER_DETAIL":
-                try:
-
-                    # TODO actions #####################################################################################
-
-                    response = {"response": backend_serializers.UserSerializer(req_inst.user, many=False).data}
-
-                    # TODO response ####################################################################################
-
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
-                    return Response(response)
-                except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                    return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "USER_CHANGE":
                 try:
 
@@ -1394,7 +1450,7 @@ def api_auth_idea(request):
 
 @api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
 @permission_classes([IsAuthenticated])
-def api_auth_salary(request):
+def api_auth_user_salary(request):
     """
     api_salary django-rest-framework
     """
@@ -2014,9 +2070,25 @@ def api_auth_salary(request):
                             )
                         except Exception as error:
                             pass
-                        json_data["excel_path"] = f"static/{path}/{file_name}"
 
-                        response = {"response": json_data}
+                        headers = []
+                        for x in json_data.items():
+                            if x != "global_objects":
+                                headers.append([x, json_data[x]])
+                        tables = [
+                            ["1.Начислено", json_data["global_objects"]["1.Начислено"]],
+                            ["2.Удержано", json_data["global_objects"]["2.Удержано"]],
+                            [
+                                "3.Доходы в натуральной форме",
+                                json_data["global_objects"]["3.Доходы в натуральной форме"]
+                            ],
+                            ["4.Выплачено", json_data["global_objects"]["4.Выплачено"]],
+                            ["5.Налоговые вычеты", json_data["global_objects"]["5.Налоговые вычеты"]]
+                        ]
+
+                        data = {"excelPath": f"static/{path}/{file_name}", "headers": headers, "tables": tables}
+
+                        response = {"response": data}
 
                     # TODO response ####################################################################################
 
@@ -3199,19 +3271,19 @@ def api_any_post(request):
 
             if req_inst.action_type == "":
                 try:
-                    objects = backend_models.LoggingModel.objects.filter(
-                        error_text_field__startswith="error:"
-                    )
+                    posts = [
+                        {"id": x, "title": f"Заголовок поста {x}", "body": f"Текст поста {x}"}
+                        for x in range(1, 100 + 1)
+                    ]
+                    num_pages = len(posts)
                     page = int(request.GET.get('page', 1))
                     limit = int(request.GET.get('limit', 10))
                     if limit > 0:
-                        p = Paginator(objects, limit)
-                        objects = p.page(page)
-                        num_pages = p.num_pages
-                    else:
-                        num_pages = 1
+                        p = Paginator(posts, limit)
+                        posts = p.page(page).object_list
+                        # num_pages = p.num_pages
                     response = {
-                        "response": backend_serializers.LoggingModelSerializer(instance=objects, many=True).data,
+                        "response": posts,
                         "x-total-count": num_pages
                     }
 
@@ -3252,9 +3324,10 @@ def api_any_post_id(request, post_id):
 
             if req_inst.action_type == "":
                 try:
-                    obj = backend_models.LoggingModel.objects.get(id=post_id)
+                    post = {"id": post_id, "title": f"Заголовок поста {post_id}", "body": f"Текст поста {post_id}"}
+
                     response = {
-                        "response": backend_serializers.LoggingModelSerializer(instance=obj, many=False).data,
+                        "response": post,
                     }
 
                     # TODO response ####################################################################################
@@ -3294,15 +3367,12 @@ def api_any_post_id_comments(request, post_id):
 
             if req_inst.action_type == "":
                 try:
-                    comment = [
-                        {"id": 1, "title": "Заголовок комментария", "body": "Текст комментария"},
-                        {"id": 2, "title": "Заголовок комментария", "body": "Текст комментария"},
-                        {"id": 3, "title": "Заголовок комментария", "body": "Текст комментария"},
-                        {"id": 4, "title": "Заголовок комментария", "body": "Текст комментария"},
-                        {"id": 5, "title": "Заголовок комментария", "body": "Текст комментария"},
+                    comments = [
+                        {"id": x, "title": f"Заголовок комментария {x}", "body": f"Текст комментария {x}"}
+                        for x in range(1, 100 + 1)
                     ]
                     response = {
-                        "response": comment,
+                        "response": comments,
                     }
 
                     # TODO response ####################################################################################

@@ -34,7 +34,17 @@ export const SalaryPage = () => {
       "Action-type": "USER_SALARY",
       dateTime: `${year}${month > 9 ? month : "0" + month}`,
     };
-    dispatch(actions.salaryUserAction(form));
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/auth/user/salary/",
+        "POST",
+        30000,
+        constants.USER_SALARY,
+        false
+      )
+    );
+    // dispatch(actions.salaryUserAction(form));
   };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (

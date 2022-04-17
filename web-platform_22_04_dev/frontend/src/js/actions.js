@@ -9,88 +9,14 @@ import * as utils from "./utils";
 
 // TODO profile ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const userLoginAction = (form) => async (dispatch) => {
-  try {
-    dispatch({
-      type: constants.USER_LOGIN.load,
-    });
-    const { config } = utils.AxiosConfigConstructorUtility({
-      url: "/api/any/user/",
-      method: "POST",
-      timeout: 30000,
-      form: form,
-    });
-    const { data } = await axios(config);
-    if (data.response) {
-      const response = data.response;
-      dispatch({
-        type: constants.USER_LOGIN.data,
-        payload: response,
-      });
-
-      localStorage.setItem("userToken", JSON.stringify(response));
-      dispatch({ type: constants.USER_DETAILS.reset });
-    } else {
-      const response = data.error;
-      dispatch({
-        type: constants.USER_LOGIN.error,
-        payload: response,
-      });
-    }
-  } catch (error) {
-    dispatch({
-      type: constants.USER_LOGIN.fail,
-      payload: utils.ActionsFailUtility({ dispatch: dispatch, error: error }),
-    });
-  }
-};
-
 export const userLogoutAction = () => async (dispatch) => {
   localStorage.removeItem("userToken");
   dispatch({ type: constants.USER_LOGIN.reset });
-  dispatch({ type: constants.USER_DETAILS.reset });
+  dispatch({ type: constants.USER_DETAIL.reset });
   dispatch({ type: constants.USER_CHANGE.reset });
   dispatch({ type: constants.USER_RECOVER_PASSWORD.reset });
   dispatch({ type: constants.USER_SALARY.reset });
   dispatch({ type: constants.USER_VACATION.reset });
-};
-
-export const userDetailsAction = (form) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: constants.USER_DETAILS.load,
-    });
-    const { config } = utils.AxiosConfigConstructorUtility({
-      url: "/api/auth/user/",
-      method: "POST",
-      timeout: 30000,
-      form: form,
-      getState: getState,
-    });
-    const { data } = await axios(config);
-    if (data.response) {
-      const response = data.response;
-      dispatch({
-        type: constants.USER_DETAILS.data,
-        payload: response,
-      });
-      dispatch({ type: constants.USER_CHANGE.reset });
-      dispatch({ type: constants.USER_RECOVER_PASSWORD.reset });
-      dispatch({ type: constants.USER_SALARY.reset });
-      dispatch({ type: constants.USER_VACATION.reset });
-    } else {
-      const response = data.error;
-      dispatch({
-        type: constants.USER_DETAILS.error,
-        payload: response,
-      });
-    }
-  } catch (error) {
-    dispatch({
-      type: constants.USER_DETAILS.fail,
-      payload: utils.ActionsFailUtility({ dispatch: dispatch, error: error }),
-    });
-  }
 };
 
 // TODO buhgalteria ////////////////////////////////////////////////////////////////////////////////////////////////////

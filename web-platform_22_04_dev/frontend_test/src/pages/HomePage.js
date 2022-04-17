@@ -84,7 +84,11 @@ const HomePage = () => {
             <tr>
               <td>Формы</td>
               <td>Все варианты наполнения форм: input, select...</td>
-              <td>Link</td>
+              <td>
+                <Link to="/form" className="btn btn-xs btn-outline-primary">
+                  Link
+                </Link>
+              </td>
             </tr>
             <tr>
               <td>Элементы</td>

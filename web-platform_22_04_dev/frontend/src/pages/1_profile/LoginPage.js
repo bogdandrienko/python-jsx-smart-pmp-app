@@ -5,9 +5,9 @@ import { Link, useNavigate } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 import * as components from "../../js/components";
+import * as actions from "../../js/actions";
 import * as constants from "../../js/constants";
 import * as utils from "../../js/utils";
-import { userLoginAction } from "../../js/actions";
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 export const LoginPage = () => {
   // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
@@ -28,6 +28,7 @@ export const LoginPage = () => {
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
   useEffect(() => {
     if (dataUserLogin) {
+      localStorage.setItem("userToken", JSON.stringify(dataUserLogin));
       utils.Sleep(10).then(() => {
         navigate("/news");
       });
@@ -44,7 +45,16 @@ export const LoginPage = () => {
         username: username,
         password: password,
       };
-      dispatch(userLoginAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/any/user/login/",
+          "POST",
+          30000,
+          constants.USER_LOGIN,
+          false
+        )
+      );
     }
   };
   //////////////////////////////////////////////////////////

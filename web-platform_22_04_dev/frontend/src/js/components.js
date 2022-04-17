@@ -48,13 +48,13 @@ export const HeaderComponent = () => {
     // fail: failUserLogin,
   } = userLoginStore;
   //////////////////////////////////////////////////////////
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const userDetailStore = useSelector((state) => state.userDetailStore);
   const {
-    // load: loadUserDetails,
-    data: dataUserDetails,
-    // error: errorUserDetails,
-    // fail: failUserDetails,
-  } = userDetailsStore;
+    // load: loadUserDetail,
+    data: dataUserDetail,
+    // error: errorUserDetail,
+    // fail: failUserDetail,
+  } = userDetailStore;
   //////////////////////////////////////////////////////////
   const notificationListStore = useSelector(
     (state) => state.notificationListStore
@@ -69,25 +69,34 @@ export const HeaderComponent = () => {
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    if (!dataUserDetails) {
+    if (!dataUserDetail) {
       const form = {
         "Action-type": "USER_DETAIL",
       };
-      dispatch(actions.userDetailsAction(form));
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/auth/user/detail/",
+          "POST",
+          30000,
+          constants.USER_DETAIL,
+          true
+        )
+      );
     } else {
       if (logic && firstRefreshUserDetails) {
         firstRefreshUserDetailsSet(false);
-        dispatch({ type: constants.USER_DETAILS.reset });
+        dispatch({ type: constants.USER_DETAIL.reset });
       }
       if (
         redirect &&
-        !utils.CheckPageAccess(userDetailsStore, location.pathname)
+        !utils.CheckPageAccess(userDetailStore, location.pathname)
       ) {
         navigate("/");
       }
     }
   }, [
-    dataUserDetails,
+    dataUserDetail,
     dispatch,
     firstRefreshUserDetails,
     logic,
@@ -110,16 +119,16 @@ export const HeaderComponent = () => {
           }
         });
       } else {
-        if (dataUserDetails && dataUserDetails["user_model"]) {
+        if (dataUserDetail && dataUserDetail["user_model"]) {
           if (
-            dataUserDetails["user_model"]["activity_boolean_field"] === false
+            dataUserDetail["user_model"]["activity_boolean_field"] === false
           ) {
             dispatch(actions.userLogoutAction());
             navigate("/login");
           }
           if (
-            !dataUserDetails["user_model"]["secret_question_char_field"] ||
-            !dataUserDetails["user_model"]["secret_answer_char_field"]
+            !dataUserDetail["user_model"]["secret_question_char_field"] ||
+            !dataUserDetail["user_model"]["secret_answer_char_field"]
           ) {
             navigate("/change_profile");
           }
@@ -176,7 +185,7 @@ export const HeaderComponent = () => {
             <Nav className="me-auto m-0 p-0">
               {constants.modules.map(
                 (module, module_i) =>
-                  utils.CheckAccess(userDetailsStore, module.Access) && (
+                  utils.CheckAccess(userDetailStore, module.Access) && (
                     <NavDropdown
                       key={module_i}
                       title={
@@ -201,7 +210,7 @@ export const HeaderComponent = () => {
                       {module.Sections.map(
                         (section, section_i) =>
                           utils.CheckAccess(
-                            userDetailsStore,
+                            userDetailStore,
                             section.Access
                           ) && (
                             <li key={section_i} className="m-0 p-1">
@@ -211,7 +220,7 @@ export const HeaderComponent = () => {
                               {section.Links.map((link, link_i) =>
                                 link.ExternalLink
                                   ? utils.CheckAccess(
-                                      userDetailsStore,
+                                      userDetailStore,
                                       link.Access
                                     ) && (
                                       <a
@@ -229,7 +238,7 @@ export const HeaderComponent = () => {
                                       </a>
                                     )
                                   : utils.CheckAccess(
-                                      userDetailsStore,
+                                      userDetailStore,
                                       link.Access
                                     ) &&
                                     link.ShowLink && (
@@ -484,7 +493,7 @@ export const FooterComponent = () => {
 
 export const ModulesComponent = () => {
   // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const userDetailStore = useSelector((state) => state.userDetailStore);
   //////////////////////////////////////////////////////////
   const notificationListStore = useSelector(
     (state) => state.notificationListStore
@@ -507,7 +516,7 @@ export const ModulesComponent = () => {
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 m-0 p-0">
               {constants.modules.map(
                 (module, module_i) =>
-                  utils.CheckAccess(userDetailsStore, module.Access) &&
+                  utils.CheckAccess(userDetailStore, module.Access) &&
                   module.ShowInModules && (
                     <div key={module_i} className="text-center m-0 p-1">
                       <div className="lead card-header border shadow bg-light bg-opacity-100 custom-background-transparent-hard m-0 p-0">
@@ -524,7 +533,7 @@ export const ModulesComponent = () => {
                         ? module["Sections"].map(
                             (section, section_i) =>
                               utils.CheckAccess(
-                                userDetailsStore,
+                                userDetailStore,
                                 section.Access
                               ) && (
                                 <div
@@ -556,7 +565,7 @@ export const ModulesComponent = () => {
                                         ? section["Links"].map((link, link_i) =>
                                             link["Active"]
                                               ? utils.CheckAccess(
-                                                  userDetailsStore,
+                                                  userDetailStore,
                                                   link.Access
                                                 ) &&
                                                 link.ShowLink && (
@@ -620,7 +629,7 @@ export const ModulesComponent = () => {
                                                   </li>
                                                 )
                                               : utils.CheckAccess(
-                                                  userDetailsStore,
+                                                  userDetailStore,
                                                   link.Access
                                                 ) &&
                                                 link.ShowLink && (

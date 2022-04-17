@@ -25,7 +25,7 @@ const globalReducer = combineReducers({
   // TODO profile //////////////////////////////////////////////////////////////////////////////////////////////////////
 
   userLoginStore: utils.ReducerConstructorUtility(constants.USER_LOGIN),
-  userDetailsStore: utils.ReducerConstructorUtility(constants.USER_DETAILS),
+  userDetailStore: utils.ReducerConstructorUtility(constants.USER_DETAIL),
   userChangeStore: utils.ReducerConstructorUtility(constants.USER_CHANGE),
   userRecoverPasswordStore: utils.ReducerConstructorUtility(
     constants.USER_RECOVER_PASSWORD

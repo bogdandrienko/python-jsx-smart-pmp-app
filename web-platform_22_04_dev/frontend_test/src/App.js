@@ -17,6 +17,7 @@ import { AboutPage } from "./pages/AboutPage";
 import AuthContext from "./components/contexts";
 import { Loader1 } from "./components/ui/loaders";
 import TestPage from "./pages/TestPage";
+import FormPage from "./pages/FormPage";
 
 export const publicRoutes = [{ path: "/login", element: <LoginPage /> }];
 
@@ -24,6 +25,7 @@ export const privateRoutes = [
   { path: "/", element: <HomePage /> },
   { path: "/home", element: <HomePage /> },
   { path: "/test", element: <TestPage /> },
+  { path: "/form", element: <FormPage /> },
   { path: "/about", element: <AboutPage /> },
   { path: "/posts_pagination", element: <PostListPaginationPage /> },
   { path: "/posts_unlimited", element: <PostListUnlimitedScrollPage /> },

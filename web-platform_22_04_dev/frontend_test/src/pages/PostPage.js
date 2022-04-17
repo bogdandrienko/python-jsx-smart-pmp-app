@@ -14,7 +14,6 @@ const PostPage = () => {
   const [comments, setComments] = useState([]);
   const [fetchById, isLoading, error] = useFetching(async (id) => {
     const response = await Services.getById(id);
-    console.log(response.data);
     setPost(response.data.response);
   });
   const [fetchCommentById, isCommentLoading, errorComment] = useFetching(
@@ -31,8 +30,7 @@ const PostPage = () => {
   return (
     <BaseComponent1>
       <Button1 onClick={() => navigate("/posts_pagination")}>
-        {" "}
-        {"<="} back
+        {" <= "} back
       </Button1>
       <div className="post_detail">
         {isLoading ? (
@@ -41,10 +39,9 @@ const PostPage = () => {
           <div className="post">
             <div className="post__content">
               <strong>
-                {post.id} {post.request_method_slug_field}{" "}
-                {post.request_path_slug_field} {post.username_slug_field}
+                {post.id} {post.title}
               </strong>
-              <div>{post.error_text_field}</div>
+              <div>{post.body}</div>
             </div>
           </div>
         )}

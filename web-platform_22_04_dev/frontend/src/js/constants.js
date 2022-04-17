@@ -4,7 +4,7 @@ import * as utils from "./utils";
 
 // TODO debug //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const DEBUG_CONSTANT = false;
+export const DEBUG_CONSTANT = true;
 
 // TODO modules ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -768,7 +768,7 @@ export const RATINGS_LIST = utils.ConstantConstructorUtility("RATINGS_LIST");
 
 export const USER_LOGIN = utils.ConstantConstructorUtility("USER_LOGIN");
 
-export const USER_DETAILS = utils.ConstantConstructorUtility("USER_DETAILS");
+export const USER_DETAIL = utils.ConstantConstructorUtility("USER_DETAIL");
 
 export const USER_CHANGE = utils.ConstantConstructorUtility("USER_CHANGE");
 

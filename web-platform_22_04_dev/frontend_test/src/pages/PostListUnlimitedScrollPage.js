@@ -102,11 +102,6 @@ export const PostListUnlimitedScrollPage = () => {
           padding: 0,
         }}
       />
-      <Pagination1
-        page={page}
-        changePage={changePage}
-        totalPages={totalPages}
-      />
     </BaseComponent1>
   );
 };

@@ -15,11 +15,9 @@ export const PostItem = (props) => {
   return (
     <div className="post" onClick={() => navigate("/posts/" + props.post.id)}>
       <div className="post__content">
-        <strong>
-          {props.post.id} {props.post.request_method_slug_field}{" "}
-          {props.post.request_path_slug_field} {props.post.username_slug_field}
-        </strong>
-        <div>{props.post.error_text_field}</div>
+        <h5>{props.post.id}.</h5>
+        <strong>{props.post.title}</strong>
+        <div>{props.post.body}</div>
         <div className="post__btns">
           <Button1 onClick={deletePost}>delete</Button1>
         </div>
@@ -69,7 +67,7 @@ export const PostForm = ({ create }) => {
         value={post.title}
         onChange={(e) => setPost({ ...post, title: e.target.value })}
         type="text"
-        placeholder="Name..."
+        placeholder="Title..."
       />
       <Input1
         value={post.body}

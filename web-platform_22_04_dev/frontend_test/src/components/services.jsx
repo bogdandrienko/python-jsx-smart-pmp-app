@@ -8,30 +8,17 @@ export class Services {
         limit: limit,
       },
     });
-    // const response = await axios.get(
-    //   "https://jsonplaceholder.typicode.com/posts",
-    //   {
-    //     params: {
-    //       _limit: limit,
-    //       _page: page,
-    //     },
-    //   }
-    // );
     console.log("getAll: ", response.data);
     return response;
   }
   static async getById(id) {
-    // const response = await axios.get(
-    //   "https://jsonplaceholder.typicode.com/posts/" + id
-    // );
     const response = await axios.get(`/api/any/post/${id}/`);
+    console.log("getAll: ", response.data);
     return response;
   }
   static async getCommentById(id) {
-    // const response = await axios.get(
-    //   `https://jsonplaceholder.typicode.com/posts/${id}/comments`
-    // );
     const response = await axios.get(`/api/any/post/${id}/comments/`);
+    console.log("getAll: ", response.data);
     return response;
   }
 }

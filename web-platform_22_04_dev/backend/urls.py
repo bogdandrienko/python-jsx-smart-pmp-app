@@ -43,6 +43,9 @@ urlpatterns = [
 
     # TODO profile #####################################################################################################
 
+    path('api/any/user/login/', backend_views.api_any_user_login, name='api_any_user_login'),
+    path('api/auth/user/detail/', backend_views.api_auth_user_detail, name='api_auth_user_detail'),
+
     path('api/any/user/', backend_views.api_any_user, name='api_any_user'),
     path('api/auth/user/', backend_views.api_auth_user, name='api_auth_user'),
 
@@ -52,7 +55,7 @@ urlpatterns = [
 
     # TODO buhgalteria #################################################################################################
 
-    path('api/auth/salary/', backend_views.api_auth_salary, name='api_auth_salary'),
+    path('api/auth/user/salary/', backend_views.api_auth_user_salary, name='api_auth_user_salary'),
 
     # TODO sup #########################################################################################################
 
