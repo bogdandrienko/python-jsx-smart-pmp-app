@@ -66,7 +66,16 @@ export const RecoverPasswordPage = () => {
         "Action-type": "FIND_USER",
         username: username,
       };
-      Recover(form);
+      dispatch(
+        utils.ActionConstructorUtility(
+          form,
+          "/api/any/user/recover/find/",
+          "POST",
+          30000,
+          constants.USER_RECOVER,
+          false
+        )
+      );
     }
   };
   //////////////////////////////////////////////////////////
@@ -77,7 +86,16 @@ export const RecoverPasswordPage = () => {
       username: username,
       secretAnswer: secretAnswer,
     };
-    Recover(form);
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/any/user/recover/check_answer/",
+        "POST",
+        30000,
+        constants.USER_RECOVER,
+        false
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerSubmitSendEmail = (e) => {
@@ -86,7 +104,16 @@ export const RecoverPasswordPage = () => {
       "Action-type": "SEND_EMAIL_PASSWORD",
       username: username,
     };
-    Recover(form);
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/any/user/recover/send_email/",
+        "POST",
+        30000,
+        constants.USER_RECOVER,
+        false
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerSubmitRecoverEmail = (e) => {
@@ -96,7 +123,16 @@ export const RecoverPasswordPage = () => {
       username: username,
       recoverPassword: recoverPassword,
     };
-    Recover(form);
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/any/user/recover/check_email/",
+        "POST",
+        30000,
+        constants.USER_RECOVER,
+        false
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerRecoverPasswordSubmit = (e) => {
@@ -107,7 +143,16 @@ export const RecoverPasswordPage = () => {
       password: password,
       password2: password2,
     };
-    Recover(form);
+    dispatch(
+      utils.ActionConstructorUtility(
+        form,
+        "/api/any/user/recover/change_password/",
+        "POST",
+        30000,
+        constants.USER_RECOVER,
+        false
+      )
+    );
   };
   //////////////////////////////////////////////////////////
   const handlerRecoverPasswordReset = async (e) => {
@@ -118,18 +163,6 @@ export const RecoverPasswordPage = () => {
     password2Set("");
   };
 
-  const Recover = (form) => {
-    dispatch(
-      utils.ActionConstructorUtility(
-        form,
-        "/api/any/user/",
-        "POST",
-        30000,
-        constants.USER_RECOVER_PASSWORD,
-        false
-      )
-    );
-  };
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <div className="m-0 p-0">

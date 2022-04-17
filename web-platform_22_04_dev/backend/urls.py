@@ -45,9 +45,27 @@ urlpatterns = [
 
     path('api/any/user/login/', backend_views.api_any_user_login, name='api_any_user_login'),
     path('api/auth/user/detail/', backend_views.api_auth_user_detail, name='api_auth_user_detail'),
+    path('api/auth/user/change/', backend_views.api_auth_user_change, name='api_auth_user_change'),
+    path('api/auth/user/change_password/', backend_views.api_auth_user_change_password,
+         name='api_auth_user_change_password'),
 
-    path('api/any/user/', backend_views.api_any_user, name='api_any_user'),
-    path('api/auth/user/', backend_views.api_auth_user, name='api_auth_user'),
+    path('api/any/user/recover/find/', backend_views.api_any_user_recover_find, name='api_any_user_recover_find'),
+    path('api/any/user/recover/check_answer/', backend_views.api_any_user_recover_check_answer,
+         name='api_any_user_recover_check_answer'),
+    path('api/any/user/recover/send_email/', backend_views.api_any_user_recover_send_email,
+         name='api_any_user_recover_send_email'),
+    path('api/any/user/recover/check_email/', backend_views.api_any_user_recover_check_email,
+         name='api_any_user_recover_check_email'),
+    path('api/any/user/recover/change_password/', backend_views.api_any_user_recover_change_password,
+         name='api_any_user_recover_change_password'),
+
+    path('api/auth/user/notification/', backend_views.api_auth_user_notification, name='api_auth_user_notification'),
+    path('api/auth/user/notification/<int:notification_id>/', backend_views.api_auth_user_notification,
+         name='api_auth_user_notification'),
+    path('api/auth/user/notification/<int:notification_id>/delete/', backend_views.api_auth_user_notification_id_delete,
+         name='api_auth_user_notification_id_delete'),
+
+    path('api/auth/user/list_all/', backend_views.api_auth_user_list_all, name='api_auth_user_list_all'),
 
     # TODO progress ####################################################################################################
 
@@ -78,6 +96,7 @@ urlpatterns = [
     # TODO develop #####################################################################################################
 
     path('api/auth/rational/', backend_views.api_auth_rational, name='api_auth_rational'),
+    path('api/auth/rational/<int:rational_id>/', backend_views.api_auth_rational, name='api_auth_rational'),
 
     path('django/', include('backend_native.urls')),
     path('test/', backend_views.test, name='test'),

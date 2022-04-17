@@ -44,7 +44,7 @@ export const ChangePasswordPage = () => {
     dispatch(
       utils.ActionConstructorUtility(
         form,
-        "/api/auth/user/",
+        "/api/auth/user/change/",
         "POST",
         30000,
         constants.USER_CHANGE

@@ -28,7 +28,7 @@ const globalReducer = combineReducers({
   userDetailStore: utils.ReducerConstructorUtility(constants.USER_DETAIL),
   userChangeStore: utils.ReducerConstructorUtility(constants.USER_CHANGE),
   userRecoverPasswordStore: utils.ReducerConstructorUtility(
-    constants.USER_RECOVER_PASSWORD
+    constants.USER_RECOVER
   ),
   UserListStore: utils.ReducerConstructorUtility(constants.USER_LIST_ALL),
 

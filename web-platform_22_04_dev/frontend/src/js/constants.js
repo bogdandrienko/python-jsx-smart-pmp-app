@@ -772,9 +772,7 @@ export const USER_DETAIL = utils.ConstantConstructorUtility("USER_DETAIL");
 
 export const USER_CHANGE = utils.ConstantConstructorUtility("USER_CHANGE");
 
-export const USER_RECOVER_PASSWORD = utils.ConstantConstructorUtility(
-  "USER_RECOVER_PASSWORD"
-);
+export const USER_RECOVER = utils.ConstantConstructorUtility("USER_RECOVER");
 
 export const USER_LIST_ALL = utils.ConstantConstructorUtility("USER_LIST_ALL");
 

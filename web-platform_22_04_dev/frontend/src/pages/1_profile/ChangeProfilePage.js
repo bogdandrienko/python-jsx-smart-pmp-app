@@ -20,13 +20,13 @@ export const ChangeProfilePage = () => {
   const [password, passwordSet] = useState("");
   const [password2, password2Set] = useState("");
   // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const userDetailStore = useSelector((state) => state.userDetailStore);
   const {
     // load: loadUserDetails,
     data: dataUserDetails,
     // error: errorUserDetails,
     // fail: failUserDetails,
-  } = userDetailsStore;
+  } = userDetailStore;
   //////////////////////////////////////////////////////////
   const userChangeStore = useSelector((state) => state.userChangeStore);
   const {
@@ -97,7 +97,7 @@ export const ChangeProfilePage = () => {
     dispatch(
       utils.ActionConstructorUtility(
         form,
-        "/api/auth/user/",
+        "/api/auth/user/change/",
         "POST",
         30000,
         constants.USER_CHANGE
@@ -121,8 +121,8 @@ export const ChangeProfilePage = () => {
       <components.HeaderComponent />
       <main>
         <components.StoreStatusComponent
-          storeStatus={userDetailsStore}
-          keyStatus={"userDetailsStore"}
+          storeStatus={userDetailStore}
+          keyStatus={"userDetailStore"}
           consoleLog={constants.DEBUG_CONSTANT}
           showLoad={false}
           loadText={""}

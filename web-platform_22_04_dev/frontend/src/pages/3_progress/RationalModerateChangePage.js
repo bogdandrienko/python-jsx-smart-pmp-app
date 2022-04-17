@@ -59,14 +59,13 @@ export const RationalModerateChangePage = () => {
   useEffect(() => {
     if (!dataRationalDetail) {
       const form = {
-        "Action-type": "RATIONAL_DETAIL",
-        id: id,
+        "Action-type": "",
       };
       dispatch(
         utils.ActionConstructorUtility(
           form,
-          "/api/auth/rational/",
-          "POST",
+          `/api/auth/rational/${id}/`,
+          "GET",
           30000,
           constants.RATIONAL_DETAIL
         )
@@ -122,7 +121,7 @@ export const RationalModerateChangePage = () => {
       <main className="container">
         <div className="btn-group m-0 p-1 text-start w-100">
           <Link
-            to={"/idea_moderate_list"}
+            to={"/rational_moderate_list"}
             className="btn btn-sm btn-primary m-1 p-2"
           >
             {"<="} назад к списку

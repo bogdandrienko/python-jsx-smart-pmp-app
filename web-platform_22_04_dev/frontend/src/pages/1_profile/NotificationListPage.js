@@ -42,13 +42,13 @@ export const NotificationListPage = () => {
   useEffect(() => {
     if (!dataNotificationList) {
       const form = {
-        "Action-type": "NOTIFICATION_LIST",
+        "Action-type": "",
       };
       dispatch(
         utils.ActionConstructorUtility(
           form,
-          "/api/auth/user/",
-          "POST",
+          `/api/auth/user/notification/?page=${1}&limit=${-1}`,
+          "GET",
           30000,
           constants.NOTIFICATION_LIST
         )
@@ -74,12 +74,11 @@ export const NotificationListPage = () => {
     if (isConfirm) {
       const form = {
         "Action-type": "NOTIFICATION_DELETE",
-        id: id,
       };
       dispatch(
         utils.ActionConstructorUtility(
           form,
-          "/api/auth/user/",
+          `/api/auth/user/notification/${id}/delete/`,
           "POST",
           30000,
           constants.NOTIFICATION_DELETE
@@ -116,7 +115,7 @@ export const NotificationListPage = () => {
                 <td className="fw-bold small m-0 p-1">описание</td>
                 <td className="small m-0 p-1" />
               </tr>
-              {dataNotificationList.map((notification, index) => (
+              {dataNotificationList.data.map((notification, index) => (
                 <tr
                   key={index}
                   className="text-center bg-light bg-opacity-10 m-0 p-0"

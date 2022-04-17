@@ -140,13 +140,13 @@ export const HeaderComponent = () => {
   useEffect(() => {
     if (!dataNotificationList) {
       const form = {
-        "Action-type": "NOTIFICATION_LIST",
+        "Action-type": "",
       };
       dispatch(
         utils.ActionConstructorUtility(
           form,
-          "/api/auth/user/",
-          "POST",
+          `/api/auth/user/notification/?page=${1}&limit=${-1}`,
+          "GET",
           30000,
           constants.NOTIFICATION_LIST
         )
@@ -172,7 +172,7 @@ export const HeaderComponent = () => {
             <i className="fa-solid fa-earth-asia m-0 p-1" />
             Домашняя
           </a>
-          {dataNotificationList && dataNotificationList.length > 0 && (
+          {dataNotificationList && dataNotificationList.data.length > 0 && (
             <i className="fa-solid fa-bell text-danger m-0 p-2" />
           )}
           <Navbar.Toggle
@@ -195,10 +195,10 @@ export const HeaderComponent = () => {
                           <span className="m-0 p-0">
                             {module.Header}{" "}
                             {dataNotificationList &&
-                              dataNotificationList.length > 0 && (
+                              dataNotificationList.data.length > 0 && (
                                 <span className="badge rounded-pill text-danger m-0 p-1">
                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
-                                  {dataNotificationList.length}
+                                  {dataNotificationList.data.length}
                                 </span>
                               )}
                           </span>
@@ -263,10 +263,14 @@ export const HeaderComponent = () => {
                                           {link.Header}{" "}
                                           {link.Header === "Уведомления" &&
                                             dataNotificationList &&
-                                            dataNotificationList.length > 0 && (
+                                            dataNotificationList.data.length >
+                                              0 && (
                                               <span className="badge rounded-pill text-danger m-0 p-1">
                                                 <i className="fa-solid fa-bell text-danger m-0 p-1" />
-                                                {dataNotificationList.length}
+                                                {
+                                                  dataNotificationList.data
+                                                    .length
+                                                }
                                               </span>
                                             )}
                                         </Nav.Link>
@@ -613,12 +617,15 @@ export const ModulesComponent = () => {
                                                             {link.Header ===
                                                               "Уведомления" &&
                                                               dataNotificationList &&
-                                                              dataNotificationList.length >
+                                                              dataNotificationList
+                                                                .data.length >
                                                                 0 && (
                                                                 <span className="badge rounded-pill text-danger m-0 p-1">
                                                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                                                   {
-                                                                    dataNotificationList.length
+                                                                    dataNotificationList
+                                                                      .data
+                                                                      .length
                                                                   }
                                                                 </span>
                                                               )}

@@ -41,13 +41,13 @@ export const IdeaChangePage = () => {
     // fail: failIdeaChange,
   } = ideaChangeStore;
   //////////////////////////////////////////////////////////
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const userDetailStore = useSelector((state) => state.userDetailStore);
   const {
     // load: loadUserDetails,
     data: dataUserDetails,
     // error: errorUserDetails,
     // fail: failUserDetails,
-  } = userDetailsStore;
+  } = userDetailStore;
   //////////////////////////////////////////////////////////
   const ideaModerateStore = useSelector((state) => state.ideaModerateStore);
   const {
@@ -192,8 +192,8 @@ export const IdeaChangePage = () => {
             {"<="} назад к списку
           </Link>
           <components.StoreStatusComponent
-            storeStatus={userDetailsStore}
-            keyStatus={"userDetailsStore"}
+            storeStatus={userDetailStore}
+            keyStatus={"userDetailStore"}
             consoleLog={constants.DEBUG_CONSTANT}
             showLoad={true}
             loadText={""}

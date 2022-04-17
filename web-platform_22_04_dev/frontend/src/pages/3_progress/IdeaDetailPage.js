@@ -188,7 +188,7 @@ export const IdeaDetailPage = () => {
       dispatch(
         utils.ActionConstructorUtility(
           form,
-          "/api/auth/user/",
+          "/api/auth/user/notification/",
           "POST",
           30000,
           constants.NOTIFICATION_CREATE

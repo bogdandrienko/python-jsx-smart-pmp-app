@@ -171,14 +171,14 @@ export const AxiosConfigConstructorUtility = ({
 
 // TODO page ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const CheckAccess = (userDetailsStore, slug) => {
+export const CheckAccess = (userDetailStore, slug) => {
   try {
     const {
       // load: loadUserDetails,
       data: dataUserDetails,
       // error: errorUserDetails,
       // fail: failUserDetails,
-    } = userDetailsStore;
+    } = userDetailStore;
     if (slug === "all" || slug.includes("all")) {
       return true;
     }
@@ -205,13 +205,13 @@ export const CheckAccess = (userDetailsStore, slug) => {
   }
 };
 
-export const CheckPageAccess = (userDetailsStore, path) => {
+export const CheckPageAccess = (userDetailStore, path) => {
   const {
     // load: loadUserDetails,
     data: dataUserDetails,
     // error: errorUserDetails,
     // fail: failUserDetails,
-  } = userDetailsStore;
+  } = userDetailStore;
   if (dataUserDetails && dataUserDetails["group_model"]) {
     if (dataUserDetails["group_model"].includes("superuser")) {
       return true;

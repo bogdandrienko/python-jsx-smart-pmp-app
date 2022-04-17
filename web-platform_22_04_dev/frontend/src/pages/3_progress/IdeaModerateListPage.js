@@ -55,7 +55,7 @@ export const IdeaModerateListPage = () => {
       dispatch(
         utils.ActionConstructorUtility(
           form,
-          "/api/auth/user/",
+          "/api/auth/user/list_all/",
           "POST",
           30000,
           constants.USER_LIST_ALL

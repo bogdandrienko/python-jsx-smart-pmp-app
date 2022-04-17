@@ -37,13 +37,13 @@ export const RationalModerateListPage = () => {
     // fail: failRationalList,
   } = rationalListStore;
   //////////////////////////////////////////////////////////
-  const userDetailsStore = useSelector((state) => state.userDetailsStore);
+  const userDetailStore = useSelector((state) => state.userDetailStore);
   const {
-    load: loadUserDetails,
-    data: dataUserDetails,
-    // error: errorUserDetails,
-    // fail: failUserDetails,
-  } = userDetailsStore;
+    load: loadUserDetail,
+    data: dataUserDetail,
+    // error: errorUserDetail,
+    // fail: failUserDetail,
+  } = userDetailStore;
   // TODO reset state //////////////////////////////////////////////////////////////////////////////////////////////////
   const resetState = async (e) => {
     try {
@@ -60,7 +60,7 @@ export const RationalModerateListPage = () => {
       dispatch(
         utils.ActionConstructorUtility(
           form,
-          "/api/auth/user/",
+          "/api/auth/user/list_all/",
           "POST",
           30000,
           constants.USER_LIST_ALL
@@ -70,37 +70,35 @@ export const RationalModerateListPage = () => {
   }, [dataUserList]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
-    if (dataUserDetails && dataUserDetails["user_model"]) {
-      if (utils.CheckAccess(userDetailsStore, "moderator_rational_atp")) {
+    if (dataUserDetail && dataUserDetail["user_model"]) {
+      if (utils.CheckAccess(userDetailStore, "moderator_rational_atp")) {
         subdivisionSet("автотранспортное предприятие");
       }
-      if (utils.CheckAccess(userDetailsStore, "moderator_rational_gtk")) {
+      if (utils.CheckAccess(userDetailStore, "moderator_rational_gtk")) {
         subdivisionSet("горно-транспортный комплекс");
       }
-      if (utils.CheckAccess(userDetailsStore, "moderator_rational_ok")) {
+      if (utils.CheckAccess(userDetailStore, "moderator_rational_ok")) {
         subdivisionSet("обогатительный комплекс");
       }
-      if (
-        utils.CheckAccess(userDetailsStore, "moderator_rational_upravlenie")
-      ) {
+      if (utils.CheckAccess(userDetailStore, "moderator_rational_upravlenie")) {
         subdivisionSet("управление предприятия");
       }
       if (
         utils.CheckAccess(
-          userDetailsStore,
+          userDetailStore,
           "moderator_rational_energoupravlenie"
         )
       ) {
         subdivisionSet("энергоуправление");
       }
-      if (utils.CheckAccess(userDetailsStore, "moderator_rational")) {
+      if (utils.CheckAccess(userDetailStore, "moderator_rational")) {
         subdivisionSet("");
       }
     }
-  }, [dataUserDetails]);
+  }, [dataUserDetail]);
   //////////////////////////////////////////////////////////
   useEffect(() => {
-    if (!dataRationalList && dataUserDetails && dataUserList) {
+    if (!dataRationalList && dataUserDetail && dataUserList) {
       const form = {
         "Action-type": "RATIONAL_LIST",
         subdivision: subdivision,
@@ -113,19 +111,28 @@ export const RationalModerateListPage = () => {
       dispatch(
         utils.ActionConstructorUtility(
           form,
-          "/api/auth/rational/",
-          "POST",
+          `/api/auth/rational/?page=${1}&limit=${-1}&subdivision=${subdivision}&category=${category}&moderate=${moderate}`,
+          "GET",
           30000,
           constants.RATIONAL_LIST
         )
       );
+      // dispatch(
+      //   utils.ActionConstructorUtility(
+      //     form,
+      //     "/api/auth/rational/",
+      //     "POST",
+      //     30000,
+      //     constants.RATIONAL_LIST
+      //   )
+      // );
     } else {
       if (firstRefresh) {
         firstRefreshSet(false);
         resetState();
       }
     }
-  }, [dataRationalList, dataUserDetails, dataUserList, firstRefresh]);
+  }, [dataRationalList, dataUserDetail, dataUserList, firstRefresh]);
   // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -178,7 +185,7 @@ export const RationalModerateListPage = () => {
                   </div>
                   <div className="card-body m-0 p-0">
                     <div className="m-0 p-0">
-                      {utils.CheckAccess(userDetailsStore, [
+                      {utils.CheckAccess(userDetailStore, [
                         "all",
                         "moderator_rational",
                         "moderator_rational_atp",
@@ -212,7 +219,7 @@ export const RationalModerateListPage = () => {
                           </select>
                         </label>
                       )}
-                      {utils.CheckAccess(userDetailsStore, [
+                      {utils.CheckAccess(userDetailStore, [
                         "all",
                         "moderator_rational",
                       ]) && (

@@ -70,3 +70,63 @@ error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 1
 970801351179, 127.0.0.1, /api/auth/user/salary/, POST, USER_SALARY, ('»»Õ', '970801351179'), 2022-04-17 20:39:34.598373
 
 970801351179, 127.0.0.1, /api/auth/user/salary/, POST, USER_SALARY, ('»»Õ', '970801351179'), 2022-04-17 20:41:05.100969
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:08:09.625222
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:08:09.842741
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:09:01.582142
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:09:26.231922
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:10:58.978389
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:11:04.327767
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:13:07.468471
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:24:30.598551
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:24:33.224515
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , int() argument must be a string, a bytes-like object or a number, not 'NoneType', 2022-04-17 23:25:38.042343
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , list index out of range, 2022-04-17 23:26:21.398202
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , list index out of range, 2022-04-17 23:26:24.767074
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , list index out of range, 2022-04-17 23:27:06.219006
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , list index out of range, 2022-04-17 23:28:09.246312
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , list index out of range, 2022-04-17 23:29:00.196405
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , list index out of range, 2022-04-17 23:29:11.317912
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:30:07.100633
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:30:09.392416
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , list index out of range, 2022-04-17 23:30:19.134641
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , list index out of range, 2022-04-17 23:30:22.181419
+
+000000000000, 127.0.0.1, /api/auth/rational/0/, GET, , list index out of range, 2022-04-17 23:30:35.215588
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:31:04.837733
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:31:07.444951
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:31:40.060577
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:33:16.320738
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:33:34.295219
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:33:36.892156
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:33:39.572289
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:35:25.145903
+
+000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:35:47.840040
