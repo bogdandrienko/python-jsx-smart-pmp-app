@@ -1,5 +1,4 @@
 import React from "react";
-import { BaseComponent1 } from "../components/ui/base";
 
 export const AboutPage = () => {
   var a = "some value"; // functional or global scoped
@@ -9,8 +8,7 @@ export const AboutPage = () => {
   // TODO function
   function function1(funcParam1 = "funcParam1", funcParam2 = "funcParam2") {
     const localParam = 33;
-    const param = localParam + funcParam1 + funcParam2;
-    return param;
+    return localParam + funcParam1 + funcParam2;
   }
   console.log("TODO functions: ", function1(11, 22));
 
@@ -27,7 +25,7 @@ export const AboutPage = () => {
   );
 
   // TODO create objects
-  // Defining a Constructor
+  // Definition a Constructor
   function Car(make, model, year) {
     this.make = make;
     this.model = model;
@@ -39,12 +37,15 @@ export const AboutPage = () => {
   }
   // Using a constructor
   const car1 = new Car("Toyota", "Prius", 2016);
+  console.log("car1: ", car1);
   const car2 = new Car("Hyundai", "Sonata", 2018);
+  console.log("car2: ", car2);
   // Adding method to the constructor prototype
   Car.prototype.age = function () {
     return new Date().getFullYear() - this.year;
   };
   car1.age(); // 2
+  console.log("car1.age(): ", car1.age());
 
   //https://cheatsheets.shecodes.io/javascript
 

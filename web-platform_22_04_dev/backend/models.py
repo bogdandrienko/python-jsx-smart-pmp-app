@@ -3293,3 +3293,13 @@ class RationalModel(models.Model):
     def __str__(self):
         return f"{self.name_char_field} | {self.category_char_field} | {self.status_moderate_char_field} | " \
                f"{self.author_foreign_key_field}"
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=30)
+    product_category = models.CharField(max_length=30, blank=True, default='')
+    created_date = models.DateTimeField()
+    available_items = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['name']

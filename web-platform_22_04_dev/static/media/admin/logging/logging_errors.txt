@@ -130,3 +130,17 @@ error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 1
 000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:35:25.145903
 
 000000000000, 127.0.0.1, /api/auth/rational/, GET, , list index out of range, 2022-04-17 23:35:47.840040
+
+None, 162.142.125.222, /, GET, , User matching query does not exist., 2022-04-18 02:00:07.757616
+
+None, 162.142.125.222, /, GET, , User matching query does not exist., 2022-04-18 02:00:08.939478
+
+None, 65.49.20.68, /, GET, , User matching query does not exist., 2022-04-18 06:04:10.630880
+
+None, 192.241.210.230, /, GET, , User matching query does not exist., 2022-04-18 08:43:11.348434
+
+None, 162.142.125.121, /, GET, , User matching query does not exist., 2022-04-18 15:08:19.704779
+
+None, 162.142.125.121, /, GET, , User matching query does not exist., 2022-04-18 15:08:20.230332
+
+None, 104.152.52.72, /, GET, , User matching query does not exist., 2022-04-18 15:38:16.717848

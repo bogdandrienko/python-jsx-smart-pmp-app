@@ -101,6 +101,8 @@ urlpatterns = [
     path('django/', include('backend_native.urls')),
     path('test/', backend_views.test, name='test'),
 
+    re_path(r'^api/products/$', backend_views.product_list),
+    re_path(r'^api/products/(?P<pk>\d+)/$', backend_views.product_detail),  # r'^products/(?P<pk>[0-9]+)/$'
     path('api/any/post/', backend_views.api_any_post, name='api_any_post'),  # re_path(r'^api/any/post/$'
     path('api/any/post/<int:post_id>/', backend_views.api_any_post_id, name='api_any_post_id'),
     path('api/any/post/<int:post_id>/comments/', backend_views.api_any_post_id_comments,
