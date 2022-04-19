@@ -15,10 +15,14 @@ import { BaseComponent1 } from "../components/ui/base";
 import { Modal1 } from "../components/ui/modals";
 import { Select1 } from "../components/ui/selects";
 import { Post } from "../components/Post";
+import { useDispatch, useSelector } from "react-redux";
+import * as utils from "../components/utils";
+import * as constants from "../components/constants";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 
 export const PostListPaginationPage = () => {
+  const dispatch = useDispatch();
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
 
   const [posts, setPosts] = useState([]);
@@ -36,6 +40,28 @@ export const PostListPaginationPage = () => {
       setTotalPages(getPageCount(totalCount, limit));
     }
   );
+
+  const POST = useSelector((state) => state.POST);
+  const {
+    load: loadPosts,
+    data: dataPosts,
+    error: errorPosts,
+    fail: failPosts,
+  } = POST;
+
+  useEffect(() => {
+    if (dataPosts) {
+      setPosts(dataPosts.response);
+      const totalCount = dataPosts["x-total-count"];
+      setTotalPages(getPageCount(totalCount, limit));
+    } else {
+      dispatch(utils.ActionConstructorUtility(constants.POST));
+    }
+  }, [dataPosts]);
+
+  function getAll() {
+    dispatch(utils.ActionConstructorUtility(constants.POST));
+  }
 
   const changePage = (page) => {
     setPage(page);
