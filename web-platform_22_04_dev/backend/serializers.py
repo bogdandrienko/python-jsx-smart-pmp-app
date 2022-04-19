@@ -318,3 +318,18 @@ class ProductSerializer(serializers.Serializer):
         instance.save()
 
         return instance
+
+
+class IdeaTestModelSerializer(serializers.ModelSerializer):
+    author = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = backend_models.IdeaTestModel
+        fields = '__all__'
+
+    def get_author(self, obj):
+        try:
+            user_model = backend_models.UserModel.objects.get(id=obj.author.id)
+            return UserModelSerializer(instance=user_model, many=False).data
+        except Exception as error:
+            return None

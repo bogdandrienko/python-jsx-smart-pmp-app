@@ -107,6 +107,27 @@ urlpatterns = [
     path('api/any/post/<int:post_id>/', backend_views.api_any_post_id, name='api_any_post_id'),
     path('api/any/post/<int:post_id>/comments/', backend_views.api_any_post_id_comments,
          name='api_any_post_id_comments'),
+
+    # GET "read list post": "http://127.0.0.1:8000/api/post/?search=all&sort=name&page=1&limit=10/"
+    # POST "create post": "http://127.0.0.1:8000/api/post/"
+    re_path(r'^api/post/$', backend_views.api_post, name='api_post'),
+
+    # GET (read single post) 'http://127.0.0.1:8000/api/post/1/'
+    # POST (action post) 'http://127.0.0.1:8000/api/post/1/'
+    # PUT (update post) 'http://127.0.0.1:8000/api/post/1/'
+    # DELETE (delete post) 'http://127.0.0.1:8000/api/post/1/'
+    re_path(r'^api/post/(?P<post_id>\d+)/$', backend_views.api_post_id, name='api_post_id'),
+
+    # GET (read list comment post) 'http://127.0.0.1:8000/api/post/1/comment/?search=all&sort=name&page=1&limit=10/'
+    # POST (create comment post) 'http://127.0.0.1:8000/api/post/1/comment/'
+    # re_path(r'^api_new/post/(?P<post_id>\d+)/comment/$', backend_views.api_post_comment, name='api_idea'),
+
+    # GET (read single comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
+    # POST (action comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
+    # PUT (update comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
+    # DELETE (delete comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
+    # re_path(r'^api_new/post/(?P<idea_id>\d+)/comment/(?P<comment_id>\d+)/$', backend_views.api_post_comment_id,
+    #         name='api_post_comment_id'),
 ]
 
 # TODO redirect from reboot react app ##################################################################################

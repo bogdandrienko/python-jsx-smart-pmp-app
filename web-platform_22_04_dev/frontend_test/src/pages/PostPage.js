@@ -38,10 +38,10 @@ const PostPage = () => {
         ) : (
           <div className="post">
             <div className="post__content">
-              <strong>
-                {post.id} {post.title}
-              </strong>
+              <h5>{post.name}</h5>
+              <strong>{post.place}</strong>
               <div>{post.body}</div>
+              <div>{post.sphere}</div>
             </div>
           </div>
         )}

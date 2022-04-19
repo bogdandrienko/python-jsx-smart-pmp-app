@@ -144,3 +144,49 @@ None, 162.142.125.121, /, GET, , User matching query does not exist., 2022-04-18
 None, 162.142.125.121, /, GET, , User matching query does not exist., 2022-04-18 15:08:20.230332
 
 None, 104.152.52.72, /, GET, , User matching query does not exist., 2022-04-18 15:38:16.717848
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-19 10:04:20.664135
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-19 10:04:21.110237
+
+None, 104.152.52.14, /, GET, , User matching query does not exist., 2022-04-19 11:15:55.050499
+
+None, 104.152.52.73, /, GET, , User matching query does not exist., 2022-04-19 11:34:01.145517
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-19 11:42:32.407013
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-19 11:42:33.647123
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-19 11:42:33.764255
+
+None, 127.0.0.1, /api/post/, GET, , 'IdeaTestModel' object has no attribute 'author_foreign_key_field', 2022-04-19 12:32:06.205521
+
+None, 127.0.0.1, /api/post/, GET, , 'IdeaTestModel' object has no attribute 'author_foreign_key_field', 2022-04-19 12:32:13.101949
+
+None, 104.152.52.61, /, GET, , User matching query does not exist., 2022-04-19 12:43:56.766189
+
+None, 192.168.1.202, /, GET, , User matching query does not exist., 2022-04-19 12:44:55.541109
+
+None, 192.168.1.202, /, GET, , User matching query does not exist., 2022-04-19 12:44:56.394135
+
+None, 192.168.1.202, /, GET, , User matching query does not exist., 2022-04-19 12:44:56.564020
+
+None, 127.0.0.1, /api/post/, POST, , invalid literal for int() with base 10: '', 2022-04-19 12:51:34.808383
+
+None, 127.0.0.1, /api/post/, GET, , 'NoneType' object has no attribute 'id', 2022-04-19 12:52:07.907162
+
+None, 127.0.0.1, /api/post/, GET, , 'NoneType' object has no attribute 'id', 2022-04-19 12:52:09.427855
+
+None, 104.152.52.74, /, GET, , User matching query does not exist., 2022-04-19 13:40:47.588389
+
+None, 185.180.143.6, /, GET, , User matching query does not exist., 2022-04-19 13:52:01.576159
+
+None, 104.152.52.56, /, GET, , User matching query does not exist., 2022-04-19 14:24:01.762240
+
+None, 205.210.31.148, /, GET, , User matching query does not exist., 2022-04-19 14:32:38.808262
+
+None, 104.152.52.69, /, GET, , User matching query does not exist., 2022-04-19 15:23:37.120407
+
+None, 170.130.187.30, /, GET, , User matching query does not exist., 2022-04-19 15:43:43.109729
+
+None, 104.152.52.73, /, GET, , User matching query does not exist., 2022-04-19 16:41:45.769962

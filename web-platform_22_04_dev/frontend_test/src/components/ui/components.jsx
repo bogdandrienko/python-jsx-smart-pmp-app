@@ -10,14 +10,16 @@ export const PostItem = (props) => {
 
   const deletePost = (e) => {
     e.stopPropagation();
+
     props.remove(props.post);
   };
   return (
     <div className="post" onClick={() => navigate("/posts/" + props.post.id)}>
       <div className="post__content">
-        <h5>{props.post.id}.</h5>
-        <strong>{props.post.title}</strong>
+        <h5>{props.post.name}</h5>
+        <strong>{props.post.place}</strong>
         <div>{props.post.body}</div>
+        <div>{props.post.sphere}</div>
         <div className="post__btns">
           <Button1 onClick={deletePost}>delete</Button1>
         </div>
@@ -46,8 +48,9 @@ export const PostList = ({ posts, title, remove }) => {
 
 export const PostForm = ({ create }) => {
   const [post, setPost] = useState({
-    title: "",
-    body: "",
+    name: "",
+    place: "",
+    sphere: "",
   });
 
   const addNewPost = (e) => {
@@ -55,8 +58,9 @@ export const PostForm = ({ create }) => {
     const newPost = { ...post, id: Date.now() };
     create(newPost);
     setPost({
-      title: "",
-      body: "",
+      name: "",
+      place: "",
+      sphere: "",
     });
   };
 
@@ -64,14 +68,20 @@ export const PostForm = ({ create }) => {
     <form>
       <h5>Create post</h5>
       <Input1
-        value={post.title}
-        onChange={(e) => setPost({ ...post, title: e.target.value })}
+        value={post.name}
+        onChange={(e) => setPost({ ...post, name: e.target.value })}
         type="text"
         placeholder="Title..."
       />
       <Input1
-        value={post.body}
-        onChange={(e) => setPost({ ...post, body: e.target.value })}
+        value={post.place}
+        onChange={(e) => setPost({ ...post, place: e.target.value })}
+        type="text"
+        placeholder="Body..."
+      />
+      <Input1
+        value={post.sphere}
+        onChange={(e) => setPost({ ...post, sphere: e.target.value })}
         type="text"
         placeholder="Body..."
       />

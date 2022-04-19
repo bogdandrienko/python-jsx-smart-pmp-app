@@ -914,3 +914,84 @@ class RationalModelAdmin(admin.ModelAdmin):
 
 
 admin.site.register(backend_models.RationalModel, RationalModelAdmin)
+
+
+class IdeaTestModelAdmin(admin.ModelAdmin):
+    """
+    Настройки отображения, фильтрации и поиска модели:'IdeaModel' на панели администратора
+    """
+
+    list_display = (
+        "author",
+        "subdivision",
+        "sphere",
+        "category",
+        "image",
+        "name",
+        "place",
+        "description",
+        "status_moderate",
+        "moderate_author",
+        "comment_moderate",
+        "creation",
+        "registration",
+    )
+    list_display_links = (
+        "author",
+    )
+    list_editable = (
+        "status_moderate",
+        "subdivision",
+        "sphere",
+        "category",
+    )
+    list_filter = (
+        "author",
+        "subdivision",
+        "sphere",
+        "category",
+        "image",
+        "name",
+        "place",
+        "description",
+        "status_moderate",
+        "moderate_author",
+        "comment_moderate",
+        "creation",
+        "registration",
+    )
+    fieldsets = (
+        ("Основная информация", {"fields": (
+            "author",
+            "subdivision",
+            "sphere",
+            "category",
+            "image",
+            "name",
+            "place",
+            "description",
+            "status_moderate",
+            "moderate_author",
+            "comment_moderate",
+            "creation",
+            "registration",
+        )}),
+    )
+    search_fields = [
+        "author",
+        "subdivision",
+        "sphere",
+        "category",
+        "image",
+        "name",
+        "place",
+        "description",
+        "status_moderate",
+        "moderate_author",
+        "comment_moderate",
+        "creation",
+        "registration",
+    ]
+
+
+admin.site.register(backend_models.IdeaTestModel, IdeaTestModelAdmin)

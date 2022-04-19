@@ -1,6 +1,9 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
+
 import React, { useEffect, useRef, useState } from "react";
+
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
+
 import { Button1 } from "../components/ui/buttons";
 import { Services } from "../components/services";
 import { Loader1 } from "../components/ui/loaders";
@@ -11,10 +14,13 @@ import { Pagination1 } from "../components/ui/paginations";
 import { BaseComponent1 } from "../components/ui/base";
 import { Modal1 } from "../components/ui/modals";
 import { Select1 } from "../components/ui/selects";
+import { Post } from "../components/Post";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
+
 export const PostListPaginationPage = () => {
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
+
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
   const [modal, setModal] = useState(false);
@@ -35,13 +41,13 @@ export const PostListPaginationPage = () => {
     setPage(page);
   };
 
-  const createPost = (newPost) => {
-    setPosts([...posts, newPost]);
+  const createPost = async (newPost) => {
+    await Services.createPost(newPost);
     setModal(false);
   };
 
-  const removePost = (post) => {
-    setPosts(posts.filter((p) => p.id !== post.id));
+  const removePost = async (post) => {
+    await Services.removePost(post.id);
   };
 
   useEffect(() => {
@@ -51,6 +57,7 @@ export const PostListPaginationPage = () => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <BaseComponent1>
+      <Post />
       <Modal1 visible={modal} setVisible={setModal}>
         <PostForm create={createPost} />
       </Modal1>

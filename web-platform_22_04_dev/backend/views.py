@@ -35,6 +35,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from backend import models as backend_models, serializers as backend_serializers, service as backend_service
 
+# TODO custom variables ################################################################################################
+
+HTTP_METHOD_NAMES = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+
 
 # TODO viewsets ########################################################################################################
 
@@ -58,7 +62,7 @@ class GroupViewSet(viewsets.ModelViewSet):
 
 # TODO routes ##########################################################################################################
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @authentication_classes([BasicAuthentication])
 def api_auth_routes(request):
     """
@@ -191,7 +195,7 @@ def index(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_ratings_list(request):
     """
@@ -333,7 +337,7 @@ def api_auth_ratings_list(request):
 
 # TODO profile #########################################################################################################
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([AllowAny])
 def api_any_user_login(request):
     """
@@ -418,7 +422,7 @@ def api_any_user_login(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_user_detail(request):
     """
@@ -460,7 +464,7 @@ def api_auth_user_detail(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([AllowAny])
 def api_any_user_recover_find(request):
     """
@@ -520,7 +524,7 @@ def api_any_user_recover_find(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([AllowAny])
 def api_any_user_recover_check_answer(request):
     """
@@ -577,7 +581,7 @@ def api_any_user_recover_check_answer(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([AllowAny])
 def api_any_user_recover_send_email(request):
     """
@@ -675,7 +679,7 @@ def api_any_user_recover_send_email(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([AllowAny])
 def api_any_user_recover_check_email(request):
     """
@@ -736,7 +740,7 @@ def api_any_user_recover_check_email(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([AllowAny])
 def api_any_user_recover_change_password(request):
     """
@@ -797,7 +801,7 @@ def api_any_user_recover_change_password(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_user_change(request):
     """
@@ -870,7 +874,7 @@ def api_auth_user_change(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_user_change_password(request):
     """
@@ -931,7 +935,7 @@ def api_auth_user_change_password(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_user_list_all(request):
     """
@@ -985,7 +989,7 @@ def api_auth_user_list_all(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_user_notification(request, notification_id=-1):
     """
@@ -1090,7 +1094,7 @@ def api_auth_user_notification(request, notification_id=-1):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_user_notification_id_delete(request, notification_id):
     """
@@ -1137,7 +1141,7 @@ def api_auth_user_notification_id_delete(request, notification_id):
 
 # TODO progress ########################################################################################################
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_idea(request):
     """
@@ -1672,7 +1676,7 @@ def api_auth_idea(request):
 
 # TODO buhgalteria #####################################################################################################
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_user_salary(request):
     """
@@ -2331,7 +2335,7 @@ def api_auth_user_salary(request):
 
 # TODO sup #############################################################################################################
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_vacation(request):
     """
@@ -2459,7 +2463,7 @@ def api_auth_vacation(request):
 
 # TODO moderator #######################################################################################################
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @authentication_classes([BasicAuthentication])
 def api_basic_admin_user_temp(request):
     """
@@ -2524,7 +2528,7 @@ def api_basic_admin_user_temp(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_admin_terminal_reboot(request):
     """
@@ -2595,7 +2599,7 @@ def api_auth_admin_terminal_reboot(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_admin_check_user(request):
     """
@@ -2646,7 +2650,7 @@ def api_auth_admin_check_user(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_admin_change_user_password(request):
     """
@@ -2710,7 +2714,7 @@ def api_auth_admin_change_user_password(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_admin_change_user_activity(request):
     """
@@ -2771,7 +2775,7 @@ def api_auth_admin_change_user_activity(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_admin_create_or_change_users(request):
     """
@@ -2940,7 +2944,7 @@ def api_auth_admin_create_or_change_users(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_admin_export_users(request):
     """
@@ -3130,7 +3134,7 @@ def api_auth_admin_export_users(request):
 
 # TODO develop #########################################################################################################
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
 def api_auth_rational(request, rational_id=-1):
     """
@@ -3548,7 +3552,7 @@ def test(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([AllowAny])
 def api_any_post(request):
     """
@@ -3606,7 +3610,7 @@ def api_any_post(request):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([AllowAny])
 def api_any_post_id(request, post_id):
     """
@@ -3649,7 +3653,7 @@ def api_any_post_id(request, post_id):
         return render(request, "backend/404.html")
 
 
-@api_view(http_method_names=["GET", "POST", "PUT", "DELETE"])
+@api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([AllowAny])
 def api_any_post_id_comments(request, post_id):
     """
@@ -3749,3 +3753,158 @@ def product_detail(request, pk):
     elif request.method == 'DELETE':
         product.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
+def api_post(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    page = int(request.GET.get('page', 1))
+                    limit = int(request.GET.get('limit', 10))
+
+                    # TODO action ######################################################################################
+
+                    posts = backend_models.IdeaTestModel.objects.all()
+                    num_pages = len(posts)
+                    if limit > 0:
+                        p = Paginator(posts, limit)
+                        posts = p.page(page).object_list
+                    response = {
+                        "response": backend_serializers.IdeaTestModelSerializer(instance=posts, many=True).data,
+                        "x-total-count": num_pages
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    name = str(request.data.get('name', ''))
+                    place = str(request.data.get('place', ''))
+                    sphere = str(request.data.get('sphere', ''))
+
+                    # TODO action ######################################################################################
+
+                    backend_models.IdeaTestModel.objects.create(
+                        name=name,
+                        place=place,
+                        sphere=sphere
+                    )
+
+                    response = {
+                        "response": "Successfully created!"
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
+def api_post_id(request, post_id):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO action ######################################################################################
+
+                    post = backend_models.IdeaTestModel.objects.get(id=post_id)
+                    response = {
+                        "response": backend_serializers.IdeaTestModelSerializer(instance=post, many=False).data,
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        if req_inst.method == "DELETE":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO action ######################################################################################
+
+                    backend_models.IdeaTestModel.objects.get(id=post_id).delete()
+                    response = {
+                        "response": "Successfully deleted!",
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")

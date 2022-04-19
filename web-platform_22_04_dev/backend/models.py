@@ -3303,3 +3303,243 @@ class Product(models.Model):
 
     class Meta:
         ordering = ['name']
+
+
+class IdeaTestModel(models.Model):
+    """
+    IdeaTestModel
+    """
+
+    author = models.ForeignKey(
+        db_column='author_db_column',
+        db_index=True,
+        db_tablespace='author_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Автор',
+        help_text='<small class="text-muted">UserModel: foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='idea_test_author_related_name',
+    )
+    subdivision = models.CharField(
+        db_column='subdivision_db_column',
+        db_index=True,
+        db_tablespace='subdivision_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Подразделение',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    sphere = models.CharField(
+        db_column='sphere_db_column',
+        db_index=True,
+        db_tablespace='sphere_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Сфера',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    category = models.CharField(
+        db_column='category_db_column',
+        db_index=True,
+        db_tablespace='category_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Категория',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    image = models.ImageField(
+        db_column='image_db_column',
+        db_index=True,
+        db_tablespace='image_db_tablespace',
+        error_messages=False,
+        validators=[FileExtensionValidator(['jpg', 'png'])],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='uploads/idea/default_idea.jpg',
+        verbose_name='Изображение',
+        help_text='<small class="text-muted">>image_field[jpg, png]</small><hr><br>',
+
+        upload_to='uploads/idea/avatar/',
+        max_length=200,
+    )
+    name = models.CharField(
+        db_column='name_db_column',
+        db_index=True,
+        db_tablespace='name_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Название',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    place = models.CharField(
+        db_column='place_db_column',
+        db_index=True,
+        db_tablespace='place_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Место',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    description = models.TextField(
+        db_column='description_db_column',
+        db_index=True,
+        db_tablespace='description_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(3000), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Описание',
+        help_text='<small class="text-muted">text_field[0, 3000]</small><hr><br>',
+
+        max_length=3000,
+    )
+    status_moderate = models.CharField(
+        db_column='status_moderate_db_column',
+        db_index=True,
+        db_tablespace='status_moderate_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default="",
+        verbose_name='Статус',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    moderate_author = models.ForeignKey(
+        db_column='moderate_author_db_column',
+        db_index=True,
+        db_tablespace='moderate_author_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=None,
+        verbose_name='Модерация',
+        help_text='<small class="text-muted">UserModel: foreign_key_field</small><hr><br>',
+
+        to=UserModel,
+        on_delete=models.SET_NULL,
+        related_name='idea_test_moderate_author',
+    )
+    comment_moderate = models.CharField(
+        db_column='comment_moderate_field_db_column',
+        db_index=True,
+        db_tablespace='comment_moderate_field_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        validators=[MinLengthValidator(0), MaxLengthValidator(300), ],
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default='',
+        verbose_name='Комментарий модерации',
+        help_text='<small class="text-muted">char_field[0, 300]</small><hr><br>',
+
+        max_length=300,
+    )
+    creation = models.DateTimeField(
+        db_column='creation_db_column',
+        db_index=True,
+        db_tablespace='creation_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата и время создания',
+        help_text='<small class="text-muted">datetime</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+    registration = models.DateTimeField(
+        db_column='registration_db_column',
+        db_index=True,
+        db_tablespace='registration_db_tablespace',
+        error_messages=False,
+        primary_key=False,
+        unique=False,
+        editable=True,
+        blank=True,
+        null=True,
+        default=timezone.now,
+        verbose_name='Дата и время регистрации',
+        help_text='<small class="text-muted">datetime</small><hr><br>',
+
+        auto_now=False,
+        auto_now_add=False,
+    )
+
+    class Meta:
+        app_label = 'backend'
+        ordering = ('-registration',)
+        verbose_name = 'Тест Идея'
+        verbose_name_plural = 'Тест Банк идей 1, Идеи'
+        db_table = 'idea_test1_model_table'
+
+    def __str__(self):
+        return f"{self.name} | {self.category} | {self.status_moderate} | {self.author}"
