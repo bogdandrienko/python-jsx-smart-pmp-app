@@ -12,23 +12,23 @@ export const PostPage = () => {
   const navigate = useNavigate();
   const id = useParams().id;
 
-  const PostGetOneStore = useSelector((state) => state.PostGetOneStore);
+  const PostReadStore = useSelector((state) => state.PostReadStore);
   const {
-    load: loadPostGetOneStore,
-    data: dataPostGetOneStore,
-    error: errorPostGetOneStore,
-    fail: failPostGetOneStore,
-  } = PostGetOneStore;
+    load: loadPostReadStore,
+    data: dataPostReadStore,
+    error: errorPostReadStore,
+    fail: failPostReadStore,
+  } = PostReadStore;
 
   useEffect(() => {
-    dispatch(actions.GetPostAction(constants.PostGetOneStore, id));
+    dispatch(actions.Post.PostReadAction(constants.PostReadStore, id));
   }, [id]);
 
   const deletePost = async (event) => {
     event.stopPropagation();
+    dispatch(actions.Post.PostDeleteAction(constants.PostDeleteStore, id));
     navigate("/posts");
-    await actions.Services.removePost(id);
-    dispatch({ type: constants.PostGetListStore.reset });
+    dispatch({ type: constants.PostReadListStore.reset });
   };
 
   return (
@@ -36,21 +36,19 @@ export const PostPage = () => {
       <button onClick={() => navigate("/posts")} className="custom_button_1">
         {" <= "} back
       </button>
-      {errorPostGetOneStore && (
-        <h4>We have some error {errorPostGetOneStore}</h4>
-      )}
-      {failPostGetOneStore && <h4>We have some fail {failPostGetOneStore}</h4>}
+      {errorPostReadStore && <h4>We have some error {errorPostReadStore}</h4>}
+      {failPostReadStore && <h4>We have some fail {failPostReadStore}</h4>}
       <div className="post_detail">
-        {loadPostGetOneStore ? (
+        {loadPostReadStore ? (
           <div>Loading...</div>
         ) : (
-          dataPostGetOneStore && (
+          dataPostReadStore && (
             <div className="post">
               <div className="post__content">
-                <h5>{dataPostGetOneStore.name}</h5>
-                <strong>{dataPostGetOneStore.place}</strong>
-                <div>{dataPostGetOneStore.body}</div>
-                <div>{dataPostGetOneStore.sphere}</div>
+                <h5>{dataPostReadStore.name}</h5>
+                <strong>{dataPostReadStore.place}</strong>
+                <div>{dataPostReadStore.body}</div>
+                <div>{dataPostReadStore.sphere}</div>
               </div>
               <div>
                 <button onClick={(event) => setVisible(true)}>delete</button>

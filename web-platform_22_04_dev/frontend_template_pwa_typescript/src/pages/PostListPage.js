@@ -24,24 +24,36 @@ export const PostListPage = () => {
   const [limit, setLimit] = useState(3);
   const [page, setPage] = useState(1);
 
-  const PostGetListStore = useSelector((state) => state.PostGetListStore);
+  const PostReadListStore = useSelector((state) => state.PostReadListStore);
   const {
     load: loadPosts,
     data: dataPosts,
     error: errorPosts,
     fail: failPosts,
-  } = PostGetListStore;
+  } = PostReadListStore;
+
+  const PostDeleteStore = useSelector((state) => state.PostDeleteStore);
+  const {
+    load: loadPostDeleteStore,
+    data: dataPostDeleteStore,
+    error: errorPostDeleteStore,
+    fail: failPostDeleteStore,
+  } = PostDeleteStore;
 
   useEffect(() => {
     dispatch(
-      actions.GetPostListAction(constants.PostGetListStore, page, limit)
+      actions.Post.PostReadListAction(constants.PostReadListStore, page, limit)
     );
   }, [page, limit]);
 
   useEffect(() => {
     if (!dataPosts) {
       dispatch(
-        actions.GetPostListAction(constants.PostGetListStore, page, limit)
+        actions.Post.PostReadListAction(
+          constants.PostReadListStore,
+          page,
+          limit
+        )
       );
     }
   }, [dataPosts]);
@@ -72,7 +84,7 @@ export const PostListPage = () => {
       {/* buttons group */}
       <div className="d-flex justify-content-center">
         <button
-          onClick={() => dispatch({ type: constants.PostGetListStore.reset })}
+          onClick={() => dispatch({ type: constants.PostReadListStore.reset })}
           className="btn btn-lg btn-outline-primary m-1 p-2"
         >
           update
@@ -84,6 +96,7 @@ export const PostListPage = () => {
           create
         </button>
       </div>
+      <div>{dataPostDeleteStore && dataPostDeleteStore}</div>
       <div>
         {/* search field group */}
         <input

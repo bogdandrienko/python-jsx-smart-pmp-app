@@ -218,3 +218,7 @@ None, 127.0.0.1, /api/post/24/, GET, , IdeaTestModel matching query does not exi
 None, 127.0.0.1, /api/post/19/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 16:29:53.799106
 
 None, 127.0.0.1, /api/post/16/, DELETE, , database is locked, 2022-04-20 16:32:35.199196
+
+None, 127.0.0.1, /api/post/35/, DELETE, , IdeaTestModel matching query does not exist., 2022-04-20 17:30:34.659979
+
+None, 127.0.0.1, /api/post/34/, DELETE, , IdeaTestModel matching query does not exist., 2022-04-20 17:30:51.930876

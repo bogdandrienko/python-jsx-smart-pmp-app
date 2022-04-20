@@ -25,7 +25,7 @@ export const PostCreatePage = () => {
 
   const createPost = async (event) => {
     event.preventDefault();
-    dispatch(actions.PostCreateAction(constants.PostCreateStore, post));
+    dispatch(actions.Post.PostCreateAction(constants.PostCreateStore, post));
     setPost({
       name: "",
       place: "",

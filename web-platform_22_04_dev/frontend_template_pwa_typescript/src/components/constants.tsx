@@ -11,16 +11,20 @@ function connectReducer(name = "", reducer) {
 
 export const DEBUG_CONSTANT = process.env.NODE_ENV === "production";
 
-export const PostGetListStore = utils.StoreReducerConstructorUtility(
-  "PostGetListStore",
-  connectReducer
-);
-export const PostGetOneStore = utils.StoreReducerConstructorUtility(
-  "PostGetOneStore",
-  connectReducer
-);
 export const PostCreateStore = utils.StoreReducerConstructorUtility(
   "PostCreateStore",
+  connectReducer
+);
+export const PostReadListStore = utils.StoreReducerConstructorUtility(
+  "PostReadListStore",
+  connectReducer
+);
+export const PostReadStore = utils.StoreReducerConstructorUtility(
+  "PostReadStore",
+  connectReducer
+);
+export const PostDeleteStore = utils.StoreReducerConstructorUtility(
+  "PostDeleteStore",
   connectReducer
 );
 

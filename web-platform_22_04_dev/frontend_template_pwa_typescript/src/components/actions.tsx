@@ -6,111 +6,152 @@ import * as constants from "./constants";
 
 // TODO profile ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+export class Post {
+  // @ts-ignore
+  static PostCreateAction(constant, post) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const { data } = await axios.post(`/api/post/`, post);
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 2000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+
+  // @ts-ignore
+  static PostReadListAction(constant, page, limit) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const { data } = await axios.get("/api/post/", {
+          params: {
+            page: page,
+            limit: limit,
+          },
+        });
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 2000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+
+  // @ts-ignore
+  static PostReadAction(constant, id) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const { data } = await axios.get(`/api/post/${id}/`);
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 2000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+
+  // @ts-ignore
+  static PostDeleteAction(constant, id) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const { data } = await axios.delete(`/api/post/${id}/`);
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 2000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+}
 // @ts-ignore
 export const userLogoutAction = () => async (dispatch) => {
   localStorage.removeItem("userToken");
   // @ts-ignore
-  dispatch({ type: constants.PostGetListStore.reset });
-  dispatch({ type: constants.PostGetOneStore.reset });
+  dispatch({ type: constants.PostReadListStore.reset });
+  dispatch({ type: constants.PostReadStore.reset });
 };
 
-// @ts-ignore
-export function GetPostListAction(constant, page, limit) {
-  // @ts-ignore
-  return async function (dispatch, getState) {
-    try {
-      dispatch({
-        type: constant.load,
-      });
-      const { data } = await axios.get("/api/post/", {
-        params: {
-          page: page,
-          limit: limit,
-        },
-      });
-      if (data.response) {
-        const response = data.response;
-        dispatch({
-          type: constant.data,
-          payload: response,
-        });
-      } else {
-        const response = data.error;
-        dispatch({
-          type: constant.error,
-          payload: response,
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: constant.fail,
-        payload: error,
-      });
-    }
-  };
-}
-
-// @ts-ignore
-export function GetPostAction(constant, id) {
-  // @ts-ignore
-  return async function (dispatch, getState) {
-    try {
-      dispatch({
-        type: constant.load,
-      });
-      const { data } = await axios.get(`/api/post/${id}/`);
-      if (data.response) {
-        const response = data.response;
-        dispatch({
-          type: constant.data,
-          payload: response,
-        });
-      } else {
-        const response = data.error;
-        dispatch({
-          type: constant.error,
-          payload: response,
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: constant.fail,
-        payload: error,
-      });
-    }
-  };
-}
-
-// @ts-ignore
-export function PostCreateAction(constant, post) {
-  // @ts-ignore
-  return async function (dispatch, getState) {
-    try {
-      dispatch({
-        type: constant.load,
-      });
-      const { data } = await axios.post(`/api/post/`, post);
-      if (data.response) {
-        const response = data.response;
-        dispatch({
-          type: constant.data,
-          payload: response,
-        });
-      } else {
-        const response = data.error;
-        dispatch({
-          type: constant.error,
-          payload: response,
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: constant.fail,
-        payload: error,
-      });
-    }
-  };
-}
 export class Services {
   static async getAll(limit = 10, page = 1) {
     // const response = await axios.get("/api/any/post/", {
