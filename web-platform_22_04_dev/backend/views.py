@@ -3791,8 +3791,10 @@ def api_post(request):
                         p = Paginator(posts, limit)
                         posts = p.page(page).object_list
                     response = {
-                        "response": backend_serializers.IdeaTestModelSerializer(instance=posts, many=True).data,
-                        "x-total-count": num_pages
+                        "response": {
+                            "data": backend_serializers.IdeaTestModelSerializer(instance=posts, many=True).data,
+                            "x-total-count": num_pages
+                        }
                     }
 
                     # TODO response ####################################################################################

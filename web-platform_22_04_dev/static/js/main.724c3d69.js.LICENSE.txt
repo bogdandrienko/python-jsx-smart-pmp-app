@@ -39,7 +39,7 @@
  */
 
 /**
- * React Router DOM v6.3.0
+ * React Routers DOM v6.3.0
  *
  * Copyright (c) Remix Software Inc.
  *
@@ -50,7 +50,7 @@
  */
 
 /**
- * React Router v6.3.0
+ * React Routers v6.3.0
  *
  * Copyright (c) Remix Software Inc.
  *

@@ -192,3 +192,29 @@ None, 170.130.187.30, /, GET, , User matching query does not exist., 2022-04-19 
 None, 104.152.52.73, /, GET, , User matching query does not exist., 2022-04-19 16:41:45.769962
 
 error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-19 18:16:14.239224
+
+None, 127.0.0.1, /api/post/13/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 11:17:05.400772
+
+None, 127.0.0.1, /api/post/13/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 11:17:05.781909
+
+None, 127.0.0.1, /api/post/, GET, , That page contains no results, 2022-04-20 13:51:35.517631
+
+None, 137.184.105.171, /, GET, , User matching query does not exist., 2022-04-20 16:17:54.072966
+
+None, 127.0.0.1, /api/post/25/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 16:26:59.592083
+
+None, 127.0.0.1, /api/post/23/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 16:27:19.524673
+
+None, 127.0.0.1, /api/post/22/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 16:27:38.745910
+
+None, 127.0.0.1, /api/post/22/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 16:27:46.367388
+
+None, 127.0.0.1, /api/post/21/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 16:27:51.222061
+
+None, 127.0.0.1, /api/post/20/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 16:28:01.620516
+
+None, 127.0.0.1, /api/post/24/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 16:28:30.899224
+
+None, 127.0.0.1, /api/post/19/, GET, , IdeaTestModel matching query does not exist., 2022-04-20 16:29:53.799106
+
+None, 127.0.0.1, /api/post/16/, DELETE, , database is locked, 2022-04-20 16:32:35.199196
