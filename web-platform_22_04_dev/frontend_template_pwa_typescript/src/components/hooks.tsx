@@ -1,6 +1,7 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import type { RootState, AppDispatch } from "./store";
 import { useEffect, useRef, useState, useMemo } from "react";
+import * as constants from "./constants";
 
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = () => useDispatch<AppDispatch>();
@@ -69,4 +70,22 @@ export const usePosts = (posts, sort, query) => {
 
   // @ts-ignore
   return sortedAndSearchedPosts;
+};
+
+// @ts-ignore
+export const useSelectorCustom1 = (constant) => {
+  const storeConstant = constant.data.split("_")[0];
+  // @ts-ignore
+  return useSelector((state) => state[storeConstant]);
+};
+
+// @ts-ignore
+export const useStateCustom1 = (initialState) => {
+  // @ts-ignore
+  const [variable, setVariable] = useState({ ...initialState });
+  function setDefault() {
+    // @ts-ignore
+    setVariable({ ...initialState });
+  }
+  return [variable, setVariable, setDefault];
 };

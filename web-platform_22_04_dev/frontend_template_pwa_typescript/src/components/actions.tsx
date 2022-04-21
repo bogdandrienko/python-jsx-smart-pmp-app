@@ -361,7 +361,7 @@ export class IdeaComment {
               type: constant.data,
               payload: response,
             });
-          }, 1000);
+          }, 3000);
         } else {
           const response = data.error;
           dispatch({
@@ -509,7 +509,7 @@ export class IdeaRating {
               type: constant.data,
               payload: response,
             });
-          }, 1000);
+          }, 3000);
         } else {
           const response = data.error;
           dispatch({

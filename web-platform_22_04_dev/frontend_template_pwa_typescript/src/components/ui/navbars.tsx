@@ -175,7 +175,7 @@ export const NavbarComponent1 = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <div className="container p-1">
+        <div className="container p-0 pt-1">
           <div className="card shadow custom-background-transparent-middle m-0 p-0">
             <div className="card-header bg-primary bg-opacity-10 m-0 p-1">
               <small className="display-6 fw-normal m-0 p-1">title</small>

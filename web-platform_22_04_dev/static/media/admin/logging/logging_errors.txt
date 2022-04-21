@@ -266,3 +266,17 @@ None, 127.0.0.1, /api/idea/9/comment/, POST, , User matching query does not exis
 None, 104.152.52.74, /, GET, , User matching query does not exist., 2022-04-21 14:43:31.801684
 
 None, 223.71.167.165, /, GET, , User matching query does not exist., 2022-04-21 15:02:05.707366
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-21 19:56:23.285778
+
+None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-21 23:28:47.702694
+
+None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-21 23:28:47.765766
+
+None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-21 23:28:51.632575
+
+None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-21 23:28:52.952149
+
+None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-21 23:52:07.152431
+
+None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-21 23:54:08.236343

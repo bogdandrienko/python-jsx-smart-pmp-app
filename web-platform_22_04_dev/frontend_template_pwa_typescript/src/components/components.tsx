@@ -3,6 +3,7 @@ import * as utils from "./utils";
 import React from "react";
 // @ts-ignore
 import { Spinner, Alert } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 export const StoreStatusComponent = ({
   // @ts-ignore
@@ -80,6 +81,92 @@ export const StoreStatusComponent = ({
   );
 };
 
+export const StoreComponent = ({
+  // @ts-ignore
+  storeStatus: storeStore,
+  consoleLog = false,
+  showLoad = true,
+  loadText = "",
+  showData = true,
+  dataText = "",
+  showError = true,
+  errorText = "",
+  showFail = true,
+  failText = "",
+}) => {
+  /////////////////////////////////////////////////////////////////////////////////////////////////TODO react components
+  const storeConstant = storeStore.data.split("_")[0];
+  const {
+    load: loadStore,
+    data: dataStore,
+    error: errorStore,
+    fail: failStore,
+    // @ts-ignore
+  } = useSelector((state) => state[storeConstant]);
+  if (consoleLog) {
+    console.log(`${storeConstant}`, {
+      load: loadStore,
+      data: dataStore,
+      error: errorStore,
+      fail: failStore,
+    });
+  }
+  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
+  return (
+    <div key={storeConstant} className="m-0 p-0">
+      {showLoad && loadStore && (
+        <div className="row justify-content-center m-0 p-0">
+          {loadText ? (
+            <Alert variant={"secondary"} className="text-center m-0 p-1">
+              {loadText}
+            </Alert>
+          ) : (
+            <Spinner
+              animation="border"
+              role="status"
+              style={{
+                height: "50px",
+                width: "50px",
+                margin: "auto",
+                display: "block",
+              }}
+              className="text-center m-0 p-0"
+            >
+              <small className="m-0 p-0">ждите</small>
+              <span className="sr-only m-0 p-0" />
+            </Spinner>
+          )}
+        </div>
+      )}
+      {showData && dataStore && (
+        <div className="row justify-content-center m-0 p-0">
+          <Alert variant={"success"} className="text-center m-0 p-1">
+            {dataText
+              ? dataText
+              : typeof dataStore === "string"
+              ? dataStore
+              : "произошла ошибка"}
+          </Alert>
+        </div>
+      )}
+      {showError && errorStore && (
+        <div className="row justify-content-center m-0 p-0">
+          <Alert variant={"danger"} className="text-center m-0 p-1">
+            {errorText ? errorText : errorStore}
+          </Alert>
+        </div>
+      )}
+      {showFail && failStore && (
+        <div className="row justify-content-center m-0 p-0">
+          <Alert variant={"warning"} className="text-center m-0 p-1">
+            {failText ? failText : failStore}
+          </Alert>
+        </div>
+      )}
+    </div>
+  );
+};
+
 // @ts-ignore
 export const MessageComponent = ({ variant, children }) => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +211,7 @@ export const AccordionComponent = ({
 }) => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
-    <div className="m-0 p-1">
+    <div className="m-0 p-0">
       <div className="accordion m-0 p-0" id="accordionExample">
         <div className="accordion-item custom-background-transparent-middle m-0 p-0">
           <h2

@@ -9,7 +9,8 @@ function connectReducer(name = "", reducer) {
   reducers[name] = reducer;
 }
 
-export const DEBUG_CONSTANT = process.env.NODE_ENV === "production";
+// export const DEBUG_CONSTANT = process.env.NODE_ENV === "production";
+export const DEBUG_CONSTANT = true;
 
 export const PostCreateStore = utils.StoreReducerConstructorUtility(
   "PostCreateStore",

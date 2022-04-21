@@ -1,6 +1,7 @@
 import * as constants from "./constants";
 import * as actions from "./actions";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 // TODO constructors ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -359,5 +360,48 @@ export const GetRegexType = ({
       console.log(error);
     }
     return new RegExp(`[^_]`, "g");
+  }
+};
+
+// @ts-ignore
+export const Delay = (callbackAfterDelay, time = 1000) => {
+  try {
+    new Promise((resolve) => setTimeout(resolve, time)).then(() => {
+      callbackAfterDelay();
+    });
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};
+
+export const Sleep = (time = 1000) => {
+  try {
+    return new Promise((resolve) => setTimeout(resolve, time));
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};
+
+export const GetPagesArray = (totalCount = 0, limit = 1) => {
+  try {
+    const page = Math.ceil(totalCount / limit);
+    let result = [];
+    if (totalCount) {
+      for (let i = 0; i < page; i++) {
+        result.push(i + 1);
+      }
+    }
+    return result;
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return [];
   }
 };
