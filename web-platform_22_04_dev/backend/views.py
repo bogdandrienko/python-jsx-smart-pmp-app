@@ -3758,6 +3758,447 @@ def product_detail(request, pk):
 @api_view(http_method_names=HTTP_METHOD_NAMES)
 # @permission_classes([IsAuthenticated])
 @permission_classes([AllowAny])
+def api_user(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    user_models = backend_models.UserModel.objects.filter(
+                        activity_boolean_field=True
+                    ).order_by("last_name_char_field")
+
+                    # TODO action ######################################################################################
+
+                    users = []
+                    for user_model in user_models:
+                        if user_model.user_foreign_key_field.is_superuser:
+                            continue
+                        users.append(f"{user_model.last_name_char_field} {user_model.first_name_char_field} "
+                                     f"{user_model.personnel_number_slug_field} ")
+                    response = {
+                        "response": {
+                            "list": users,
+                            "x-total-count": len(users)
+                        }
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    name = str(request.data.get('name', ''))
+                    place = str(request.data.get('place', ''))
+                    sphere = str(request.data.get('sphere', ''))
+
+                    # TODO action ######################################################################################
+
+                    backend_models.IdeaTestModel.objects.create(
+                        name=name,
+                        place=place,
+                        sphere=sphere
+                    )
+
+                    response = {
+                        "response": "Successfully created!"
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
+def api_idea(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    page = int(request.GET.get('page', 1))
+                    limit = int(request.GET.get('limit', 10))
+
+                    # TODO action ######################################################################################
+
+                    posts = backend_models.IdeaModel.objects.all()
+                    num_pages = len(posts)
+                    if limit > 0:
+                        p = Paginator(posts, limit)
+                        posts = p.page(page).object_list
+                    response = {
+                        "response": {
+                            "list": backend_serializers.IdeaModelSerializer(instance=posts, many=True).data,
+                            "x-total-count": num_pages
+                        }
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            # if req_inst.action_type == "":
+            if True:
+                # try:
+                if True:
+                    # TODO get_value ###################################################################################
+
+                    subdivision = str(request.data.get('name', ''))
+                    sphere = str(request.data.get('place', ''))
+                    category = str(request.data.get('sphere', ''))
+                    avatar = request.data.get('avatar', None)
+                    name = str(request.data.get('name', ''))
+                    place = str(request.data.get('place', ''))
+                    description = str(request.data.get('description', ''))
+                    moderate = str(request.data.get('moderate', 'на модерации'))
+
+                    # TODO action ######################################################################################
+
+                    backend_models.IdeaModel.objects.create(
+                        author_foreign_key_field=backend_models.UserModel.objects.all()[0],
+                        subdivision_char_field=subdivision,
+                        sphere_char_field=sphere,
+                        category_char_field=category,
+                        image_field=avatar,
+                        name_char_field=name,
+                        place_char_field=place,
+                        description_text_field=description,
+                        status_moderate_char_field=moderate
+                    )
+
+                    response = {
+                        "response": "Successfully created!"
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                # except Exception as error:
+                #     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                #     return Response({"error": "This action has error!"})
+            # return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
+def api_idea_id(request, idea_id):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO action ######################################################################################
+
+                    post = backend_models.IdeaModel.objects.get(id=idea_id)
+                    response = {
+                        "response": backend_serializers.IdeaModelSerializer(instance=post, many=False).data,
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        if req_inst.method == "DELETE":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO action ######################################################################################
+
+                    backend_models.IdeaModel.objects.get(id=idea_id).delete()
+                    response = {
+                        "response": "Successfully deleted!",
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
+def api_idea_comment(request, idea_id):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    page = int(request.GET.get('page', 1))
+                    limit = int(request.GET.get('limit', 10))
+
+                    # TODO action ######################################################################################
+
+                    idea = backend_models.IdeaModel.objects.get(id=idea_id)
+                    comments = backend_models.IdeaCommentModel.objects.filter(idea_foreign_key_field=idea)
+                    num_pages = len(comments)
+                    if limit > 0:
+                        p = Paginator(comments, limit)
+                        comments = p.page(page).object_list
+                    response = {
+                        "response": {
+                            "list": backend_serializers.IdeaCommentModelSerializer(instance=comments, many=True).data,
+                            "x-total-count": num_pages
+                        }
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            # if req_inst.action_type == "":
+            if True:
+                # try:
+                if True:
+                    # TODO get_value ###################################################################################
+
+                    comment = str(request.data.get('comment', ''))
+
+                    # TODO action ######################################################################################
+
+                    backend_models.IdeaCommentModel.objects.create(
+                        author_foreign_key_field=backend_models.UserModel.objects.all()[0],
+                        idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id),
+                        comment_text_field=comment,
+                    )
+
+                    response = {
+                        "response": "Successfully created!"
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                # except Exception as error:
+                #     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                #     return Response({"error": "This action has error!"})
+            # return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
+def api_idea_rating(request, idea_id):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    objects = backend_models.IdeaRatingModel.objects.filter(
+                        idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id)
+                    )
+                    rate = 0
+                    if objects.count() > 0:
+                        for i in objects:
+                            rate += i.rating_integer_field
+                        rate = round(rate / objects.count(), 2)
+                    response = {
+                        "response": {
+                            "list": backend_serializers.IdeaRatingModelSerializer(instance=objects, many=True).data,
+                            "x-total-count": objects.count(),
+                            "rate": rate,
+                        }
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            # if req_inst.action_type == "":
+            if True:
+                # try:
+                if True:
+                    # TODO get_value ###################################################################################
+
+                    value = int(request.data.get('value', 0))
+
+                    # TODO action ######################################################################################
+
+                    rating = backend_models.IdeaRatingModel.objects.filter(
+                        author_foreign_key_field=backend_models.UserModel.objects.all()[0],
+                        idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id),
+                    )[0]
+
+                    if value != rating.rating_integer_field:
+                        rating.rating_integer_field = value
+                        rating.save()
+
+                    response = {
+                        "response": "Successfully created!"
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                # except Exception as error:
+                #     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                #     return Response({"error": "This action has error!"})
+            # return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def api_post(request):
     """
     django-rest-framework

@@ -222,3 +222,47 @@ None, 127.0.0.1, /api/post/16/, DELETE, , database is locked, 2022-04-20 16:32:3
 None, 127.0.0.1, /api/post/35/, DELETE, , IdeaTestModel matching query does not exist., 2022-04-20 17:30:34.659979
 
 None, 127.0.0.1, /api/post/34/, DELETE, , IdeaTestModel matching query does not exist., 2022-04-20 17:30:51.930876
+
+None, 64.62.197.122, /, GET, , User matching query does not exist., 2022-04-21 07:55:01.760314
+
+None, 127.0.0.1, /api/idea/, GET, , 'NoneType' object has no attribute 'id', 2022-04-21 08:03:41.114043
+
+None, 127.0.0.1, /api/idea/, GET, , 'NoneType' object has no attribute 'id', 2022-04-21 08:03:41.200126
+
+None, 127.0.0.1, /api/idea/, GET, , 'NoneType' object has no attribute 'id', 2022-04-21 08:03:45.518611
+
+None, 127.0.0.1, /api/idea/, GET, , 'NoneType' object has no attribute 'id', 2022-04-21 08:03:45.586729
+
+None, 127.0.0.1, /api/idea/, GET, , 'NoneType' object has no attribute 'id', 2022-04-21 08:03:46.526199
+
+None, 127.0.0.1, /api/idea/, GET, , 'NoneType' object has no attribute 'id', 2022-04-21 08:03:46.652435
+
+None, 193.118.53.138, /, GET, , User matching query does not exist., 2022-04-21 08:38:27.548153
+
+None, 71.6.199.23, /, GET, , User matching query does not exist., 2022-04-21 09:19:50.878660
+
+None, 34.140.248.32, /, GET, , User matching query does not exist., 2022-04-21 09:20:09.590908
+
+None, 104.152.52.2, /, GET, , User matching query does not exist., 2022-04-21 10:00:55.899187
+
+None, 127.0.0.1, /api/idea/, POST, , IdeaModel() got an unexpected keyword argument 'place', 2022-04-21 13:11:12.987120
+
+None, 127.0.0.1, /api/idea/, POST, , IdeaModel() got an unexpected keyword argument 'place', 2022-04-21 13:14:18.325783
+
+None, 127.0.0.1, /api/idea/, POST, , User matching query does not exist., 2022-04-21 13:14:18.343128
+
+None, 127.0.0.1, /api/idea/9/comment/, POST, , Cannot assign "<UserModel: Утепбергенова | Сулушаш | Активен | 933289 | Курьер | 9 | 970918450532>": "IdeaCommentModel.idea_foreign_key_field" must be a "IdeaModel" instance., 2022-04-21 14:02:36.723182
+
+None, 127.0.0.1, /api/idea/9/comment/, POST, , User matching query does not exist., 2022-04-21 14:02:36.739139
+
+None, 127.0.0.1, /api/idea/9/comment/, POST, , Cannot assign "<UserModel: Утепбергенова | Сулушаш | Активен | 933289 | Курьер | 9 | 970918450532>": "IdeaCommentModel.idea_foreign_key_field" must be a "IdeaModel" instance., 2022-04-21 14:04:52.058628
+
+None, 127.0.0.1, /api/idea/9/comment/, POST, , User matching query does not exist., 2022-04-21 14:04:52.075271
+
+None, 127.0.0.1, /api/idea/9/comment/, POST, , Cannot assign "<UserModel: Утепбергенова | Сулушаш | Активен | 933289 | Курьер | 9 | 970918450532>": "IdeaCommentModel.idea_foreign_key_field" must be a "IdeaModel" instance., 2022-04-21 14:05:00.169911
+
+None, 127.0.0.1, /api/idea/9/comment/, POST, , User matching query does not exist., 2022-04-21 14:05:00.200069
+
+None, 104.152.52.74, /, GET, , User matching query does not exist., 2022-04-21 14:43:31.801684
+
+None, 223.71.167.165, /, GET, , User matching query does not exist., 2022-04-21 15:02:05.707366

@@ -237,3 +237,127 @@ export const getPagesArray = (totalPages) => {
   }
   return result;
 };
+
+export const GetSliceString = (string = "", length = 30, withDots = true) => {
+  try {
+    if (string == null || string === "null") {
+      return "";
+    }
+    if (`${string}`.length >= length) {
+      if (withDots) {
+        return `${string}`.slice(0, length) + "...";
+      } else {
+        return `${string}`.slice(0, length);
+      }
+    } else {
+      return string;
+    }
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return "";
+  }
+};
+
+export const GetStaticFile = (path = "") => {
+  try {
+    if (path === "null" || path === "/media/null" || path == null) {
+      return "";
+    }
+    return `/static${path}`;
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return "";
+  }
+};
+
+// @ts-ignore
+export const GetCleanDateTime = (dateTime, withTime = true) => {
+  try {
+    const date = dateTime.split("T")[0];
+    const time = dateTime.split("T")[1].slice(0, 5);
+    if (withTime) {
+      return `${date} ${time}`;
+    } else {
+      return `${date}`;
+    }
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return "";
+  }
+};
+
+export const ChangeAccordionCollapse = (objects = [""]) => {
+  try {
+    objects.forEach(function (object, index, array) {
+      const obj = document.getElementById(object);
+      const classname =
+        // @ts-ignore
+        obj.getAttribute("class") === "accordion-collapse collapse m-0 p-0"
+          ? "accordion-collapse m-0 p-0"
+          : "accordion-collapse collapse m-0 p-0";
+      // @ts-ignore
+      obj.setAttribute("class", classname);
+    });
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};
+
+export const GetRegexType = ({
+  numbers = false,
+  latin = false,
+  cyrillic = false,
+  onlyLowerLetters = false,
+  lowerSpace = false,
+  space = false,
+  punctuationMarks = false,
+  email = false,
+}) => {
+  try {
+    let regex = "";
+    if (numbers) {
+      regex = regex + "0-9";
+    }
+    if (latin) {
+      if (onlyLowerLetters) {
+        regex = regex + "a-z";
+      } else {
+        regex = regex + "A-Za-z";
+      }
+    }
+    if (cyrillic) {
+      if (onlyLowerLetters) {
+        regex = regex + "а-яё";
+      } else {
+        regex = regex + "А-ЯЁа-яё";
+      }
+    }
+    if (lowerSpace) {
+      regex = regex + "_";
+    }
+    if (space) {
+      regex = regex + " ";
+    }
+    if (punctuationMarks) {
+      regex = regex + "-:;.,!?_";
+    }
+    if (email) {
+      regex = regex + "@.";
+    }
+    return new RegExp(`[^${regex}]`, "g");
+  } catch (error) {
+    if (constants.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return new RegExp(`[^_]`, "g");
+  }
+};

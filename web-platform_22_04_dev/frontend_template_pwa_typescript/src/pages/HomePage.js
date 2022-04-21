@@ -1,12 +1,12 @@
 import React from "react";
-import { BaseComponent2 } from "../components/jsx/ui/base";
+import { BaseComponent1 } from "../components/ui/base";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
-    <BaseComponent2>
+    <BaseComponent1>
       <h1>Home page</h1>
-      <div className="">
+      <div className="bg-light bg-opacity-75">
         <table className="table table-striped table-bordered table-responsive border-dark">
           <thead className="bg-primary bg-opacity-10">
             <tr>
@@ -16,6 +16,18 @@ const HomePage = () => {
             </tr>
           </thead>
           <tbody className="bg-light bg-opacity-25">
+            <tr>
+              <td>Банк идей redux</td>
+              <td>Переписанный функционал банка идей.</td>
+              <td>
+                <Link
+                  to="/idea/list"
+                  className="btn btn-xs btn-outline-primary"
+                >
+                  Link
+                </Link>
+              </td>
+            </tr>
             <tr>
               <td>Статическая redux пагинация</td>
               <td>
@@ -115,7 +127,7 @@ const HomePage = () => {
           </tbody>
         </table>
       </div>
-    </BaseComponent2>
+    </BaseComponent1>
   );
 };
 

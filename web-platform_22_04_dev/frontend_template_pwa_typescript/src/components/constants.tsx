@@ -28,4 +28,46 @@ export const PostDeleteStore = utils.StoreReducerConstructorUtility(
   connectReducer
 );
 
+export const IdeaCreateStore = utils.StoreReducerConstructorUtility(
+  "IdeaCreateStore",
+  connectReducer
+);
+export const IdeaReadListStore = utils.StoreReducerConstructorUtility(
+  "IdeaReadListStore",
+  connectReducer
+);
+export const IdeaReadStore = utils.StoreReducerConstructorUtility(
+  "IdeaReadStore",
+  connectReducer
+);
+export const IdeaDeleteStore = utils.StoreReducerConstructorUtility(
+  "IdeaDeleteStore",
+  connectReducer
+);
+
+export const UserReadListStore = utils.StoreReducerConstructorUtility(
+  "UserReadListStore",
+  connectReducer
+);
+
+export const IdeaCommentCreateStore = utils.StoreReducerConstructorUtility(
+  "IdeaCommentCreateStore",
+  connectReducer
+);
+
+export const IdeaCommentReadListStore = utils.StoreReducerConstructorUtility(
+  "IdeaCommentReadListStore",
+  connectReducer
+);
+
+export const IdeaRatingCreateStore = utils.StoreReducerConstructorUtility(
+  "IdeaRatingCreateStore",
+  connectReducer
+);
+
+export const IdeaRatingReadListStore = utils.StoreReducerConstructorUtility(
+  "IdeaRatingReadListStore",
+  connectReducer
+);
+
 connectReducer("counter", counterReducer);

@@ -148,39 +148,43 @@ class IdeaModelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_user_model(self, obj):
-        user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
-        user_model_serializer = UserModelSerializer(instance=user_model, many=False).data
-        if not user_model_serializer:
-            response = None
-        else:
-            response = user_model_serializer
-        return response
+        try:
+            user_model = backend_models.UserModel.objects.get(id=obj.author_foreign_key_field.id)
+            return UserModelSerializer(instance=user_model, many=False).data
+        except Exception as error:
+            return None
 
     def get_comments(self, obj):
-        objects = backend_models.IdeaCommentModel.objects.filter(
-            idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=obj.id)
-        )
-        if objects.count() <= 0:
-            response = {"count": 0, "comments": []}
-        else:
-            serialized_objects = IdeaCommentModelSerializer(instance=objects, many=True).data
-            response = {"comments": serialized_objects, "count": objects.count()}
-        return response
+        try:
+            objects = backend_models.IdeaCommentModel.objects.filter(
+                idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=obj.id)
+            )
+            if objects.count() <= 0:
+                response = {"count": 0, "comments": []}
+            else:
+                serialized_objects = IdeaCommentModelSerializer(instance=objects, many=True).data
+                response = {"comments": serialized_objects, "count": objects.count()}
+            return response
+        except Exception as error:
+            return {"count": 0, "comments": []}
 
     def get_ratings(self, obj):
-        objects = backend_models.IdeaRatingModel.objects.filter(
-            idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=obj.id)
-        )
-        if objects.count() <= 0:
-            response = {"ratings": [], "count": 0, "rate": 0}
-        else:
-            rate = 0
-            for i in objects:
-                rate += i.rating_integer_field
-            rate = round(rate / objects.count(), 2)
-            serialized_objects = IdeaRatingModelSerializer(instance=objects, many=True).data
-            response = {"ratings": serialized_objects, "count": objects.count(), "rate": rate}
-        return response
+        try:
+            objects = backend_models.IdeaRatingModel.objects.filter(
+                idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=obj.id)
+            )
+            if objects.count() <= 0:
+                response = {"ratings": [], "count": 0, "rate": 0}
+            else:
+                rate = 0
+                for i in objects:
+                    rate += i.rating_integer_field
+                rate = round(rate / objects.count(), 2)
+                serialized_objects = IdeaRatingModelSerializer(instance=objects, many=True).data
+                response = {"ratings": serialized_objects, "count": objects.count(), "rate": rate}
+            return response
+        except Exception as error:
+            return {"ratings": [], "count": 0, "rate": 0}
 
 
 class IdeaRatingModelSerializer(serializers.ModelSerializer):
