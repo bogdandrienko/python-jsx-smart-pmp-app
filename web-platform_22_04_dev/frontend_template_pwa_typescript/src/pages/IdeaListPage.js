@@ -42,12 +42,24 @@ export const IdeaListPage = () => {
   const IdeaReadListStore = hooks.useSelectorCustom1(
     constants.IdeaReadListStore
   );
-  const IdeaDeleteStore = hooks.useSelectorCustom1(constants.IdeaDeleteStore);
   const UserReadListStore = hooks.useSelectorCustom1(
     constants.UserReadListStore
   );
 
   // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    dispatch({ type: constants.UserReadListStore.reset });
+  }, []);
+
+  useEffect(() => {
+    dispatch({ type: constants.IdeaReadListStore.reset });
+  }, [page]);
+
+  useEffect(() => {
+    setPage(1);
+    dispatch({ type: constants.IdeaReadListStore.reset });
+  }, [limit]);
 
   useEffect(() => {
     if (!IdeaReadListStore.data) {
@@ -62,15 +74,6 @@ export const IdeaListPage = () => {
   }, [IdeaReadListStore.data]);
 
   useEffect(() => {
-    dispatch({ type: constants.IdeaReadListStore.reset });
-  }, [page]);
-
-  useEffect(() => {
-    setPage(1);
-    dispatch({ type: constants.IdeaReadListStore.reset });
-  }, [limit]);
-
-  useEffect(() => {
     if (!UserReadListStore.data) {
       dispatch(
         actions.Users.UserReadListAction(
@@ -81,10 +84,6 @@ export const IdeaListPage = () => {
       );
     }
   }, [UserReadListStore.data]);
-
-  useEffect(() => {
-    dispatch({ type: constants.UserReadListStore.reset });
-  }, []);
 
   const handlerSubmit = async (e) => {
     try {
@@ -97,10 +96,9 @@ export const IdeaListPage = () => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <BaseComponent1>
-      <div>{IdeaDeleteStore.data && IdeaDeleteStore.data}</div>
       <components.AccordionComponent
         key_target={"accordion1"}
-        isCollapse={true}
+        isCollapse={false}
         title={
           <span>
             <i className="fa-solid fa-filter" /> Фильтрация, поиск и сортировка:
@@ -553,9 +551,9 @@ export const IdeaListPage = () => {
                           <div className="d-flex justify-content-between m-0 p-1">
                             <span
                               className={
-                                idea["ratings"]["rate"] > 7
+                                idea["ratings"]["total_rate"] > 7
                                   ? "text-success m-0 p-1"
-                                  : idea["ratings"]["rate"] > 4
+                                  : idea["ratings"]["total_rate"] > 4
                                   ? "custom-color-warning-1 m-0 p-1"
                                   : "text-danger m-0 p-1"
                               }
@@ -565,30 +563,30 @@ export const IdeaListPage = () => {
                             <div className="m-0 p-1">
                               <span
                                 className={
-                                  idea["ratings"]["rate"] > 7
+                                  idea["ratings"]["total_rate"] > 7
                                     ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill m-0 p-2"
-                                    : idea["ratings"]["rate"] > 4
+                                    : idea["ratings"]["total_rate"] > 4
                                     ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill m-0 p-2"
                                     : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2"
                                 }
                               >
-                                {`${idea["ratings"]["rate"]}  / ${idea["ratings"]["count"]}`}
+                                {`${idea["ratings"]["total_rate"]}  / ${idea["ratings"]["count"]}`}
                               </span>
                             </div>
                             <span className="m-0 p-1">
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 1
+                                  idea["ratings"]["self_rate"] >= 1
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 0.5
+                                    : idea["ratings"]["self_rate"] >= 0.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
@@ -596,16 +594,16 @@ export const IdeaListPage = () => {
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 2
+                                  idea["ratings"]["self_rate"] >= 2
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 1.5
+                                    : idea["ratings"]["self_rate"] >= 1.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
@@ -613,16 +611,16 @@ export const IdeaListPage = () => {
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 3
+                                  idea["ratings"]["self_rate"] >= 3
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 2.5
+                                    : idea["ratings"]["self_rate"] >= 2.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
@@ -630,16 +628,16 @@ export const IdeaListPage = () => {
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 4
+                                  idea["ratings"]["self_rate"] >= 4
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 3.5
+                                    : idea["ratings"]["self_rate"] >= 3.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
@@ -647,16 +645,16 @@ export const IdeaListPage = () => {
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 5
+                                  idea["ratings"]["self_rate"] >= 5
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 4.5
+                                    : idea["ratings"]["self_rate"] >= 4.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
@@ -664,16 +662,16 @@ export const IdeaListPage = () => {
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 6
+                                  idea["ratings"]["self_rate"] >= 6
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 5.5
+                                    : idea["ratings"]["self_rate"] >= 5.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
@@ -681,16 +679,16 @@ export const IdeaListPage = () => {
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 7
+                                  idea["ratings"]["self_rate"] >= 7
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 6.5
+                                    : idea["ratings"]["self_rate"] >= 6.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
@@ -698,16 +696,16 @@ export const IdeaListPage = () => {
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 8
+                                  idea["ratings"]["self_rate"] >= 8
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 7.5
+                                    : idea["ratings"]["self_rate"] >= 7.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
@@ -715,16 +713,16 @@ export const IdeaListPage = () => {
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 9
+                                  idea["ratings"]["self_rate"] >= 9
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 8.5
+                                    : idea["ratings"]["self_rate"] >= 8.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
@@ -732,20 +730,21 @@ export const IdeaListPage = () => {
                               <i
                                 style={{
                                   color:
-                                    idea["ratings"]["rate"] > 7
+                                    idea["ratings"]["self_rate"] > 7
                                       ? "#00ff00"
-                                      : idea["ratings"]["rate"] > 4
+                                      : idea["ratings"]["self_rate"] > 4
                                       ? "#ffaa00"
                                       : "#ff0000",
                                 }}
                                 className={
-                                  idea["ratings"]["rate"] >= 10
+                                  idea["ratings"]["self_rate"] >= 10
                                     ? "fas fa-star m-0 p-0"
-                                    : idea["ratings"]["rate"] >= 9.5
+                                    : idea["ratings"]["self_rate"] >= 9.5
                                     ? "fas fa-star-half-alt m-0 p-0"
                                     : "far fa-star m-0 p-0"
                                 }
                               />
+                              <div className="m-0 p-0">Ваша оценка</div>
                             </span>
                           </div>
                           <div className="d-flex justify-content-between m-0 p-1">

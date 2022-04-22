@@ -129,7 +129,7 @@ export const RationalModerateChangePage = () => {
         </div>
         <components.AccordionComponent
           key_target={"accordion1"}
-          isCollapse={true}
+          isCollapse={false}
           title={"Модерация:"}
           text_style="text-danger"
           header_style="bg-danger bg-opacity-10 custom-background-transparent-low"

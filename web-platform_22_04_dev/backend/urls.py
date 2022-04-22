@@ -123,6 +123,8 @@ urlpatterns = [
     # GET (read list comment post) 'http://127.0.0.1:8000/api/post/1/comment/?search=all&sort=name&page=1&limit=10/'
     # POST (create comment post) 'http://127.0.0.1:8000/api/post/1/comment/'
     re_path(r'^api/idea/(?P<idea_id>\d+)/comment/$', backend_views.api_idea_comment, name='api_idea_comment'),
+    # GET (read list comment post) 'http://127.0.0.1:8000/api/post/1/comment/?search=all&sort=name&page=1&limit=10/'
+    # POST (create comment post) 'http://127.0.0.1:8000/api/post/1/comment/'
     re_path(r'^api/idea/(?P<idea_id>\d+)/rating/$', backend_views.api_idea_rating, name='api_idea_rating'),
 
     # GET (read single comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'

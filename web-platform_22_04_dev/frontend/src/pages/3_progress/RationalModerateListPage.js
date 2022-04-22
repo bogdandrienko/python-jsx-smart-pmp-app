@@ -154,7 +154,7 @@ export const RationalModerateListPage = () => {
       <main>
         <components.AccordionComponent
           key_target={"accordion1"}
-          isCollapse={true}
+          isCollapse={false}
           title={"Фильтрация, поиск и сортировка:"}
           text_style="text-success"
           header_style="bg-success bg-opacity-10 custom-background-transparent-low"

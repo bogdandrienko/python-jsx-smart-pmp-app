@@ -120,7 +120,7 @@ export const IdeaModerateListPage = () => {
       <main>
         <components.AccordionComponent
           key_target={"accordion1"}
-          isCollapse={true}
+          isCollapse={false}
           title={
             <span>
               <i className="fa-solid fa-filter" /> Фильтрация, поиск и

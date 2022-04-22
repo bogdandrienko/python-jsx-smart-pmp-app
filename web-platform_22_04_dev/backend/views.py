@@ -3919,7 +3919,8 @@ def api_idea(request):
                     # TODO action ######################################################################################
 
                     backend_models.IdeaModel.objects.create(
-                        author_foreign_key_field=backend_models.UserModel.objects.all()[0],
+                        author_foreign_key_field=backend_models.UserModel.objects.get(
+                            personnel_number_slug_field=932524),
                         subdivision_char_field=subdivision,
                         sphere_char_field=sphere,
                         category_char_field=category,
@@ -4082,13 +4083,14 @@ def api_idea_comment(request, idea_id):
                     # TODO action ######################################################################################
 
                     backend_models.IdeaCommentModel.objects.create(
-                        author_foreign_key_field=backend_models.UserModel.objects.all()[0],
+                        author_foreign_key_field=backend_models.UserModel.objects.get(
+                            personnel_number_slug_field=932524),
                         idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id),
                         comment_text_field=comment,
                     )
 
                     response = {
-                        "response": "Successfully created!"
+                        "response": "Комментарий успешно отправлен!"
                     }
 
                     # TODO response ####################################################################################
@@ -4134,6 +4136,15 @@ def api_idea_rating(request, idea_id):
                     objects = backend_models.IdeaRatingModel.objects.filter(
                         idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id)
                     )
+                    try:
+                        self_rating = backend_models.IdeaRatingModel.objects.get(
+                            author_foreign_key_field=backend_models.UserModel.objects.get(
+                                personnel_number_slug_field=932524),
+                            idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id)
+                        )
+                        self_rate = self_rating.rating_integer_field
+                    except Exception as error:
+                        self_rate = 0
                     rate = 0
                     if objects.count() > 0:
                         for i in objects:
@@ -4143,7 +4154,8 @@ def api_idea_rating(request, idea_id):
                         "response": {
                             "list": backend_serializers.IdeaRatingModelSerializer(instance=objects, many=True).data,
                             "x-total-count": objects.count(),
-                            "rate": rate,
+                            "total_rate": rate,
+                            "self_rate": self_rate,
                         }
                     }
 
@@ -4169,8 +4181,9 @@ def api_idea_rating(request, idea_id):
 
                     # TODO action ######################################################################################
 
-                    rating = backend_models.IdeaRatingModel.objects.filter(
-                        author_foreign_key_field=backend_models.UserModel.objects.all()[0],
+                    rating = backend_models.IdeaRatingModel.objects.get_or_create(
+                        author_foreign_key_field=backend_models.UserModel.objects.get(
+                            personnel_number_slug_field=932524),
                         idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id),
                     )[0]
 
@@ -4179,7 +4192,7 @@ def api_idea_rating(request, idea_id):
                         rating.save()
 
                     response = {
-                        "response": "Successfully created!"
+                        "response": "Рейтинг успешно применён!"
                     }
 
                     # TODO response ####################################################################################
@@ -4195,6 +4208,7 @@ def api_idea_rating(request, idea_id):
     except Exception as error:
         backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
+
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
 # @permission_classes([IsAuthenticated])

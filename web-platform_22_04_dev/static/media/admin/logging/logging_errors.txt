@@ -280,3 +280,179 @@ None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-21 23
 None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-21 23:52:07.152431
 
 None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-21 23:54:08.236343
+
+None, 162.142.125.212, /, GET, , User matching query does not exist., 2022-04-22 01:18:21.092070
+
+None, 162.142.125.212, /, GET, , User matching query does not exist., 2022-04-22 01:18:21.578499
+
+None, 103.203.57.20, /, GET, , User matching query does not exist., 2022-04-22 06:40:46.207614
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:51:52.391451
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:51:52.408607
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:51:53.540385
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:51:53.556535
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:51:53.716278
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:51:53.732138
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:51:54.154278
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:51:54.169384
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:51:54.263640
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:51:54.283227
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:52:02.019526
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:52:02.033715
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:52:02.391261
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:52:02.407227
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:52:02.548158
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:52:02.562506
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 07:52:12.598720
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 07:52:12.616901
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 07:52:12.943715
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 07:52:12.959092
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 07:52:13.078773
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 07:52:13.101405
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:25.732912
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:25.750265
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:26.803069
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:26.841037
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:27.257357
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:27.275353
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:27.432500
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:27.448827
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:28.308488
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:28.324018
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:28.488092
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:28.535636
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:28.715800
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:28.732778
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:34.891425
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:34.910123
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:35.188333
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:35.206969
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:35.438662
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:35.452571
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:35.767254
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:35.782520
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , list index out of range, 2022-04-22 07:53:35.989852
+
+None, 127.0.0.1, /api/idea/31/rating/, POST, , User matching query does not exist., 2022-04-22 07:53:36.008662
+
+None, 154.53.52.216, /, GET, , User matching query does not exist., 2022-04-22 08:39:11.489939
+
+None, 154.53.52.216, /, GET, , User matching query does not exist., 2022-04-22 08:40:21.974252
+
+None, 154.53.52.216, /, GET, , User matching query does not exist., 2022-04-22 08:40:33.931899
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 08:47:24.552458
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 08:47:24.616476
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 08:47:36.547881
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 08:47:36.674617
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 08:49:06.577409
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 08:49:06.605865
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 08:49:11.709389
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 08:49:11.725252
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 08:49:27.461823
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 08:49:27.534170
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 08:49:51.550760
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 08:49:51.566889
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:39:47.600444
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:39:47.694477
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:40:22.409516
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:40:22.425464
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:41:54.997901
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:41:55.017993
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:41:57.701646
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:41:57.737554
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:42:03.120709
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:42:03.140467
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:42:04.399984
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:42:04.419687
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:42:05.297684
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:42:05.328390
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:44:27.210641
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:44:27.231586
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:44:29.989162
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:44:30.007160
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , list index out of range, 2022-04-22 09:46:46.219316
+
+None, 127.0.0.1, /api/idea/32/rating/, POST, , User matching query does not exist., 2022-04-22 09:46:46.235273
+
+None, 23.225.163.214, /, GET, , User matching query does not exist., 2022-04-22 11:09:05.937859
+
+None, 23.225.163.214, /, GET, , User matching query does not exist., 2022-04-22 11:09:53.183507
+
+None, 23.225.163.214, /, GET, , User matching query does not exist., 2022-04-22 11:09:58.347222
+
+None, 167.172.33.237, /, GET, , User matching query does not exist., 2022-04-22 12:39:06.237787

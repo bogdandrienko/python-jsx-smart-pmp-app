@@ -13,7 +13,7 @@ export const VideoStudyPage = () => {
         <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 justify-content-center text-center shadow m-0 p-0">
           <components.AccordionComponent
             key_target={"accordion1"}
-            isCollapse={true}
+            isCollapse={false}
             title={"Первый вход в систему:"}
             text_style="text-primary"
             header_style="bg-primary bg-opacity-10 custom-background-transparent-low"
@@ -36,7 +36,7 @@ export const VideoStudyPage = () => {
           </components.AccordionComponent>
           <components.AccordionComponent
             key_target={"accordion2"}
-            isCollapse={true}
+            isCollapse={false}
             title={"Выгрузка расчётного листа:"}
             text_style="custom-color-warning-1"
             header_style="bg-warning bg-opacity-10 custom-background-transparent-low"
@@ -59,7 +59,7 @@ export const VideoStudyPage = () => {
           </components.AccordionComponent>
           <components.AccordionComponent
             key_target={"accordion3"}
-            isCollapse={true}
+            isCollapse={false}
             title={"Выгрузка данных по отпуску:"}
             text_style="text-success"
             header_style="bg-success bg-opacity-10 custom-background-transparent-low"
