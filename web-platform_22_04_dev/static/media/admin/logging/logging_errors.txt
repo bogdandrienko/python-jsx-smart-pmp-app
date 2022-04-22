@@ -462,3 +462,9 @@ None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-22 16
 None, 198.235.24.154, /, GET, , User matching query does not exist., 2022-04-22 16:35:01.128621
 
 None, 127.0.0.1, /api/idea/, GET, , invalid literal for int() with base 10: '3.888888888888889', 2022-04-22 16:43:57.680941
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-22 19:06:36.543505
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-22 20:24:56.192816
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-22 20:24:56.458816

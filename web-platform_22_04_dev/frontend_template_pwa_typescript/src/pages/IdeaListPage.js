@@ -98,7 +98,7 @@ export const IdeaListPage = () => {
     <BaseComponent1>
       <components.AccordionComponent
         key_target={"accordion1"}
-        isCollapse={false}
+        isCollapse={true}
         title={
           <span>
             <i className="fa-solid fa-filter" /> Фильтрация, поиск и сортировка:

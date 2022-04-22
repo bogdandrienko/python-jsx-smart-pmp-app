@@ -108,7 +108,15 @@ urlpatterns = [
     path('api/any/post/<int:post_id>/comments/', backend_views.api_any_post_id_comments,
          name='api_any_post_id_comments'),
 
+    re_path(r'^api/post/$', backend_views.api_post, name='api_post'),
+
+    re_path(r'^api/post/(?P<post_id>\d+)/$', backend_views.api_post_id, name='api_post_id'),
+
+    # TODO clean #######################################################################################################
+
     re_path(r'^api/user/$', backend_views.api_user, name='api_user'),
+    re_path(r'^api/user/login/$', backend_views.api_user_login, name='api_user_login'),
+    re_path(r'^api/user/detail/$', backend_views.api_user_detail, name='api_user_detail'),
 
     re_path(r'^api/notification/$', backend_views.api_notification, name='api_notification'),
 
@@ -135,10 +143,6 @@ urlpatterns = [
     # DELETE (delete comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
     # re_path(r'^api_new/post/(?P<idea_id>\d+)/comment/(?P<comment_id>\d+)/$', backend_views.api_post_comment_id,
     #         name='api_post_comment_id'),
-
-    re_path(r'^api/post/$', backend_views.api_post, name='api_post'),
-
-    re_path(r'^api/post/(?P<post_id>\d+)/$', backend_views.api_post_id, name='api_post_id'),
 ]
 
 # TODO redirect from reboot react app ##################################################################################

@@ -8,6 +8,8 @@ import * as actions from "../components/actions";
 import * as utils from "../components/utils";
 import * as components from "../components/components";
 import * as hooks from "../components/hooks";
+import * as paginators from "../components/ui/paginators";
+import * as modals from "../components/ui/modals";
 
 export const IdeaPage = () => {
   const dispatch = useDispatch();
@@ -16,6 +18,10 @@ export const IdeaPage = () => {
 
   const [visible, setVisible] = useState(false);
   const [comment, commentSet] = useState("");
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(15);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalForm, setModalForm] = useState({});
 
   const IdeaReadStore = hooks.useSelectorCustom1(constants.IdeaReadStore);
   const IdeaCommentReadListStore = hooks.useSelectorCustom1(
@@ -37,8 +43,8 @@ export const IdeaPage = () => {
       actions.IdeaComment.ReadListAction(
         constants.IdeaCommentReadListStore,
         id,
-        1,
-        5
+        page,
+        limit
       )
     );
     dispatch(
@@ -63,12 +69,16 @@ export const IdeaPage = () => {
         actions.IdeaComment.ReadListAction(
           constants.IdeaCommentReadListStore,
           id,
-          1,
-          5
+          page,
+          limit
         )
       );
     }
   }, [IdeaCommentReadListStore.data]);
+
+  useEffect(() => {
+    dispatch({ type: constants.IdeaCommentReadListStore.reset });
+  }, [page]);
 
   useEffect(() => {
     if (!IdeaRatingReadListStore.data) {
@@ -77,7 +87,7 @@ export const IdeaPage = () => {
           constants.IdeaRatingReadListStore,
           id,
           1,
-          5
+          100
         )
       );
     }
@@ -162,8 +172,46 @@ export const IdeaPage = () => {
     }
   };
 
+  const ShowNodal = async (event, form) => {
+    event.preventDefault();
+    setModalForm(form);
+    setIsModalVisible(true);
+  };
+
+  const CreateNotification = async (form) => {
+    if (form) {
+      await dispatch(
+        actions.Notification.CreateAction(constants.NotificationCreateStore, {
+          ...form,
+          description: `${form.description}, причина:${form.answer}`,
+        })
+      );
+      setIsModalVisible(false);
+    } else {
+      setIsModalVisible(false);
+    }
+  };
+
   return (
     <BaseComponent1>
+      <modals.ModalPrompt2
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        callback={CreateNotification}
+        form={modalForm}
+      />
+      <components.StoreComponent
+        storeStatus={constants.NotificationCreateStore}
+        consoleLog={constants.DEBUG_CONSTANT}
+        showLoad={true}
+        loadText={""}
+        showData={false}
+        dataText={""}
+        showError={true}
+        errorText={""}
+        showFail={true}
+        failText={""}
+      />
       <div className="btn-group text-start w-100 m-0 p-0">
         <Link to={"/idea/list"} className="btn btn-sm btn-primary m-1 p-2">
           {"<="} назад к списку
@@ -172,8 +220,10 @@ export const IdeaPage = () => {
           <button
             type="button"
             className="btn btn-sm btn-outline-danger m-1 p-2"
-            onClick={(e) =>
-              handlerNotificationSubmit({
+            onClick={(event) =>
+              ShowNodal(event, {
+                question: "Введите причину жалобы на идею?",
+                answer: "Идея неуместна!",
                 name: "жалоба на идею в банке идей",
                 place: "банк идей",
                 description: `название идеи: ${IdeaReadStore.data["name_char_field"]}`,
@@ -356,10 +406,16 @@ export const IdeaPage = () => {
                           }
                           className={
                             IdeaReadStore.data["ratings"]["total_rate"] > 7
-                              ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill"
+                              ? IdeaReadStore.data["ratings"]["count"] > 0
+                                ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill"
+                                : "btn btn-sm bg-success bg-opacity-50 badge rounded-pill disabled"
                               : IdeaReadStore.data["ratings"]["total_rate"] > 4
-                              ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill"
-                              : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill"
+                              ? IdeaReadStore.data["ratings"]["count"] > 0
+                                ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill"
+                                : "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill disabled"
+                              : IdeaReadStore.data["ratings"]["count"] > 0
+                              ? "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill"
+                              : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill disabled"
                           }
                         >
                           <ul className="m-0 p-0">
@@ -659,6 +715,17 @@ export const IdeaPage = () => {
                       showFail={true}
                       failText={""}
                     />
+                    {!IdeaCommentReadListStore.load &&
+                      IdeaCommentReadListStore.data && (
+                        <paginators.Pagination1
+                          totalObjects={
+                            IdeaCommentReadListStore.data["x-total-count"]
+                          }
+                          limit={limit}
+                          page={page}
+                          changePage={setPage}
+                        />
+                      )}
                     {!IdeaCommentReadListStore.data ||
                     (IdeaCommentReadListStore.data.list &&
                       IdeaCommentReadListStore.data.list.length) < 1 ? (
@@ -669,11 +736,23 @@ export const IdeaPage = () => {
                       </div>
                     ) : (
                       <ul className="list-group m-0 p-0">
+                        <components.StoreComponent
+                          storeStatus={constants.NotificationCreateStore}
+                          consoleLog={constants.DEBUG_CONSTANT}
+                          showLoad={true}
+                          loadText={""}
+                          showData={false}
+                          dataText={""}
+                          showError={true}
+                          errorText={""}
+                          showFail={true}
+                          failText={""}
+                        />
                         {IdeaCommentReadListStore.data.list.map(
                           (object, index) => (
                             <li className="list-group-item m-0 p-1">
                               <div className="d-flex justify-content-between m-0 p-0">
-                                <h6 className="btn btn-outline-warning m-0 p-2">
+                                <h6 className="btn btn-sm btn-outline-warning m-0 p-2">
                                   {object["user_model"]["last_name_char_field"]}{" "}
                                   {
                                     object["user_model"][
@@ -688,13 +767,16 @@ export const IdeaPage = () => {
                                   )}
                                   <button
                                     type="button"
-                                    className="btn btn-sm btn-outline-danger m-1 p-1"
-                                    onClick={(e) =>
-                                      handlerNotificationSubmit({
+                                    className="btn btn-sm btn-outline-danger m-1 p-0"
+                                    onClick={(event) =>
+                                      ShowNodal(event, {
+                                        question:
+                                          "Введите причину жалобы на комментарий?",
+                                        answer: "Не цензурная лексика!",
                                         name: "жалоба на комментарий в банке идей",
                                         place: "банк идей",
                                         description: `название идеи: ${
-                                          IdeaReadStore["name_char_field"]
+                                          IdeaReadStore.data["name_char_field"]
                                         } (${
                                           IdeaReadStore.data["user_model"][
                                             "last_name_char_field"
@@ -733,6 +815,17 @@ export const IdeaPage = () => {
                         )}
                       </ul>
                     )}
+                    {!IdeaCommentReadListStore.load &&
+                      IdeaCommentReadListStore.data && (
+                        <paginators.Pagination1
+                          totalObjects={
+                            IdeaCommentReadListStore.data["x-total-count"]
+                          }
+                          limit={limit}
+                          page={page}
+                          changePage={setPage}
+                        />
+                      )}
                   </div>
                 </div>
               </div>

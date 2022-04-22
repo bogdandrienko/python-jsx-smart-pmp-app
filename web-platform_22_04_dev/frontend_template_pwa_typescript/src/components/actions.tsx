@@ -775,6 +775,83 @@ export class Users {
     };
   }
 }
+
+export class User {
+  // @ts-ignore
+  static UserLoginAction(constant) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const { data } = await axios.get(
+          "/api/user/login/?username=000000000000&password=31284bogdan"
+        );
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 1000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+  // @ts-ignore
+  static UserDetailAction(constant) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const {
+          userLoginStore: { data: userLogin },
+        } = getState();
+        const { data } = await axios.get(`/api/user/detail/`, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${userLogin.token}`,
+          },
+        });
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 1000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+}
 // @ts-ignore
 export const userLogoutAction = () => async (dispatch) => {
   localStorage.removeItem("userToken");

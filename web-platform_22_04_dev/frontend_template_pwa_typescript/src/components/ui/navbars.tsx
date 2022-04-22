@@ -11,8 +11,44 @@ import {
 } from "react-bootstrap";
 // @ts-ignore
 import { LinkContainer } from "react-router-bootstrap";
+import * as actions from "../actions";
+import * as constants from "../constants";
+import * as hooks from "../hooks";
 
 export const NavbarComponent1 = () => {
+  const dispatch = useDispatch();
+
+  const userLoginStore = hooks.useSelectorCustom1(constants.userLoginStore);
+
+  console.log("userLoginStore: ", userLoginStore);
+
+  const userDetailStore = hooks.useSelectorCustom1(constants.userDetailStore);
+
+  console.log("userDetailStore: ", userDetailStore);
+
+  useEffect(() => {
+    if (userLoginStore.data) {
+      localStorage.setItem("userToken", JSON.stringify(userLoginStore.data));
+    }
+  }, [userLoginStore.data]);
+
+  useEffect(() => {
+    dispatch(actions.User.UserDetailAction(constants.userDetailStore));
+  }, []);
+
+  const Login = () => {
+    dispatch(actions.User.UserLoginAction(constants.userLoginStore));
+  };
+
+  const Logout = () => {
+    localStorage.removeItem("userToken");
+    dispatch({ type: constants.userLoginStore.reset });
+  };
+
+  const Detail = () => {
+    dispatch(actions.User.UserDetailAction(constants.userDetailStore));
+  };
+
   return (
     <div className="m-0 p-0 pb-3">
       <header className="header navbar-fixed-top bg-dark bg-opacity-10 shadow-lg m-0 p-0">
@@ -238,21 +274,40 @@ export const NavbarComponent1 = () => {
                     <NavDropdown.Divider className="m-0 p-0" />
                   </li>
                 </NavDropdown>
+                <LinkContainer to="/login" className="text-center m-0 p-1 mx-1">
+                  <Nav.Link className="m-0 p-0">
+                    <button
+                      className="btn btn-sm btn-primary m-0 p-2"
+                      onClick={() => Login()}
+                    >
+                      Войти{" "}
+                      <i className="fa-solid fa-arrow-right-to-bracket m-0 p-1" />
+                    </button>
+                  </Nav.Link>
+                </LinkContainer>
                 <LinkContainer
                   to="/logout"
                   className="text-center m-0 p-1 mx-1"
                 >
                   <Nav.Link className="m-0 p-0">
-                    <button className="btn btn-sm btn-danger m-0 p-2">
+                    <button
+                      className="btn btn-sm btn-danger m-0 p-2"
+                      onClick={() => Logout()}
+                    >
                       Выйти <i className="fa-solid fa-door-open m-0 p-1" />
                     </button>
                   </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to="/login" className="text-center m-0 p-1 mx-1">
+                <LinkContainer
+                  to="/logout"
+                  className="text-center m-0 p-1 mx-1"
+                >
                   <Nav.Link className="m-0 p-0">
-                    <button className="btn btn-sm btn-primary m-0 p-2">
-                      Войти{" "}
-                      <i className="fa-solid fa-arrow-right-to-bracket m-0 p-1" />
+                    <button
+                      className="btn btn-sm btn-warning m-0 p-2"
+                      onClick={() => Detail()}
+                    >
+                      Detail <i className="fa-solid fa-balance-scale m-0 p-1" />
                     </button>
                   </Nav.Link>
                 </LinkContainer>

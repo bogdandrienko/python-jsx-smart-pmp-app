@@ -3807,7 +3807,30 @@ def api_user(request):
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
-        if req_inst.method == "POST":
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
+def api_user_login(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
 
             # TODO action ##############################################################################################
 
@@ -3816,21 +3839,72 @@ def api_user(request):
 
                     # TODO get_value ###################################################################################
 
-                    name = str(request.data.get('name', ''))
-                    place = str(request.data.get('place', ''))
-                    sphere = str(request.data.get('sphere', ''))
+                    username = str(request.GET.get('username', ''))
+                    print("username: ", username)
+                    password = str(request.GET.get('password', ''))
+                    print("password: ", password)
 
                     # TODO action ######################################################################################
 
-                    backend_models.IdeaTestModel.objects.create(
-                        name=name,
-                        place=place,
-                        sphere=sphere
-                    )
-
+                    is_authenticated = authenticate(username=username, password=password)
                     response = {
-                        "response": "Successfully created!"
+                        "response": "Успешно вошли!"
                     }
+                    if is_authenticated:
+                        user = User.objects.get(username=username)
+                        user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                        if user_model.activity_boolean_field is False:
+                            return Response({"error": "Внимание, Ваш аккаунт заблокирован!"})
+                        update_last_login(sender=None, user=user)
+                        refresh = RefreshToken.for_user(user=user)
+                        response = {"response": {
+                            "refresh": str(refresh),
+                            "access": str(refresh.access_token),
+                            "token": str(refresh.access_token),
+                            "name": f"{user_model.last_name_char_field} {user_model.first_name_char_field}"
+                        }}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([IsAuthenticated])
+# @permission_classes([AllowAny])
+def api_user_detail(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO action ######################################################################################
+
+                    response = {"response": backend_serializers.UserSerializer(req_inst.user, many=False).data}
 
                     # TODO response ####################################################################################
 

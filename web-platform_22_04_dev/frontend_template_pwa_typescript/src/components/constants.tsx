@@ -81,4 +81,14 @@ export const NotificationReadListStore = utils.StoreReducerConstructorUtility(
   connectReducer
 );
 
+export const userLoginStore = utils.StoreReducerConstructorUtility(
+  "userLoginStore",
+  connectReducer
+);
+
+export const userDetailStore = utils.StoreReducerConstructorUtility(
+  "userDetailStore",
+  connectReducer
+);
+
 connectReducer("counter", counterReducer);

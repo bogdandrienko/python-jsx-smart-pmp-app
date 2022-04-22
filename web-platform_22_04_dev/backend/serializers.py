@@ -159,13 +159,7 @@ class IdeaModelSerializer(serializers.ModelSerializer):
             objects = backend_models.IdeaCommentModel.objects.filter(
                 idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=obj.id)
             )
-            print(obj.id)
-            print(objects)
-            if objects <= 0:
-                response = {"count": 0}
-            else:
-                response = {"count": objects.count()}
-            return response
+            return {"count": objects.count()}
         except Exception as error:
             return {"count": 0}
 
