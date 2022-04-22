@@ -152,19 +152,12 @@ export const IdeaPage = () => {
   const handlerNotificationSubmit = async ({ name, place, description }) => {
     let prompt = window.prompt("Причина жалобы?", "Нарушение норм приличия!");
     if (prompt) {
-      const form = {
-        "Action-type": "NOTIFICATION_CREATE",
-        name: name,
-        place: place,
-        description: description + `, причина: ${prompt}`,
-      };
       dispatch(
-        utils.ActionConstructorUtility(
-          form,
-          "/api/auth/user/notification/",
-          "POST",
-          30000
-        )
+        actions.Notification.CreateAction(constants.NotificationCreateStore, {
+          name: name,
+          place: place,
+          description: description + `, причина: ${prompt}`,
+        })
       );
     }
   };

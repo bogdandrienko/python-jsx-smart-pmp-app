@@ -34,7 +34,7 @@ export const IdeaCreatePage = () => {
     if (IdeaCreateStore.data) {
       utils.Delay(() => {
         dispatch({ type: constants.IdeaCreateStore.reset });
-      }, 3000);
+      }, 7000);
     }
   }, [IdeaCreateStore.data]);
 

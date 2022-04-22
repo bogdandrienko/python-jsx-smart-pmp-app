@@ -593,6 +593,154 @@ export class IdeaRating {
   }
 }
 
+export class Notification {
+  // @ts-ignore
+  static CreateAction(constant, form) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const formData = new FormData();
+        Object.entries(form).map(([key, value]) => {
+          // @ts-ignore
+          formData.append(key, value);
+        });
+        const { data } = await axios.post(`/api/notification/`, formData, {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        });
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 1000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+
+  // @ts-ignore
+  static ReadListAction(constant, page, limit) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const { data } = await axios.get(`/api/notification/`, {
+          params: {
+            page: page,
+            limit: limit,
+          },
+        });
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 3000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+
+  // @ts-ignore
+  static ReadAction(constant, id) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const { data } = await axios.get(`/api/idea/${id}/`);
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 1000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+
+  // @ts-ignore
+  static DeleteAction(constant, id) {
+    // @ts-ignore
+    return async function (dispatch, getState) {
+      try {
+        dispatch({
+          type: constant.load,
+        });
+        const { data } = await axios.delete(`/api/idea/${id}/`);
+        if (data.response) {
+          const response = data.response;
+          setTimeout(() => {
+            dispatch({
+              type: constant.data,
+              payload: response,
+            });
+          }, 1000);
+        } else {
+          const response = data.error;
+          dispatch({
+            type: constant.error,
+            payload: response,
+          });
+        }
+      } catch (error) {
+        dispatch({
+          type: constant.fail,
+          payload: error,
+        });
+      }
+    };
+  }
+}
+
 export class Users {
   // @ts-ignore
   static UserReadListAction(constant, page, limit) {

@@ -25,21 +25,6 @@ export const NavbarComponent1 = () => {
                 alt="id"
               />
             </a>
-            <Link
-              to="/idea/list"
-              className="btn btn-lg btn-outline-light m-1 p-2"
-            >
-              /idea/list
-            </Link>
-            <Link to="/idea/1" className="btn btn-lg btn-outline-light m-1 p-2">
-              /idea/1
-            </Link>
-            <Link
-              to="/idea/create"
-              className="btn btn-lg btn-outline-light m-1 p-2"
-            >
-              /idea/create
-            </Link>
             <a className="btn btn-outline-light navbar-brand m-0 p-2" href="/">
               <i className="fa-solid fa-earth-asia m-0 p-1" />
               Домашняя
@@ -126,6 +111,106 @@ export const NavbarComponent1 = () => {
                           <i className="fa-solid fa-bell text-danger m-0 p-1" />
                         </span>
                         Link2
+                      </Nav.Link>
+                    </LinkContainer>
+                    <NavDropdown.Divider className="m-0 p-0" />
+                  </li>
+                  <li className="m-0 p-1">
+                    <strong className="dropdown-header text-center m-0 p-0">
+                      Header2
+                    </strong>
+                    <LinkContainer to="/" className="custom-hover m-0 p-0">
+                      <Nav.Link className="custom-color-warning-1">
+                        <span className="badge rounded-pill text-danger m-0 p-1">
+                          <i className="fa-solid fa-bell text-danger m-0 p-1" />
+                        </span>
+                        Link1
+                      </Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer to="/" className="custom-hover m-0 p-0">
+                      <Nav.Link className="custom-color-warning-1">
+                        <span className="badge rounded-pill text-danger m-0 p-1">
+                          <i className="fa-solid fa-bell text-danger m-0 p-1" />
+                        </span>
+                        Link2
+                      </Nav.Link>
+                    </LinkContainer>
+                    <NavDropdown.Divider className="m-0 p-0" />
+                  </li>
+                </NavDropdown>
+                <NavDropdown
+                  title={"Развитие"}
+                  id="basic-nav-dropdown"
+                  className="btn custom-background-transparent-low-middle m-1 p-0"
+                >
+                  <li className="m-0 p-1">
+                    <strong className="dropdown-header text-center m-0 p-0">
+                      Банк идей
+                    </strong>
+                    <LinkContainer
+                      to="/idea/template"
+                      className="custom-hover m-0 p-0"
+                    >
+                      <Nav.Link className="text-secondary">
+                        <span className="badge rounded-pill text-secondary m-0 p-1">
+                          <i className="fa-solid fa-circle-info m-0 p-1" />
+                        </span>
+                        Пример (шаблон) идеи
+                      </Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer
+                      to="/idea/create"
+                      className="custom-hover m-0 p-0"
+                    >
+                      <Nav.Link className="text-success">
+                        <span className="badge rounded-pill text-success m-0 p-1">
+                          <i className="fa-solid fa-circle-plus m-0 p-1" />
+                        </span>
+                        Подача новой идеи
+                      </Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer
+                      to="/idea/correct"
+                      className="custom-hover m-0 p-0"
+                    >
+                      <Nav.Link className="text-danger">
+                        <span className="badge rounded-pill text-danger m-0 p-1">
+                          <i className="fa-solid fa-screwdriver-wrench m-0 p-1" />
+                        </span>
+                        Мои идеи на доработку
+                      </Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer
+                      to="/idea/list"
+                      className="custom-hover m-0 p-0"
+                    >
+                      <Nav.Link className="text-primary">
+                        <span className="badge rounded-pill text-primary m-0 p-1">
+                          <i className="fa-solid fa-list m-0 p-1" />
+                        </span>
+                        Список идей
+                      </Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer
+                      to="/idea/top"
+                      className="custom-hover m-0 p-0"
+                    >
+                      <Nav.Link className="custom-color-warning-1">
+                        <span className="badge rounded-pill custom-color-warning-1 m-0 p-1">
+                          <i className="fa-solid fa-list-ol m-0 p-1" />
+                        </span>
+                        Лучшие идеи
+                      </Nav.Link>
+                    </LinkContainer>
+                    <LinkContainer
+                      to="/idea/moderate"
+                      className="custom-hover m-0 p-0"
+                    >
+                      <Nav.Link className="text-danger">
+                        <span className="badge rounded-pill text-danger m-0 p-1">
+                          <i className="fa-solid fa-screwdriver-wrench m-0 p-1" />
+                        </span>
+                        Модерация идей
                       </Nav.Link>
                     </LinkContainer>
                     <NavDropdown.Divider className="m-0 p-0" />

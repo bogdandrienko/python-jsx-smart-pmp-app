@@ -3850,6 +3850,67 @@ def api_user(request):
 @api_view(http_method_names=HTTP_METHOD_NAMES)
 # @permission_classes([IsAuthenticated])
 @permission_classes([AllowAny])
+def api_notification(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    name = str(request.data.get('name', ''))
+                    place = str(request.data.get('place', ''))
+                    description = str(request.data.get('description', ''))
+
+                    # TODO action ######################################################################################
+
+                    if place == "банк идей":
+                        model = backend_models.GroupModel.objects.get(name_slug_field="moderator_idea")
+                    else:
+                        model = backend_models.GroupModel.objects.get(name_slug_field="superuser")
+
+                    backend_models.NotificationModel.objects.create(
+                        author_foreign_key_field=backend_models.UserModel.objects.get(
+                            personnel_number_slug_field=932524),
+                        model_foreign_key_field=model,
+                        name_char_field=name,
+                        place_char_field=place,
+                        description_text_field=description,
+                    )
+                    response = {"response": "Успешно отправлено!"}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+# @permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def api_idea(request):
     """
     django-rest-framework

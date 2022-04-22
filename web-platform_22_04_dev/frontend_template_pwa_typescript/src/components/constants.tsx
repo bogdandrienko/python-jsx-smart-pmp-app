@@ -71,4 +71,14 @@ export const IdeaRatingReadListStore = utils.StoreReducerConstructorUtility(
   connectReducer
 );
 
+export const NotificationCreateStore = utils.StoreReducerConstructorUtility(
+  "NotificationCreateStore",
+  connectReducer
+);
+
+export const NotificationReadListStore = utils.StoreReducerConstructorUtility(
+  "NotificationReadListStore",
+  connectReducer
+);
+
 connectReducer("counter", counterReducer);

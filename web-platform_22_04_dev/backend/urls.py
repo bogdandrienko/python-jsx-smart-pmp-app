@@ -110,6 +110,8 @@ urlpatterns = [
 
     re_path(r'^api/user/$', backend_views.api_user, name='api_user'),
 
+    re_path(r'^api/notification/$', backend_views.api_notification, name='api_notification'),
+
     # GET "read list post": "http://127.0.0.1:8000/api/post/?search=all&sort=name&page=1&limit=10/"
     # POST "create post": "http://127.0.0.1:8000/api/post/"
     re_path(r'^api/idea/$', backend_views.api_idea, name='api_idea'),

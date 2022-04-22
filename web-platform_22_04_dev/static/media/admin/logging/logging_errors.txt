@@ -456,3 +456,9 @@ None, 23.225.163.214, /, GET, , User matching query does not exist., 2022-04-22 
 None, 23.225.163.214, /, GET, , User matching query does not exist., 2022-04-22 11:09:58.347222
 
 None, 167.172.33.237, /, GET, , User matching query does not exist., 2022-04-22 12:39:06.237787
+
+None, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-22 16:29:35.728136
+
+None, 198.235.24.154, /, GET, , User matching query does not exist., 2022-04-22 16:35:01.128621
+
+None, 127.0.0.1, /api/idea/, GET, , invalid literal for int() with base 10: '3.888888888888889', 2022-04-22 16:43:57.680941

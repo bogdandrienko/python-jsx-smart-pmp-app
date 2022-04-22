@@ -11,7 +11,7 @@ import * as constants from "../components/constants";
 import * as actions from "../components/actions";
 import * as utils from "../components/utils";
 import * as components from "../components/components";
-import { useStateCustom1 } from "../components/hooks";
+import * as paginators from "../components/ui/paginators";
 import * as hooks from "../components/hooks";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
@@ -21,7 +21,7 @@ export const IdeaListPage = () => {
 
   // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
 
-  const [filter, setFilter, resetFilter] = useStateCustom1({
+  const [filter, setFilter, resetFilter] = hooks.useStateCustom1({
     sort: "дате публикации (свежие в начале)",
     query: "",
     search: "",
@@ -37,7 +37,7 @@ export const IdeaListPage = () => {
   });
 
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(6);
+  const [limit, setLimit] = useState(9);
 
   const IdeaReadListStore = hooks.useSelectorCustom1(
     constants.IdeaReadListStore
@@ -145,10 +145,9 @@ export const IdeaListPage = () => {
                       <option disabled defaultValue value="">
                         количество на странице
                       </option>
-                      <option value="3">3</option>
-                      <option value="6">6</option>
-                      <option value="12">12</option>
-                      <option value="24">24</option>
+                      <option value="9">9</option>
+                      <option value="18">18</option>
+                      <option value="36">36</option>
                       <option value="-1">все</option>
                     </select>
                   </label>
@@ -381,19 +380,12 @@ export const IdeaListPage = () => {
         }
       </components.AccordionComponent>
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
-        <div className="page__wrapper">
-          {utils
-            .GetPagesArray(IdeaReadListStore.data["x-total-count"], limit)
-            .map((p) => (
-              <span
-                onClick={() => setPage(p)}
-                key={p}
-                className={page === p ? "page page__current" : "page"}
-              >
-                {p}
-              </span>
-            ))}
-        </div>
+        <paginators.Pagination1
+          totalObjects={IdeaReadListStore.data["x-total-count"]}
+          limit={limit}
+          page={page}
+          changePage={setPage}
+        />
       )}
       <components.StoreComponent
         storeStatus={constants.IdeaReadListStore}
@@ -564,10 +556,10 @@ export const IdeaListPage = () => {
                               <span
                                 className={
                                   idea["ratings"]["total_rate"] > 7
-                                    ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill m-0 p-2"
+                                    ? "btn btn-sm bg-success disabled bg-opacity-50 badge rounded-pill text-dark lead fw-bold m-0 p-2"
                                     : idea["ratings"]["total_rate"] > 4
-                                    ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill m-0 p-2"
-                                    : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill m-0 p-2"
+                                    ? "btn btn-sm bg-warning disabled bg-opacity-50 badge rounded-pill text-dark lead fw-bold m-0 p-2"
+                                    : "btn btn-sm bg-danger disabled bg-opacity-50 badge rounded-pill text-dark lead fw-bold m-0 p-2"
                                 }
                               >
                                 {`${idea["ratings"]["total_rate"]}  / ${idea["ratings"]["count"]}`}
@@ -777,19 +769,12 @@ export const IdeaListPage = () => {
         </div>
       )}
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
-        <div className="page__wrapper">
-          {utils
-            .GetPagesArray(IdeaReadListStore.data["x-total-count"], limit)
-            .map((p) => (
-              <span
-                onClick={() => setPage(p)}
-                key={p}
-                className={page === p ? "page page__current" : "page"}
-              >
-                {p}
-              </span>
-            ))}
-        </div>
+        <paginators.Pagination1
+          totalObjects={IdeaReadListStore.data["x-total-count"]}
+          limit={limit}
+          page={page}
+          changePage={setPage}
+        />
       )}
     </BaseComponent1>
   );
