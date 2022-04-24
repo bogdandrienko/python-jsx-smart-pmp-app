@@ -114,10 +114,11 @@ urlpatterns = [
 
     # TODO clean #######################################################################################################
 
+    re_path(r'^api/captcha/$', backend_views.api_captcha, name='api_captcha'),
     re_path(r'^api/user/$', backend_views.api_user, name='api_user'),
     re_path(r'^api/user/login/$', backend_views.api_user_login, name='api_user_login'),
     re_path(r'^api/user/detail/$', backend_views.api_user_detail, name='api_user_detail'),
-
+    re_path(r'^api/user/password/change/$', backend_views.api_user_password_change, name='api_user_password_change'),
     re_path(r'^api/notification/$', backend_views.api_notification, name='api_notification'),
 
     # GET "read list post": "http://127.0.0.1:8000/api/post/?search=all&sort=name&page=1&limit=10/"

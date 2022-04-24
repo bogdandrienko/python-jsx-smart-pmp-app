@@ -254,8 +254,8 @@
       skipHooks = _params$skipHooks === void 0 ? false : _params$skipHooks;
     var normalized = normalizeIcons(icons);
 
-    if (typeof namespace.hooks.addPack === "function" && !skipHooks) {
-      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    if (typeof namespace.hook.addPack === "function" && !skipHooks) {
+      namespace.hook.addPack(prefix, normalizeIcons(icons));
     } else {
       namespace.styles[prefix] = _objectSpread2(
         _objectSpread2({}, namespace.styles[prefix] || {}),
@@ -3746,8 +3746,8 @@
       skipHooks = _params$skipHooks === void 0 ? false : _params$skipHooks;
     var normalized = normalizeIcons(icons);
 
-    if (typeof namespace.hooks.addPack === "function" && !skipHooks) {
-      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    if (typeof namespace.hook.addPack === "function" && !skipHooks) {
+      namespace.hook.addPack(prefix, normalizeIcons(icons));
     } else {
       namespace.styles[prefix] = _objectSpread2(
         _objectSpread2({}, namespace.styles[prefix] || {}),
@@ -5158,8 +5158,8 @@
       skipHooks = _params$skipHooks === void 0 ? false : _params$skipHooks;
     var normalized = normalizeIcons(icons);
 
-    if (typeof namespace.hooks.addPack === "function" && !skipHooks) {
-      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    if (typeof namespace.hook.addPack === "function" && !skipHooks) {
+      namespace.hook.addPack(prefix, normalizeIcons(icons));
     } else {
       namespace.styles[prefix] = _objectSpread2(
         _objectSpread2({}, namespace.styles[prefix] || {}),
@@ -14109,8 +14109,8 @@
       skipHooks = _params$skipHooks === void 0 ? false : _params$skipHooks;
     var normalized = normalizeIcons(icons);
 
-    if (typeof namespace.hooks.addPack === "function" && !skipHooks) {
-      namespace.hooks.addPack(prefix, normalizeIcons(icons));
+    if (typeof namespace.hook.addPack === "function" && !skipHooks) {
+      namespace.hook.addPack(prefix, normalizeIcons(icons));
     } else {
       namespace.styles[prefix] = _objectSpread2(
         _objectSpread2({}, namespace.styles[prefix] || {}),

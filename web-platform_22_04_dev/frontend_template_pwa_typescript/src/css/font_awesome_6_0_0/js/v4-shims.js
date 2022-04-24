@@ -999,8 +999,8 @@
     [62176, "fab", "meetup"],
   ];
   bunker(function () {
-    if (typeof namespace.hooks.addShims === "function") {
-      namespace.hooks.addShims(shims);
+    if (typeof namespace.hook.addShims === "function") {
+      namespace.hook.addShims(shims);
     } else {
       var _namespace$shims;
 
