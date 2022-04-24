@@ -51,9 +51,7 @@ export const IdeaCreatePage = () => {
 
   const CreateConfirm = async (create = false) => {
     if (create) {
-      await dispatch(
-        action.Idea.IdeaCreateAction(constant.IdeaCreateStore, idea)
-      );
+      await dispatch(action.Idea.IdeaCreateAction({ form: idea }));
       resetIdea();
       setIsModalVisible(false);
     } else {

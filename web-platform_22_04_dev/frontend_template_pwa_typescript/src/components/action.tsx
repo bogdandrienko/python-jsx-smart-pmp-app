@@ -148,7 +148,7 @@ export class Users {
 
 export class Notification {
   // @ts-ignore
-  static CreateAction(constant, form) {
+  static CreateAction({ form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
@@ -252,42 +252,22 @@ export class Notification {
 
 export class Idea {
   // @ts-ignore
-  static IdeaCreateAction(constant, post) {
+  static IdeaCreateAction({ form }) {
     // @ts-ignore
-    return async function (dispatch, getState) {
-      try {
-        dispatch({
-          type: constant.load,
-        });
-        const formData = new FormData();
-        Object.entries(post).map(([key, value]) => {
-          // @ts-ignore
-          formData.append(key, value);
-        });
-        const { data } = await axios.post(`/api/idea/`, formData, {
-          headers: {
-            "content-type": "multipart/form-data",
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          form: {
+            "Action-Type": "IdeaCreateStore",
+            ...form,
           },
-        });
-        if (data.response) {
-          const response = data.response;
-          dispatch({
-            type: constant.data,
-            payload: response,
-          });
-        } else {
-          const response = data.error;
-          dispatch({
-            type: constant.error,
-            payload: response,
-          });
-        }
-      } catch (error) {
-        dispatch({
-          type: constant.fail,
-          payload: error,
-        });
-      }
+          url: `/api/idea/`,
+          method: "POST",
+          timeout: 10000,
+          constant: constant.IdeaCreateStore,
+          authentication: true,
+        })
+      );
     };
   }
 

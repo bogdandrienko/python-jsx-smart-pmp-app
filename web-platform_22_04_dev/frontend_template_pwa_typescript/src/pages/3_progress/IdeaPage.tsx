@@ -127,9 +127,11 @@ export const IdeaPage = () => {
   const CreateNotification = (form) => {
     if (form) {
       dispatch(
-        action.Notification.CreateAction(constant.NotificationCreateStore, {
-          ...form,
-          description: `${form.description}, причина:${form.answer}`,
+        action.Notification.CreateAction({
+          form: {
+            ...form,
+            description: `${form.description}, причина:${form.answer}`,
+          },
         })
       );
       setIsModalLowRatingVisible(false);
@@ -195,7 +197,7 @@ export const IdeaPage = () => {
   return (
     <base.BaseComponent1>
       <modal.ModalPrompt2
-        isModalVisible={isModalLowRatingVisible}
+        isModalVisible={isModalNotificationVisible}
         setIsModalVisible={setIsModalNotificationVisible}
         callback={CreateNotification}
         // @ts-ignore
