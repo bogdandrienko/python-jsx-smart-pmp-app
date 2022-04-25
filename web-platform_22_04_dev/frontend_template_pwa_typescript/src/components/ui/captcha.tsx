@@ -10,7 +10,6 @@ import * as component from "../component";
 import * as constant from "../constant";
 import * as hook from "../hook";
 import * as util from "../util";
-import { Captcha } from "../action";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -32,8 +31,10 @@ export const Captcha1 = () => {
   function Check(event) {
     event.preventDefault();
     event.stopPropagation();
-    dispatch(action.Captcha.CheckAccess({}));
+    dispatch(action.Captcha.CheckAccess());
   }
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="card">
@@ -49,8 +50,8 @@ export const Captcha1 = () => {
           Вы успешно прошли проверку!
         </div>
       )}
-      <component.StoreComponent
-        storeStatus={constant.captchaCheckStore}
+      <component.StoreComponent1
+        stateConstant={constant.captchaCheckStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}

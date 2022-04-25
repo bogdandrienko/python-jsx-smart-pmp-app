@@ -1,5 +1,5 @@
 import React from "react";
-import { BaseComponent3 } from "../../components/ui/base";
+import { Base3 } from "../../components/ui/base";
 import {
   TestComponent1,
   TestComponent2,
@@ -8,14 +8,16 @@ import {
 } from "../../components/ui/component";
 
 const TestPage = () => {
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
-    <BaseComponent3>
+    <Base3>
       <h1>Test page</h1>
       <TestComponent1 />
       <TestComponent2 />
       <TestComponent3 />
       <TestComponent4 />
-    </BaseComponent3>
+    </Base3>
   );
 };
 

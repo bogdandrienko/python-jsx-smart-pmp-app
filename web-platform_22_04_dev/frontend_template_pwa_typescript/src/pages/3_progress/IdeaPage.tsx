@@ -21,6 +21,22 @@ import * as paginator from "../../components/ui/paginator";
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const IdeaPage = () => {
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const IdeaReadStore = hook.useSelectorCustom1(constant.IdeaReadStore);
+  const IdeaCommentReadListStore = hook.useSelectorCustom1(
+    constant.IdeaCommentReadListStore
+  );
+  const IdeaCommentCreateStore = hook.useSelectorCustom1(
+    constant.IdeaCommentCreateStore
+  );
+  const IdeaRatingReadListStore = hook.useSelectorCustom1(
+    constant.IdeaRatingReadListStore
+  );
+  const IdeaRatingCreateStore = hook.useSelectorCustom1(
+    constant.IdeaRatingCreateStore
+  );
+
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
@@ -38,19 +54,7 @@ export const IdeaPage = () => {
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
 
-  const IdeaReadStore = hook.useSelectorCustom1(constant.IdeaReadStore);
-  const IdeaCommentReadListStore = hook.useSelectorCustom1(
-    constant.IdeaCommentReadListStore
-  );
-  const IdeaCommentCreateStore = hook.useSelectorCustom1(
-    constant.IdeaCommentCreateStore
-  );
-  const IdeaRatingReadListStore = hook.useSelectorCustom1(
-    constant.IdeaRatingReadListStore
-  );
-  const IdeaRatingCreateStore = hook.useSelectorCustom1(
-    constant.IdeaRatingCreateStore
-  );
+  // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (!IdeaReadStore.data) {
@@ -69,7 +73,7 @@ export const IdeaPage = () => {
   useEffect(() => {
     if (!IdeaRatingReadListStore.data) {
       dispatch(
-        action.IdeaRating.ReadListAction({ id: id, limit: 1000, page: 1 })
+        action.IdeaRating.ReadListAction({ id: id, limit: 100, page: 1 })
       );
     }
   }, [IdeaRatingReadListStore.data]);
@@ -193,9 +197,8 @@ export const IdeaPage = () => {
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // @ts-ignore
   return (
-    <base.BaseComponent1>
+    <base.Base1>
       <modal.ModalPrompt2
         isModalVisible={isModalNotificationVisible}
         setIsModalVisible={setIsModalNotificationVisible}
@@ -210,12 +213,12 @@ export const IdeaPage = () => {
         // @ts-ignore
         form={modalLowRatingForm}
       />
-      <component.StoreComponent
-        storeStatus={constant.NotificationCreateStore}
+      <component.StoreComponent1
+        stateConstant={constant.NotificationCreateStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}
-        showData={false}
+        showData={true}
         dataText={""}
         showError={true}
         errorText={""}
@@ -245,8 +248,8 @@ export const IdeaPage = () => {
           </button>
         )}
       </div>
-      <component.StoreComponent
-        storeStatus={constant.IdeaReadStore}
+      <component.StoreComponent1
+        stateConstant={constant.IdeaReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}
@@ -376,8 +379,8 @@ export const IdeaPage = () => {
                   </label>
                 </div>
               </div>
-              <component.StoreComponent
-                storeStatus={constant.IdeaRatingCreateStore}
+              <component.StoreComponent1
+                stateConstant={constant.IdeaRatingCreateStore}
                 consoleLog={constant.DEBUG_CONSTANT}
                 showLoad={true}
                 loadText={""}
@@ -429,8 +432,8 @@ export const IdeaPage = () => {
                           }
                         >
                           <ul className="m-0 p-0">
-                            <component.StoreComponent
-                              storeStatus={constant.IdeaRatingReadListStore}
+                            <component.StoreComponent1
+                              stateConstant={constant.IdeaRatingReadListStore}
                               consoleLog={constant.DEBUG_CONSTANT}
                               showLoad={true}
                               loadText={""}
@@ -469,192 +472,206 @@ export const IdeaPage = () => {
                       </Nav>
                     </Container>
                   </Navbar>
-                  <span className="m-0 p-1">
-                    <div className="m-0 p-0">
-                      Нажмите на одну из 10 звезд для оценки идеи:
-                    </div>
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 1
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 0.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(1)}
-                    />
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 2
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 1.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(2)}
-                    />
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 3
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 2.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(3)}
-                    />
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 4
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 3.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(4)}
-                    />
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 5
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 4.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(5)}
-                    />
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 6
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 5.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(6)}
-                    />
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 7
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 6.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(7)}
-                    />
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 8
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 7.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(8)}
-                    />
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 9
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 8.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(9)}
-                    />
-                    <i
-                      style={{
-                        color:
-                          IdeaReadStore.data["ratings"]["self_rate"] > 7
-                            ? "#00ff00"
-                            : IdeaReadStore.data["ratings"]["self_rate"] > 4
-                            ? "#ffaa00"
-                            : "#ff0000",
-                      }}
-                      className={
-                        IdeaReadStore.data["ratings"]["self_rate"] >= 10
-                          ? "btn fas fa-star m-0 p-0"
-                          : IdeaReadStore.data["ratings"]["self_rate"] >= 9.5
-                          ? "btn fas fa-star-half-alt m-0 p-0"
-                          : "btn far fa-star m-0 p-0"
-                      }
-                      onClick={() => handlerRatingCreateSubmit(10)}
-                    />
-                    <div className="m-0 p-0">Ваша оценка</div>
-                  </span>
+                  <component.StoreComponent1
+                    stateConstant={constant.IdeaRatingReadListStore}
+                    consoleLog={constant.DEBUG_CONSTANT}
+                    showLoad={true}
+                    loadText={""}
+                    showData={false}
+                    dataText={""}
+                    showError={true}
+                    errorText={""}
+                    showFail={true}
+                    failText={""}
+                  />
+                  {IdeaRatingReadListStore.data && (
+                    <span className="m-0 p-1">
+                      <div className="m-0 p-0">
+                        Нажмите на одну из 10 звезд для оценки идеи:
+                      </div>
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 1
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 0.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(1)}
+                      />
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 2
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 1.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(2)}
+                      />
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 3
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 2.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(3)}
+                      />
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 4
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 3.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(4)}
+                      />
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 5
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 4.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(5)}
+                      />
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 6
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 5.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(6)}
+                      />
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 7
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 6.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(7)}
+                      />
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 8
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 7.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(8)}
+                      />
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 9
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 8.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(9)}
+                      />
+                      <i
+                        style={{
+                          color:
+                            IdeaRatingReadListStore.data["self_rate"] > 7
+                              ? "#00ff00"
+                              : IdeaRatingReadListStore.data["self_rate"] > 4
+                              ? "#ffaa00"
+                              : "#ff0000",
+                        }}
+                        className={
+                          IdeaRatingReadListStore.data["self_rate"] >= 10
+                            ? "btn fas fa-star m-0 p-0"
+                            : IdeaRatingReadListStore.data["self_rate"] >= 9.5
+                            ? "btn fas fa-star-half-alt m-0 p-0"
+                            : "btn far fa-star m-0 p-0"
+                        }
+                        onClick={() => handlerRatingCreateSubmit(10)}
+                      />
+                      <div className="m-0 p-0">Ваша оценка</div>
+                    </span>
+                  )}
                 </div>
                 <div className="d-flex justify-content-between m-0 p-1">
                   <span className="text-secondary m-0 p-1">Комментарии</span>
@@ -668,12 +685,12 @@ export const IdeaPage = () => {
                 <div className="card m-0 p-2">
                   <div className="order-md-last m-0 p-0">
                     <div className="m-0 p-0 my-2">
-                      <component.StoreComponent
-                        storeStatus={constant.IdeaCommentCreateStore}
+                      <component.StoreComponent1
+                        stateConstant={constant.IdeaCommentCreateStore}
                         consoleLog={constant.DEBUG_CONSTANT}
                         showLoad={true}
                         loadText={""}
-                        showData={false}
+                        showData={true}
                         dataText={""}
                         showError={true}
                         errorText={""}
@@ -757,8 +774,8 @@ export const IdeaPage = () => {
                       </div>
                     ) : (
                       <ul className="list-group m-0 p-0">
-                        <component.StoreComponent
-                          storeStatus={constant.NotificationCreateStore}
+                        <component.StoreComponent1
+                          stateConstant={constant.NotificationCreateStore}
                           consoleLog={constant.DEBUG_CONSTANT}
                           showLoad={true}
                           loadText={""}
@@ -769,8 +786,8 @@ export const IdeaPage = () => {
                           showFail={true}
                           failText={""}
                         />
-                        <component.StoreComponent
-                          storeStatus={constant.IdeaCommentReadListStore}
+                        <component.StoreComponent1
+                          stateConstant={constant.IdeaCommentReadListStore}
                           consoleLog={constant.DEBUG_CONSTANT}
                           showLoad={true}
                           loadText={""}
@@ -889,6 +906,6 @@ export const IdeaPage = () => {
           </div>
         )}
       </div>
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

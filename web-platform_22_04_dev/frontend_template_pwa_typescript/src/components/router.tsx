@@ -23,6 +23,7 @@ import { ChangeProfilePage } from "../pages/2_profile/ChangeProfilePage";
 import { PostListUnlimitedScrollPage } from "../pages/7_develop/PostListUnlimitedScrollPage";
 import { RecoverPasswordPage } from "../pages/2_profile/RecoverPasswordPage";
 import { RatingsListPage } from "../pages/1_main/RatingsListPage";
+import { NewsPage } from "../pages/1_main/NewsPage";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -58,13 +59,16 @@ export const modules = [
           },
           {
             Header: "Новости платформы",
-            Access: ["user"],
+            Access: ["all"],
             Active: true,
             Link: "/news",
             ExternalLink: false,
             ShowLink: true,
             Title: "Новости платформы",
             Description: "страница новостей веб-платформы",
+            path: "/news",
+            element: <NewsPage />,
+            private: "all",
             Logic: true,
             Redirect: true,
             Style: "text-secondary",

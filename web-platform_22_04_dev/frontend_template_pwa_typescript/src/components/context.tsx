@@ -1,12 +1,10 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
-import React, { createContext } from "react";
+import { createContext } from "react";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const AuthContext = createContext(null);
-
-export default AuthContext;
+export const AuthContext = createContext(null);
 
 // function App() {
 //   const [isAuth, setIsAuth] = useState(false);
@@ -20,6 +18,7 @@ export default AuthContext;
 //   if (isLoading) {
 //     return <h5>Download...</h5>;
 //   }
+// TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //   return (
 //     <AuthContext.Provider value={{ isAuth, setIsAuth: setIsAuth, isLoading }}>
 //       <BrowserRouter>

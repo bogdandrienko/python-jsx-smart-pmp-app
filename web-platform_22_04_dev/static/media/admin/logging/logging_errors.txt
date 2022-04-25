@@ -586,3 +586,61 @@ error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 1
 error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-24 20:20:23.528359
 
 None, 127.0.0.1, /api/idea/32/comment/, GET, , That page contains no results, 2022-04-24 22:05:30.704226
+
+None, 162.142.125.9, /, GET, , User matching query does not exist., 2022-04-25 00:17:34.966735
+
+None, 162.142.125.9, /, GET, , User matching query does not exist., 2022-04-25 00:17:35.687128
+
+None, 134.122.12.147, /, GET, , User matching query does not exist., 2022-04-25 07:04:20.009089
+
+000000000000, 127.0.0.1, /api/notification/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:43:26.558475
+
+000000000000, 127.0.0.1, /api/notification/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:43:30.125118
+
+000000000000, 127.0.0.1, /api/idea/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:43:30.185118
+
+000000000000, 127.0.0.1, /api/idea/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:43:30.288211
+
+000000000000, 127.0.0.1, /api/notification/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:45:55.799214
+
+000000000000, 127.0.0.1, /api/idea/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:45:55.869028
+
+000000000000, 127.0.0.1, /api/idea/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:45:55.942263
+
+000000000000, 127.0.0.1, /api/notification/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:47:39.283720
+
+000000000000, 127.0.0.1, /api/idea/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:47:39.380647
+
+000000000000, 127.0.0.1, /api/idea/, GET, , '>' not supported between instances of 'str' and 'int', 2022-04-25 08:47:39.447349
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-25 08:55:27.155214
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-25 08:55:27.552209
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-25 08:59:16.041334
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-25 08:59:16.425309
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-25 08:59:17.603884
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-25 08:59:17.907203
+
+000000000000, 127.0.0.1, /api/notification/, GET, , That page contains no results, 2022-04-25 12:43:53.620755
+
+000000000000, 127.0.0.1, /api/notification/31/, DELETE, , NotificationModel matching query does not exist., 2022-04-25 13:00:47.969907
+
+000000000000, 127.0.0.1, /api/notification/40/, DELETE, , NotificationModel matching query does not exist., 2022-04-25 13:01:31.431898
+
+000000000000, 127.0.0.1, /api/notification/42/, DELETE, , NotificationModel matching query does not exist., 2022-04-25 13:05:58.981685
+
+000000000000, 127.0.0.1, /api/notification/44/, DELETE, , NotificationModel matching query does not exist., 2022-04-25 13:06:52.729468
+
+000000000000, 127.0.0.1, /api/notification/, GET, , That page number is not an integer, 2022-04-25 14:51:48.757261
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page number is not an integer, 2022-04-25 14:51:48.823356
+
+None, 216.218.206.68, /, GET, , User matching query does not exist., 2022-04-25 16:21:19.174571
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-25 16:36:32.064485
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-25 16:37:36.727881

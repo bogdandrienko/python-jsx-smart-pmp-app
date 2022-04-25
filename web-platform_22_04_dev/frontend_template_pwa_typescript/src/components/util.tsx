@@ -112,7 +112,6 @@ export function ActionConstructor1({
         // @ts-ignore
         formData.append(key, value);
       });
-
       const config = {
         url: url,
         method: method,
@@ -136,6 +135,94 @@ export function ActionConstructor1({
         } catch (error) {}
       }
 
+      const { data } = await axios(config);
+      if (data.response) {
+        const response = data.response;
+        dispatch({
+          type: constant.data,
+          payload: response,
+        });
+      } else {
+        const response = data.error;
+        dispatch({
+          type: constant.error,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: constant.fail,
+        payload: ActionsFailUtility({ dispatch: dispatch, error: error }),
+      });
+    }
+  };
+}
+
+export function ActionConstructor2({
+  form = {},
+  url = "/",
+  method = "GET",
+  timeout = 10000,
+  constant = { load: {}, data: {}, error: {}, fail: {} },
+  authentication = true,
+}) {
+  // @ts-ignore
+  return async function (dispatch, getState) {
+    try {
+      dispatch({
+        type: constant.load,
+      });
+
+      if (method === "GET") {
+        console.log("form: ", form);
+        console.log("url: ", url);
+
+        url = url + `?`;
+        Object.entries(form).map(([key, value]) => {
+          // @ts-ignore
+          url = url + `${key}=${value}&`;
+        });
+        url = url.slice(0, -1);
+        console.log("url: ", url);
+
+        // config.headers = {
+        //   "Content-Type": "application/json",
+        // };
+      }
+
+      const formData = new FormData();
+
+      if (method === "POST" || method === "PUT") {
+        Object.entries(form).map(([key, value]) => {
+          // @ts-ignore
+          formData.append(key, value);
+        });
+      }
+
+      const config = {
+        url: url,
+        method: method,
+        timeout: timeout,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: {},
+      };
+
+      if (authentication) {
+        try {
+          const {
+            userLoginStore: { data: userLogin },
+          } = getState();
+          config.headers = {
+            ...config.headers,
+            // @ts-ignore
+            Authorization: `Bearer ${userLogin.token}`,
+          };
+        } catch (error) {}
+      }
+
+      // @ts-ignore
       const { data } = await axios(config);
       if (data.response) {
         const response = data.response;
@@ -266,12 +353,12 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
       }
       switch (status) {
         case 401:
-          dispatch(action.User.UserLogoutAction({}));
+          dispatch(action.User.UserLogoutAction());
           return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
         case 413:
           return "Ваш файл слишком большой! Измените его размер и перезагрузите страницу перед отправкой.";
         case 500:
-          dispatch(action.User.UserLogoutAction({}));
+          dispatch(action.User.UserLogoutAction());
           return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
         case "timeout":
           return "Превышено время ожидания! Попробуйте повторить действие или ожидайте исправления.";

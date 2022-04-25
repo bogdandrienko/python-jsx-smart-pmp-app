@@ -213,23 +213,80 @@ class DjangoClass:
                 except Exception as error:
                     self.data = None
                 try:
+                    self.GET = request.GET
+                except Exception as error:
+                    self.GET = None
+                try:
                     self.body = request.data.get("body")
                 except Exception as error:
                     self.body = None
 
-            def get_value(self, key: str, except_error=False, strip=False):
-                try:
-                    if self.data.get(key) == "null":
+            @staticmethod
+            def convert_value(value, default):
+                if type(default) == bool:
+                    return bool(value)
+                elif type(default) == str:
+                    return str(value)
+                elif type(default) == int:
+                    return int(value)
+                elif type(default) == float:
+                    return float(value)
+                else:
+                    return value
+
+            def get_value(self, key: str, default="", except_error=False, strip=False):
+                if self.method == "GET":
+                    try:
+                        if self.GET.get(key, default) == "null":
+                            return None
+                        elif self.GET.get(key, default) == "true":
+                            return True
+                        elif self.GET.get(key, default) == "false":
+                            return False
+                        else:
+                            if strip:
+                                return str(self.GET.get(key, default)).strip()
+                            else:
+                                value = DjangoClass.DRFClass.RequestClass.convert_value(
+                                    value=self.GET.get(key, default),
+                                    default=default
+                                )
+                                return value
+                    except Exception as error:
                         return None
-                    elif self.data.get(key) == "true":
+                else:
+                    try:
+                        if self.data.get(key, default) == "null":
+                            return None
+                        elif self.data.get(key, default) == "true":
+                            return True
+                        elif self.data.get(key, default) == "false":
+                            return False
+                        else:
+                            if strip:
+                                return str(self.data.get(key, default)).strip()
+                            else:
+                                value = DjangoClass.DRFClass.RequestClass.convert_value(
+                                    value=self.data.get(key, default),
+                                    default=default
+                                )
+                                return value
+                    except Exception as error:
+                        return None
+
+            def get_param(self, key: str, default="", except_error=False, strip=False):
+                try:
+                    if self.GET.get(key, default) == "null":
+                        return None
+                    elif self.data.get(key, default) == "true":
                         return True
-                    elif self.data.get(key) == "false":
+                    elif self.data.get(key, default) == "false":
                         return False
                     else:
                         if strip:
-                            return str(self.data.get(key)).strip()
+                            return str(self.data.get(key, default)).strip()
                         else:
-                            return self.data.get(key)
+                            return self.data.get(key, default)
                 except Exception as error:
                     pass
 

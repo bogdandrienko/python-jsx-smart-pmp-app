@@ -1,4 +1,5 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
+
 import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
@@ -13,8 +14,9 @@ import * as base from "../../components/ui/base";
 
 export const IdeaTemplatePage = () => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
-    <base.BaseComponent1>
+    <base.Base1>
       <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
         <div className="card shadow custom-background-transparent-low m-0 p-0">
           <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
@@ -207,6 +209,6 @@ export const IdeaTemplatePage = () => {
           </div>
         </div>
       </ul>
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

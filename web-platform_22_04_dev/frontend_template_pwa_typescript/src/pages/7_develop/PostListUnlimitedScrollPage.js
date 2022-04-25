@@ -5,7 +5,7 @@ import { Button1 } from "../../components/ui/button";
 import { Loader1 } from "../../components/ui/loader";
 import { useFetching, useObserver, usePosts } from "../../components/hook";
 import { PostList, PostForm, PostFilter } from "../../components/ui/component";
-import { BaseComponent3 } from "../../components/ui/base";
+import { Base3 } from "../../components/ui/base";
 import { Modal1 } from "../../components/ui/modal";
 import { Select2 } from "../../components/ui/select";
 
@@ -122,8 +122,9 @@ export const PostListUnlimitedScrollPage = () => {
   // console.log("limit: ", limit);
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
-    <base.BaseComponent1>
+    <base.Base1>
       <Modal1 visible={modal} setVisible={setModal}>
         <PostForm create={createPost} />
       </Modal1>
@@ -169,6 +170,6 @@ export const PostListUnlimitedScrollPage = () => {
           padding: 0,
         }}
       />
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

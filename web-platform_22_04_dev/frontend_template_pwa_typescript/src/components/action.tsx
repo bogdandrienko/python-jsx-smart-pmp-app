@@ -5,19 +5,14 @@ import axios from "axios";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as constant from "./constant";
-import { AxiosConfigConstructor } from "./util";
 import * as util from "./util";
-import {
-  NotificationReadListStore,
-  userChangeStore,
-  userDetailStore,
-} from "./constant";
+import { HttpMethods } from "./constant";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export class Captcha {
   // @ts-ignore
-  static CheckAccess({}) {
+  static CheckAccess() {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
@@ -58,7 +53,7 @@ export class User {
     };
   }
   // @ts-ignore
-  static UserLogoutAction({}) {
+  static UserLogoutAction() {
     // @ts-ignore
     return async function (dispatch) {
       try {
@@ -75,7 +70,7 @@ export class User {
     };
   }
   // @ts-ignore
-  static UserDetailAction({}) {
+  static UserDetailAction() {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
@@ -115,33 +110,21 @@ export class User {
 
 export class Users {
   // @ts-ignore
-  static UserReadListAction(constant, page, limit) {
+  static UsersReadListAction() {
     // @ts-ignore
-    return async function (dispatch, getState) {
-      try {
-        dispatch({
-          type: constant.load,
-        });
-        const { data } = await axios.get("/api/user/");
-        if (data.response) {
-          const response = data.response;
-          dispatch({
-            type: constant.data,
-            payload: response,
-          });
-        } else {
-          const response = data.error;
-          dispatch({
-            type: constant.error,
-            payload: response,
-          });
-        }
-      } catch (error) {
-        dispatch({
-          type: constant.fail,
-          payload: error,
-        });
-      }
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          form: {
+            "Action-Type": "UsersReadListStore",
+          },
+          url: `/api/user/`,
+          method: "GET",
+          timeout: 10000,
+          constant: constant.UsersReadListStore,
+          authentication: true,
+        })
+      );
     };
   }
 }
@@ -219,33 +202,22 @@ export class Notification {
   }
 
   // @ts-ignore
-  static DeleteAction(constant, id) {
+  static DeleteAction({ id }) {
     // @ts-ignore
-    return async function (dispatch, getState) {
-      try {
-        dispatch({
-          type: constant.load,
-        });
-        const { data } = await axios.delete(`/api/idea/${id}/`);
-        if (data.response) {
-          const response = data.response;
-          dispatch({
-            type: constant.data,
-            payload: response,
-          });
-        } else {
-          const response = data.error;
-          dispatch({
-            type: constant.error,
-            payload: response,
-          });
-        }
-      } catch (error) {
-        dispatch({
-          type: constant.fail,
-          payload: error,
-        });
-      }
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          form: {
+            "Action-Type": "NotificationDeleteStore",
+            ...{},
+          },
+          url: `/api/notification/${id}/`,
+          method: "DELETE",
+          timeout: 10000,
+          constant: constant.NotificationDeleteStore,
+          authentication: true,
+        })
+      );
     };
   }
 }
@@ -283,6 +255,23 @@ export class Idea {
           },
           url: `/api/idea/?limit=${limit}&page=${page}`,
           method: "GET",
+          timeout: 10000,
+          constant: constant.IdeaReadListStore,
+          authentication: true,
+        })
+      );
+    };
+  }
+
+  // @ts-ignore
+  static IdeaReadListAction2({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor2({
+          form: form,
+          url: `/api/idea/`,
+          method: constant.HttpMethods.GET(),
           timeout: 10000,
           constant: constant.IdeaReadListStore,
           authentication: true,

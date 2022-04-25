@@ -169,28 +169,18 @@ class IdeaModelSerializer(serializers.ModelSerializer):
                 idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=obj.id)
             )
             if objects.count() <= 0:
-                response = {"count": 0, "total_rate": 0, "self_rate": 0}
+                response = {"count": 0, "total_rate": 0}
             else:
                 rate = 0
                 for i in objects:
                     rate += i.rating_integer_field
-                try:
-                    self_rating = backend_models.IdeaRatingModel.objects.get(
-                        author_foreign_key_field=backend_models.UserModel.objects.get(
-                            personnel_number_slug_field=932524),
-                        idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=obj.id)
-                    )
-                    self_rate = self_rating.rating_integer_field
-                except Exception as error:
-                    self_rate = 0
                 response = {
                     "count": objects.count(),
                     "total_rate": round(rate / objects.count(), 2),
-                    "self_rate": self_rate,
                 }
             return response
         except Exception as error:
-            return {"count": 0, "total_rate": 0, "self_rate": 0}
+            return {"count": 0, "total_rate": 0}
 
 
 class IdeaRatingModelSerializer(serializers.ModelSerializer):

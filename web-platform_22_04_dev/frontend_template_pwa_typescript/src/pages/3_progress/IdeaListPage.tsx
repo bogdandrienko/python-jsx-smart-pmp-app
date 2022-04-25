@@ -1,25 +1,38 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import { BaseComponent1 } from "../../components/ui/base";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import * as constant from "../../components/constant";
 import * as action from "../../components/action";
 import * as util from "../../components/util";
 import * as component from "../../components/component";
-import * as paginator from "../../components/ui/paginator";
 import * as hook from "../../components/hook";
+import * as message from "../../components/ui/message";
+import * as base from "../../components/ui/base";
+import * as paginator from "../../components/ui/paginator";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const IdeaListPage = () => {
-  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const IdeaReadListStore = hook.useSelectorCustom1(constant.IdeaReadListStore);
+  const UsersReadListStore = hook.useSelectorCustom1(
+    constant.UsersReadListStore
+  );
+
+  // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
+
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(9);
+
+  const [custom, setCustom] = useState({ page: 3, limit: 9 });
 
   const [filter, setFilter, resetFilter] = hook.useStateCustom1({
     sort: "дате публикации (свежие в начале)",
@@ -36,15 +49,7 @@ export const IdeaListPage = () => {
     detailView: true,
   });
 
-  const IdeaReadListStore = hook.useSelectorCustom1(constant.IdeaReadListStore);
-  const UserReadListStore = hook.useSelectorCustom1(constant.UserReadListStore);
-
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(9);
-
-  useEffect(() => {
-    dispatch({ type: constant.UserReadListStore.reset });
-  }, []);
+  // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     dispatch({ type: constant.IdeaReadListStore.reset });
@@ -57,30 +62,43 @@ export const IdeaListPage = () => {
 
   useEffect(() => {
     if (!IdeaReadListStore.data) {
-      dispatch(action.Idea.IdeaReadListAction({ page: page, limit: limit }));
+      dispatch(
+        action.Idea.IdeaReadListAction2({
+          form: { ...filter, page: page, limit: limit },
+        })
+      );
     }
   }, [IdeaReadListStore.data]);
 
   useEffect(() => {
-    if (!UserReadListStore.data) {
-      dispatch(action.Idea.IdeaReadListAction({ page: page, limit: limit }));
+    if (!UsersReadListStore.data) {
+      dispatch(action.Users.UsersReadListAction());
     }
-  }, [UserReadListStore.data]);
+  }, [UsersReadListStore.data]);
+
+  useEffect(() => {
+    dispatch({ type: constant.UsersReadListStore.reset });
+  }, []);
+
+  // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // @ts-ignore
-  const handlerSubmit = async (event) => {
+  const ResetList = (event) => {
     try {
       event.preventDefault();
+      event.stopPropagation();
     } catch (error) {}
     setPage(1);
     dispatch({ type: constant.IdeaReadListStore.reset });
   };
 
+  console.log("custom: ", custom);
+
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <BaseComponent1>
-      <component.AccordionComponent
+    <base.Base1>
+      <component.Accordion1
         key_target={"accordion1"}
         isCollapse={true}
         title={
@@ -94,7 +112,7 @@ export const IdeaListPage = () => {
       >
         {
           <ul className="row-cols-auto row-cols-sm-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
-            <form className="m-0 p-0" onSubmit={handlerSubmit}>
+            <form className="m-0 p-0" onSubmit={ResetList}>
               <div className="card shadow custom-background-transparent-hard m-0 p-0">
                 <div className="card-header m-0 p-0">
                   <label className="lead m-0 p-1">
@@ -247,7 +265,7 @@ export const IdeaListPage = () => {
                         </option>
                       </select>
                     </label>
-                    {UserReadListStore.data && (
+                    {UsersReadListStore.data && (
                       <label className="form-control-sm text-center m-0 p-1">
                         Автор:
                         <select
@@ -263,7 +281,7 @@ export const IdeaListPage = () => {
                           <option className="m-0 p-0" value="">
                             все варианты
                           </option>
-                          {UserReadListStore.data.list.map(
+                          {UsersReadListStore.data.list.map(
                             (user = "", index = 0) => (
                               <option
                                 key={index}
@@ -278,8 +296,8 @@ export const IdeaListPage = () => {
                       </label>
                     )}
                   </div>
-                  <component.StoreComponent
-                    storeStatus={constant.UserReadListStore}
+                  <component.StoreComponent1
+                    stateConstant={constant.UsersReadListStore}
                     consoleLog={constant.DEBUG_CONSTANT}
                     showLoad={true}
                     loadText={""}
@@ -301,7 +319,7 @@ export const IdeaListPage = () => {
                         onChange={(e) =>
                           setFilter({
                             ...filter,
-                            author: e.target.value.replace(
+                            search: e.target.value.replace(
                               util.GetRegexType({
                                 numbers: true,
                                 cyrillic: true,
@@ -365,7 +383,8 @@ export const IdeaListPage = () => {
             </form>
           </ul>
         }
-      </component.AccordionComponent>
+      </component.Accordion1>
+
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
@@ -374,8 +393,385 @@ export const IdeaListPage = () => {
           changePage={setPage}
         />
       )}
-      <component.StoreComponent
-        storeStatus={constant.IdeaReadListStore}
+      {!IdeaReadListStore.load && IdeaReadListStore.data ? (
+        IdeaReadListStore.data.list.length > 0 ? (
+          <div>
+            <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
+              {IdeaReadListStore.data.list.map(
+                // @ts-ignore
+                (idea, index) => (
+                  <div
+                    key={index}
+                    className="col-sm-12 col-md-6 col-lg-4 m-0 p-1"
+                  >
+                    <div className="m-0 p-0">
+                      <div className="card shadow custom-background-transparent-low m-0 p-0">
+                        <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
+                          <Link
+                            to={`/idea/${idea.id}`}
+                            className="text-decoration-none text-dark m-0 p-0"
+                          >
+                            <h6 className="lead fw-bold m-0 p-0">
+                              {util.GetSliceString(idea["name_char_field"], 50)}
+                            </h6>
+                          </Link>
+                        </div>
+                        <div className="card-body m-0 p-0">
+                          <div className="m-0 p-0">
+                            <label className="form-control-sm text-center m-0 p-1">
+                              Подразделение:
+                              <select
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                required
+                              >
+                                <option className="m-0 p-0" value="">
+                                  {idea["subdivision_char_field"]}
+                                </option>
+                              </select>
+                            </label>
+                            <label className="form-control-sm text-center m-0 p-1">
+                              Сфера:
+                              <select
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                required
+                              >
+                                <option className="m-0 p-0" value="">
+                                  {idea["sphere_char_field"]}
+                                </option>
+                              </select>
+                            </label>
+                            <label className="form-control-sm text-center m-0 p-1">
+                              Категория:
+                              <select
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                required
+                              >
+                                <option className="m-0 p-0" value="">
+                                  {idea["category_char_field"]}
+                                </option>
+                              </select>
+                            </label>
+                          </div>
+                          <div className="m-0 p-0">
+                            <img
+                              src={
+                                idea["image_field"]
+                                  ? util.GetStaticFile(idea["image_field"])
+                                  : util.GetStaticFile(
+                                      "/media/default/idea/default_idea.jpg"
+                                    )
+                              }
+                              className="img-fluid img-thumbnail w-50 m-1 p-0"
+                              alt="изображение отсутствует"
+                            />
+                          </div>
+                          <div className="m-0 p-0">
+                            <label className="form-control-sm text-center w-50 m-0 p-1">
+                              Место изменения:
+                              <input
+                                type="text"
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                defaultValue={util.GetSliceString(
+                                  idea["place_char_field"],
+                                  50
+                                )}
+                                readOnly={true}
+                                placeholder="введите место изменения тут..."
+                                required
+                                minLength={1}
+                                maxLength={300}
+                              />
+                            </label>
+                          </div>
+                          <div className="m-0 p-0">
+                            <label className="form-control-sm text-center w-100 m-0 p-1">
+                              Описание:
+                              <textarea
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                defaultValue={util.GetSliceString(
+                                  idea["description_text_field"],
+                                  100
+                                )}
+                                readOnly={true}
+                                required
+                                placeholder="введите описание тут..."
+                                minLength={1}
+                                maxLength={3000}
+                                rows={3}
+                              />
+                            </label>
+                          </div>
+                          <div className="m-0 p-0">
+                            <div className="btn btn-sm btn-warning m-0 p-2">
+                              Автор:{" "}
+                              {idea["user_model"]["last_name_char_field"] &&
+                                idea["user_model"]["last_name_char_field"]}{" "}
+                              {idea["user_model"]["first_name_char_field"]}{" "}
+                              {idea["user_model"]["position_char_field"]}
+                            </div>
+                          </div>
+                          <div className="d-flex justify-content-between m-1 p-0">
+                            <label className="text-muted border m-0 p-2">
+                              подано:{" "}
+                              <p className="m-0">
+                                {util.GetCleanDateTime(
+                                  idea["created_datetime_field"],
+                                  true
+                                )}
+                              </p>
+                            </label>
+                            <label className="text-muted border m-1 p-2">
+                              зарегистрировано:{" "}
+                              <p className="m-0 p-0">
+                                {util.GetCleanDateTime(
+                                  idea["register_datetime_field"],
+                                  true
+                                )}
+                              </p>
+                            </label>
+                          </div>
+                        </div>
+                        <div className="card-footer m-0 p-1">
+                          <div className="d-flex justify-content-between m-0 p-1">
+                            <span
+                              className={
+                                idea["ratings"]["total_rate"] > 7
+                                  ? "text-success m-0 p-1"
+                                  : idea["ratings"]["total_rate"] > 4
+                                  ? "custom-color-warning-1 m-0 p-1"
+                                  : "text-danger m-0 p-1"
+                              }
+                            >
+                              Рейтинг
+                            </span>
+                            <div className="m-0 p-1">
+                              <span
+                                className={
+                                  idea["ratings"]["total_rate"] > 7
+                                    ? "btn btn-sm bg-success disabled bg-opacity-50 badge rounded-pill text-dark lead fw-bold m-0 p-2"
+                                    : idea["ratings"]["total_rate"] > 4
+                                    ? "btn btn-sm bg-warning disabled bg-opacity-50 badge rounded-pill text-dark lead fw-bold m-0 p-2"
+                                    : "btn btn-sm bg-danger disabled bg-opacity-50 badge rounded-pill text-dark lead fw-bold m-0 p-2"
+                                }
+                              >
+                                {`${idea["ratings"]["total_rate"]}  / ${idea["ratings"]["count"]}`}
+                              </span>
+                              <div className="m-0 p-0">
+                                <small>Рейтинг / голоса</small>
+                              </div>
+                            </div>
+                            <span className="m-0 p-1">
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 1
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 0.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 2
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 1.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 3
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 2.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 4
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 3.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 5
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 4.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 6
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 5.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 7
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 6.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 8
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 7.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 9
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 8.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <i
+                                style={{
+                                  color:
+                                    idea["ratings"]["total_rate"] > 7
+                                      ? "#00ff00"
+                                      : idea["ratings"]["total_rate"] > 4
+                                      ? "#ffaa00"
+                                      : "#ff0000",
+                                }}
+                                className={
+                                  idea["ratings"]["total_rate"] >= 10
+                                    ? "fas fa-star m-0 p-0"
+                                    : idea["ratings"]["total_rate"] >= 9.5
+                                    ? "fas fa-star-half-alt m-0 p-0"
+                                    : "far fa-star m-0 p-0"
+                                }
+                              />
+                              <div className="m-0 p-0">
+                                <small>Общий рейтинг</small>
+                              </div>
+                            </span>
+                          </div>
+                          <div className="d-flex justify-content-between m-0 p-1">
+                            <span className="text-secondary m-0 p-1">
+                              Комментарии
+                            </span>
+                            <i className="fa-solid fa-comment m-0 p-1">
+                              {" "}
+                              {idea["comments"]["count"]}
+                            </i>
+                          </div>
+                        </div>
+                        <div className="m-0 p-0">
+                          <Link
+                            className="btn btn-sm btn-primary w-100 m-0 p-1"
+                            to={`/idea/${idea.id}`}
+                          >
+                            подробнее
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
+              )}
+            </ul>
+          </div>
+        ) : (
+          <message.Message.Secondary>
+            Ничего не найдено! Попробуйте изменить условия фильтрации и/или
+            очистить строку поиска.
+          </message.Message.Secondary>
+        )
+      ) : (
+        ""
+      )}
+      <component.StoreComponent1
+        stateConstant={constant.IdeaReadListStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}
@@ -386,380 +782,6 @@ export const IdeaListPage = () => {
         showFail={true}
         failText={""}
       />
-      {IdeaReadListStore.data && (
-        <div>
-          {IdeaReadListStore.data.list ? (
-            <div>
-              <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
-                {IdeaReadListStore.data.list.map(
-                  // @ts-ignore
-                  (idea, index) => (
-                    <div
-                      key={index}
-                      className="col-sm-12 col-md-6 col-lg-4 m-0 p-1"
-                    >
-                      <div className="m-0 p-0">
-                        <div className="card shadow custom-background-transparent-low m-0 p-0">
-                          <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
-                            <Link
-                              to={`/idea/${idea.id}`}
-                              className="text-decoration-none text-dark m-0 p-0"
-                            >
-                              <h6 className="lead fw-bold m-0 p-0">
-                                {util.GetSliceString(
-                                  idea["name_char_field"],
-                                  50
-                                )}
-                              </h6>
-                            </Link>
-                          </div>
-                          <div className="card-body m-0 p-0">
-                            <div className="m-0 p-0">
-                              <label className="form-control-sm text-center m-0 p-1">
-                                Подразделение:
-                                <select
-                                  className="form-control form-control-sm text-center m-0 p-1"
-                                  required
-                                >
-                                  <option className="m-0 p-0" value="">
-                                    {idea["subdivision_char_field"]}
-                                  </option>
-                                </select>
-                              </label>
-                              <label className="form-control-sm text-center m-0 p-1">
-                                Сфера:
-                                <select
-                                  className="form-control form-control-sm text-center m-0 p-1"
-                                  required
-                                >
-                                  <option className="m-0 p-0" value="">
-                                    {idea["sphere_char_field"]}
-                                  </option>
-                                </select>
-                              </label>
-                              <label className="form-control-sm text-center m-0 p-1">
-                                Категория:
-                                <select
-                                  className="form-control form-control-sm text-center m-0 p-1"
-                                  required
-                                >
-                                  <option className="m-0 p-0" value="">
-                                    {idea["category_char_field"]}
-                                  </option>
-                                </select>
-                              </label>
-                            </div>
-                            <div className="m-0 p-0">
-                              <img
-                                src={
-                                  idea["image_field"]
-                                    ? util.GetStaticFile(idea["image_field"])
-                                    : util.GetStaticFile(
-                                        "/media/default/idea/default_idea.jpg"
-                                      )
-                                }
-                                className="img-fluid img-thumbnail w-50 m-1 p-0"
-                                alt="изображение отсутствует"
-                              />
-                            </div>
-                            <div className="m-0 p-0">
-                              <label className="form-control-sm text-center w-50 m-0 p-1">
-                                Место изменения:
-                                <input
-                                  type="text"
-                                  className="form-control form-control-sm text-center m-0 p-1"
-                                  defaultValue={util.GetSliceString(
-                                    idea["place_char_field"],
-                                    50
-                                  )}
-                                  readOnly={true}
-                                  placeholder="введите место изменения тут..."
-                                  required
-                                  minLength={1}
-                                  maxLength={300}
-                                />
-                              </label>
-                            </div>
-                            <div className="m-0 p-0">
-                              <label className="form-control-sm text-center w-100 m-0 p-1">
-                                Описание:
-                                <textarea
-                                  className="form-control form-control-sm text-center m-0 p-1"
-                                  defaultValue={util.GetSliceString(
-                                    idea["description_text_field"],
-                                    100
-                                  )}
-                                  readOnly={true}
-                                  required
-                                  placeholder="введите описание тут..."
-                                  minLength={1}
-                                  maxLength={3000}
-                                  rows={3}
-                                />
-                              </label>
-                            </div>
-                            <div className="m-0 p-0">
-                              <div className="btn btn-sm btn-warning m-0 p-2">
-                                Автор:{" "}
-                                {idea["user_model"]["last_name_char_field"] &&
-                                  idea["user_model"][
-                                    "last_name_char_field"
-                                  ]}{" "}
-                                {idea["user_model"]["first_name_char_field"]}{" "}
-                                {idea["user_model"]["position_char_field"]}
-                              </div>
-                            </div>
-                            <div className="d-flex justify-content-between m-1 p-0">
-                              <label className="text-muted border m-0 p-2">
-                                подано:{" "}
-                                <p className="m-0">
-                                  {util.GetCleanDateTime(
-                                    idea["created_datetime_field"],
-                                    true
-                                  )}
-                                </p>
-                              </label>
-                              <label className="text-muted border m-1 p-2">
-                                зарегистрировано:{" "}
-                                <p className="m-0 p-0">
-                                  {util.GetCleanDateTime(
-                                    idea["register_datetime_field"],
-                                    true
-                                  )}
-                                </p>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="card-footer m-0 p-1">
-                            <div className="d-flex justify-content-between m-0 p-1">
-                              <span
-                                className={
-                                  idea["ratings"]["total_rate"] > 7
-                                    ? "text-success m-0 p-1"
-                                    : idea["ratings"]["total_rate"] > 4
-                                    ? "custom-color-warning-1 m-0 p-1"
-                                    : "text-danger m-0 p-1"
-                                }
-                              >
-                                Рейтинг
-                              </span>
-                              <div className="m-0 p-1">
-                                <span
-                                  className={
-                                    idea["ratings"]["total_rate"] > 7
-                                      ? "btn btn-sm bg-success disabled bg-opacity-50 badge rounded-pill text-dark lead fw-bold m-0 p-2"
-                                      : idea["ratings"]["total_rate"] > 4
-                                      ? "btn btn-sm bg-warning disabled bg-opacity-50 badge rounded-pill text-dark lead fw-bold m-0 p-2"
-                                      : "btn btn-sm bg-danger disabled bg-opacity-50 badge rounded-pill text-dark lead fw-bold m-0 p-2"
-                                  }
-                                >
-                                  {`${idea["ratings"]["total_rate"]}  / ${idea["ratings"]["count"]}`}
-                                </span>
-                              </div>
-                              <span className="m-0 p-1">
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 1
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 0.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 2
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 1.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 3
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 2.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 4
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 3.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 5
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 4.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 6
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 5.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 7
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 6.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 8
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 7.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 9
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 8.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <i
-                                  style={{
-                                    color:
-                                      idea["ratings"]["self_rate"] > 7
-                                        ? "#00ff00"
-                                        : idea["ratings"]["self_rate"] > 4
-                                        ? "#ffaa00"
-                                        : "#ff0000",
-                                  }}
-                                  className={
-                                    idea["ratings"]["self_rate"] >= 10
-                                      ? "fas fa-star m-0 p-0"
-                                      : idea["ratings"]["self_rate"] >= 9.5
-                                      ? "fas fa-star-half-alt m-0 p-0"
-                                      : "far fa-star m-0 p-0"
-                                  }
-                                />
-                                <div className="m-0 p-0">Ваша оценка</div>
-                              </span>
-                            </div>
-                            <div className="d-flex justify-content-between m-0 p-1">
-                              <span className="text-secondary m-0 p-1">
-                                Комментарии
-                              </span>
-                              <i className="fa-solid fa-comment m-0 p-1">
-                                {" "}
-                                {idea["comments"]["count"]}
-                              </i>
-                            </div>
-                          </div>
-                          <div className="m-0 p-0">
-                            <Link
-                              className="btn btn-sm btn-primary w-100 m-0 p-1"
-                              to={`/idea/${idea.id}`}
-                            >
-                              подробнее
-                            </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )
-                )}
-              </ul>
-            </div>
-          ) : (
-            <h1>Idea not found!</h1>
-          )}
-        </div>
-      )}
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
@@ -768,6 +790,6 @@ export const IdeaListPage = () => {
           changePage={setPage}
         />
       )}
-    </BaseComponent1>
+    </base.Base1>
   );
 };

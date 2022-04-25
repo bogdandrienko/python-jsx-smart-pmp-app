@@ -14,6 +14,9 @@ export const Modal1 = ({ children, visible, setVisible }) => {
   if (visible) {
     rootClasses.push("custom_modal_1_active");
   }
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
       <div
@@ -34,6 +37,8 @@ export const ModalConfirm1 = ({
   // @ts-ignore
   callback,
 }) => {
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div
       className={
@@ -50,14 +55,14 @@ export const ModalConfirm1 = ({
         {description && <h2>{description}</h2>}
         <button
           type="button"
-          onClick={(event) => callback(true)}
+          onClick={() => callback(true)}
           className="btn btn-lg btn-outline-success m-1 p-2"
         >
           подтвердить
         </button>
         <button
           type="button"
-          onClick={(event) => callback(false)}
+          onClick={() => callback(false)}
           className="btn btn-lg btn-outline-secondary m-1 p-2"
         >
           отмена
@@ -99,6 +104,8 @@ export const ModalPrompt2 = ({
     callback(false);
     setAnsw("Нарушение норм приличия!");
   };
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div

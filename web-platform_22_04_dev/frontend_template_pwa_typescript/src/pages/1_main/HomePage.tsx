@@ -15,7 +15,7 @@ export const HomePage = () => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <base.BaseComponent1>
+    <base.Base1>
       <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 text-center m-0 p-1">
         <div className="embed-responsive embed-responsive-16by9 text-center m-0 p-1">
           <div className="btn-group text-start w-100 m-0 p-0">
@@ -51,6 +51,6 @@ export const HomePage = () => {
       <div className="m-0 p-0">
         <component.ModulesComponent />
       </div>
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

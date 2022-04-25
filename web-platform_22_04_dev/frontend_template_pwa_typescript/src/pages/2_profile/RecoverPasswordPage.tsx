@@ -1,14 +1,12 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
 // @ts-ignore
 import ReCAPTCHA from "react-google-recaptcha";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as component from "../../components/component";
-import * as constant from "../../components/constant";
 import * as util from "../../components/util";
 
 import * as base from "../../components/ui/base";
@@ -16,19 +14,7 @@ import * as base from "../../components/ui/base";
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const RecoverPasswordPage = () => {
-  // TODO variables ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const [captcha, captchaSet] = useState("");
-  const [username, usernameSet] = useState("");
-  const [secretQuestion, secretQuestionSet] = useState("");
-  const [secretAnswer, secretAnswerSet] = useState("");
-  const [email, emailSet] = useState("");
-  const [recoverPassword, recoverPasswordSet] = useState("");
-  const [success, successSet] = useState(false);
-  const [password, passwordSet] = useState("");
-  const [password2, password2Set] = useState("");
-
-  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // const userRecoverPasswordStore = useSelector(
   //   // @ts-ignore
@@ -40,6 +26,20 @@ export const RecoverPasswordPage = () => {
   //   // error: errorUserRecoverPassword,
   //   // fail: failUserRecoverPassword,
   // } = userRecoverPasswordStore;
+
+  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const [captcha, captchaSet] = useState("");
+  const [username, usernameSet] = useState("");
+  const [secretQuestion, secretQuestionSet] = useState("");
+  const [secretAnswer, secretAnswerSet] = useState("");
+  const [email, emailSet] = useState("");
+  const [recoverPassword, recoverPasswordSet] = useState("");
+  const [success, successSet] = useState(false);
+  const [password, passwordSet] = useState("");
+  const [password2, password2Set] = useState("");
+
+  // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // useEffect(() => {
   //   if (dataUserRecoverPassword) {
@@ -67,7 +67,7 @@ export const RecoverPasswordPage = () => {
   //   }
   // }, [dataUserRecoverPassword]);
 
-  // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
+  // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // @ts-ignore
   const handlerSubmitFindUser = (event) => {
@@ -171,7 +171,7 @@ export const RecoverPasswordPage = () => {
   };
   //////////////////////////////////////////////////////////
   // @ts-ignore
-  const handlerRecoverPasswordReset = async (event) => {
+  const handlerRecoverPasswordReset = (event) => {
     try {
       event.preventDefault();
     } catch (error) {}
@@ -179,9 +179,10 @@ export const RecoverPasswordPage = () => {
     password2Set("");
   };
 
-  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
-    <base.BaseComponent1>
+    <base.Base1>
       {/*<component.StoreComponent*/}
       {/*  storeStatus={constant.userRecoverPasswordStore}*/}
       {/*  consoleLog={constant.DEBUG_CONSTANT}*/}
@@ -267,7 +268,7 @@ export const RecoverPasswordPage = () => {
         )}
         {!success && (secretQuestion || email) ? (
           <div className="shadow m-0 p-0">
-            <component.AccordionComponent
+            <component.Accordion1
               key_target={"accordion1"}
               isCollapse={false}
               title={"Регламент восстановления:"}
@@ -292,7 +293,7 @@ export const RecoverPasswordPage = () => {
                   </ul>
                 </div>
               }
-            </component.AccordionComponent>
+            </component.Accordion1>
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 shadow m-0 p-0">
               <div className="col-6 m-0 p-0">
                 <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 justify-content-center text-center m-0 p-1">
@@ -574,6 +575,6 @@ export const RecoverPasswordPage = () => {
           </ul>
         )}
       </div>
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

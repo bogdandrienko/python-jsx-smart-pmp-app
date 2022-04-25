@@ -1162,7 +1162,7 @@ def api_auth_idea(request):
 
             # TODO action ##############################################################################################
 
-            if req_inst.action_type == "IDEA_CREATE":
+            if req_inst.action_type == "IDEA_CREATE":  # clean
                 try:
 
                     # TODO get_value ###################################################################################
@@ -1344,7 +1344,7 @@ def api_auth_idea(request):
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_DETAIL":
+            if req_inst.action_type == "IDEA_DETAIL":  # clean
                 try:
 
                     # TODO get_value ###################################################################################
@@ -1481,7 +1481,7 @@ def api_auth_idea(request):
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "IDEA_COMMENT_CREATE":
+            if req_inst.action_type == "IDEA_COMMENT_CREATE":  # clean
                 try:
 
                     # TODO get_value ###################################################################################
@@ -3999,6 +3999,155 @@ def api_user(request):
 @api_view(http_method_names=HTTP_METHOD_NAMES)
 # @permission_classes([IsAuthenticated])
 @permission_classes([AllowAny])
+def api_user_ratings(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    sort = req_inst.get_value(key="sort", default='')
+                    only_month = req_inst.get_value(key="onlyMonth", default='')
+
+                    # TODO action ######################################################################################
+
+                    authors = []
+                    # ideas = backend_models.IdeaModel.objects.filter(
+                    #     status_moderate_char_field="принято"
+                    # ).order_by("-register_datetime_field")
+                    ideas = backend_models.IdeaModel.objects.all().order_by("-register_datetime_field")
+                    if only_month:
+                        now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
+                        local_objects = []
+                        for idea in ideas:
+                            if (idea.register_datetime_field + datetime.timedelta(days=31)).strftime('%Y-%m-%d %H:%M') \
+                                    >= now:
+                                local_objects.append(idea.id)
+                        ideas = backend_models.IdeaModel.objects.filter(
+                            id__in=local_objects
+                        ).order_by("-register_datetime_field")
+                    for idea in ideas:
+                        authors.append(idea.author_foreign_key_field)
+                    authors = set(authors)
+                    ideas = []
+                    for author in authors:
+                        ideas_arr = backend_models.IdeaModel.objects.filter(
+                            author_foreign_key_field=author, status_moderate_char_field="принято"
+                        )
+                        idea_count = ideas_arr.count()
+                        idea_rating = 0
+                        idea_rating_count = 0
+                        idea_comment_count = 0
+                        for idea in ideas_arr:
+                            ratings = backend_models.IdeaRatingModel.objects.filter(idea_foreign_key_field=idea)
+                            for rate in ratings:
+                                idea_rating += rate.rating_integer_field
+                            idea_rating_count += ratings.count()
+                            idea_comment_count = backend_models.IdeaCommentModel.objects.filter(
+                                idea_foreign_key_field=idea
+                            ).count()
+                        if idea_rating_count == 0:
+                            idea_rating = 0
+                        else:
+                            idea_rating = round(idea_rating / idea_rating_count, 2)
+                        serialized_user = backend_serializers.UserModelSerializer(instance=author, many=False).data
+                        ideas.append({
+                            "user_model": serialized_user,
+                            "idea_count": idea_count, "idea_rating": idea_rating,
+                            "idea_rating_count": idea_rating_count, "idea_comment_count": idea_comment_count
+                        })
+                    # sort
+                    if sort:
+                        if sort == "количеству (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "количеству (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "рейтингу (популярные в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "рейтингу (популярные в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "отметкам рейтинга (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "отметкам рейтинга (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_rating_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "комментариям (наибольшие в начале)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_comment_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=True)
+                            ideas = [x[1] for x in ideas_arr]
+                        elif sort == "комментариям (наибольшие в конце)":
+                            ideas_arr = []
+                            for idea in ideas:
+                                ideas_arr.append([idea["idea_comment_count"], idea])
+                            ideas_arr.sort(key=lambda x: x[0], reverse=False)
+                            ideas = [x[1] for x in ideas_arr]
+                    response = {
+                        "response": {
+                            "list": ideas,
+                            "x-total-count": len(ideas)
+                        }
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+
+                    time.sleep(3)
+
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([AllowAny])
 def api_captcha(request):
     """
     django-rest-framework
@@ -4025,7 +4174,7 @@ def api_captcha(request):
                         "response": "Вы не робот!"
                     }
 
-                    sleep(1, 3)
+                    sleep(3, 5)
 
                     # TODO response ####################################################################################
 
@@ -4043,7 +4192,6 @@ def api_captcha(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-# @permission_classes([IsAuthenticated])
 @permission_classes([AllowAny])
 def api_user_login(request):
     """
@@ -4062,36 +4210,13 @@ def api_user_login(request):
 
             # TODO action ##############################################################################################
 
-            print("action_type: ", req_inst.action_type)
-
-            username = req_inst.get_value("username")
-            password = req_inst.get_value("password")
-
-            print("username: ", username)
-            print("password: ", password)
-
-            username = str(request.GET.get('username', ''))
-            password = str(request.GET.get('password', ''))
-
-            print("username: ", username)
-            print("password: ", password)
-
-            if req_inst.action_type == "userLoginStore":
+            if req_inst.action_type == "":
                 try:
 
                     # TODO get_value ###################################################################################
 
-                    username = req_inst.get_value("username")
-                    password = req_inst.get_value("password")
-
-                    print("username: ", username)
-                    print("password: ", password)
-
-                    username = str(request.GET.get('username', ''))
-                    password = str(request.GET.get('password', ''))
-
-                    print("username: ", username)
-                    print("password: ", password)
+                    username = req_inst.get_value(key="username", default='')
+                    password = req_inst.get_value(key="password", default='')
 
                     # TODO action ######################################################################################
 
@@ -4124,9 +4249,8 @@ def api_user_login(request):
                             update_last_login(sender=None, user=user)
                             refresh = RefreshToken.for_user(user=user)
                             response = {"response": {
-                                "refresh": str(refresh),
-                                "access": str(refresh.access_token),
                                 "token": str(refresh.access_token),
+                                "full name": f"{user_model.last_name_char_field} {user_model.first_name_char_field}"
                             }}
                         else:
                             response = {
@@ -4142,7 +4266,7 @@ def api_user_login(request):
                 except Exception as error:
                     backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
-            if req_inst.action_type == "":
+            if req_inst.action_type == "123":
                 try:
 
                     # TODO get_value ###################################################################################
@@ -4254,10 +4378,10 @@ def api_user_password_change(request):
             if req_inst.action_type == "":
                 try:
 
-                    secret_question = str(request.data.get('secretQuestion', ''))
-                    secret_answer = str(request.data.get('secretAnswer', ''))
-                    email = str(request.data.get('email', ''))
-                    password = str(request.data.get('password', ''))
+                    secret_question = req_inst.get_value(key="secretQuestion", default='')
+                    secret_answer = req_inst.get_value(key="secretAnswer", default='')
+                    email = req_inst.get_value(key="email", default=None)
+                    password = req_inst.get_value(key="password", default='')
 
                     user_model = req_inst.user_model
                     user_model.secret_question_char_field = secret_question
@@ -4316,20 +4440,34 @@ def api_notification(request):
 
                     # TODO get_value ###################################################################################
 
-                    page = int(request.GET.get('page', 1))
-                    limit = int(request.GET.get('limit', 10))
+                    page = req_inst.get_value(key="page", default=1)
+                    limit = req_inst.get_value(key="limit", default=10)
 
                     # TODO action ######################################################################################
 
-                    notifications = backend_models.NotificationModel.objects.all()
-                    num_pages = len(notifications)
+                    objects = backend_models.NotificationModel.objects.filter(
+                        model_foreign_key_field=None,
+                        target_foreign_key_field=req_inst.user_model,
+                        visibility_boolean_field=True,
+                    )
+                    serializer = backend_serializers.NotificationModelSerializer(objects, many=True).data
+                    group_models = backend_models.GroupModel.objects.filter(user_many_to_many_field=req_inst.user_model)
+                    objects = backend_models.NotificationModel.objects.filter(
+                        model_foreign_key_field__in=group_models,
+                        target_foreign_key_field=None,
+                        visibility_boolean_field=True,
+                    ).order_by("-hide_datetime_field")
+                    serializer1 = backend_serializers.NotificationModelSerializer(objects, many=True).data
+
+                    serializers = serializer + serializer1
+
+                    num_pages = len(serializers)
                     if limit > 0:
-                        p = Paginator(notifications, limit)
-                        notifications = p.page(page).object_list
+                        p = Paginator(serializers, limit)
+                        serializers = p.page(page).object_list
                     response = {
                         "response": {
-                            "list": backend_serializers.NotificationModelSerializer(
-                                instance=notifications, many=True).data,
+                            "list": serializers,
                             "x-total-count": num_pages
                         }
                     }
@@ -4354,9 +4492,9 @@ def api_notification(request):
 
                     # TODO get_value ###################################################################################
 
-                    name = str(request.data.get('name', ''))
-                    place = str(request.data.get('place', ''))
-                    description = str(request.data.get('description', ''))
+                    name = req_inst.get_value(key="name", default="")
+                    place = req_inst.get_value(key="place", default="")
+                    description = req_inst.get_value(key="description", default="")
 
                     # TODO action ######################################################################################
 
@@ -4395,6 +4533,53 @@ def api_notification(request):
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
+def api_notification_id(request, notification_id):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "DELETE":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO action ######################################################################################
+
+                    backend_models.NotificationModel.objects.get(id=notification_id).delete()
+                    response = {
+                        "response": "Успешно скрыто!",
+                    }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+
+                    sleep(4)
+
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([IsAuthenticated])
 def api_idea(request):
     """
     django-rest-framework
@@ -4417,12 +4602,23 @@ def api_idea(request):
 
                     # TODO get_value ###################################################################################
 
-                    page = int(request.GET.get('page', 1))
-                    limit = int(request.GET.get('limit', 10))
+                    page = req_inst.get_value(key="page", default=1)
+                    limit = req_inst.get_value(key="limit", default=10)
+                    subdivision = req_inst.get_value(key="subdivision", default="")
+
+                    is_delete = req_inst.get_value(key="is_delete", default="")  # "false"
+
+                    if is_delete:
+                        pass
+
+                    posts = backend_models.IdeaModel.objects.all()
+                    if subdivision:
+                        posts = posts.filter(subdivision_char_field=subdivision)
 
                     # TODO action ######################################################################################
 
-                    posts = backend_models.IdeaModel.objects.all()
+                    # posts = backend_models.IdeaModel.objects.filter(status_moderate_char_field="принято")
+                    # posts = backend_models.IdeaModel.objects.all()
                     num_pages = len(posts)
                     if limit > 0:
                         p = Paginator(posts, limit)
@@ -4453,20 +4649,19 @@ def api_idea(request):
                 try:
                     # TODO get_value ###################################################################################
 
-                    subdivision = str(request.data.get('name', ''))
-                    sphere = str(request.data.get('sphere', ''))
-                    category = str(request.data.get('category', ''))
-                    avatar = request.data.get('avatar', None)
-                    name = str(request.data.get('name', ''))
-                    place = str(request.data.get('place', ''))
-                    description = str(request.data.get('description', ''))
-                    moderate = str(request.data.get('moderate', 'на модерации'))
+                    subdivision = req_inst.get_value(key="subdivision", default="")
+                    sphere = req_inst.get_value(key="sphere", default="")
+                    category = req_inst.get_value(key="category", default="")
+                    avatar = req_inst.get_value(key="avatar", default=None)
+                    name = req_inst.get_value(key="name", default="")
+                    place = req_inst.get_value(key="place", default="")
+                    description = req_inst.get_value(key="description", default="")
+                    moderate = req_inst.get_value(key="moderate", default="на модерации")
 
                     # TODO action ######################################################################################
 
                     backend_models.IdeaModel.objects.create(
-                        author_foreign_key_field=backend_models.UserModel.objects.get(
-                            personnel_number_slug_field=932524),
+                        author_foreign_key_field=req_inst.user_model,
                         subdivision_char_field=subdivision,
                         sphere_char_field=sphere,
                         category_char_field=category,
@@ -4475,6 +4670,16 @@ def api_idea(request):
                         place_char_field=place,
                         description_text_field=description,
                         status_moderate_char_field=moderate
+                    )
+
+                    backend_models.NotificationModel.objects.create(
+                        author_foreign_key_field=req_inst.user_model,
+                        model_foreign_key_field=backend_models.GroupModel.objects.get(
+                            name_slug_field="moderator_idea"
+                        ),
+                        name_char_field=f"Создана новая идея",
+                        place_char_field="банк идей",
+                        description_text_field=f"название идеи: {name}",
                     )
 
                     response = {
@@ -4523,9 +4728,9 @@ def api_idea_id(request, idea_id):
 
                     # TODO action ######################################################################################
 
-                    post = backend_models.IdeaModel.objects.get(id=idea_id)
+                    obj = backend_models.IdeaModel.objects.get(id=idea_id)
                     response = {
-                        "response": backend_serializers.IdeaModelSerializer(instance=post, many=False).data,
+                        "response": backend_serializers.IdeaModelSerializer(instance=obj, many=False).data,
                     }
 
                     # TODO response ####################################################################################
@@ -4550,7 +4755,7 @@ def api_idea_id(request, idea_id):
 
                     backend_models.IdeaModel.objects.get(id=idea_id).delete()
                     response = {
-                        "response": "Successfully deleted!",
+                        "response": "Успешно удалено!",
                     }
 
                     # TODO response ####################################################################################
@@ -4595,8 +4800,8 @@ def api_idea_comment(request, idea_id):
 
                     # TODO get_value ###################################################################################
 
-                    page = int(request.GET.get('page', 1))
-                    limit = int(request.GET.get('limit', 10))
+                    page = req_inst.get_value(key="page", default=1)
+                    limit = req_inst.get_value(key="limit", default=10)
 
                     # TODO action ######################################################################################
 
@@ -4635,13 +4840,12 @@ def api_idea_comment(request, idea_id):
                 try:
                     # TODO get_value ###################################################################################
 
-                    comment = str(request.data.get('comment', ''))
+                    comment = req_inst.get_value(key="comment", default="")
 
                     # TODO action ######################################################################################
 
                     backend_models.IdeaCommentModel.objects.create(
-                        author_foreign_key_field=backend_models.UserModel.objects.get(
-                            personnel_number_slug_field=932524),
+                        author_foreign_key_field=req_inst.user_model,
                         idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id),
                         comment_text_field=comment,
                     )
@@ -4697,8 +4901,7 @@ def api_idea_rating(request, idea_id):
                     )
                     try:
                         self_rating = backend_models.IdeaRatingModel.objects.get(
-                            author_foreign_key_field=backend_models.UserModel.objects.get(
-                                personnel_number_slug_field=932524),
+                            author_foreign_key_field=req_inst.user_model,
                             idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id)
                         )
                         self_rate = self_rating.rating_integer_field
@@ -4742,8 +4945,7 @@ def api_idea_rating(request, idea_id):
                     # TODO action ######################################################################################
 
                     rating = backend_models.IdeaRatingModel.objects.get_or_create(
-                        author_foreign_key_field=backend_models.UserModel.objects.get(
-                            personnel_number_slug_field=932524),
+                        author_foreign_key_field=req_inst.user_model,
                         idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id),
                     )[0]
 

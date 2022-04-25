@@ -18,12 +18,13 @@ import * as captcha from "../../components/ui/captcha";
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const LoginPage = () => {
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const captchaCheckStore = hook.useSelectorCustom1(constant.captchaCheckStore);
+
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
-
-  const captchaCheckStore = hook.useSelectorCustom1(constant.captchaCheckStore);
-  const userLoginStore = hook.useSelectorCustom1(constant.userLoginStore);
 
   const [user, setUser, resetUser] = hook.useStateCustom1({
     username: "",
@@ -33,7 +34,7 @@ export const LoginPage = () => {
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // @ts-ignore
-  async function Login(event) {
+  function Login(event) {
     try {
       event.preventDefault();
       event.stopPropagation();
@@ -51,7 +52,7 @@ export const LoginPage = () => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <base.BaseComponent1>
+    <base.Base1>
       <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
         <form className="m-0 p-0" onSubmit={Login}>
           <div className="card shadow custom-background-transparent-low m-0 p-0">
@@ -146,7 +147,7 @@ export const LoginPage = () => {
             </div>
             <div className="card-footer m-0 p-0">
               <component.StoreComponent1
-                storeStatus={userLoginStore}
+                stateConstant={constant.userLoginStore}
                 consoleLog={constant.DEBUG_CONSTANT}
                 showLoad={true}
                 loadText={""}
@@ -187,6 +188,6 @@ export const LoginPage = () => {
           </div>
         </form>
       </ul>
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

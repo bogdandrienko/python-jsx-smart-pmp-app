@@ -17,6 +17,10 @@ import * as modal from "../../components/ui/modal";
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const IdeaCreatePage = () => {
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const IdeaCreateStore = hook.useSelectorCustom1(constant.IdeaCreateStore);
+
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
@@ -33,7 +37,7 @@ export const IdeaCreatePage = () => {
   });
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const IdeaCreateStore = hook.useSelectorCustom1(constant.IdeaCreateStore);
+  // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     dispatch({ type: constant.IdeaCreateStore.reset });
@@ -62,8 +66,8 @@ export const IdeaCreatePage = () => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <base.BaseComponent1>
-      <component.AccordionComponent
+    <base.Base1>
+      <component.Accordion1
         key_target={"accordion1"}
         isCollapse={false}
         title={"Регламент подачи:"}
@@ -86,9 +90,9 @@ export const IdeaCreatePage = () => {
             </ul>
           </div>
         }
-      </component.AccordionComponent>
-      <component.StoreComponent
-        storeStatus={constant.IdeaCreateStore}
+      </component.Accordion1>
+      <component.StoreComponent1
+        stateConstant={constant.IdeaCreateStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}
@@ -383,6 +387,6 @@ export const IdeaCreatePage = () => {
           </ul>
         )}
       </div>
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

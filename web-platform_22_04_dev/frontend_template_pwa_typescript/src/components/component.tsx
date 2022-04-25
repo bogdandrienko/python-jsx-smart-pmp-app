@@ -40,7 +40,9 @@ export const StoreStatusComponent = ({
   if (consoleLog) {
     console.log(`${keyStatus}`, storeStatus);
   }
+
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div key={keyStatus} className="m-0 p-0">
       {showLoad && loadStatus && (
@@ -122,7 +124,9 @@ export const StoreComponent = ({
       fail: failStore,
     });
   }
+
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div key={storeConstant} className="m-0 p-0">
       {showLoad && loadStore && (
@@ -179,7 +183,7 @@ export const StoreComponent = ({
 
 export const StoreComponent1 = ({
   // @ts-ignore
-  storeStatus,
+  stateConstant,
   consoleLog = false,
   showLoad = true,
   loadText = "",
@@ -190,26 +194,20 @@ export const StoreComponent1 = ({
   showFail = true,
   failText = "",
 }) => {
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO react components
-  const {
-    load: loadStore,
-    data: dataStore,
-    error: errorStore,
-    fail: failStore,
-    // @ts-ignore
-  } = storeStatus;
-  // if (consoleLog) {
-  //   console.log(`${storeConstant}`, {
-  //     load: loadStore,
-  //     data: dataStore,
-  //     error: errorStore,
-  //     fail: failStore,
-  //   });
-  // }
+  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const Constant = stateConstant.data.split("_")[0];
+  // @ts-ignore
+  const StoreConstant = useSelector((state) => state[Constant]);
+  if (consoleLog) {
+    console.log(`${Constant}`, StoreConstant);
+  }
+
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
-    <div key={storeStatus} className="m-0 p-0">
-      {showLoad && loadStore && (
+    <div key={`${new Date().getMilliseconds()}`} className="m-0 p-0">
+      {showLoad && StoreConstant.load && (
         <div className="row justify-content-center m-0 p-0">
           {loadText ? (
             <Alert variant={"secondary"} className="text-center m-0 p-1">
@@ -232,28 +230,28 @@ export const StoreComponent1 = ({
           )}
         </div>
       )}
-      {showData && dataStore && (
+      {showData && StoreConstant.data && (
         <div className="row justify-content-center m-0 p-0">
           <Alert variant={"success"} className="text-center m-0 p-1">
             {dataText
               ? dataText
-              : typeof dataStore === "string"
-              ? dataStore
+              : typeof StoreConstant.data === "string"
+              ? StoreConstant.data
               : "произошла ошибка"}
           </Alert>
         </div>
       )}
-      {showError && errorStore && (
+      {showError && StoreConstant.error && (
         <div className="row justify-content-center m-0 p-0">
           <Alert variant={"danger"} className="text-center m-0 p-1">
-            {errorText ? errorText : errorStore}
+            {errorText ? errorText : StoreConstant.error}
           </Alert>
         </div>
       )}
-      {showFail && failStore && (
+      {showFail && StoreConstant.fail && (
         <div className="row justify-content-center m-0 p-0">
           <Alert variant={"warning"} className="text-center m-0 p-1">
-            {failText ? failText : failStore}
+            {failText ? failText : StoreConstant.fail}
           </Alert>
         </div>
       )}
@@ -290,7 +288,9 @@ export const StoreStatus1 = ({
       fail: failStore,
     });
   }
+
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div key={storeConstant} className="m-0 p-0">
       {showLoad && loadStore && (
@@ -347,6 +347,7 @@ export const StoreStatus1 = ({
 // @ts-ignore
 export const MessageComponent = ({ variant, children }) => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="row justify-content-center m-0 p-1">
       <Alert variant={variant} className="text-center m-0 p-1">
@@ -358,6 +359,7 @@ export const MessageComponent = ({ variant, children }) => {
 
 export const LoaderComponent = () => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <Spinner
       animation="border"
@@ -381,7 +383,9 @@ export const ModulesComponent = () => {
     constant.NotificationReadListStore
   );
   const userDetailStore = hook.useSelectorCustom1(constant.userDetailStore);
+
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="shadow text-center m-0 p-0">
       {router.modules && (
@@ -489,7 +493,10 @@ export const ModulesComponent = () => {
                                                             {"  "}
                                                             {link.Header ===
                                                               "Уведомления" &&
-                                                              NotificationReadListStore.data && (
+                                                              NotificationReadListStore.data &&
+                                                              NotificationReadListStore
+                                                                .data.list
+                                                                .length > 0 && (
                                                                 <span className="badge rounded-pill text-danger m-0 p-1">
                                                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                                                   {
@@ -555,6 +562,7 @@ export const ModulesComponent = () => {
 };
 export const NewsComponent = ({ count = 100 }) => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="card list-group list-group-item-action list-group-flush custom-background-transparent-low-middle m-0 p-0">
       <div className="border-bottom scrollarea m-0 p-0">
@@ -634,7 +642,7 @@ export const NewsComponent = ({ count = 100 }) => {
   );
 };
 
-export const AccordionComponent = ({
+export const Accordion1 = ({
   // @ts-ignore
   key_target,
   isCollapse = true,
@@ -647,6 +655,7 @@ export const AccordionComponent = ({
   children,
 }) => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="m-0 p-0">
       <div className="accordion m-0 p-0" id="accordionExample">

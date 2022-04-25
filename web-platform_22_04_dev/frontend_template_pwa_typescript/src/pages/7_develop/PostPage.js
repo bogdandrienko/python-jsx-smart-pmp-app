@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BaseComponent3 } from "../../components/ui/base";
+import { Base3 } from "../../components/ui/base";
 import { useDispatch, useSelector } from "react-redux";
 import * as constant from "../../components/constant";
 import * as action from "../../components/action";
@@ -38,8 +38,10 @@ export const PostPage = () => {
     dispatch({ type: constant.PostReadListStore.reset });
   };
 
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
-    <BaseComponent3>
+    <Base3>
       <button onClick={() => navigate("/posts")} className="custom_button_1">
         {" <= "} back
       </button>
@@ -69,7 +71,7 @@ export const PostPage = () => {
         setVisible={setVisible}
         action={deletePost}
       />
-    </BaseComponent3>
+    </Base3>
   );
 };
 
@@ -78,6 +80,9 @@ export const PostDelete = ({ visible, setVisible, action }) => {
   if (visible) {
     rootClasses.push("custom_modal_1_active");
   }
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div>
       <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>

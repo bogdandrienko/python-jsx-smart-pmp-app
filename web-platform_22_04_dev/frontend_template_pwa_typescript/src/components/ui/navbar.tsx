@@ -10,22 +10,12 @@ import { LinkContainer } from "react-router-bootstrap";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as action from "../action";
-import * as component from "../component";
 import * as constant from "../constant";
-import * as context from "../context";
 import * as hook from "../hook";
 import * as router from "../router";
 import * as util from "../util";
-
-import * as base from "./base";
-import * as captcha from "./captcha";
-import * as footer from "./footer";
-import * as modal from "./modal";
-import * as navbar from "./navbar";
-import * as paginator from "./paginator";
-import { CheckPageAccess } from "../util";
-import AuthContext from "../context";
-import { Button1 } from "./button";
+import * as context from "../context";
+import * as button from "./button";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -47,8 +37,8 @@ export const NavbarComponent1 = () => {
   useEffect(() => {
     if (userLoginStore.data) {
       localStorage.setItem("userToken", JSON.stringify(userLoginStore.data));
-      dispatch(action.User.UserDetailAction({}));
-      dispatch(action.Notification.ReadListAction({ limit: 10, page: 1 }));
+      dispatch(action.User.UserDetailAction());
+      dispatch(action.Notification.ReadListAction({ limit: 1, page: 1 }));
     }
   }, [userLoginStore.data]);
 
@@ -63,7 +53,7 @@ export const NavbarComponent1 = () => {
         if (
           userDetailStore.data["user_model"]["activity_boolean_field"] === false
         ) {
-          dispatch(action.User.UserLogoutAction({}));
+          dispatch(action.User.UserLogoutAction());
         }
         if (
           (!userDetailStore.data["user_model"]["secret_question_char_field"] ||
@@ -75,6 +65,8 @@ export const NavbarComponent1 = () => {
       }
     }
   }, [userDetailStore.data]);
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="m-0 p-0 pb-3">
@@ -88,9 +80,10 @@ export const NavbarComponent1 = () => {
                 alt="id"
               />
             </a>
-            {NotificationReadListStore.data && (
-              <i className="fa-solid fa-bell text-danger m-0 p-2" />
-            )}
+            {NotificationReadListStore.data &&
+              NotificationReadListStore.data.list.length > 0 && (
+                <i className="fa-solid fa-bell text-danger m-0 p-2" />
+              )}
             <Navbar.Toggle
               aria-controls="basic-navbar-nav"
               className="btn btn-success text-success bg-warning bg-opacity-50"
@@ -107,7 +100,8 @@ export const NavbarComponent1 = () => {
                           <span>
                             <i className="fa-solid fa-earth-asia m-0 p-0" />{" "}
                             {module.Header === "Профиль" ? (
-                              NotificationReadListStore.data ? (
+                              NotificationReadListStore.data &&
+                              NotificationReadListStore.data.list.length > 0 ? (
                                 <span className="m-0 p-1">
                                   {module.Header}
                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
@@ -168,7 +162,9 @@ export const NavbarComponent1 = () => {
                                           </span>
                                           <small>
                                             {link.Header === "Уведомления" ? (
-                                              NotificationReadListStore.data ? (
+                                              NotificationReadListStore.data &&
+                                              NotificationReadListStore.data
+                                                .list.length > 0 ? (
                                                 <span className="m-0 p-1">
                                                   {link.Header}
                                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
@@ -237,16 +233,19 @@ export const NavbarComponent1 = () => {
 
 export const NavbarComponent2 = () => {
   // @ts-ignore
-  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const { isAuth, setIsAuth } = useContext(context.AuthContext);
   // @ts-ignore
   const logout = (event) => {
     event.preventDefault();
     setIsAuth(false);
     localStorage.removeItem("auth");
   };
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="custom_navbar_1">
-      <Button1 onClick={logout}>logout</Button1>
+      <button.Button1 onClick={logout}>logout</button.Button1>
       <div className="custom_navbar_1_links">
         <Link to="/" className="custom_navbar_1_link">
           home
@@ -258,13 +257,16 @@ export const NavbarComponent2 = () => {
 
 export const NavbarComponent3 = () => {
   // @ts-ignore
-  const { isAuth, setIsAuth } = useContext(AuthContext);
+  const { isAuth, setIsAuth } = useContext(context.AuthContext);
   // @ts-ignore
   const logout = (event) => {
     event.preventDefault();
     setIsAuth(false);
     localStorage.removeItem("auth");
   };
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <header className="p-3 bg-dark text-white">
       <div className="container">

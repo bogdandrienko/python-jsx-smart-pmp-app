@@ -1,9 +1,16 @@
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
+
 import React, { useState } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useNavigate } from "react-router-dom";
-import { Button1 } from "./button";
-import { Input1 } from "./input";
-import { Select2 } from "./select";
+
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
+
+import * as button from "./button";
+import * as input from "./input";
+import * as select from "./select";
+
+// TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // @ts-ignore
 export const PostItem = (props) => {
@@ -15,6 +22,9 @@ export const PostItem = (props) => {
 
     props.remove(props.post);
   };
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="post" onClick={() => navigate("/posts/" + props.post.id)}>
       <div className="post__content">
@@ -23,7 +33,7 @@ export const PostItem = (props) => {
         <div>{props.post.body}</div>
         <div>{props.post.sphere}</div>
         <div className="post__btns">
-          <Button1 onClick={deletePost}>delete</Button1>
+          <button.Button1 onClick={deletePost}>delete</button.Button1>
         </div>
       </div>
     </div>
@@ -35,6 +45,9 @@ export const PostList = ({ posts, title, remove }) => {
   if (!posts.length) {
     return <h1 style={{ textAlign: "center" }}>Post not found!</h1>;
   }
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div>
       <h1 style={{ textAlign: "center" }}>{title}</h1>
@@ -72,10 +85,12 @@ export const PostForm = ({ create }) => {
     });
   };
 
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <form>
       <h5>Create post</h5>
-      <Input1
+      <input.Input1
         // @ts-ignore
         value={post.name}
         // @ts-ignore
@@ -83,7 +98,7 @@ export const PostForm = ({ create }) => {
         type="text"
         placeholder="Title..."
       />
-      <Input1
+      <input.Input1
         // @ts-ignore
         value={post.place}
         // @ts-ignore
@@ -91,7 +106,7 @@ export const PostForm = ({ create }) => {
         type="text"
         placeholder="Body..."
       />
-      <Input1
+      <input.Input1
         // @ts-ignore
         value={post.sphere}
         // @ts-ignore
@@ -99,23 +114,25 @@ export const PostForm = ({ create }) => {
         type="text"
         placeholder="Body..."
       />
-      <Button1 onClick={addNewPost}>create</Button1>
+      <button.Button1 onClick={addNewPost}>create</button.Button1>
     </form>
   );
 };
 
 // @ts-ignore
 export const PostFilter = ({ filter, setFilter }) => {
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div>
-      <Input1
+      <input.Input1
         // @ts-ignore
         value={filter.query}
         // @ts-ignore
         onChange={(e) => setFilter({ ...filter, query: e.target.value })}
         placeholder="Поиск..."
       />
-      <Select2
+      <select.Select2
         value={filter.sort}
         // @ts-ignore
         onChange={(selectedSort) =>
@@ -141,7 +158,9 @@ export const TestComponent1 = () => {
   function minus() {
     countSet(count - value);
   }
+
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="card text-center m-0 p-0">
       <div className="card-header text-center m-0 p-0">
@@ -208,6 +227,8 @@ export class TestComponent2 extends React.Component {
     });
   }
   render() {
+    // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
     return (
       <div className="card text-center m-0 p-0">
         <div className="card-header text-center m-0 p-0">
@@ -263,6 +284,8 @@ export const TestComponent3 = function () {
     countSet(count - 1);
   }
 
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div>
       <h1>{count}</h1>
@@ -299,6 +322,8 @@ export class TestComponent4 extends React.Component {
   }
 
   render() {
+    // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
     return (
       <div>
         <h1>

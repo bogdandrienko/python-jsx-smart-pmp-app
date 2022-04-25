@@ -1,7 +1,6 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11,37 +10,26 @@ import * as constant from "../../components/constant";
 import * as util from "../../components/util";
 
 import * as base from "../../components/ui/base";
+import * as hook from "../../components/hook";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const RatingsListPage = () => {
-  // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
-  // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
-  const [firstRefresh, firstRefreshSet] = useState(true);
-  //////////////////////////////////////////////////////////
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const ratingsListStore = hook.useSelectorCustom1(constant.ratingsListStore);
+
+  // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   const [detailView, detailViewSet] = useState(true);
   const [onlyMonth, onlyMonthSet] = useState(true);
   const [sort, sortSet] = useState("количеству (наибольшие в начале)");
-  // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
-  // @ts-ignore
-  const ratingsListStore = useSelector((state) => state.ratingsListStore);
-  const {
-    load: loadratingsList,
-    data: dataratingsList,
-    // error: errorratingsList,
-    // fail: failratingsList,
-  } = ratingsListStore;
-  // TODO reset state //////////////////////////////////////////////////////////////////////////////////////////////////
-  // @ts-ignore
-  const resetState = async (event) => {
-    try {
-      event.preventDefault();
-    } catch (error) {}
-    // dispatch({ type: constant.RATINGS_LIST.reset });
-  };
-  // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
+
+  // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
+
   useEffect(() => {
-    if (!dataratingsList) {
+    if (!ratingsListStore.data) {
+      // dispatch(action.Idea.IdeaReadListAction({ page: page, limit: limit }));
       // const form = {
       //   "Action-type": "RATINGS_LIST",
       //   onlyMonth: onlyMonth,
@@ -56,27 +44,24 @@ export const RatingsListPage = () => {
       //     constants.RATINGS_LIST
       //   )
       // );
-    } else {
-      if (firstRefresh) {
-        firstRefreshSet(false);
-        // @ts-ignore
-        resetState();
-      }
     }
-  }, [dataratingsList, firstRefresh]);
+  }, [ratingsListStore.data]);
+
   // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
+
   // @ts-ignore
   const handlerSubmit = (event) => {
     try {
       event.preventDefault();
     } catch (error) {}
-    // @ts-ignore
-    resetState();
+    // dispatch({ type: constant.RATINGS_LIST.reset });
   };
-  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
-    <base.BaseComponent1>
-      <component.AccordionComponent
+    <base.Base1>
+      <component.Accordion1
         key_target={"accordion1"}
         isCollapse={false}
         title={
@@ -171,10 +156,9 @@ export const RatingsListPage = () => {
             </form>
           </ul>
         }
-      </component.AccordionComponent>
-      <component.StoreStatusComponent
-        storeStatus={ratingsListStore}
-        keyStatus={"ratingsListStore"}
+      </component.Accordion1>
+      <component.StoreComponent1
+        stateConstant={constant.ratingsListStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}
@@ -185,8 +169,8 @@ export const RatingsListPage = () => {
         showFail={true}
         failText={""}
       />
-      {!loadratingsList &&
-        (!dataratingsList || dataratingsList.length < 1 ? (
+      {!ratingsListStore.load &&
+        (!ratingsListStore.data || ratingsListStore.data.list.length < 1 ? (
           <div className="m-0 p-0 my-1">
             <component.MessageComponent variant={"danger"}>
               Ничего не найдено! Попробуйте изменить условия фильтрации и/или
@@ -195,7 +179,7 @@ export const RatingsListPage = () => {
           </div>
         ) : !detailView ? (
           <div className="card shadow m-0 p-0 my-1">
-            {dataratingsList.map(
+            {ratingsListStore.data.list.map(
               // @ts-ignore
               (author, index) => (
                 <Link
@@ -225,7 +209,7 @@ export const RatingsListPage = () => {
           </div>
         ) : (
           <ul className="row row-cols-2 row-cols-sm-2 row-cols-md-2 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
-            {dataratingsList.map(
+            {ratingsListStore.data.list.map(
               // @ts-ignore
               (author, index) => (
                 <div key={index} className="col-sm-6 col-md-4 col-lg-4 m-0 p-1">
@@ -384,6 +368,6 @@ export const RatingsListPage = () => {
             )}
           </ul>
         ))}
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

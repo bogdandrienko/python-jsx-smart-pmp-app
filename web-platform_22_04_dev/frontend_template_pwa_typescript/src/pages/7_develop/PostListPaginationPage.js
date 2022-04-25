@@ -9,7 +9,7 @@ import { Loader1 } from "../../components/ui/loader";
 import { useFetching, usePosts } from "../../components/hook";
 import { PostList, PostForm, PostFilter } from "../../components/ui/component";
 import { Pagination3 } from "../../components/ui/paginator";
-import { BaseComponent3 } from "../../components/ui/base";
+import { Base3 } from "../../components/ui/base";
 import { Modal1 } from "../../components/ui/modal";
 import { Select2 } from "../../components/ui/select";
 
@@ -55,6 +55,7 @@ export const PostListPaginationPage = () => {
   }, [page, limit]);
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <BaseComponent1>
       <Modal1 visible={modal} setVisible={setModal}>

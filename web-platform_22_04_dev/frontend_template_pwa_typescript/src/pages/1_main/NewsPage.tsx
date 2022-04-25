@@ -13,8 +13,8 @@ export const NewsPage = () => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <base.BaseComponent1>
+    <base.Base1>
       <component.NewsComponent count={100} />
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

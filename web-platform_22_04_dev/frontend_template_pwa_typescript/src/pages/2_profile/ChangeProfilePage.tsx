@@ -1,4 +1,5 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
+
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -16,9 +17,15 @@ import * as modal from "../../components/ui/modal";
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const ChangeProfilePage = () => {
-  // TODO react hooks variables ////////////////////////////////////////////////////////////////////////////////////////
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const userDetailStore = hook.useSelectorCustom1(constant.userDetailStore);
+  const userChangeStore = hook.useSelectorCustom1(constant.userChangeStore);
+
+  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   const dispatch = useDispatch();
-  // TODO custom variables /////////////////////////////////////////////////////////////////////////////////////////////
+
   const [user, setUser, resetUser] = hook.useStateCustom1({
     secretQuestion: "",
     secretAnswer: "",
@@ -29,11 +36,9 @@ export const ChangeProfilePage = () => {
   });
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
-  const userDetailStore = hook.useSelectorCustom1(constant.userDetailStore);
-  const userChangeStore = hook.useSelectorCustom1(constant.userChangeStore);
 
-  // TODO useEffect hooks //////////////////////////////////////////////////////////////////////////////////////////////
+  // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
+
   useEffect(() => {
     if (userDetailStore.data && userDetailStore.data["user_model"]) {
       setUser({
@@ -48,15 +53,17 @@ export const ChangeProfilePage = () => {
       });
     }
   }, [userDetailStore.data]);
-  //////////////////////////////////////////////////////////
+
   useEffect(() => {
     if (userChangeStore.data) {
       util.Delay(() => {
-        dispatch(action.User.UserLogoutAction({}));
+        dispatch(action.User.UserLogoutAction());
       }, 10);
     }
   }, [userChangeStore.data]);
-  // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
+
   const CreateConfirm = (create = false) => {
     if (create) {
       dispatch(action.User.ChangeAction({ form: user }));
@@ -70,9 +77,9 @@ export const ChangeProfilePage = () => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <base.BaseComponent1>
-      <component.StoreComponent
-        storeStatus={constant.userDetailStore}
+    <base.Base1>
+      <component.StoreComponent1
+        stateConstant={constant.userDetailStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}
@@ -103,8 +110,8 @@ export const ChangeProfilePage = () => {
               перенаправлять на эту страницу постоянно!
             </div>
             <div className="card-header m-0 p-0">
-              <component.StoreComponent
-                storeStatus={constant.userChangeStore}
+              <component.StoreComponent1
+                stateConstant={constant.userChangeStore}
                 consoleLog={constant.DEBUG_CONSTANT}
                 showLoad={true}
                 loadText={""}
@@ -340,6 +347,6 @@ export const ChangeProfilePage = () => {
           </div>
         </form>
       </ul>
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

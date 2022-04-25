@@ -14,9 +14,9 @@ export const VideoStudyPage = () => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <base.BaseComponent1>
+    <base.Base1>
       <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-2 justify-content-center text-center shadow m-0 p-0">
-        <component.AccordionComponent
+        <component.Accordion1
           key_target={"accordion1"}
           isCollapse={true}
           title={"Первый вход в систему:"}
@@ -38,8 +38,8 @@ export const VideoStudyPage = () => {
               </div>
             </div>
           }
-        </component.AccordionComponent>
-        <component.AccordionComponent
+        </component.Accordion1>
+        <component.Accordion1
           key_target={"accordion2"}
           isCollapse={true}
           title={"Выгрузка расчётного листа:"}
@@ -61,8 +61,8 @@ export const VideoStudyPage = () => {
               </div>
             </div>
           }
-        </component.AccordionComponent>
-        <component.AccordionComponent
+        </component.Accordion1>
+        <component.Accordion1
           key_target={"accordion3"}
           isCollapse={true}
           title={"Выгрузка данных по отпуску:"}
@@ -84,8 +84,8 @@ export const VideoStudyPage = () => {
               </div>
             </div>
           }
-        </component.AccordionComponent>
+        </component.Accordion1>
       </div>
-    </base.BaseComponent1>
+    </base.Base1>
   );
 };

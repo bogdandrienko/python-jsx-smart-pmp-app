@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFetching } from "../../components/hook";
 import { Loader1 } from "../../components/ui/loader";
-import { BaseComponent3 } from "../../components/ui/base";
+import { Base3 } from "../../components/ui/base";
 import { Button1 } from "../../components/ui/button";
 
 import * as action from "../../components/action";
@@ -28,6 +28,9 @@ const PostItemPage = () => {
     fetchById(id);
     fetchCommentById(id);
   }, []);
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <BaseComponent1>
       <Button1 onClick={() => navigate("/posts_pagination")}>

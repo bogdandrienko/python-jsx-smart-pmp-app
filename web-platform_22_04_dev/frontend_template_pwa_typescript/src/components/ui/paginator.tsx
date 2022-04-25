@@ -13,6 +13,9 @@ export const Pagination1 = ({
   changePage,
 }) => {
   const totalPages = Math.ceil(totalObjects / limit);
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <nav aria-label="Page navigation example m-0 p-0">
       {totalPages > 1 ? (
@@ -102,6 +105,8 @@ export const Pagination2 = ({
   // @ts-ignore
   changePage,
 }) => {
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="page__wrapper">
       {util.GetPagesArray(totalObjects, limit).map((p) => (
@@ -120,6 +125,9 @@ export const Pagination2 = ({
 // @ts-ignore
 export const Pagination3 = ({ totalPages, page, changePage }) => {
   let pagesArray = util.getPagesArray(totalPages);
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <div className="page__wrapper">
       {pagesArray.map((p) => (

@@ -95,8 +95,8 @@ export const userRecoverPasswordStore = util.StoreReducerConstructorUtility(
   connectReducer
 );
 
-export const UserReadListStore = util.StoreReducerConstructorUtility(
-  "UserReadListStore",
+export const UsersReadListStore = util.StoreReducerConstructorUtility(
+  "UsersReadListStore",
   connectReducer
 );
 
@@ -107,6 +107,11 @@ export const NotificationCreateStore = util.StoreReducerConstructorUtility(
 
 export const NotificationReadListStore = util.StoreReducerConstructorUtility(
   "NotificationReadListStore",
+  connectReducer
+);
+
+export const NotificationDeleteStore = util.StoreReducerConstructorUtility(
+  "NotificationDeleteStore",
   connectReducer
 );
 
@@ -168,3 +173,48 @@ export const PostDeleteStore = util.StoreReducerConstructorUtility(
   "PostDeleteStore",
   connectReducer
 );
+
+export class HttpMethods {
+  // @ts-ignore
+  static GET() {
+    return "GET";
+  }
+  static POST() {
+    // config.headers = {
+    //   "Content-Type": "application/json", | "application/json",
+    // };
+    return "POST";
+  }
+  static PUT() {
+    return "PUT";
+  }
+  static DELETE() {
+    return "DELETE";
+  }
+}
+
+// export function GetHttpMethod(key) {
+//   switch (key) {
+//     case key=true:
+//       return { load: true };
+//     case data:
+//       return {
+//         load: false,
+//         // @ts-ignore
+//         data: action.payload,
+//       };
+//     case error:
+//       return {
+//         load: false,
+//         // @ts-ignore
+//         error: action.payload,
+//       };
+//     case fail:
+//       // @ts-ignore
+//       return { load: false, fail: action.payload };
+//     case reset:
+//       return {};
+//     default:
+//       return state;
+//   }
+// }

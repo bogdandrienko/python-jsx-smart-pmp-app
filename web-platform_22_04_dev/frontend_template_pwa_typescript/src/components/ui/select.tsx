@@ -1,4 +1,8 @@
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
+
 import React from "react";
+
+// TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // @ts-ignore
 export const Select1 = ({
@@ -10,7 +14,8 @@ export const Select1 = ({
   useDefaultSelect = false,
   defaultSelect = { value: "", name: "" },
 }) => {
-  // @ts-ignore
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <select value={value} onChange={(event) => onChange(event.target.value)}>
       {useDefaultSelect && (
@@ -33,6 +38,8 @@ export const Select1 = ({
 
 // @ts-ignore
 export const Select2 = ({ options, defaultValue, value, onChange }) => {
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <select value={value} onChange={(event) => onChange(event.target.value)}>
       // @ts-ignore
