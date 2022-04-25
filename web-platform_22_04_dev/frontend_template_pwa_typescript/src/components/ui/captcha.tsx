@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as action from "../action";
-import * as component from "../component";
+import * as component from "./component";
 import * as constant from "../constant";
 import * as hook from "../hook";
 import * as util from "../util";

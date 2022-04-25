@@ -226,7 +226,7 @@ class DjangoClass:
                 if type(default) == bool:
                     return bool(value)
                 elif type(default) == str:
-                    return str(value)
+                    return str(value).strip()
                 elif type(default) == int:
                     return int(value)
                 elif type(default) == float:
@@ -236,43 +236,23 @@ class DjangoClass:
 
             def get_value(self, key: str, default="", except_error=False, strip=False):
                 if self.method == "GET":
-                    try:
-                        if self.GET.get(key, default) == "null":
-                            return None
-                        elif self.GET.get(key, default) == "true":
-                            return True
-                        elif self.GET.get(key, default) == "false":
-                            return False
-                        else:
-                            if strip:
-                                return str(self.GET.get(key, default)).strip()
-                            else:
-                                value = DjangoClass.DRFClass.RequestClass.convert_value(
-                                    value=self.GET.get(key, default),
-                                    default=default
-                                )
-                                return value
-                    except Exception as error:
-                        return None
+                    source = self.GET
                 else:
-                    try:
-                        if self.data.get(key, default) == "null":
-                            return None
-                        elif self.data.get(key, default) == "true":
-                            return True
-                        elif self.data.get(key, default) == "false":
-                            return False
-                        else:
-                            if strip:
-                                return str(self.data.get(key, default)).strip()
-                            else:
-                                value = DjangoClass.DRFClass.RequestClass.convert_value(
-                                    value=self.data.get(key, default),
-                                    default=default
-                                )
-                                return value
-                    except Exception as error:
+                    source = self.data
+                try:
+                    if source.get(key, default) == "null":
                         return None
+                    elif source.get(key, default) == "true":
+                        return True
+                    elif source.get(key, default) == "false":
+                        return False
+                    else:
+                        return DjangoClass.DRFClass.RequestClass.convert_value(
+                            value=source.get(key, default),
+                            default=default
+                        )
+                except Exception as error:
+                    return None
 
             def get_param(self, key: str, default="", except_error=False, strip=False):
                 try:

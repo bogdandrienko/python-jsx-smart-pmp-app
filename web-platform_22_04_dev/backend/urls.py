@@ -141,6 +141,8 @@ urlpatterns = [
     # POST (create comment post) 'http://127.0.0.1:8000/api/post/1/comment/'
     re_path(r'^api/idea/(?P<idea_id>\d+)/rating/$', backend_views.api_idea_rating, name='api_idea_rating'),
 
+    re_path(r'^api/idea/comment/(?P<comment_id>\d+)/$', backend_views.api_idea_comment_id, name='api_idea_comment_id'),
+
     # GET (read single comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
     # POST (action comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
     # PUT (update comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'

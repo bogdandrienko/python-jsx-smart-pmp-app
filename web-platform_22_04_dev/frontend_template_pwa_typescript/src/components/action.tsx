@@ -330,6 +330,25 @@ export class Idea {
       }
     };
   }
+  // @ts-ignore
+  static IdeaPutAction({ id, form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          form: {
+            "Action-Type": "IdeaUpdateStore",
+            ...form,
+          },
+          url: `/api/idea/${id}/`,
+          method: "PUT",
+          timeout: 10000,
+          constant: constant.IdeaUpdateStore,
+          authentication: true,
+        })
+      );
+    };
+  }
 }
 
 export class IdeaComment {
@@ -416,33 +435,22 @@ export class IdeaComment {
   }
 
   // @ts-ignore
-  static DeleteAction(constant, id) {
+  static DeleteAction({ id }) {
     // @ts-ignore
-    return async function (dispatch, getState) {
-      try {
-        dispatch({
-          type: constant.load,
-        });
-        const { data } = await axios.delete(`/api/idea/${id}/`);
-        if (data.response) {
-          const response = data.response;
-          dispatch({
-            type: constant.data,
-            payload: response,
-          });
-        } else {
-          const response = data.error;
-          dispatch({
-            type: constant.error,
-            payload: response,
-          });
-        }
-      } catch (error) {
-        dispatch({
-          type: constant.fail,
-          payload: error,
-        });
-      }
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          form: {
+            "Action-Type": "IdeaCommentDeleteStore",
+            ...{},
+          },
+          url: `/api/idea/comment/${id}/`,
+          method: constant.HttpMethods.DELETE(),
+          timeout: 10000,
+          constant: constant.IdeaCommentDeleteStore,
+          authentication: true,
+        })
+      );
     };
   }
 }

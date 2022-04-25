@@ -6,7 +6,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as component from "../../components/component";
+import * as component from "../../components/ui/component";
 import * as util from "../../components/util";
 
 import * as base from "../../components/ui/base";
@@ -235,12 +235,8 @@ export const RecoverPasswordPage = () => {
                         }
                         autoComplete="current-username"
                       />
-                      <small className="text-danger m-0 p-0">
-                        * обязательно
-                        <small className="custom-color-warning-1 m-0 p-0">
-                          {" "}
-                          * только цифры
-                        </small>
+                      <small className="custom-color-warning-1 m-0 p-0">
+                        * только цифры
                         <small className="text-muted m-0 p-0">
                           {" "}
                           * длина: 12 символов
@@ -336,12 +332,8 @@ export const RecoverPasswordPage = () => {
                               minLength={4}
                               maxLength={32}
                             />
-                            <small className="text-danger m-0 p-0">
-                              * обязательно
-                              <small className="custom-color-warning-1 m-0 p-0">
-                                {" "}
-                                * только кириллица, цифры и пробел
-                              </small>
+                            <small className="custom-color-warning-1 m-0 p-0">
+                              * только кириллица
                               <small className="text-muted m-0 p-0">
                                 {" "}
                                 * длина: от 4 до 32 символов
@@ -402,12 +394,8 @@ export const RecoverPasswordPage = () => {
                               maxLength={300}
                               className="form-control form-control-sm text-center m-0 p-1"
                             />
-                            <small className="text-danger m-0 p-0">
-                              * обязательно
-                              <small className="custom-color-warning-1 m-0 p-0">
-                                {" "}
-                                * вводить без кавычек
-                              </small>
+                            <small className="custom-color-warning-1 m-0 p-0">
+                              * вводить без кавычек
                               <small className="text-muted m-0 p-0">
                                 {" "}
                                 * длина: не более 300 символов
@@ -489,12 +477,8 @@ export const RecoverPasswordPage = () => {
                           />
                         </span>
                       </div>
-                      <small className="text-danger m-0 p-0">
-                        * обязательно
-                        <small className="custom-color-warning-1 m-0 p-0">
-                          {" "}
-                          * только латиница, цифры и нижний пробел
-                        </small>
+                      <small className="custom-color-warning-1 m-0 p-0">
+                        * только латиница
                         <small className="text-muted m-0 p-0">
                           {" "}
                           * длина: от 8 до 16 символов
@@ -537,12 +521,8 @@ export const RecoverPasswordPage = () => {
                           />
                         </span>
                       </div>
-                      <small className="text-danger m-0 p-0">
-                        * обязательно
-                        <small className="custom-color-warning-1 m-0 p-0">
-                          {" "}
-                          * только латиница, цифры и нижний пробел
-                        </small>
+                      <small className="custom-color-warning-1 m-0 p-0">
+                        * только латиница
                         <small className="text-muted m-0 p-0">
                           {" "}
                           * длина: от 8 до 16 символов

@@ -2,11 +2,20 @@
 
 import axios from "axios";
 
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Nav, Spinner, Alert } from "react-bootstrap";
+import { Link } from "react-router-dom";
+// @ts-ignore
+import { LinkContainer } from "react-router-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
+
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as action from "./action";
 import * as constant from "./constant";
 import * as router from "./router";
+import * as hook from "./hook";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -708,4 +717,58 @@ export const CheckPageAccess = (userGroups, pageAccess) => {
     }
   }
   return false;
+};
+
+export const PageLogic = () => {
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const userLoginStore = hook.useSelectorCustom1(constant.userLoginStore);
+
+  const userDetailStore = hook.useSelectorCustom1(constant.userDetailStore);
+
+  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // TODO variable /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const { title, description, access } = GetInfoPage(location.pathname);
+
+  // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    if (userLoginStore.data) {
+      localStorage.setItem("userToken", JSON.stringify(userLoginStore.data));
+      dispatch(action.User.UserDetailAction());
+      dispatch(action.Notification.ReadListAction({ limit: 1, page: 1 }));
+    }
+  }, [userLoginStore.data]);
+
+  useEffect(() => {
+    if (userDetailStore.data) {
+      if (userDetailStore.data["user_model"]) {
+        if (!CheckPageAccess(userDetailStore.data["group_model"], access)) {
+          navigate("/");
+        }
+        if (
+          userDetailStore.data["user_model"]["activity_boolean_field"] === false
+        ) {
+          dispatch(action.User.UserLogoutAction());
+        }
+        if (
+          (!userDetailStore.data["user_model"]["secret_question_char_field"] ||
+            !userDetailStore.data["user_model"]["secret_answer_char_field"]) &&
+          location.pathname !== "/password/change"
+        ) {
+          navigate("/password/change");
+        }
+      }
+    }
+  }, [userDetailStore.data]);
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  return <div className="d-none">.</div>;
 };

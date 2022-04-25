@@ -16,7 +16,7 @@ import { HomePage } from "../pages/1_main/HomePage";
 import { TextStudyPage } from "../pages/1_main/TextStudyPage";
 import { VideoStudyPage } from "../pages/1_main/VideoStudyPage";
 import { IdeaListPage } from "../pages/3_progress/IdeaListPage";
-import { IdeaPage } from "../pages/3_progress/IdeaPage";
+import { IdeaDetailPage } from "../pages/3_progress/IdeaDetailPage";
 import { IdeaCreatePage } from "../pages/3_progress/IdeaCreatePage";
 import { IdeaTemplatePage } from "../pages/3_progress/IdeaTemplatePage";
 import { ChangeProfilePage } from "../pages/2_profile/ChangeProfilePage";
@@ -24,6 +24,8 @@ import { PostListUnlimitedScrollPage } from "../pages/7_develop/PostListUnlimite
 import { RecoverPasswordPage } from "../pages/2_profile/RecoverPasswordPage";
 import { RatingsListPage } from "../pages/1_main/RatingsListPage";
 import { NewsPage } from "../pages/1_main/NewsPage";
+import { IdeaModerateChangePage } from "../pages/3_progress/IdeaModerateChangePage";
+import { IdeaModerateListPage } from "../pages/3_progress/IdeaModerateListPage";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -444,24 +446,6 @@ export const modules = [
             LinkIcon: "fa-solid fa-list m-0 p-1",
           },
           {
-            Header: "Подробности идеи [скрыто]",
-            Access: ["user"],
-            Active: true,
-            Link: "/idea/:id",
-            ExternalLink: false,
-            ShowLink: false,
-            Title: "Подробности идеи",
-            Description:
-              "страница с подробной информацией об идеи в банке идей",
-            path: "/idea/:id",
-            element: <IdeaPage />,
-            private: true,
-            Logic: true,
-            Redirect: true,
-            Style: "text-muted",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
             Header: "Лучшие идеи",
             Access: ["user"],
             Active: true,
@@ -479,11 +463,14 @@ export const modules = [
             Header: "Модерация идей [модератор]",
             Access: ["moderator_idea"],
             Active: true,
-            Link: "/idea_moderate_list",
+            Link: "/idea/moderate/list",
             ExternalLink: false,
             ShowLink: true,
             Title: "Модерация идей",
             Description: "страница со списком идей и возможностью модерации",
+            path: "/idea/moderate/list",
+            element: <IdeaModerateListPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-danger",
@@ -493,11 +480,32 @@ export const modules = [
             Header: "Модерация идеи [модератор] [скрыто]",
             Access: ["moderator_idea"],
             Active: true,
-            Link: "/idea_moderate_change/0",
+            Link: "/idea/moderate/:id",
             ExternalLink: false,
             ShowLink: false,
             Title: "Модерация идеи",
             Description: "модерация идеи в банке идей",
+            path: "/idea/moderate/:id",
+            element: <IdeaModerateChangePage />,
+            private: true,
+            Logic: true,
+            Redirect: true,
+            Style: "text-muted",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
+            Header: "Подробности идеи [скрыто]",
+            Access: ["user"],
+            Active: true,
+            Link: "/idea/:id",
+            ExternalLink: false,
+            ShowLink: false,
+            Title: "Подробности идеи",
+            Description:
+              "страница с подробной информацией об идеи в банке идей",
+            path: "/idea/:id",
+            element: <IdeaDetailPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-muted",

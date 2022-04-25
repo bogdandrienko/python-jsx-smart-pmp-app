@@ -644,3 +644,19 @@ None, 216.218.206.68, /, GET, , User matching query does not exist., 2022-04-25 
 000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-25 16:36:32.064485
 
 000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-25 16:37:36.727881
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-25 19:34:00.194882
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-25 19:34:00.509890
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-25 19:34:21.730533
+
+000000000000, 127.0.0.1, /api/idea/, GET, , local variable 'category' referenced before assignment, 2022-04-25 19:50:17.600511
+
+000000000000, 127.0.0.1, /api/idea/, GET, , local variable 'category' referenced before assignment, 2022-04-25 19:50:31.697510
+
+000000000000, 127.0.0.1, /api/idea/108/, DELETE, , IdeaModel matching query does not exist., 2022-04-25 23:02:11.712875
+
+000000000000, 127.0.0.1, /api/idea/108/, DELETE, , IdeaModel matching query does not exist., 2022-04-25 23:02:13.091877
+
+000000000000, 127.0.0.1, /api/idea/comment/108/, DELETE, , IdeaCommentModel matching query does not exist., 2022-04-25 23:05:37.228128

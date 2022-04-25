@@ -1,15 +1,13 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
-import React, { useContext, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 // @ts-ignore
 import { LinkContainer } from "react-router-bootstrap";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as action from "../action";
 import * as constant from "../constant";
 import * as hook from "../hook";
 import * as router from "../router";
@@ -20,11 +18,7 @@ import * as button from "./button";
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const NavbarComponent1 = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const { title, description, access } = util.GetInfoPage(location.pathname);
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const userLoginStore = hook.useSelectorCustom1(constant.userLoginStore);
 
@@ -34,42 +28,19 @@ export const NavbarComponent1 = () => {
     constant.NotificationReadListStore
   );
 
-  useEffect(() => {
-    if (userLoginStore.data) {
-      localStorage.setItem("userToken", JSON.stringify(userLoginStore.data));
-      dispatch(action.User.UserDetailAction());
-      dispatch(action.Notification.ReadListAction({ limit: 1, page: 1 }));
-    }
-  }, [userLoginStore.data]);
+  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  useEffect(() => {
-    if (userDetailStore.data) {
-      if (userDetailStore.data["user_model"]) {
-        if (
-          !util.CheckPageAccess(userDetailStore.data["group_model"], access)
-        ) {
-          navigate("/");
-        }
-        if (
-          userDetailStore.data["user_model"]["activity_boolean_field"] === false
-        ) {
-          dispatch(action.User.UserLogoutAction());
-        }
-        if (
-          (!userDetailStore.data["user_model"]["secret_question_char_field"] ||
-            !userDetailStore.data["user_model"]["secret_answer_char_field"]) &&
-          location.pathname !== "/password/change"
-        ) {
-          navigate("/password/change");
-        }
-      }
-    }
-  }, [userDetailStore.data]);
+  const location = useLocation();
+
+  // TODO variable /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const { title, description, access } = util.GetInfoPage(location.pathname);
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="m-0 p-0 pb-3">
+      <util.PageLogic />
       <header className="header navbar-fixed-top bg-dark bg-opacity-10 shadow-lg m-0 p-0">
         <Navbar expand="lg" className="m-0 p-0">
           <Container className="">

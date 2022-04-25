@@ -6,6 +6,35 @@ import React from "react";
 
 export class Message {
   // @ts-ignore
+  static Success({ children }) {
+    // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    return (
+      <div
+        className={
+          "container-fluid container text-center row justify-content-center m-0 p-0"
+        }
+      >
+        <div
+          className={
+            "card w-75 bg-light text-center border border-1 border-success m-0 p-0"
+          }
+        >
+          <div
+            className={
+              "card-header bg-success bg-opacity-25 lead text-success m-0 p-1"
+            }
+          >
+            успешно
+          </div>
+          <div className={"card-body bg-success bg-opacity-10 m-0 p-0"}>
+            {children}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  // @ts-ignore
   static Danger({ children }) {
     // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -17,7 +46,7 @@ export class Message {
       >
         <div
           className={
-            "card bg-light w-50 text-center border border-1 border-danger m-0 p-0"
+            "card w-75 bg-light text-center border border-1 border-danger m-0 p-0"
           }
         >
           <div
@@ -28,6 +57,35 @@ export class Message {
             внимание!
           </div>
           <div className={"card-body bg-danger bg-opacity-10 m-0 p-0"}>
+            {children}
+          </div>
+        </div>
+      </div>
+    );
+  }
+  // @ts-ignore
+  static Warning({ children }) {
+    // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    return (
+      <div
+        className={
+          "container-fluid container text-center row justify-content-center m-0 p-0"
+        }
+      >
+        <div
+          className={
+            "card w-75 bg-light text-center border border-1 bwarning m-0 p-0"
+          }
+        >
+          <div
+            className={
+              "card-header bg-warning bg-opacity-25 lead text-warning m-0 p-1"
+            }
+          >
+            ошибка!
+          </div>
+          <div className={"card-body bg-warning bg-opacity-10 m-0 p-0"}>
             {children}
           </div>
         </div>
@@ -46,7 +104,7 @@ export class Message {
       >
         <div
           className={
-            "card bg-light w-50 text-center border border-1 border-secondary m-0 p-0"
+            "card w-75 bg-light text-center border border-1 border-secondary m-0 p-0"
           }
         >
           <div
@@ -54,7 +112,7 @@ export class Message {
               "card-header bg-secondary bg-opacity-25 lead text-secondary m-0 p-1"
             }
           >
-            внимание!
+            дополнительно
           </div>
           <div className={"card-body bg-secondary bg-opacity-10 m-0 p-0"}>
             {children}

@@ -72,6 +72,52 @@ export const ModalConfirm1 = ({
   );
 };
 
+export const ModalConfirm2 = ({
+  isModalVisible = false,
+  // @ts-ignore
+  setIsModalVisible,
+  description = "Подтвердить действие?",
+  // @ts-ignore
+  callback,
+}) => {
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  return (
+    <div
+      className={
+        isModalVisible
+          ? "custom_modal_1 custom_modal_1_active"
+          : "custom_modal_1"
+      }
+      onClick={() => setIsModalVisible(false)}
+    >
+      <div
+        className={"custom_modal_content_1"}
+        onClick={(event) => event.stopPropagation()}
+      >
+        {description && <h2>{description}</h2>}
+        <button
+          type="button"
+          onClick={() => {
+            setIsModalVisible(false);
+            callback();
+          }}
+          className="btn btn-lg btn-outline-success m-1 p-2"
+        >
+          подтвердить
+        </button>
+        <button
+          type="button"
+          onClick={() => setIsModalVisible(false)}
+          className="btn btn-lg btn-outline-secondary m-1 p-2"
+        >
+          отмена
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export const ModalPrompt2 = ({
   isModalVisible = false,
   // @ts-ignore

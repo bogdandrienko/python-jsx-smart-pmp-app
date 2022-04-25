@@ -136,6 +136,14 @@ export const IdeaDeleteStore = util.StoreReducerConstructorUtility(
   "IdeaDeleteStore",
   connectReducer
 );
+export const IdeaUpdateStore = util.StoreReducerConstructorUtility(
+  "IdeaUpdateStore",
+  connectReducer
+);
+export const IdeaChangeStore = util.StoreReducerConstructorUtility(
+  "IdeaChangeStore",
+  connectReducer
+);
 
 export const IdeaCommentCreateStore = util.StoreReducerConstructorUtility(
   "IdeaCommentCreateStore",
@@ -144,6 +152,11 @@ export const IdeaCommentCreateStore = util.StoreReducerConstructorUtility(
 
 export const IdeaCommentReadListStore = util.StoreReducerConstructorUtility(
   "IdeaCommentReadListStore",
+  connectReducer
+);
+
+export const IdeaCommentDeleteStore = util.StoreReducerConstructorUtility(
+  "IdeaCommentDeleteStore",
   connectReducer
 );
 

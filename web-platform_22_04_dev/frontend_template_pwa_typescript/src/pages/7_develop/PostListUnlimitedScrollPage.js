@@ -12,7 +12,7 @@ import { Select2 } from "../../components/ui/select";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as action from "../../components/action";
-import * as component from "../../components/component";
+import * as component from "../../components/ui/component";
 import * as constant from "../../components/constant";
 import * as context from "../../components/context";
 import * as hook from "../../components/hook";

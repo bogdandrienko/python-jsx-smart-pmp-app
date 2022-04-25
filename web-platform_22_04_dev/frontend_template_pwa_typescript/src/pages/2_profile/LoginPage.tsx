@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as action from "../../components/action";
-import * as component from "../../components/component";
+import * as component from "../../components/ui/component";
 import * as constant from "../../components/constant";
 import * as hook from "../../components/hook";
 import * as util from "../../components/util";
