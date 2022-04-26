@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -26,6 +26,7 @@ export const IdeaSelfPage = () => {
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const id = useParams().id;
 
   const [idea, setIdea, resetIdea] = hook.useStateCustom1({
@@ -38,10 +39,17 @@ export const IdeaSelfPage = () => {
     place: "",
     description: "",
     moderate: "на модерации",
-    moderateComment: "автор внёс изменения",
+    moderateComment: "Автор внёс изменения",
   });
 
   const [isModalUpdateVisible, setIsModalUpdateVisible] = useState(false);
+
+  const [moderate, setModerate, resetModerate] = hook.useStateCustom1({
+    moderate: "скрыто",
+    moderateComment: "Автор скрыл свою идею",
+  });
+
+  const [isModalHideVisible, setIsModalHideVisible] = useState(false);
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -50,6 +58,7 @@ export const IdeaSelfPage = () => {
       dispatch(action.Idea.Read({ idea_id: id }));
     } else {
       setIdea({
+        ...idea,
         subdivision: IdeaReadStore.data["subdivision_char_field"],
         sphere: IdeaReadStore.data["sphere_char_field"],
         category: IdeaReadStore.data["category_char_field"],
@@ -66,29 +75,71 @@ export const IdeaSelfPage = () => {
     }
   }, [IdeaUpdateStore.data]);
 
+  useEffect(() => {
+    resetState();
+  }, [id]);
+
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const resetState = () => {
     resetIdea();
     dispatch({ type: constant.IdeaReadStore.reset });
     dispatch({ type: constant.IdeaUpdateStore.reset });
+    navigate("/idea/self/list");
   };
 
   const ChangeIdea = () => {
     dispatch(action.Idea.Update({ idea_id: id, form: idea }));
   };
 
+  const HideIdea = () => {
+    dispatch(
+      action.Idea.Update({
+        idea_id: id,
+        form: { ...moderate },
+      })
+    );
+  };
+
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <base.Base1>
+      <modal.ModalConfirm2
+        isModalVisible={isModalHideVisible}
+        setIsModalVisible={setIsModalHideVisible}
+        description={"Скрыть свою идею?"}
+        callback={() => HideIdea()}
+      />
       <div className="btn-group m-0 p-1 text-start w-100">
         <Link to={"/idea/self/list"} className="btn btn-sm btn-primary m-1 p-2">
           {"<="} назад к списку
         </Link>
+        {IdeaReadStore.data && (
+          <button
+            type="button"
+            className="btn btn-sm btn-warning m-1 p-2"
+            onClick={() => setIsModalHideVisible(true)}
+            style={{ zIndex: 0 }}
+          >
+            скрыть
+          </button>
+        )}
       </div>
       <component.StoreComponent1
         stateConstant={constant.IdeaReadStore}
+        consoleLog={constant.DEBUG_CONSTANT}
+        showLoad={true}
+        loadText={""}
+        showData={false}
+        dataText={""}
+        showError={true}
+        errorText={""}
+        showFail={true}
+        failText={""}
+      />
+      <component.StoreComponent1
+        stateConstant={constant.IdeaUpdateStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}

@@ -55,12 +55,17 @@ export const Pagination1 = ({
           {util.GetPagesArray(totalObjects, limit).map((p) => (
             <li className="page-item" key={p}>
               <button
+                type={"button"}
                 className={
                   page === p
                     ? "page-link fw-bold bg-warning bg-opacity-75"
                     : "page-link"
                 }
-                onClick={() => changePage(p)}
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  changePage(p);
+                }}
               >
                 {p}
               </button>

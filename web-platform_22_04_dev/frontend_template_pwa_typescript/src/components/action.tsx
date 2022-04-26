@@ -99,6 +99,23 @@ export class User {
     };
   }
   // @ts-ignore
+  static ReadTopList({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
+          url: `/api/user/rating/`,
+          method: constant.HttpMethods.GET(),
+          timeout: 10000,
+          constant: constant.ratingsListStore,
+          authentication: true,
+        })
+      );
+    };
+  }
+  // @ts-ignore
   static Update({ form }) {
     // @ts-ignore
     return async function (dispatch) {
@@ -159,7 +176,7 @@ export class Notification {
       dispatch(
         util.ActionConstructor1({
           // @ts-ignore
-          form: form,
+          form: {},
           url: `/api/notification/${notification_id}/`,
           method: constant.HttpMethods.DELETE(),
           timeout: 10000,
@@ -234,7 +251,7 @@ export class Idea {
       dispatch(
         util.ActionConstructor1({
           // @ts-ignore
-          form: form,
+          form: {},
           url: `/api/idea/${idea_id}/`,
           method: constant.HttpMethods.GET(),
           timeout: 10000,
@@ -321,7 +338,7 @@ export class IdeaComment {
       dispatch(
         util.ActionConstructor1({
           // @ts-ignore
-          form: form,
+          form: {},
           url: `/api/idea/comment/${comment_id}/`,
           method: constant.HttpMethods.DELETE(),
           timeout: 10000,

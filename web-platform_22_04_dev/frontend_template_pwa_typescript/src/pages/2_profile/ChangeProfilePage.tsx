@@ -35,7 +35,7 @@ export const ChangeProfilePage = () => {
     password2: "",
   });
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalUpdateVisible, setIsModalUpdateVisible] = useState(false);
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -64,14 +64,8 @@ export const ChangeProfilePage = () => {
 
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const CreateConfirm = (create = false) => {
-    if (create) {
-      dispatch(action.User.Update({ form: user }));
-      resetUser();
-      setIsModalVisible(false);
-    } else {
-      setIsModalVisible(false);
-    }
+  const CreateConfirm = () => {
+    dispatch(action.User.Update({ form: user }));
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,13 +89,13 @@ export const ChangeProfilePage = () => {
           className="m-0 p-0"
           onSubmit={(event) => {
             event.preventDefault();
-            setIsModalVisible(true);
+            setIsModalUpdateVisible(true);
           }}
         >
-          <modal.ModalConfirm1
-            isModalVisible={isModalVisible}
-            setIsModalVisible={setIsModalVisible}
-            description={"Заменить данные на новые?"}
+          <modal.ModalConfirm2
+            isModalVisible={isModalUpdateVisible}
+            setIsModalVisible={setIsModalUpdateVisible}
+            description={"Заменить данные?"}
             callback={CreateConfirm}
           />
           <div className="card shadow custom-background-transparent-low m-0 p-0">

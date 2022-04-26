@@ -116,7 +116,7 @@ urlpatterns = [
 
     re_path(r'^api/captcha/$', backend_views.api_captcha, name='api_captcha'),
     re_path(r'^api/user/$', backend_views.api_user, name='api_user'),
-    re_path(r'^api/user/ratings$', backend_views.api_user_ratings, name='api_user_ratings'),
+    re_path(r'^api/user/rating/$', backend_views.api_user_ratings, name='api_user_ratings'),
     re_path(r'^api/user/login/$', backend_views.api_user_login, name='api_user_login'),
     re_path(r'^api/user/detail/$', backend_views.api_user_detail, name='api_user_detail'),
     re_path(r'^api/user/password/change/$', backend_views.api_user_password_change, name='api_user_password_change'),
@@ -128,31 +128,24 @@ urlpatterns = [
 
     re_path(r'^api/vacation/$', backend_views.api_vacation, name='api_vacation'),
 
-    # GET "read list post": "http://127.0.0.1:8000/api/post/?search=all&sort=name&page=1&limit=10/"
-    # POST "create post": "http://127.0.0.1:8000/api/post/"
+    # GET "read list idea": "http://127.0.0.1:8000/api/idea/?search=all&sort=name&page=1&limit=10/"
+    # POST "create idea": "http://127.0.0.1:8000/api/idea/"
     re_path(r'^api/idea/$', backend_views.api_idea, name='api_idea'),
 
-    # GET (read single post) 'http://127.0.0.1:8000/api/post/1/'
-    # POST (action post) 'http://127.0.0.1:8000/api/post/1/'
-    # PUT (update post) 'http://127.0.0.1:8000/api/post/1/'
-    # DELETE (delete post) 'http://127.0.0.1:8000/api/post/1/'
+    # GET (read single idea) 'http://127.0.0.1:8000/api/idea/1/'
+    # POST (action idea) 'http://127.0.0.1:8000/api/idea/1/'
+    # PUT (update idea) 'http://127.0.0.1:8000/api/idea/1/'
+    # DELETE (delete idea) 'http://127.0.0.1:8000/api/idea/1/'
     re_path(r'^api/idea/(?P<idea_id>\d+)/$', backend_views.api_idea_id, name='api_idea_id'),
 
-    # GET (read list comment post) 'http://127.0.0.1:8000/api/post/1/comment/?search=all&sort=name&page=1&limit=10/'
-    # POST (create comment post) 'http://127.0.0.1:8000/api/post/1/comment/'
+    # GET (read list comment idea) 'http://127.0.0.1:8000/api/idea/1/comment/?search=all&sort=name&page=1&limit=10/'
+    # POST (create comment idea) 'http://127.0.0.1:8000/api/idea/1/comment/'
     re_path(r'^api/idea/(?P<idea_id>\d+)/comment/$', backend_views.api_idea_comment, name='api_idea_comment'),
-    # GET (read list comment post) 'http://127.0.0.1:8000/api/post/1/comment/?search=all&sort=name&page=1&limit=10/'
-    # POST (create comment post) 'http://127.0.0.1:8000/api/post/1/comment/'
-    re_path(r'^api/idea/(?P<idea_id>\d+)/rating/$', backend_views.api_idea_rating, name='api_idea_rating'),
 
+    # DELETE (delete comment) 'http://127.0.0.1:8000/api/idea/comment/1/'
     re_path(r'^api/idea/comment/(?P<comment_id>\d+)/$', backend_views.api_idea_comment_id, name='api_idea_comment_id'),
 
-    # GET (read single comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
-    # POST (action comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
-    # PUT (update comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
-    # DELETE (delete comment post) 'http://127.0.0.1:8000/api/post/1/comment/1/'
-    # re_path(r'^api_new/post/(?P<idea_id>\d+)/comment/(?P<comment_id>\d+)/$', backend_views.api_post_comment_id,
-    #         name='api_post_comment_id'),
+    re_path(r'^api/idea/(?P<idea_id>\d+)/rating/$', backend_views.api_idea_rating, name='api_idea_rating'),
 ]
 
 # TODO redirect from reboot react app ##################################################################################

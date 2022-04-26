@@ -112,7 +112,7 @@ export class Message {
               "card-header bg-secondary bg-opacity-25 lead text-secondary m-0 p-1"
             }
           >
-            дополнительно
+            информация
           </div>
           <div className={"card-body bg-secondary bg-opacity-10 m-0 p-0"}>
             {children}

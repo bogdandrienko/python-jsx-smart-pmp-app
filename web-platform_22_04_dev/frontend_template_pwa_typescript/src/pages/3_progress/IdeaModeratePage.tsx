@@ -106,6 +106,10 @@ export const IdeaModeratePage = () => {
     }
   }, [IdeaUpdateStore.data, IdeaCommentDeleteStore.data]);
 
+  useEffect(() => {
+    resetState();
+  }, [id]);
+
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const resetState = () => {
@@ -131,8 +135,8 @@ export const IdeaModeratePage = () => {
     );
   };
 
-  const DeleteComment = ({ id = 0 }) => {
-    dispatch(action.IdeaComment.Delete({ comment_id: id }));
+  const DeleteComment = ({ comment_id = 0 }) => {
+    dispatch(action.IdeaComment.Delete({ comment_id: comment_id }));
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -173,7 +177,7 @@ export const IdeaModeratePage = () => {
               />
               <div className="card shadow custom-background-transparent-hard m-0 p-0">
                 <div className="card-header m-0 p-0">
-                  <label className="lead m-0 p-1">
+                  <label className="m-0 p-1">
                     Выберите заключение по идеи{" "}
                     <p className="fw-bold text-secondary m-0 p-0">
                       заполните комментарий "на доработку", чтобы автор идеи его
@@ -237,18 +241,6 @@ export const IdeaModeratePage = () => {
                     </label>
                   )}
                 </div>
-                <component.StoreComponent1
-                  stateConstant={constant.IdeaUpdateStore}
-                  consoleLog={constant.DEBUG_CONSTANT}
-                  showLoad={true}
-                  loadText={""}
-                  showData={true}
-                  dataText={""}
-                  showError={true}
-                  errorText={""}
-                  showFail={true}
-                  failText={""}
-                />
                 <div className="card-footer m-0 p-0">
                   <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                     <button
@@ -268,6 +260,18 @@ export const IdeaModeratePage = () => {
       </component.Accordion1>
       <component.StoreComponent1
         stateConstant={constant.IdeaReadStore}
+        consoleLog={constant.DEBUG_CONSTANT}
+        showLoad={true}
+        loadText={""}
+        showData={false}
+        dataText={""}
+        showError={true}
+        errorText={""}
+        showFail={true}
+        failText={""}
+      />
+      <component.StoreComponent1
+        stateConstant={constant.IdeaUpdateStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}
@@ -615,45 +619,57 @@ export const IdeaModeratePage = () => {
                   </button>
                 </ul>
               </div>
-
               <div className="card-footer m-0 p-0">
+                <component.StoreComponent1
+                  stateConstant={constant.IdeaCommentReadListStore}
+                  consoleLog={constant.DEBUG_CONSTANT}
+                  showLoad={true}
+                  loadText={""}
+                  showData={false}
+                  dataText={""}
+                  showError={true}
+                  errorText={""}
+                  showFail={true}
+                  failText={""}
+                />
+                <component.StoreComponent1
+                  stateConstant={constant.IdeaCommentDeleteStore}
+                  consoleLog={constant.DEBUG_CONSTANT}
+                  showLoad={true}
+                  loadText={""}
+                  showData={false}
+                  dataText={""}
+                  showError={true}
+                  errorText={""}
+                  showFail={true}
+                  failText={""}
+                />
                 <div className="card m-0 p-2">
                   <div className="order-md-last m-0 p-0">
                     {!IdeaCommentReadListStore.load &&
                       IdeaCommentReadListStore.data && (
-                        <select.Select1
-                          value={paginationComment.limit}
-                          // @ts-ignore
-                          onChange={(event) =>
-                            setPaginationComment({
-                              ...paginationComment,
-                              limit: event.target.value,
-                            })
-                          }
-                          options={[
-                            {
-                              value: "10",
-                              name: "по 10 комментариев на странице",
-                            },
-                            {
-                              value: "20",
-                              name: "по 20 комментариев на странице",
-                            },
-                            {
-                              value: "30",
-                              name: "по 30 комментариев на странице",
-                            },
-                            {
-                              value: "100",
-                              name: "по 100 комментариев на странице",
-                            },
-                          ]}
-                          useDefaultSelect={false}
-                          defaultSelect={{
-                            value: `${paginationComment.limit}`,
-                            name: "количество комментариев",
-                          }}
-                        />
+                        <label className="form-control-sm text-center m-0 p-1">
+                          Количество комментариев на странице:
+                          <select
+                            className="form-control form-control-sm text-center m-0 p-1"
+                            value={paginationComment.limit}
+                            onChange={(event) =>
+                              setPaginationComment({
+                                ...paginationComment,
+                                // @ts-ignore
+                                limit: event.target.value,
+                              })
+                            }
+                          >
+                            <option disabled defaultValue={""} value="">
+                              количество на странице
+                            </option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                          </select>
+                        </label>
                       )}
                     {IdeaCommentReadListStore.data &&
                     IdeaCommentReadListStore.data.list.length < 1 ? (
@@ -664,30 +680,6 @@ export const IdeaModeratePage = () => {
                       </div>
                     ) : (
                       <ul className="list-group m-0 p-0">
-                        <component.StoreComponent1
-                          stateConstant={constant.NotificationCreateStore}
-                          consoleLog={constant.DEBUG_CONSTANT}
-                          showLoad={true}
-                          loadText={""}
-                          showData={false}
-                          dataText={""}
-                          showError={true}
-                          errorText={""}
-                          showFail={true}
-                          failText={""}
-                        />
-                        <component.StoreComponent1
-                          stateConstant={constant.IdeaCommentReadListStore}
-                          consoleLog={constant.DEBUG_CONSTANT}
-                          showLoad={true}
-                          loadText={""}
-                          showData={false}
-                          dataText={""}
-                          showError={true}
-                          errorText={""}
-                          showFail={true}
-                          failText={""}
-                        />
                         {!IdeaCommentReadListStore.load &&
                           IdeaCommentReadListStore.data && (
                             <paginator.Pagination1
@@ -757,7 +749,7 @@ export const IdeaModeratePage = () => {
                                         event.stopPropagation();
                                         setModalCommentDeleteForm({
                                           ...modalCommentDeleteForm,
-                                          id: object.id,
+                                          comment_id: object.id,
                                         });
                                         setIsModalCommentDeleteVisible(true);
                                       }}

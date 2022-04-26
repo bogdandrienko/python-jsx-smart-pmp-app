@@ -1,6 +1,7 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -11,6 +12,7 @@ import * as util from "../../components/util";
 
 import * as base from "../../components/ui/base";
 import * as hook from "../../components/hook";
+import * as action from "../../components/action";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,29 +23,32 @@ export const RatingsListPage = () => {
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const [detailView, detailViewSet] = useState(true);
-  const [onlyMonth, onlyMonthSet] = useState(true);
-  const [sort, sortSet] = useState("количеству (наибольшие в начале)");
+  const dispatch = useDispatch();
+
+  // const [detailView, detailViewSet] = useState(true);
+  // const [onlyMonth, onlyMonthSet] = useState(true);
+  // const [sort, sortSet] = useState("количеству (наибольшие в начале)");
+
+  const [paginationIdea, setPaginationIdea] = useState({
+    page: 1,
+    limit: 9,
+    detailView: true,
+  });
+
+  const [filter, setFilter, resetFilter] = hook.useStateCustom1({
+    sort: "рейтингу (популярные в начале)",
+    onlyMonth: true,
+  });
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (!ratingsListStore.data) {
-      // dispatch(action.Idea.IdeaReadListAction({ page: page, limit: limit }));
-      // const form = {
-      //   "Action-type": "RATINGS_LIST",
-      //   onlyMonth: onlyMonth,
-      //   sort: sort,
-      // };
-      // dispatch(
-      //   utils.ActionConstructorUtility(
-      //     form,
-      //     "/api/auth/ratings_list/",
-      //     "POST",
-      //     30000,
-      //     constants.RATINGS_LIST
-      //   )
-      // );
+      dispatch(
+        action.User.ReadTopList({
+          form: { ...filter, ...paginationIdea },
+        })
+      );
     }
   }, [ratingsListStore.data]);
 
@@ -54,7 +59,8 @@ export const RatingsListPage = () => {
     try {
       event.preventDefault();
     } catch (error) {}
-    // dispatch({ type: constant.RATINGS_LIST.reset });
+
+    dispatch({ type: constant.ratingsListStore.reset });
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////

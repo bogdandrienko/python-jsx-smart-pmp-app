@@ -30,6 +30,7 @@ import { IdeaSelfPage } from "../pages/3_progress/IdeaSelfPage";
 import { IdeaSelfListPage } from "../pages/3_progress/IdeaSelfListPage";
 import { SalaryPage } from "../pages/4_buh/SalaryPage";
 import { VacationPage } from "../pages/5_sup/VacationPage";
+import { IdeaTopListPage } from "../pages/3_progress/IdeaTopListPage";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -448,7 +449,7 @@ export const modules = [
             Title: "Лучшие идеи",
             Description: "страница с лучшими идеями в банке идей",
             path: "/idea/rating/list",
-            element: <IdeaPublicListPage />,
+            element: <IdeaTopListPage />,
             private: true,
             Logic: true,
             Redirect: true,

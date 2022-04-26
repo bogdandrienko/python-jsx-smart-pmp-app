@@ -3927,7 +3927,7 @@ def api_post_id(request, post_id):
 
 
 def sleep(multiply=1.0, stop=0):
-    multiply = multiply / 1.5
+    multiply = multiply / 0.75
     if stop:
         time.sleep(multiply)
     else:
@@ -4027,10 +4027,9 @@ def api_user_ratings(request):
                     # TODO action ######################################################################################
 
                     authors = []
-                    # ideas = backend_models.IdeaModel.objects.filter(
-                    #     status_moderate_char_field="принято"
-                    # ).order_by("-register_datetime_field")
-                    ideas = backend_models.IdeaModel.objects.all().order_by("-register_datetime_field")
+                    ideas = backend_models.IdeaModel.objects.filter(
+                        status_moderate_char_field="принято"
+                    ).order_by("-register_datetime_field")
                     if only_month:
                         now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
                         local_objects = []
@@ -4173,10 +4172,9 @@ def api_captcha(request):
                     response = {
                         "response": "Вы не робот!"
                     }
+                    # TODO response ####################################################################################
 
                     sleep(3, 5)
-
-                    # TODO response ####################################################################################
 
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
@@ -4260,6 +4258,8 @@ def api_user_login(request):
                         response = {"error": "Внимание, попыток входа можно совершать не более 10 в час!"}
 
                     # TODO response ####################################################################################
+
+                    sleep(2)
 
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
@@ -4504,8 +4504,7 @@ def api_notification(request):
                         model = backend_models.GroupModel.objects.get(name_slug_field="superuser")
 
                     backend_models.NotificationModel.objects.create(
-                        author_foreign_key_field=backend_models.UserModel.objects.get(
-                            personnel_number_slug_field=932524),
+                        author_foreign_key_field=req_inst.user_model,
                         model_foreign_key_field=model,
                         name_char_field=name,
                         place_char_field=place,
@@ -5221,6 +5220,8 @@ def api_salary(request):
 
                     # TODO response ####################################################################################
 
+                    sleep(2)
+
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
@@ -5345,6 +5346,8 @@ def api_vacation(request):
                     response = {"response": json_data}
 
                     # TODO response ####################################################################################
+
+                    sleep(2)
 
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
@@ -5713,18 +5716,39 @@ def api_idea_id(request, idea_id):
                     idea.register_datetime_field = timezone.now()
                     idea.save()
                     if req_inst.user_model == idea.author_foreign_key_field:
+                        message = "Идея отредактирована автором"
+                        if moderate == "скрыто":
+                            message = "Автор скрыл свою идею!"
                         backend_models.NotificationModel.objects.create(
                             author_foreign_key_field=req_inst.user_model,
                             model_foreign_key_field=backend_models.GroupModel.objects.get(
                                 name_slug_field="moderator_idea"
                             ),
-                            name_char_field="Идея отредактирована автором",
+                            name_char_field=message,
                             place_char_field="банк идей",
                             description_text_field=f"название идеи: {idea.name_char_field}",
                         )
+                    else:
+                        if moderate == "принято" or moderate == "на доработку":
+                            message = "Действия с Вашей идеей"
+                            if moderate == "принято":
+                                message = "Ваша идея успешно принята и открыта в общем доступе!"
+                            if moderate == "на доработку":
+                                message = "Ваша идея отправлена на доработку! Проверьте список идей на доработку и " \
+                                          "исправьте её!"
+                            backend_models.NotificationModel.objects.create(
+                                author_foreign_key_field=req_inst.user_model,
+                                target_foreign_key_field=idea.author_foreign_key_field,
+                                name_char_field=message,
+                                place_char_field="банк идей",
+                                description_text_field=f"название идеи: {idea.name_char_field}",
+                            )
+
                     response = {"response": "успешно изменено!"}
 
                     # TODO response ####################################################################################
+
+                    sleep(2)
 
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
@@ -5769,7 +5793,7 @@ def api_idea_comment(request, idea_id):
 
                     idea = backend_models.IdeaModel.objects.get(id=idea_id)
                     comments = backend_models.IdeaCommentModel.objects.filter(idea_foreign_key_field=idea)
-                    num_pages = len(comments)
+                    total_count = len(comments)
                     current_page = 1
                     if limit > 0:
                         p = Paginator(comments, limit)
@@ -5778,7 +5802,7 @@ def api_idea_comment(request, idea_id):
                     response = {
                         "response": {
                             "list": backend_serializers.IdeaCommentModelSerializer(instance=comments, many=True).data,
-                            "x-total-count": num_pages,
+                            "x-total-count": total_count,
                             "current-page": current_page
                         }
                     }
@@ -5903,30 +5927,44 @@ def api_idea_rating(request, idea_id):
             if req_inst.action_type == "":
                 try:
 
+                    page = req_inst.get_value(key="page", default=1)
+                    limit = req_inst.get_value(key="limit", default=10)
+
                     # TODO get_value ###################################################################################
 
                     objects = backend_models.IdeaRatingModel.objects.filter(
                         idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id)
                     )
+                    total_count = len(objects)
+                    current_page = 1
+
+                    rate = 0
+                    if total_count > 0:
+                        for i in objects:
+                            rate += i.rating_integer_field
+                        rate = round(rate / total_count, 2)
+
+                    if limit > 0:
+                        p = Paginator(objects, limit)
+                        objects = p.page(page).object_list
+                        current_page = p.num_pages
+
                     try:
                         self_rating = backend_models.IdeaRatingModel.objects.get(
                             author_foreign_key_field=req_inst.user_model,
                             idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea_id)
                         )
                         self_rate = self_rating.rating_integer_field
+
                     except Exception as error:
                         self_rate = 0
-                    rate = 0
-                    if objects.count() > 0:
-                        for i in objects:
-                            rate += i.rating_integer_field
-                        rate = round(rate / objects.count(), 2)
                     response = {
                         "response": {
                             "list": backend_serializers.IdeaRatingModelSerializer(instance=objects, many=True).data,
-                            "x-total-count": objects.count(),
+                            "x-total-count": total_count,
                             "total_rate": rate,
                             "self_rate": self_rate,
+                            "current-page": current_page
                         }
                     }
 

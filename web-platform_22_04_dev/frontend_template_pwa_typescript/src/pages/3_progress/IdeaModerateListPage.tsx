@@ -327,19 +327,19 @@ export const IdeaModerateListPage = () => {
                         </select>
                       </label>
                     )}
+                    <component.StoreComponent1
+                      stateConstant={constant.UsersReadListStore}
+                      consoleLog={constant.DEBUG_CONSTANT}
+                      showLoad={true}
+                      loadText={""}
+                      showData={false}
+                      dataText={""}
+                      showError={true}
+                      errorText={""}
+                      showFail={true}
+                      failText={""}
+                    />
                   </div>
-                  <component.StoreComponent1
-                    stateConstant={constant.UsersReadListStore}
-                    consoleLog={constant.DEBUG_CONSTANT}
-                    showLoad={true}
-                    loadText={""}
-                    showData={false}
-                    dataText={""}
-                    showError={true}
-                    errorText={""}
-                    showFail={true}
-                    failText={""}
-                  />
                   <div className="m-0 p-0">
                     <label className="form-control-sm text-center w-75 m-0 p-1">
                       Поле поиска по части названия:
