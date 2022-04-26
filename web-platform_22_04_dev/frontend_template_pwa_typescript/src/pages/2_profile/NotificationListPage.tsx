@@ -46,7 +46,7 @@ export const NotificationListPage = () => {
         NotificationReadListStore.data.list.length === 1)
     ) {
       dispatch(
-        action.Notification.ReadListAction({ limit: limit, page: page })
+        action.Notification.ReadList({ form: { limit: limit, page: page } })
       );
     }
   }, [NotificationReadListStore.data]);
@@ -63,7 +63,7 @@ export const NotificationListPage = () => {
 
   // @ts-ignore
   const DeleteNotification = ({ id }) => {
-    dispatch(action.Notification.DeleteAction({ id: id }));
+    dispatch(action.Notification.Delete({ notification_id: id }));
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////

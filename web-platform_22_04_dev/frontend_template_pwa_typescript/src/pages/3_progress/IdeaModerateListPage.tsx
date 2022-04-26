@@ -24,16 +24,16 @@ export const IdeaModerateListPage = () => {
   const UsersReadListStore = hook.useSelectorCustom1(
     constant.UsersReadListStore
   );
-  const userDetailStore = hook.useSelectorCustom1(constant.userDetailStore);
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
 
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(9);
-
-  const [custom, setCustom] = useState({ page: 3, limit: 9 });
+  const [paginationIdea, setPaginationIdea] = useState({
+    page: 1,
+    limit: 9,
+    detailView: true,
+  });
 
   const [filter, setFilter, resetFilter] = hook.useStateCustom1({
     sort: "дате публикации (свежие в начале)",
@@ -47,25 +47,24 @@ export const IdeaModerateListPage = () => {
     place: "",
     description: "",
     moderate: "на модерации",
-    detailView: true,
   });
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [page]);
+  }, [paginationIdea.page]);
 
   useEffect(() => {
-    setPage(1);
+    setPaginationIdea({ ...paginationIdea, page: 1 });
     dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [limit]);
+  }, [paginationIdea.limit]);
 
   useEffect(() => {
     if (!IdeaReadListStore.data) {
       dispatch(
-        action.Idea.IdeaReadListAction2({
-          form: { ...filter, page: page, limit: limit },
+        action.Idea.ReadList({
+          form: { ...filter, ...paginationIdea },
         })
       );
     }
@@ -73,7 +72,7 @@ export const IdeaModerateListPage = () => {
 
   useEffect(() => {
     if (!UsersReadListStore.data) {
-      dispatch(action.Users.UsersReadListAction());
+      dispatch(action.User.ReadList());
     }
   }, [UsersReadListStore.data]);
 
@@ -89,11 +88,9 @@ export const IdeaModerateListPage = () => {
       event.preventDefault();
       event.stopPropagation();
     } catch (error) {}
-    setPage(1);
+    setPaginationIdea({ ...paginationIdea, page: 1 });
     dispatch({ type: constant.IdeaReadListStore.reset });
   };
-
-  console.log("custom: ", custom);
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -129,11 +126,11 @@ export const IdeaModerateListPage = () => {
                       type="checkbox"
                       className="form-check-input m-0 p-1"
                       id="flexSwitchCheckDefault"
-                      checked={filter.detailView}
+                      checked={paginationIdea.detailView}
                       onChange={() =>
-                        setFilter({
-                          ...filter,
-                          detailView: !filter.detailView,
+                        setPaginationIdea({
+                          ...paginationIdea,
+                          detailView: !paginationIdea.detailView,
                         })
                       }
                     />
@@ -142,9 +139,14 @@ export const IdeaModerateListPage = () => {
                     Количество идей на странице:
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
-                      value={limit}
-                      // @ts-ignore
-                      onChange={(event) => setLimit(event.target.value)}
+                      value={paginationIdea.limit}
+                      onChange={(event) =>
+                        setPaginationIdea({
+                          ...paginationIdea,
+                          // @ts-ignore
+                          limit: event.target.value,
+                        })
+                      }
                     >
                       <option disabled defaultValue={""} value="">
                         количество на странице
@@ -158,37 +160,35 @@ export const IdeaModerateListPage = () => {
                 </div>
                 <div className="card-body m-0 p-0">
                   <div className="m-0 p-0">
-                    {util.CheckAccess(userDetailStore, "moderator_idea") && (
-                      <label className="form-control-sm text-center m-0 p-1">
-                        Статус:
-                        <select
-                          className="form-control form-control-sm text-center m-0 p-1"
-                          value={filter.moderate}
-                          onChange={(e) =>
-                            setFilter({
-                              ...filter,
-                              moderate: e.target.value,
-                            })
-                          }
-                        >
-                          <option className="m-0 p-0" value="">
-                            все варианты
-                          </option>
-                          <option className="m-0 p-0" value="на модерации">
-                            на модерации
-                          </option>
-                          <option className="m-0 p-0" value="на доработку">
-                            на доработку
-                          </option>
-                          <option className="m-0 p-0" value="скрыто">
-                            скрыто
-                          </option>
-                          <option className="m-0 p-0" value="принято">
-                            принято
-                          </option>
-                        </select>
-                      </label>
-                    )}
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Статус:
+                      <select
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={filter.moderate}
+                        onChange={(e) =>
+                          setFilter({
+                            ...filter,
+                            moderate: e.target.value,
+                          })
+                        }
+                      >
+                        <option className="m-0 p-0" value="">
+                          все варианты
+                        </option>
+                        <option className="m-0 p-0" value="на модерации">
+                          на модерации
+                        </option>
+                        <option className="m-0 p-0" value="на доработку">
+                          на доработку
+                        </option>
+                        <option className="m-0 p-0" value="скрыто">
+                          скрыто
+                        </option>
+                        <option className="m-0 p-0" value="принято">
+                          принято
+                        </option>
+                      </select>
+                    </label>
                     <label className="form-control-sm text-center m-0 p-1">
                       Подразделение:
                       <select
@@ -420,16 +420,22 @@ export const IdeaModerateListPage = () => {
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={limit}
-          page={page}
-          changePage={setPage}
+          limit={paginationIdea.limit}
+          page={paginationIdea.page}
+          // @ts-ignore
+          changePage={(page) =>
+            setPaginationIdea({
+              ...paginationIdea,
+              page: page,
+            })
+          }
         />
       )}
       {!IdeaReadListStore.load && IdeaReadListStore.data ? (
         IdeaReadListStore.data.list.length > 0 ? (
           <div className={"m-0 p-0"}>
             {" "}
-            {filter.detailView ? (
+            {paginationIdea.detailView ? (
               <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
                 {IdeaReadListStore.data.list.map(
                   // @ts-ignore
@@ -801,7 +807,7 @@ export const IdeaModerateListPage = () => {
                           <div className="m-0 p-0">
                             <Link
                               to={`/idea/moderate/${idea.id}`}
-                              className="btn btn-sm btn-danger w-100 m-1 p-2"
+                              className="btn btn-sm btn-danger w-100 m-0 p-2"
                             >
                               модерация
                             </Link>
@@ -875,9 +881,15 @@ export const IdeaModerateListPage = () => {
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={limit}
-          page={page}
-          changePage={setPage}
+          limit={paginationIdea.limit}
+          page={paginationIdea.page}
+          // @ts-ignore
+          changePage={(page) =>
+            setPaginationIdea({
+              ...paginationIdea,
+              page: page,
+            })
+          }
         />
       )}
     </base.Base1>

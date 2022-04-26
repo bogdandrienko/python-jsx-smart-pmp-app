@@ -6,22 +6,20 @@ import axios from "axios";
 
 import * as constant from "./constant";
 import * as util from "./util";
-import { HttpMethods } from "./constant";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export class Captcha {
   // @ts-ignore
-  static CheckAccess() {
+  static Check() {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "captchaCheckStore",
-          },
+          // @ts-ignore
+          form: {},
           url: `/api/captcha/`,
-          method: "GET",
+          method: constant.HttpMethods.GET(),
           timeout: 10000,
           constant: constant.captchaCheckStore,
           authentication: false,
@@ -33,18 +31,15 @@ export class Captcha {
 
 export class User {
   // @ts-ignore
-  static UserLoginAction({ username = "", password = "" }) {
+  static Login({ form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "userLoginStore",
-            username: username,
-            password: password,
-          },
-          url: `/api/user/login/?username=${username}&password=${password}`,
-          method: "GET",
+          // @ts-ignore
+          form: form,
+          url: `/api/user/login/`,
+          method: constant.HttpMethods.GET(),
           timeout: 10000,
           constant: constant.userLoginStore,
           authentication: false,
@@ -53,14 +48,14 @@ export class User {
     };
   }
   // @ts-ignore
-  static UserLogoutAction() {
+  static Logout() {
     // @ts-ignore
     return async function (dispatch) {
       try {
         localStorage.removeItem("userToken");
-        // @ts-ignore
-        dispatch({ type: constant.captchaCheckStore.reset });
         dispatch({ type: constant.userLoginStore.reset });
+
+        dispatch({ type: constant.captchaCheckStore.reset });
         dispatch({ type: constant.userDetailStore.reset });
         dispatch({ type: constant.userChangeStore.reset });
         dispatch({ type: constant.NotificationReadListStore.reset });
@@ -70,16 +65,15 @@ export class User {
     };
   }
   // @ts-ignore
-  static UserDetailAction() {
+  static Read() {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "userDetailStore",
-          },
+          // @ts-ignore
+          form: {},
           url: `/api/user/detail/`,
-          method: "GET",
+          method: constant.HttpMethods.GET(),
           timeout: 10000,
           constant: constant.userDetailStore,
           authentication: true,
@@ -88,17 +82,32 @@ export class User {
     };
   }
   // @ts-ignore
-  static ChangeAction({ form }) {
+  static ReadList() {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "userChangeStore",
-            ...form,
-          },
+          // @ts-ignore
+          form: {},
+          url: `/api/user/`,
+          method: constant.HttpMethods.GET(),
+          timeout: 10000,
+          constant: constant.UsersReadListStore,
+          authentication: true,
+        })
+      );
+    };
+  }
+  // @ts-ignore
+  static Update({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
           url: `/api/user/password/change/`,
-          method: "POST",
+          method: constant.HttpMethods.POST(),
           timeout: 10000,
           constant: constant.userChangeStore,
           authentication: true,
@@ -108,40 +117,17 @@ export class User {
   }
 }
 
-export class Users {
-  // @ts-ignore
-  static UsersReadListAction() {
-    // @ts-ignore
-    return async function (dispatch) {
-      dispatch(
-        util.ActionConstructor1({
-          form: {
-            "Action-Type": "UsersReadListStore",
-          },
-          url: `/api/user/`,
-          method: "GET",
-          timeout: 10000,
-          constant: constant.UsersReadListStore,
-          authentication: true,
-        })
-      );
-    };
-  }
-}
-
 export class Notification {
   // @ts-ignore
-  static CreateAction({ form }) {
+  static Create({ form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "NotificationCreateStore",
-            ...form,
-          },
+          // @ts-ignore
+          form: form,
           url: `/api/notification/`,
-          method: "POST",
+          method: constant.HttpMethods.POST(),
           timeout: 10000,
           constant: constant.NotificationCreateStore,
           authentication: true,
@@ -149,19 +135,16 @@ export class Notification {
       );
     };
   }
-
   // @ts-ignore
-  static ReadListAction({ limit, page }) {
+  static ReadList({ form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "NotificationReadListStore",
-            ...{},
-          },
-          url: `/api/notification/?limit=${limit}&page=${page}`,
-          method: "GET",
+          // @ts-ignore
+          form: form,
+          url: `/api/notification/`,
+          method: constant.HttpMethods.GET(),
           timeout: 10000,
           constant: constant.NotificationReadListStore,
           authentication: true,
@@ -169,50 +152,16 @@ export class Notification {
       );
     };
   }
-
   // @ts-ignore
-  static ReadAction(constant, id) {
-    // @ts-ignore
-    return async function (dispatch, getState) {
-      try {
-        dispatch({
-          type: constant.load,
-        });
-        const { data } = await axios.get(`/api/idea/${id}/`);
-        if (data.response) {
-          const response = data.response;
-          dispatch({
-            type: constant.data,
-            payload: response,
-          });
-        } else {
-          const response = data.error;
-          dispatch({
-            type: constant.error,
-            payload: response,
-          });
-        }
-      } catch (error) {
-        dispatch({
-          type: constant.fail,
-          payload: error,
-        });
-      }
-    };
-  }
-
-  // @ts-ignore
-  static DeleteAction({ id }) {
+  static Delete({ notification_id }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "NotificationDeleteStore",
-            ...{},
-          },
-          url: `/api/notification/${id}/`,
-          method: "DELETE",
+          // @ts-ignore
+          form: form,
+          url: `/api/notification/${notification_id}/`,
+          method: constant.HttpMethods.DELETE(),
           timeout: 10000,
           constant: constant.NotificationDeleteStore,
           authentication: true,
@@ -222,19 +171,55 @@ export class Notification {
   }
 }
 
-export class Idea {
+export class Salary {
   // @ts-ignore
-  static IdeaCreateAction({ form }) {
+  static Read({ form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "IdeaCreateStore",
-            ...form,
-          },
+          form: form,
+          url: `/api/salary/`,
+          method: constant.HttpMethods.GET(),
+          timeout: 10000,
+          constant: constant.SalaryReadStore,
+          authentication: true,
+        })
+      );
+    };
+  }
+}
+
+export class Vacation {
+  // @ts-ignore
+  static Read({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          form: form,
+          url: `/api/vacation/`,
+          method: constant.HttpMethods.GET(),
+          timeout: 10000,
+          constant: constant.VacationReadStore,
+          authentication: true,
+        })
+      );
+    };
+  }
+}
+
+export class Idea {
+  // @ts-ignore
+  static Create({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
           url: `/api/idea/`,
-          method: "POST",
+          method: constant.HttpMethods.POST(),
           timeout: 10000,
           constant: constant.IdeaCreateStore,
           authentication: true,
@@ -242,33 +227,30 @@ export class Idea {
       );
     };
   }
-
   // @ts-ignore
-  static IdeaReadListAction({ page, limit }) {
+  static Read({ idea_id }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "IdeaReadListStore",
-            ...{},
-          },
-          url: `/api/idea/?limit=${limit}&page=${page}`,
-          method: "GET",
+          // @ts-ignore
+          form: form,
+          url: `/api/idea/${idea_id}/`,
+          method: constant.HttpMethods.GET(),
           timeout: 10000,
-          constant: constant.IdeaReadListStore,
+          constant: constant.IdeaReadStore,
           authentication: true,
         })
       );
     };
   }
-
   // @ts-ignore
-  static IdeaReadListAction2({ form }) {
+  static ReadList({ form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
-        util.ActionConstructor2({
+        util.ActionConstructor1({
+          // @ts-ignore
           form: form,
           url: `/api/idea/`,
           method: constant.HttpMethods.GET(),
@@ -279,69 +261,16 @@ export class Idea {
       );
     };
   }
-
   // @ts-ignore
-  static IdeaReadAction({ id }) {
+  static Update({ idea_id, form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "IdeaReadStore",
-            ...{},
-          },
-          url: `/api/idea/${id}/`,
-          method: "GET",
-          timeout: 10000,
-          constant: constant.IdeaReadStore,
-          authentication: true,
-        })
-      );
-    };
-  }
-
-  // @ts-ignore
-  static IdeaDeleteAction(constant, id) {
-    // @ts-ignore
-    return async function (dispatch, getState) {
-      try {
-        dispatch({
-          type: constant.load,
-        });
-        const { data } = await axios.delete(`/api/idea/${id}/`);
-        if (data.response) {
-          const response = data.response;
-          dispatch({
-            type: constant.data,
-            payload: response,
-          });
-        } else {
-          const response = data.error;
-          dispatch({
-            type: constant.error,
-            payload: response,
-          });
-        }
-      } catch (error) {
-        dispatch({
-          type: constant.fail,
-          payload: error,
-        });
-      }
-    };
-  }
-  // @ts-ignore
-  static IdeaPutAction({ id, form }) {
-    // @ts-ignore
-    return async function (dispatch) {
-      dispatch(
-        util.ActionConstructor1({
-          form: {
-            "Action-Type": "IdeaUpdateStore",
-            ...form,
-          },
-          url: `/api/idea/${id}/`,
-          method: "PUT",
+          // @ts-ignore
+          form: form,
+          url: `/api/idea/${idea_id}/`,
+          method: constant.HttpMethods.PUT(),
           timeout: 10000,
           constant: constant.IdeaUpdateStore,
           authentication: true,
@@ -353,17 +282,15 @@ export class Idea {
 
 export class IdeaComment {
   // @ts-ignore
-  static CreateAction({ id, form }) {
+  static Create({ idea_id, form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "IdeaCommentCreateStore",
-            ...form,
-          },
-          url: `/api/idea/${id}/comment/`,
-          method: "POST",
+          // @ts-ignore
+          form: form,
+          url: `/api/idea/${idea_id}/comment/`,
+          method: constant.HttpMethods.POST(),
           timeout: 10000,
           constant: constant.IdeaCommentCreateStore,
           authentication: true,
@@ -371,19 +298,15 @@ export class IdeaComment {
       );
     };
   }
-
   // @ts-ignore
-  static ReadListAction({ id, limit, page }) {
+  static ReadList({ idea_id, form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "IdeaCommentReadListStore",
-            ...{},
-          },
-          url: `/api/idea/${id}/comment/?limit=${limit}&page=${page}`,
-          method: "GET",
+          form: form,
+          url: `/api/idea/${idea_id}/comment/`,
+          method: constant.HttpMethods.GET(),
           timeout: 10000,
           constant: constant.IdeaCommentReadListStore,
           authentication: true,
@@ -391,60 +314,15 @@ export class IdeaComment {
       );
     };
   }
-
   // @ts-ignore
-  static async getAllComments({ id: id, limit: limit, page: page }) {
-    const response = await axios.get(`/api/idea/${id}/comment/`, {
-      params: {
-        limit: limit,
-        page: page,
-      },
-    });
-    return response.data.response;
-  }
-
-  // @ts-ignore
-  static ReadAction(constant, id) {
-    // @ts-ignore
-    return async function (dispatch, getState) {
-      try {
-        dispatch({
-          type: constant.load,
-        });
-        const { data } = await axios.get(`/api/idea/${id}/`);
-        if (data.response) {
-          const response = data.response;
-          dispatch({
-            type: constant.data,
-            payload: response,
-          });
-        } else {
-          const response = data.error;
-          dispatch({
-            type: constant.error,
-            payload: response,
-          });
-        }
-      } catch (error) {
-        dispatch({
-          type: constant.fail,
-          payload: error,
-        });
-      }
-    };
-  }
-
-  // @ts-ignore
-  static DeleteAction({ id }) {
+  static Delete({ comment_id }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "IdeaCommentDeleteStore",
-            ...{},
-          },
-          url: `/api/idea/comment/${id}/`,
+          // @ts-ignore
+          form: form,
+          url: `/api/idea/comment/${comment_id}/`,
           method: constant.HttpMethods.DELETE(),
           timeout: 10000,
           constant: constant.IdeaCommentDeleteStore,
@@ -457,104 +335,36 @@ export class IdeaComment {
 
 export class IdeaRating {
   // @ts-ignore
-  static CreateAction({ id, form }) {
+  static Create({ idea_id, form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "IdeaCommentCreateStore",
-            ...form,
-          },
-          url: `/api/idea/${id}/rating/`,
-          method: "POST",
+          // @ts-ignore
+          form: form,
+          url: `/api/idea/${idea_id}/rating/`,
+          method: constant.HttpMethods.POST(),
           timeout: 10000,
-          constant: constant.IdeaCommentCreateStore,
+          constant: constant.IdeaRatingCreateStore,
           authentication: true,
         })
       );
     };
   }
-
   // @ts-ignore
-  static ReadListAction({ id, limit, page }) {
+  static ReadList({ idea_id, form }) {
     // @ts-ignore
     return async function (dispatch) {
       dispatch(
         util.ActionConstructor1({
-          form: {
-            "Action-Type": "IdeaRatingReadListStore",
-            ...{},
-          },
-          url: `/api/idea/${id}/rating/?limit=${limit}&page=${page}`,
-          method: "GET",
+          form: form,
+          url: `/api/idea/${idea_id}/rating/`,
+          method: constant.HttpMethods.GET(),
           timeout: 10000,
           constant: constant.IdeaRatingReadListStore,
           authentication: true,
         })
       );
-    };
-  }
-
-  // @ts-ignore
-  static ReadAction(constant, id) {
-    // @ts-ignore
-    return async function (dispatch, getState) {
-      try {
-        dispatch({
-          type: constant.load,
-        });
-        const { data } = await axios.get(`/api/idea/${id}/`);
-        if (data.response) {
-          const response = data.response;
-          dispatch({
-            type: constant.data,
-            payload: response,
-          });
-        } else {
-          const response = data.error;
-          dispatch({
-            type: constant.error,
-            payload: response,
-          });
-        }
-      } catch (error) {
-        dispatch({
-          type: constant.fail,
-          payload: error,
-        });
-      }
-    };
-  }
-
-  // @ts-ignore
-  static DeleteAction(constant, id) {
-    // @ts-ignore
-    return async function (dispatch, getState) {
-      try {
-        dispatch({
-          type: constant.load,
-        });
-        const { data } = await axios.delete(`/api/idea/${id}/`);
-        if (data.response) {
-          const response = data.response;
-          dispatch({
-            type: constant.data,
-            payload: response,
-          });
-        } else {
-          const response = data.error;
-          dispatch({
-            type: constant.error,
-            payload: response,
-          });
-        }
-      } catch (error) {
-        dispatch({
-          type: constant.fail,
-          payload: error,
-        });
-      }
     };
   }
 }

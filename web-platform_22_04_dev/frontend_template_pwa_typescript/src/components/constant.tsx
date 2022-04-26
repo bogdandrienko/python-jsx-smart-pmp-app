@@ -115,6 +115,16 @@ export const NotificationDeleteStore = util.StoreReducerConstructorUtility(
   connectReducer
 );
 
+export const SalaryReadStore = util.StoreReducerConstructorUtility(
+  "SalaryReadStore",
+  connectReducer
+);
+
+export const VacationReadStore = util.StoreReducerConstructorUtility(
+  "VacationReadStore",
+  connectReducer
+);
+
 export const ratingsListStore = util.StoreReducerConstructorUtility(
   "ratingsListStore",
   connectReducer
@@ -192,6 +202,9 @@ export class HttpMethods {
   static GET() {
     return "GET";
   }
+  static READ() {
+    return "GET";
+  }
   static POST() {
     // config.headers = {
     //   "Content-Type": "application/json", | "application/json",
@@ -199,6 +212,9 @@ export class HttpMethods {
     return "POST";
   }
   static PUT() {
+    return "PUT";
+  }
+  static UPDATE() {
     return "PUT";
   }
   static DELETE() {

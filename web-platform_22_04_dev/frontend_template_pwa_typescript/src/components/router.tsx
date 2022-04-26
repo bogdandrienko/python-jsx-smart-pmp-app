@@ -15,8 +15,8 @@ import { NotificationListPage } from "../pages/2_profile/NotificationListPage";
 import { HomePage } from "../pages/1_main/HomePage";
 import { TextStudyPage } from "../pages/1_main/TextStudyPage";
 import { VideoStudyPage } from "../pages/1_main/VideoStudyPage";
-import { IdeaListPage } from "../pages/3_progress/IdeaListPage";
-import { IdeaDetailPage } from "../pages/3_progress/IdeaDetailPage";
+import { IdeaPublicListPage } from "../pages/3_progress/IdeaPublicListPage";
+import { IdeaPublicPage } from "../pages/3_progress/IdeaPublicPage";
 import { IdeaCreatePage } from "../pages/3_progress/IdeaCreatePage";
 import { IdeaTemplatePage } from "../pages/3_progress/IdeaTemplatePage";
 import { ChangeProfilePage } from "../pages/2_profile/ChangeProfilePage";
@@ -24,8 +24,12 @@ import { PostListUnlimitedScrollPage } from "../pages/7_develop/PostListUnlimite
 import { RecoverPasswordPage } from "../pages/2_profile/RecoverPasswordPage";
 import { RatingsListPage } from "../pages/1_main/RatingsListPage";
 import { NewsPage } from "../pages/1_main/NewsPage";
-import { IdeaModerateChangePage } from "../pages/3_progress/IdeaModerateChangePage";
+import { IdeaModeratePage } from "../pages/3_progress/IdeaModeratePage";
 import { IdeaModerateListPage } from "../pages/3_progress/IdeaModerateListPage";
+import { IdeaSelfPage } from "../pages/3_progress/IdeaSelfPage";
+import { IdeaSelfListPage } from "../pages/3_progress/IdeaSelfListPage";
+import { SalaryPage } from "../pages/4_buh/SalaryPage";
+import { VacationPage } from "../pages/5_sup/VacationPage";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -403,42 +407,31 @@ export const modules = [
             Header: "Мои идеи на доработку",
             Access: ["user"],
             Active: true,
-            Link: "/idea_self_list",
+            Link: "/idea/self/list",
             ExternalLink: false,
             ShowLink: true,
             Title: "Мои идеи на доработку",
             Description: "страница со списком Ваших идей для доработки",
+            path: "/idea/self/list",
+            element: <IdeaSelfListPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-danger",
             LinkIcon: "fa-solid fa-screwdriver-wrench m-0 p-1",
           },
           {
-            Header: "Редактирование своей идеи [скрыто]",
-            Access: ["user"],
-            Active: true,
-            Link: "/idea_change/0",
-            ExternalLink: false,
-            ShowLink: false,
-            Title: "Редактирование своей идеи",
-            Description: "страница с идеей на доработку",
-            Logic: true,
-            Redirect: true,
-            Style: "text-muted",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
             Header: "Список идей",
             Access: ["user"],
             Active: true,
-            Link: "/idea/list",
+            Link: "/idea/public/list",
             ExternalLink: false,
             ShowLink: true,
             Title: "Список идей",
             Description:
               "список идей в банке идей с возможностью поиска и фильтрации",
-            path: "/idea/list",
-            element: <IdeaListPage />,
+            path: "/idea/public/list",
+            element: <IdeaPublicListPage />,
             private: true,
             Logic: true,
             Redirect: true,
@@ -449,11 +442,14 @@ export const modules = [
             Header: "Лучшие идеи",
             Access: ["user"],
             Active: true,
-            Link: "/idea_rating",
+            Link: "/idea/rating/list",
             ExternalLink: false,
             ShowLink: true,
             Title: "Лучшие идеи",
             Description: "страница с лучшими идеями в банке идей",
+            path: "/idea/rating/list",
+            element: <IdeaPublicListPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "custom-color-warning-1",
@@ -486,7 +482,24 @@ export const modules = [
             Title: "Модерация идеи",
             Description: "модерация идеи в банке идей",
             path: "/idea/moderate/:id",
-            element: <IdeaModerateChangePage />,
+            element: <IdeaModeratePage />,
+            private: true,
+            Logic: true,
+            Redirect: true,
+            Style: "text-muted",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
+            Header: "Редактирование своей идеи [скрыто]",
+            Access: ["user"],
+            Active: true,
+            Link: "/idea/self/:id",
+            ExternalLink: false,
+            ShowLink: false,
+            Title: "Редактирование своей идеи",
+            Description: "страница с идеей на доработку",
+            path: "/idea/self/:id",
+            element: <IdeaSelfPage />,
             private: true,
             Logic: true,
             Redirect: true,
@@ -497,14 +510,14 @@ export const modules = [
             Header: "Подробности идеи [скрыто]",
             Access: ["user"],
             Active: true,
-            Link: "/idea/:id",
+            Link: "/idea/public/:id",
             ExternalLink: false,
             ShowLink: false,
             Title: "Подробности идеи",
             Description:
               "страница с подробной информацией об идеи в банке идей",
-            path: "/idea/:id",
-            element: <IdeaDetailPage />,
+            path: "/idea/public/:id",
+            element: <IdeaPublicPage />,
             private: true,
             Logic: true,
             Redirect: true,
@@ -536,6 +549,9 @@ export const modules = [
             Title: "Выгрузка расчётного листа",
             Description:
               "страница выгрузки расчётного листа за выбранный период",
+            path: "/salary",
+            element: <SalaryPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-dark",
@@ -566,6 +582,9 @@ export const modules = [
             Title: "Выгрузка данных по отпуску",
             Description:
               "страница выгрузки данных по отпуску за выбранный период",
+            path: "/vacation",
+            element: <VacationPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-dark",

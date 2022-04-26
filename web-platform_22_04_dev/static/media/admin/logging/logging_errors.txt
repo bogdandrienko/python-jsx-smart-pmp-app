@@ -660,3 +660,37 @@ error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 1
 000000000000, 127.0.0.1, /api/idea/108/, DELETE, , IdeaModel matching query does not exist., 2022-04-25 23:02:13.091877
 
 000000000000, 127.0.0.1, /api/idea/comment/108/, DELETE, , IdeaCommentModel matching query does not exist., 2022-04-25 23:05:37.228128
+
+None, 103.203.57.20, /, GET, , User matching query does not exist., 2022-04-26 06:50:37.427127
+
+None, 138.68.78.157, /, GET, , User matching query does not exist., 2022-04-26 07:11:06.627359
+
+None, 104.152.52.15, /, GET, , User matching query does not exist., 2022-04-26 09:57:49.954979
+
+None, 92.118.161.45, /, GET, , User matching query does not exist., 2022-04-26 12:27:42.740005
+
+None, 198.235.24.32, /, GET, , User matching query does not exist., 2022-04-26 12:42:47.559021
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 12:56:36.267436
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 12:56:39.319442
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 12:56:46.562648
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 12:56:59.103710
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 13:05:51.951478
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 13:05:54.031044
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 13:06:47.724454
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 13:07:53.868721
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 13:08:08.465805
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 13:09:30.930117
+
+000000000000, 127.0.0.1, /api/idea/, GET, , That page contains no results, 2022-04-26 13:09:35.122598
+
+None, 205.210.31.31, /, GET, , User matching query does not exist., 2022-04-26 16:20:14.722208

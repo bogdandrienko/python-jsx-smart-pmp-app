@@ -31,7 +31,7 @@ export const Captcha1 = () => {
   function Check(event) {
     event.preventDefault();
     event.stopPropagation();
-    dispatch(action.Captcha.CheckAccess());
+    dispatch(action.Captcha.Check());
   }
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -4580,6 +4580,787 @@ def api_notification_id(request, notification_id):
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
 @permission_classes([IsAuthenticated])
+def api_salary(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    date_time = req_inst.get_value(key="dateTime", default="202201")
+
+                    # TODO action ######################################################################################
+
+                    # Get json response from 1c
+                    key = backend_service.UtilsClass.create_encrypted_password(
+                        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        _length=10
+                    )
+                    hash_key_obj = hashlib.sha256()
+                    hash_key_obj.update(key.encode('utf-8'))
+                    key_hash = str(hash_key_obj.hexdigest().strip().upper())
+                    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+                    iin = req_inst.user.username
+                    if str(iin).lower() == '000000000000':
+                        iin = 970801351179
+                    iin_base64 = base64.b64encode(str(iin).encode()).decode()
+                    date_base64 = base64.b64encode(f'{date_time}'.encode()).decode()
+                    url = f'http://192.168.1.10/KM_1C/hs/zp/rl/{iin_base64}_{key_hash_base64}/{date_base64}'
+                    h = httplib2.Http(
+                        os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_salary_data"
+                    )
+                    _login = 'Web_adm_1c'
+                    _password = '159159qqww!'
+                    h.add_credentials(_login, _password)
+                    response, content = h.request(url)
+
+                    data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    error_word_list = ['ошибка', 'error', 'failed']
+                    if data.find('send') == 0:
+                        return Response({"error": f"{data.split('send')[1].strip()}"})
+                    else:
+                        for error_word in error_word_list:
+                            if data.find(error_word.lower()) >= 0:
+                                return Response({"error": f"Произошла ошибка!"})
+
+                        # Get local test json response from 1c
+                        # Временное чтение файла для отладки без доступа к 1С
+                        # with open("static/media/data/json_data.json", "r", encoding="utf-8") as file:
+                        #     data = json.load(file)
+                        #     time.sleep(3)
+                        json_data = json.loads(data)
+
+                        try:
+                            json_data["global_objects"]["1.Начислено"]
+                        except Exception as error:
+                            json_data["global_objects"]["1.Начислено"] = {
+                                "Fields": {
+                                    "1": "Вид",
+                                    "2": "Период",
+                                    "3": "Дни",
+                                    "4": "Период",
+                                    "5": "Часы",
+                                    "6": "ВсегоДни",
+                                    "7": "ВсегоЧасы",
+                                    "8": "Сумма"
+                                },
+                            }
+                        try:
+                            json_data["global_objects"]["2.Удержано"]
+                        except Exception as error:
+                            json_data["global_objects"]["2.Удержано"] = {
+                                "Fields": {
+                                    "1": "Вид",
+                                    "2": "Период",
+                                    "3": "Сумма"
+                                },
+                            }
+                        try:
+                            json_data["global_objects"]["3.Доходы в натуральной форме"]
+                        except Exception as error:
+                            json_data["global_objects"]["3.Доходы в натуральной форме"] = {
+                                "Fields": {
+                                    "1": "Вид",
+                                    "2": "Период",
+                                    "3": "Сумма"
+                                },
+                            }
+                        try:
+                            json_data["global_objects"]["4.Выплачено"]
+                        except Exception as error:
+                            json_data["global_objects"]["4.Выплачено"] = {
+                                "Fields": {
+                                    "1": "Вид",
+                                    "2": "Период",
+                                    "3": "Сумма"
+                                },
+                            }
+                        try:
+                            json_data["global_objects"]["5.Налоговые вычеты"]
+                        except Exception as error:
+                            json_data["global_objects"]["5.Налоговые вычеты"] = {
+                                "Fields": {
+                                    "1": "Вид",
+                                    "2": "Период",
+                                    "3": "Сумма"
+                                },
+                            }
+
+                        # Return pretty integer and float value
+                        def return_float_value(_value):
+                            if isinstance(_value, int) or isinstance(_value, float):
+                                if len(f'{_value:.2f}') < 10:
+                                    _value = f'{_value:.2f}'[:-6] + ' ' + f'{_value:.2f}'[-6:]
+                                else:
+                                    _value = f'{_value:.2f}'[:-9] + ' ' + f'{_value:.2f}'[-9:-6] + ' ' + \
+                                             f'{_value:.2f}'[-6:]
+                            return _value
+
+                        # Create 'Ends' and pretty integer and float value
+                        def create_ends(table: str, extracols=False):
+                            if extracols:
+                                _days = 0
+                                _hours = 0
+                                _summ = 0
+                                for __key in json_data['global_objects'][table].keys():
+                                    if __key != 'Fields':
+                                        try:
+                                            _days += json_data['global_objects'][table][f'{__key}']['ВсегоДни']
+                                            _hours += json_data['global_objects'][table][f'{__key}']['ВсегоЧасы']
+                                            _summ_local = json_data['global_objects'][table][f'{__key}']['Сумма']
+                                            json_data['global_objects'][table][f'{__key}'][
+                                                'Сумма'] = return_float_value(
+                                                _summ_local)
+                                            _summ += _summ_local
+                                        except Exception as error_:
+                                            backend_service.DjangoClass.LoggingClass.error(request=request,
+                                                                                           error=error_)
+                                json_data['global_objects'][table]['Ends'] = {
+                                    'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
+                                    'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
+                                }
+                            else:
+                                _summ = 0
+                                for __key in json_data['global_objects'][table].keys():
+                                    if __key != 'Fields':
+                                        try:
+                                            _summ_local = json_data['global_objects'][table][f'{__key}']['Сумма']
+                                            json_data['global_objects'][table][f'{__key}'][
+                                                'Сумма'] = return_float_value(
+                                                _summ_local)
+                                            _summ += _summ_local
+                                        except Exception as error_:
+                                            backend_service.DjangoClass.LoggingClass.error(request=request,
+                                                                                           error=error_)
+                                json_data['global_objects'][table]['Ends'] = {
+                                    'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
+                                }
+
+                        create_ends(table='1.Начислено', extracols=True)
+                        create_ends(table='2.Удержано', extracols=False)
+                        create_ends(table='3.Доходы в натуральной форме', extracols=False)
+                        create_ends(table='4.Выплачено', extracols=False)
+                        create_ends(table='5.Налоговые вычеты', extracols=False)
+
+                        # pretty integer and float value in headers
+                        for _key in json_data.keys():
+                            if _key != 'global_objects':
+                                json_data[_key] = return_float_value(json_data[_key])
+
+                        # create excel
+                        key = backend_service.UtilsClass.create_encrypted_password(
+                            _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                            _length=24
+                        )
+                        date = backend_service.DateTimeUtils.get_current_date()
+                        path = 'media/data/temp/salary'
+                        file_name = f"salary_{key}_{date}.xlsx"
+                        workbook = backend_service.ExcelClass.workbook_create()
+                        sheet = backend_service.ExcelClass.workbook_activate(workbook)
+
+                        # Delete old files
+                        for root, dirs, files in os.walk(f"static/{path}", topdown=True):
+                            for file in files:
+                                try:
+                                    date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
+                                    if date != date_file:
+                                        os.remove(f'{path}/{file}')
+                                except Exception as error:
+                                    pass
+
+                        # Create 'TitleComponent'
+                        backend_service.ExcelClass.set_sheet_value(
+                            col=1,
+                            row=1,
+                            value='РАСЧЕТНЫЙ ЛИСТ',
+                            sheet=sheet
+                        )
+                        sheet.merge_cells(start_row=1, start_column=1, end_row=1, end_column=8)
+                        #######################################################
+
+                        # Create 'Headers'
+                        header_arr = []
+                        for key, value in json_data.items():
+                            if key != 'global_objects' and key != 'Долг за организацией на начало месяца' \
+                                    and key != 'Долг за организацией на конец месяца':
+                                header_arr.append(f'{key}: {value}')
+
+                        header_len_devide = len(header_arr) - 8
+                        if header_len_devide % 2 != 0:
+                            header_len_devide += 1
+
+                        row_i_1 = 1 + 1
+                        for header in header_arr[0:4]:
+                            col_i = 1
+                            backend_service.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=row_i_1,
+                                value=header,
+                                sheet=sheet
+                            )
+                            sheet.merge_cells(start_row=row_i_1, start_column=col_i, end_row=row_i_1,
+                                              end_column=col_i + 4)
+                            row_i_1 += 1
+
+                        row_i_2 = 1 + 1
+                        for header in header_arr[4:8]:
+                            col_i = 6
+                            backend_service.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=row_i_2,
+                                value=header,
+                                sheet=sheet
+                            )
+                            sheet.merge_cells(start_row=row_i_2, start_column=col_i, end_row=row_i_2,
+                                              end_column=col_i + 2)
+                            row_i_2 += 1
+
+                        row_i_3 = row_i_1
+                        for header in header_arr[8:8 + header_len_devide // 2]:
+                            col_i = 1
+                            backend_service.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=row_i_3,
+                                value=header,
+                                sheet=sheet
+                            )
+                            sheet.merge_cells(start_row=row_i_3, start_column=col_i, end_row=row_i_3,
+                                              end_column=col_i + 4)
+                            row_i_3 += 1
+
+                        row_i_4 = row_i_2
+                        for header in header_arr[8 + header_len_devide // 2:]:
+                            col_i = 6
+                            backend_service.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=row_i_4,
+                                value=header,
+                                sheet=sheet
+                            )
+                            sheet.merge_cells(start_row=row_i_4, start_column=col_i, end_row=row_i_4,
+                                              end_column=col_i + 2)
+                            row_i_4 += 1
+                        header_low_row = row_i_4
+
+                        #######################################################
+
+                        # Create 'Bodyes'
+                        def create_bodyes(table: str, extracols=False):
+                            bodyes_arr = [[table]]
+                            for __key, _value in json_data['global_objects'][table].items():
+                                local_bodyes_arr = []
+                                for ___key, __value in json_data['global_objects'][table][__key].items():
+                                    if extracols:
+                                        if ___key != '6' and ___key != '7' and \
+                                                ___key != 'ВсегоДни' and ___key != 'ВсегоЧасы':
+                                            local_bodyes_arr.append(__value)
+                                    else:
+                                        local_bodyes_arr.append(__value)
+                                bodyes_arr.append(local_bodyes_arr)
+                            return bodyes_arr
+
+                        bodyes_arr_1 = create_bodyes('1.Начислено', extracols=True)
+                        bodyes_arr_2 = create_bodyes('2.Удержано', extracols=False)
+                        bodyes_arr_3 = create_bodyes('3.Доходы в натуральной форме', extracols=False)
+                        bodyes_arr_4 = create_bodyes('4.Выплачено', extracols=False)
+                        bodyes_arr_5 = create_bodyes('5.Налоговые вычеты', extracols=False)
+
+                        bold_arr = []
+
+                        body_low_row_1 = header_low_row
+                        bold_arr.append(body_low_row_1)
+                        sheet.merge_cells(start_row=body_low_row_1, start_column=1, end_row=body_low_row_1,
+                                          end_column=1 + 4)
+                        for body in bodyes_arr_1:
+                            col_i = 1
+                            for value in body:
+                                if isinstance(value, int) and value == 0:
+                                    value = ''
+                                backend_service.ExcelClass.set_sheet_value(
+                                    col=col_i,
+                                    row=body_low_row_1,
+                                    value=value,
+                                    sheet=sheet
+                                )
+                                col_i += 1
+                            body_low_row_1 += 1
+
+                        body_low_row_2 = header_low_row
+                        bold_arr.append(body_low_row_2)
+                        sheet.merge_cells(start_row=body_low_row_2, start_column=6, end_row=body_low_row_2,
+                                          end_column=6 + 2)
+                        for body in bodyes_arr_2:
+                            col_i = 6
+                            for value in body:
+                                backend_service.ExcelClass.set_sheet_value(
+                                    col=col_i,
+                                    row=body_low_row_2,
+                                    value=value,
+                                    sheet=sheet
+                                )
+                                col_i += 1
+                            body_low_row_2 += 1
+
+                        if body_low_row_1 >= body_low_row_2:
+                            body_low_row_3 = body_low_row_1
+                            body_low_row_4 = body_low_row_1
+                        else:
+                            body_low_row_3 = body_low_row_2
+                            body_low_row_4 = body_low_row_2
+
+                        bold_arr.append(body_low_row_3)
+                        sheet.merge_cells(start_row=body_low_row_3, start_column=1, end_row=body_low_row_3,
+                                          end_column=1 + 4)
+                        for body in bodyes_arr_3:
+                            col_i = 1
+                            for value in body:
+                                backend_service.ExcelClass.set_sheet_value(
+                                    col=col_i,
+                                    row=body_low_row_3,
+                                    value=value,
+                                    sheet=sheet
+                                )
+                                col_i += 1
+                            body_low_row_3 += 1
+
+                        bold_arr.append(body_low_row_4)
+                        sheet.merge_cells(start_row=body_low_row_4, start_column=6, end_row=body_low_row_4,
+                                          end_column=6 + 2)
+                        for body in bodyes_arr_4:
+                            col_i = 6
+                            for value in body:
+                                backend_service.ExcelClass.set_sheet_value(
+                                    col=col_i,
+                                    row=body_low_row_4,
+                                    value=value,
+                                    sheet=sheet
+                                )
+                                col_i += 1
+                            body_low_row_4 += 1
+
+                        if body_low_row_3 >= body_low_row_4:
+                            body_low_row_5 = body_low_row_3
+                            body_low_row_6 = body_low_row_3
+                        else:
+                            body_low_row_5 = body_low_row_4
+                            body_low_row_6 = body_low_row_4
+
+                        bold_arr.append(body_low_row_5)
+                        sheet.merge_cells(start_row=body_low_row_5, start_column=1, end_row=body_low_row_5,
+                                          end_column=1 + 4)
+                        for body in bodyes_arr_5:
+                            col_i = 1
+                            for value in body:
+                                backend_service.ExcelClass.set_sheet_value(
+                                    col=col_i,
+                                    row=body_low_row_5,
+                                    value=value,
+                                    sheet=sheet
+                                )
+                                col_i += 1
+                            body_low_row_5 += 1
+
+                        lowest = [
+                            f'Долг за организацией на начало месяца: '
+                            f'{json_data["Долг за организацией на начало месяца"]}',
+                            f'Долг за организацией на конец месяца: '
+                            f'{json_data["Долг за организацией на конец месяца"]}',
+                        ]
+
+                        bold_arr.append(body_low_row_6)
+                        for body in ['.', 'Вид', *lowest]:
+                            col_i = 6
+                            backend_service.ExcelClass.set_sheet_value(
+                                col=col_i,
+                                row=body_low_row_6,
+                                value=body,
+                                sheet=sheet
+                            )
+                            sheet.merge_cells(start_row=body_low_row_6, start_column=col_i, end_row=body_low_row_6,
+                                              end_column=col_i + 2)
+                            body_low_row_6 += 1
+
+                        if body_low_row_6 >= body_low_row_5:
+                            body_low_row = body_low_row_6
+                        else:
+                            body_low_row = body_low_row_5
+
+                        if body_low_row_1 >= body_low_row_2:
+                            body_color_2 = body_low_row_1
+                        else:
+                            body_color_2 = body_low_row_2
+                        if body_low_row_3 >= body_low_row_4:
+                            body_color_3 = body_low_row_3
+                        else:
+                            body_color_3 = body_low_row_4
+                        #######################################################
+
+                        # Set fonts
+                        #######################################################
+                        font_headers = Font(name='Arial', size=8, bold=False)
+                        for row in range(1, header_low_row):
+                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                                cell = sheet[f'{col}{row}']
+                                cell.font = font_headers
+
+                        font_bodyes = Font(name='Arial', size=7, bold=False)
+                        for row in range(header_low_row, body_low_row + 1):
+                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                                cell = sheet[f'{col}{row}']
+                                cell.font = font_bodyes
+
+                        font_tables = Font(name='Arial', size=8, bold=True)
+                        for row in [header_low_row, body_color_2, body_color_3]:
+                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                                cell = sheet[f'{col}{row}']
+                                cell.font = font_tables
+
+                        # Set aligments
+                        # wrap_text = Alignment(wrap_text=True)
+                        # shrink_to_fit = Alignment(shrink_to_fit=True)
+                        aligment_center = Alignment(horizontal='center', vertical='center', wrap_text=True,
+                                                    shrink_to_fit=True)
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{1}']
+                            cell.alignment = aligment_center
+                        aligment_left = Alignment(horizontal='left', vertical='center', wrap_text=True,
+                                                  shrink_to_fit=True)
+                        for row in range(2, header_low_row):
+                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                                cell = sheet[f'{col}{row}']
+                                cell.alignment = aligment_left
+
+                        aligment_right = Alignment(horizontal='right', vertical='center', wrap_text=True,
+                                                   shrink_to_fit=True)
+                        for row in range(header_low_row, body_low_row + 1):
+                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                                cell = sheet[f'{col}{row}']
+                                if col == 'A' or col == 'F':
+                                    cell.alignment = aligment_left
+                                elif col == 'E' or col == 'H':
+                                    cell.alignment = aligment_right
+                                else:
+                                    cell.alignment = aligment_center
+
+                        # Set borders
+                        side_medium = Side(border_style="thin", color="FF808080")
+                        # side_think = Side(border_style="thin", color="FF808080")
+                        border_horizontal_middle = Border(
+                            top=side_medium,
+                            # left=side_medium,
+                            # right=side_medium,
+                            # bottom=side_medium
+                        )
+                        border_vertical_middle = Border(
+                            # top=side_think,
+                            left=side_medium,
+                            # right=side_think,
+                            # bottom=side_think
+                        )
+                        border_vertical_light = Border(
+                            # top=side_think,
+                            left=side_medium,
+                            # right=side_think,
+                            # bottom=side_think
+                        )
+                        for row in range(header_low_row, body_low_row):
+                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                                if col == 'G' and row > body_low_row_4 or col == 'H' and row > body_low_row_4:
+                                    pass
+                                else:
+                                    cell = sheet[f'{col}{row}']
+                                    cell.border = border_vertical_light
+                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(1)}{row}']
+                            cell.border = border_vertical_middle
+                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(6)}{row}']
+                            cell.border = border_vertical_middle
+                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(9)}{row}']
+                            cell.border = border_vertical_middle
+                        side_think = Side(border_style="dotted", color="FF808080")
+                        # {'mediumDashDotDot', 'thin', 'dashed', 'mediumDashed', 'dotted', 'double', 'thick',
+                        # 'medium', 'dashDot','dashDotDot', 'hair', 'mediumDashDot', 'slantDashDot'}
+                        border_think = Border(
+                            top=side_think,
+                            left=side_think,
+                            right=side_think,
+                            bottom=side_think
+                        )
+                        for row in range(1, header_low_row):
+                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                                cell = sheet[f'{col}{row}']
+                                cell.border = border_think
+                        side_medium = Side(border_style="thin", color="FF808080")
+                        border_medium = Border(
+                            top=side_medium,
+                            left=side_medium,
+                            right=side_medium,
+                            bottom=side_medium
+                        )
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
+                                cell = sheet[f'{col}{row - 1}']
+                                cell.border = border_medium
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            cell = sheet[f'{col}{body_low_row}']
+                            cell.border = border_horizontal_middle
+                        #######################################################
+
+                        # Colored styles
+                        #######################################################
+                        color_green = PatternFill(fgColor="E6E6FF", fill_type="solid")
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
+                                cell = sheet[f'{col}{row}']
+                                cell.fill = color_green
+                                cell = sheet[f'{col}{row - 1}']
+                                cell.border = border_medium
+                        color_yellow = PatternFill(fgColor="d0ffd8", fill_type="solid")
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
+                            cell = sheet[f'{col}{body_low_row_1 - 1}']
+                            cell.fill = color_yellow
+
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                            cell = sheet[f'{col}{body_low_row_2 - 1}']
+                            cell.fill = color_yellow
+
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                            cell = sheet[f'{col}{body_low_row_3 - 1}']
+                            cell.fill = color_yellow
+                            cell.fill = color_yellow
+
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                            cell = sheet[f'{col}{body_low_row_4 - 1}']
+                            cell.fill = color_yellow
+
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                            cell = sheet[f'{col}{body_low_row_5 - 1}']
+                            cell.fill = color_yellow
+                            cell.fill = color_yellow
+
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                            cell = sheet[f'{col}{body_low_row_6 - 1}']
+                            cell.fill = color_yellow
+
+                        #######################################################
+
+                        # Height and width styles
+                        #######################################################
+                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            width = 1
+                            for row in range(1, body_low_row + 1):
+                                cell = sheet[f'{col}{row}']
+                                value = len(str(cell.value))
+                                if value > width:
+                                    width = value
+                            if col == 'A' or col == 'F':
+                                width = width / 2
+                            sheet.column_dimensions[col].height = 1
+                            sheet.column_dimensions[col].width = round((width * 0.95), 3)
+                        #######################################################
+
+                        # Set global page and book settings
+                        #######################################################
+                        sheet.page_setup.orientation = sheet.ORIENTATION_PORTRAIT
+                        sheet.page_setup.paperSize = sheet.PAPERSIZE_LETTER
+                        sheet.page_margins.left = 0.05
+                        sheet.page_margins.right = 0.05
+                        sheet.page_margins.header = 0.1
+                        sheet.page_margins.bottom = 0.2
+                        sheet.page_margins.footer = 0.2
+                        sheet.page_margins.top = 0.1
+                        sheet.print_options.horizontalCentered = True
+                        # sheet.print_options.verticalCentered = True
+                        sheet.page_setup.fitToHeight = 1
+                        sheet.page_setup.scale = 80
+                        sheet.page_setup.fitToHeight = 1
+                        sheet.page_setup.fitToWidth = 1
+                        sheet.protection.password = key + '_1'
+                        sheet.protection.sheet = True
+                        sheet.protection.enable()
+                        #######################################################
+                        try:
+                            backend_service.ExcelClass.workbook_save(
+                                workbook=workbook,
+                                excel_file=f"static/{path}/{file_name}"
+                            )
+                        except Exception as error:
+                            pass
+
+                        headers = []
+                        for x in json_data.keys():
+                            if x != "global_objects":
+                                headers.append([x, json_data[x]])
+                        tables = [
+                            ["1.Начислено", json_data["global_objects"]["1.Начислено"]],
+                            ["2.Удержано", json_data["global_objects"]["2.Удержано"]],
+                            [
+                                "3.Доходы в натуральной форме",
+                                json_data["global_objects"]["3.Доходы в натуральной форме"]
+                            ],
+                            ["4.Выплачено", json_data["global_objects"]["4.Выплачено"]],
+                            ["5.Налоговые вычеты", json_data["global_objects"]["5.Налоговые вычеты"]]
+                        ]
+                        data = {"excelPath": f"static/{path}/{file_name}", "headers": headers, "tables": tables}
+
+                        response = {"response": data}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([IsAuthenticated])
+def api_vacation(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    date_time = req_inst.get_value(key="dateTime", default="20220101")
+
+                    # TODO action ######################################################################################
+
+                    key = backend_service.UtilsClass.create_encrypted_password(
+                        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        _length=10
+                    )
+                    hash_key_obj = hashlib.sha256()
+                    hash_key_obj.update(key.encode('utf-8'))
+                    key_hash = str(hash_key_obj.hexdigest().strip().upper())
+                    key_hash_base64 = base64.b64encode(str(key_hash).encode()).decode()
+                    iin = req_inst.user.username
+                    if str(iin).lower() == '000000000000' or str(iin).lower() == 'bogdan':
+                        iin = 970801351179
+                    iin_base64 = base64.b64encode(str(iin).encode()).decode()
+                    date_base64 = base64.b64encode(f'{date_time}'.encode()).decode()
+                    url = f'http://192.168.1.10/KM_1C/hs/pers/u_vacation/{iin_base64}_{key_hash_base64}/{date_base64}'
+                    h = httplib2.Http(
+                        os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_vacation_data"
+                    )
+                    _login = 'Web_adm_1c'
+                    _password = '159159qqww!'
+                    h.add_credentials(_login, _password)
+                    response, content = h.request(url)
+
+                    data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    error_word_list = ['ошибка', 'error', 'failed']
+                    if data.find('send') == 0:
+                        return Response({"error": f"{data.split('send')[1].strip()}"})
+                    json_data = json.loads(data)
+                    for error_word in error_word_list:
+                        if data.find(error_word.lower()) >= 0:
+                            return Response({"error": f"Произошла ошибка!"})
+
+                    headers = []
+                    tables = []
+                    for key, value in json_data.items():
+                        try:
+                            if key != "global_objects":
+                                try:
+                                    if key == "Работник":
+                                        headers.append(["Работник", value])
+                                    elif key == "Подразделение":
+                                        headers.append(["Место работы", value])
+                                    elif key == "Должность":
+                                        headers.append(["Должность", value])
+                                    elif key == "На дату":
+                                        headers.append(["Дни отпуска на дату - ", value])
+                                    elif key == "Фактически заработанные дни":
+                                        headers.append([
+                                            "Количество дней неиспользованного отпуска на выбранную дату",
+                                            value
+                                        ])
+                                    else:
+                                        headers.append([key, value])
+                                except Exception as error:
+                                    pass
+                            else:
+                                for key_, value_ in json_data["global_objects"].items():
+                                    tab = []
+                                    for key__, value__ in json_data["global_objects"][key_].items():
+                                        try:
+                                            if key__ == "По графику ":
+                                                tab.append(["По графику: ", value__])
+                                            elif key__ == "Период":
+                                                tab.append(["Дата начала", value__[0:11]])
+                                            elif key__ == "ДатаОкончания":
+                                                tab.append(["Дата окончания", value__[0:11]])
+                                            elif key__ == "ДнейОтпуска":
+                                                tab.append(["Запланированные дни отпуска", value__])
+                                            elif key__ == "Рабочий год":
+                                                tab.append(["Год", value__])
+                                            else:
+                                                tab.append([key__, value__])
+                                        except Exception as error:
+                                            pass
+                                    tables.append(tab)
+                        except Exception as error:
+                            pass
+                    json_data = {
+                        "headers": headers,
+                        "tables": tables,
+                    }
+                    response = {"response": json_data}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([IsAuthenticated])
 def api_idea(request):
     """
     django-rest-framework
@@ -4752,6 +5533,16 @@ def api_idea(request):
         if req_inst.method == "POST":
 
             # TODO action ##############################################################################################
+
+            print("api_idea POST")
+            for k, v in request.data.items():
+                print(f"{k}: {v}")
+
+            for k, v in request.GET.items():
+                print(f"{k}: {v}")
+
+            name = req_inst.get_value(key="name", default="")
+            print(name)
 
             if req_inst.action_type == "":
                 try:

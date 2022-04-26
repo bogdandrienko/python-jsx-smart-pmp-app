@@ -14,33 +14,19 @@ import * as util from "../../components/util";
 
 import * as base from "../../components/ui/base";
 import * as modal from "../../components/ui/modal";
-import * as select from "../../components/ui/select";
-import * as paginator from "../../components/ui/paginator";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const IdeaModerateChangePage = () => {
+export const IdeaSelfPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const IdeaReadStore = hook.useSelectorCustom1(constant.IdeaReadStore);
   const IdeaUpdateStore = hook.useSelectorCustom1(constant.IdeaUpdateStore);
-  const IdeaCommentReadListStore = hook.useSelectorCustom1(
-    constant.IdeaCommentReadListStore
-  );
-  const IdeaCommentDeleteStore = hook.useSelectorCustom1(
-    constant.IdeaCommentDeleteStore
-  );
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
   const id = useParams().id;
-
-  // const [limit, setLimit] = useState(10);
-  // const [page, setPage] = useState(1);
-
-  const [paginationComment, setPaginationComment, resetPaginationComment] =
-    hook.useStateCustom1({ page: 1, limit: 10 });
 
   const [idea, setIdea, resetIdea] = hook.useStateCustom1({
     subdivision: "",
@@ -51,26 +37,17 @@ export const IdeaModerateChangePage = () => {
     name: "",
     place: "",
     description: "",
+    moderate: "на модерации",
+    moderateComment: "автор внёс изменения",
   });
 
-  const [moderate, setModerate, resetModerate] = hook.useStateCustom1({
-    moderate: "",
-    moderateComment: "",
-  });
-
-  const [isModalModerateVisible, setIsModalModerateVisible] = useState(false);
-
-  const [isModalChangeVisible, setIsModalChangeVisible] = useState(false);
-
-  const [isModalCommentDeleteVisible, setIsModalCommentDeleteVisible] =
-    useState(false);
-  const [modalCommentDeleteForm, setModalCommentDeleteForm] = useState({});
+  const [isModalUpdateVisible, setIsModalUpdateVisible] = useState(false);
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (!IdeaReadStore.data) {
-      dispatch(action.Idea.IdeaReadAction({ id: id }));
+      dispatch(action.Idea.Read({ idea_id: id }));
     } else {
       setIdea({
         subdivision: IdeaReadStore.data["subdivision_char_field"],
@@ -84,69 +61,21 @@ export const IdeaModerateChangePage = () => {
   }, [IdeaReadStore.data]);
 
   useEffect(() => {
-    if (!IdeaCommentReadListStore.data) {
-      dispatch(
-        action.IdeaComment.ReadListAction({ id: id, ...paginationComment })
-      );
-    }
-  }, [IdeaCommentReadListStore.data]);
-
-  useEffect(() => {
-    resetState();
-  }, [id]);
-
-  useEffect(() => {
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-  }, [paginationComment.page]);
-
-  useEffect(() => {
-    setPaginationComment({ ...paginationComment, page: 1 });
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-  }, [paginationComment.limit]);
-
-  useEffect(() => {
     if (IdeaUpdateStore.data) {
-      util.Delay(() => {
-        resetState();
-        resetModerate();
-      }, 10);
+      resetState();
     }
   }, [IdeaUpdateStore.data]);
-
-  useEffect(() => {
-    if (IdeaCommentDeleteStore.data) {
-      util.Delay(() => {
-        resetState();
-      }, 10);
-    }
-  }, [IdeaCommentDeleteStore.data]);
 
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const resetState = () => {
     resetIdea();
-    resetPaginationComment();
     dispatch({ type: constant.IdeaReadStore.reset });
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
     dispatch({ type: constant.IdeaUpdateStore.reset });
-    dispatch({ type: constant.IdeaCommentDeleteStore.reset });
-  };
-
-  const UpdateIdea = () => {
-    dispatch(
-      action.Idea.IdeaPutAction({
-        id: id,
-        form: { ...moderate },
-      })
-    );
   };
 
   const ChangeIdea = () => {
-    dispatch(action.Idea.IdeaPutAction({ id: id, form: idea }));
-  };
-
-  const DeleteComment = ({ id = 0 }) => {
-    dispatch(action.IdeaComment.DeleteAction({ id: id }));
+    dispatch(action.Idea.Update({ idea_id: id, form: idea }));
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -154,132 +83,10 @@ export const IdeaModerateChangePage = () => {
   return (
     <base.Base1>
       <div className="btn-group m-0 p-1 text-start w-100">
-        <Link
-          to={"/idea/moderate/list"}
-          className="btn btn-sm btn-primary m-1 p-2"
-        >
+        <Link to={"/idea/self/list"} className="btn btn-sm btn-primary m-1 p-2">
           {"<="} назад к списку
         </Link>
       </div>
-      <component.Accordion1
-        key_target={"accordion1"}
-        isCollapse={false}
-        title={"Модерация:"}
-        text_style="text-danger"
-        header_style="bg-danger bg-opacity-10 custom-background-transparent-low"
-        body_style="bg-light bg-opacity-10 custom-background-transparent-low"
-      >
-        {
-          <ul className="row-cols-auto row-cols-sm-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
-            <form
-              className="m-0 p-0"
-              onSubmit={(event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                setIsModalModerateVisible(true);
-              }}
-            >
-              <modal.ModalConfirm2
-                isModalVisible={isModalModerateVisible}
-                setIsModalVisible={setIsModalModerateVisible}
-                description={"Изменить статус?"}
-                callback={UpdateIdea}
-              />
-              <div className="card shadow custom-background-transparent-hard m-0 p-0">
-                <div className="card-header m-0 p-0">
-                  <label className="lead m-0 p-1">
-                    Выберите заключение по идеи{" "}
-                    <p className="fw-bold text-secondary m-0 p-0">
-                      заполните комментарий "на доработку", чтобы автор идеи его
-                      увидел
-                    </p>
-                  </label>
-                </div>
-                <div className="card-body m-0 p-0">
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Заключение:
-                    <select
-                      required
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={moderate.moderate}
-                      onChange={(event) =>
-                        setModerate({
-                          ...moderate,
-                          moderate: event.target.value,
-                        })
-                      }
-                    >
-                      <option value="">не выбрано</option>
-                      <option value="на модерации">на модерации</option>
-                      <option value="на доработку">на доработку</option>
-                      <option value="скрыто">скрыто</option>
-                      <option value="принято">принято</option>
-                    </select>
-                  </label>
-                  {moderate.moderate === "на доработку" && (
-                    <label className="w-75 form-control-sm">
-                      Комментарий:
-                      <input
-                        type="text"
-                        className="form-control form-control-sm text-center m-0 p-1"
-                        value={moderate.moderateComment}
-                        placeholder="вводите комментарий тут..."
-                        minLength={1}
-                        maxLength={300}
-                        onChange={(event) =>
-                          setModerate({
-                            ...moderate,
-                            moderateComment: event.target.value.replace(
-                              util.GetRegexType({
-                                numbers: true,
-                                cyrillic: true,
-                                space: true,
-                                punctuationMarks: true,
-                              }),
-                              ""
-                            ),
-                          })
-                        }
-                      />
-                      <small className="custom-color-warning-1 m-0 p-0">
-                        * только кириллица
-                        <small className="text-muted m-0 p-0">
-                          {" "}
-                          * длина: не более 300 символов
-                        </small>
-                      </small>
-                    </label>
-                  )}
-                </div>
-                <component.StoreComponent1
-                  stateConstant={constant.IdeaUpdateStore}
-                  consoleLog={constant.DEBUG_CONSTANT}
-                  showLoad={true}
-                  loadText={""}
-                  showData={true}
-                  dataText={""}
-                  showError={true}
-                  errorText={""}
-                  showFail={true}
-                  failText={""}
-                />
-                <div className="card-footer m-0 p-0">
-                  <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
-                    <button
-                      className="btn btn-sm btn-danger m-1 p-2"
-                      type="submit"
-                      style={{ zIndex: 0 }}
-                    >
-                      <i className="fa-solid fa-circle-check m-0 p-1" />
-                      вынести заключение
-                    </button>
-                  </ul>
-                </div>
-              </div>
-            </form>
-          </ul>
-        }
-      </component.Accordion1>
       <component.StoreComponent1
         stateConstant={constant.IdeaReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
@@ -299,12 +106,12 @@ export const IdeaModerateChangePage = () => {
             onSubmit={(event) => {
               event.preventDefault();
               event.stopPropagation();
-              setIsModalChangeVisible(true);
+              setIsModalUpdateVisible(true);
             }}
           >
             <modal.ModalConfirm2
-              isModalVisible={isModalChangeVisible}
-              setIsModalVisible={setIsModalChangeVisible}
+              isModalVisible={isModalUpdateVisible}
+              setIsModalVisible={setIsModalUpdateVisible}
               description={"Заменить данные?"}
               callback={ChangeIdea}
             />
@@ -314,12 +121,7 @@ export const IdeaModerateChangePage = () => {
                   {IdeaReadStore.data["name_char_field"]}
                 </h6>
                 <h6 className="text-danger lead small m-0 p-0">
-                  {" [ "}
-                  {util.GetSliceString(
-                    IdeaReadStore.data["status_moderate_char_field"],
-                    30
-                  )}
-                  {" : "}
+                  {"[ "}
                   {util.GetSliceString(
                     IdeaReadStore.data["comment_moderate_char_field"],
                     30
@@ -628,188 +430,6 @@ export const IdeaModerateChangePage = () => {
                     сбросить данные
                   </button>
                 </ul>
-              </div>
-
-              <div className="card-footer m-0 p-0">
-                <div className="card m-0 p-2">
-                  <div className="order-md-last m-0 p-0">
-                    {!IdeaCommentReadListStore.load &&
-                      IdeaCommentReadListStore.data && (
-                        <select.Select1
-                          value={paginationComment.limit}
-                          // @ts-ignore
-                          onChange={(event) =>
-                            setPaginationComment({
-                              ...paginationComment,
-                              limit: event.target.value,
-                            })
-                          }
-                          options={[
-                            {
-                              value: "10",
-                              name: "по 10 комментариев на странице",
-                            },
-                            {
-                              value: "20",
-                              name: "по 20 комментариев на странице",
-                            },
-                            {
-                              value: "30",
-                              name: "по 30 комментариев на странице",
-                            },
-                            {
-                              value: "100",
-                              name: "по 100 комментариев на странице",
-                            },
-                          ]}
-                          useDefaultSelect={false}
-                          defaultSelect={{
-                            value: `${paginationComment.limit}`,
-                            name: "количество комментариев",
-                          }}
-                        />
-                      )}
-                    {IdeaCommentReadListStore.data &&
-                    IdeaCommentReadListStore.data.list.length < 1 ? (
-                      <div className="my-1">
-                        <component.MessageComponent variant={"warning"}>
-                          Комментарии не найдены!
-                        </component.MessageComponent>
-                      </div>
-                    ) : (
-                      <ul className="list-group m-0 p-0">
-                        <component.StoreComponent1
-                          stateConstant={constant.NotificationCreateStore}
-                          consoleLog={constant.DEBUG_CONSTANT}
-                          showLoad={true}
-                          loadText={""}
-                          showData={false}
-                          dataText={""}
-                          showError={true}
-                          errorText={""}
-                          showFail={true}
-                          failText={""}
-                        />
-                        <component.StoreComponent1
-                          stateConstant={constant.IdeaCommentReadListStore}
-                          consoleLog={constant.DEBUG_CONSTANT}
-                          showLoad={true}
-                          loadText={""}
-                          showData={false}
-                          dataText={""}
-                          showError={true}
-                          errorText={""}
-                          showFail={true}
-                          failText={""}
-                        />
-                        {!IdeaCommentReadListStore.load &&
-                          IdeaCommentReadListStore.data && (
-                            <paginator.Pagination1
-                              totalObjects={
-                                IdeaCommentReadListStore.data["x-total-count"]
-                              }
-                              limit={paginationComment.limit}
-                              page={paginationComment.page}
-                              // @ts-ignore
-                              changePage={(page) =>
-                                setPaginationComment({
-                                  ...paginationComment,
-                                  page: page,
-                                })
-                              }
-                            />
-                          )}
-                        {!IdeaCommentReadListStore.load &&
-                          IdeaCommentReadListStore.data &&
-                          IdeaCommentReadListStore.data.list.map(
-                            // @ts-ignore
-                            (object, index) => (
-                              <li
-                                className="list-group-item m-0 p-1"
-                                key={index}
-                              >
-                                <div className="d-flex justify-content-between m-0 p-0">
-                                  <h6 className="btn btn-sm btn-outline-warning m-0 p-2">
-                                    {
-                                      object["user_model"][
-                                        "last_name_char_field"
-                                      ]
-                                    }{" "}
-                                    {
-                                      object["user_model"][
-                                        "first_name_char_field"
-                                      ]
-                                    }
-                                  </h6>
-                                  <span className="text-muted m-0 p-0">
-                                    {util.GetCleanDateTime(
-                                      object["created_datetime_field"],
-                                      true
-                                    )}
-                                    <modal.ModalConfirm2
-                                      isModalVisible={
-                                        isModalCommentDeleteVisible
-                                      }
-                                      setIsModalVisible={
-                                        setIsModalCommentDeleteVisible
-                                      }
-                                      description={
-                                        "Удалить выбранный комментарий?"
-                                      }
-                                      // @ts-ignore
-                                      callback={() =>
-                                        DeleteComment({
-                                          ...modalCommentDeleteForm,
-                                        })
-                                      }
-                                    />
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-outline-danger m-1 p-0"
-                                      onClick={(event) => {
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                        setModalCommentDeleteForm({
-                                          ...modalCommentDeleteForm,
-                                          id: object.id,
-                                        });
-                                        setIsModalCommentDeleteVisible(true);
-                                      }}
-                                    >
-                                      <i className="fa-solid fa-skull-crossbones m-0 p-1" />
-                                      удалить комментарий
-                                    </button>
-                                  </span>
-                                </div>
-                                <div className="d-flex justify-content-center m-0 p-1">
-                                  <small className="text-muted m-0 p-1">
-                                    {object["comment_text_field"]}
-                                  </small>
-                                </div>
-                              </li>
-                            )
-                          )}
-                        {!IdeaCommentReadListStore.load &&
-                          IdeaCommentReadListStore.data && (
-                            <paginator.Pagination1
-                              totalObjects={
-                                IdeaCommentReadListStore.data["x-total-count"]
-                              }
-                              limit={paginationComment.limit}
-                              page={paginationComment.page}
-                              // @ts-ignore
-                              changePage={(page) =>
-                                setPaginationComment({
-                                  ...paginationComment,
-                                  page: page,
-                                })
-                              }
-                            />
-                          )}
-                      </ul>
-                    )}
-                  </div>
-                </div>
               </div>
             </div>
           </form>

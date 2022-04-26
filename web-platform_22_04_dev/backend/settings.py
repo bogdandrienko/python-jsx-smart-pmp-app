@@ -149,7 +149,7 @@ if DEBUG:
     STATIC_DIR = Path(BASE_DIR, 'static')
     STATICFILES_DIRS = [
         Path(BASE_DIR, 'frontend/public/static'),
-        Path(BASE_DIR, 'frontend_test/public/static'),
+        # Path(BASE_DIR, 'frontend_test/public/static'),
         Path(BASE_DIR, 'static')
     ]
 else:
@@ -158,7 +158,7 @@ else:
     STATIC_DIR = Path(BASE_DIR, 'static')
     STATICFILES_DIRS = [
         Path(BASE_DIR, 'react/production/static'),
-        Path(BASE_DIR, 'react/test/static'),
+        # Path(BASE_DIR, 'react/test/static'),
     ]
 
 MEDIA_URL = '/media/'

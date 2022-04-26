@@ -41,9 +41,8 @@ export const LoginPage = () => {
     } catch (error) {}
     if (captchaCheckStore.data) {
       dispatch(
-        action.User.UserLoginAction({
-          username: user.username,
-          password: user.password,
+        action.User.Login({
+          form: { username: user.username, password: user.password },
         })
       );
     }

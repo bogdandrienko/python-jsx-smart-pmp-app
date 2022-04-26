@@ -1038,3 +1038,94 @@ export const Accordion1 = ({
     </div>
   );
 };
+
+export const SalaryTableComponent = ({ tab = {} }) => {
+  // @ts-ignore
+  let header = tab[0];
+  let thead_array = [];
+  // @ts-ignore
+  for (let i in tab[1]["Fields"]) {
+    if (
+      // @ts-ignore
+      tab[1]["Fields"][i] !== "ВсегоДни" &&
+      // @ts-ignore
+      tab[1]["Fields"][i] !== "ВсегоЧасы"
+    ) {
+      // @ts-ignore
+      thead_array.push(tab[1]["Fields"][i]);
+    }
+  }
+  let tbody_array = [];
+  // @ts-ignore
+  for (let i in tab[1]) {
+    if (i !== "Fields") {
+      let local_tbody_array = [];
+      // @ts-ignore
+      for (let j in tab[1][i]) {
+        if (j !== "ВсегоДни" && j !== "ВсегоЧасы") {
+          // @ts-ignore
+          local_tbody_array.push(tab[1][i][j]);
+        }
+      }
+      tbody_array.push(local_tbody_array);
+    }
+  }
+  // @ts-ignore
+  function getValue(value) {
+    if (typeof value === "number") {
+      return value.toFixed(2);
+    } else {
+      return value;
+    }
+  }
+  // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
+  return (
+    <li className="col-12 col-md-6 col-lg-6 m-0 p-3 my-1">
+      <h6 className="lead fw-bold bold m-0 p-0">{header.slice(2)}</h6>
+      <table className="table table-sm table-condensed table-striped table-hover table-responsive table-responsive-sm table-bordered border-secondary small m-0 p-0">
+        <thead className="m-0 p-0 mb-1">
+          <tr className="m-0 p-0">
+            {thead_array.map((thead, index_h) => (
+              <th
+                key={index_h}
+                className={
+                  index_h === 4
+                    ? "text-center w-25 m-0 p-p-1"
+                    : "text-center m-0 p-p-1"
+                }
+              >
+                {thead}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="m-0 p-0">
+          {tbody_array.map((tbody, index_i) => (
+            <tr key={index_i} className="m-0 p-0">
+              {tbody.slice(0, 1).map((body, index_j) => (
+                <td key={index_j} className="text-start m-0 p-1">
+                  {body}
+                </td>
+              ))}
+              {tbody.slice(1, -1).map((body, index_j) => (
+                <td key={index_j} className="text-end m-0 p-1">
+                  {body ? body : ""}
+                </td>
+              ))}
+              {tbody.slice(-1).map((body, index_j) => (
+                <td
+                  key={index_j}
+                  className={
+                    index_j === 0 ? "text-end m-0 p-0" : "text-end m-0 p-1"
+                  }
+                >
+                  {body ? getValue(body) : ""}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </li>
+  );
+};

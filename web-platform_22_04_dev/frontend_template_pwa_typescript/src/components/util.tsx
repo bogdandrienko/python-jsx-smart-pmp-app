@@ -97,18 +97,12 @@ export function ActionConstructorUtility(
 }
 
 export function ActionConstructor1({
-  // @ts-ignore
-  form,
-  // @ts-ignore
-  url,
-  // @ts-ignore
-  method,
-  // @ts-ignore
-  timeout,
-  // @ts-ignore
-  constant,
-  // @ts-ignore
-  authentication,
+  form = {},
+  url = "/",
+  method = "GET",
+  timeout = 10000,
+  constant = { load: {}, data: {}, error: {}, fail: {} },
+  authentication = true,
 }) {
   // @ts-ignore
   return async function (dispatch, getState) {
@@ -116,34 +110,67 @@ export function ActionConstructor1({
       dispatch({
         type: constant.load,
       });
-      const formData = new FormData();
-      Object.entries(form).map(([key, value]) => {
-        // @ts-ignore
-        formData.append(key, value);
-      });
-      const config = {
-        url: url,
-        method: method,
-        timeout: timeout,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        data: formData,
+
+      // add "Action-Type" to { url | formData }
+      form = {
+        "Action-Type": GetConstantStringName({ constant: constant }),
+        ...form,
       };
 
+      const formData = new FormData();
+      // add {form} to "request.data" POST | PUT
+      if (method === "POST" || method === "PUT") {
+        Object.entries(form).map(([key, value]) => {
+          // @ts-ignore
+          formData.append(key, value);
+        });
+      }
+
+      let config = {};
+
+      // add Authorization to headers
       if (authentication) {
         try {
           const {
             userLoginStore: { data: userLogin },
           } = getState();
-          config.headers = {
-            ...config.headers,
-            // @ts-ignore
-            Authorization: `Bearer ${userLogin.token}`,
+          config = {
+            url: url,
+            method: method,
+            timeout: timeout,
+            headers: {
+              "Content-Type": "multipart/form-data",
+              // @ts-ignore
+              Authorization: `Bearer ${userLogin.token}`,
+            },
+            data: formData,
           };
         } catch (error) {}
+      } else {
+        config = {
+          url: url,
+          method: method,
+          timeout: timeout,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          data: formData,
+        };
       }
 
+      // add {form} to "request.GET" GET | DELETE
+      if (method === "GET" || method === "DELETE") {
+        url = url + `?`;
+        Object.entries(form).map(([key, value]) => {
+          // @ts-ignore
+          url = url + `${key}=${value}&`;
+        });
+        url = url.slice(0, -1);
+        // @ts-ignore
+        config.url = url;
+      }
+
+      // @ts-ignore
       const { data } = await axios(config);
       if (data.response) {
         const response = data.response;
@@ -182,31 +209,16 @@ export function ActionConstructor2({
         type: constant.load,
       });
 
-      if (method === "GET") {
-        console.log("form: ", form);
-        console.log("url: ", url);
-
-        url = url + `?`;
-        Object.entries(form).map(([key, value]) => {
-          // @ts-ignore
-          url = url + `${key}=${value}&`;
-        });
-        url = url.slice(0, -1);
-        console.log("url: ", url);
-
-        // config.headers = {
-        //   "Content-Type": "application/json",
-        // };
-      }
-
       const formData = new FormData();
 
-      if (method === "POST" || method === "PUT") {
-        Object.entries(form).map(([key, value]) => {
-          // @ts-ignore
-          formData.append(key, value);
-        });
-      }
+      console.log("form: ", form, typeof form);
+
+      Object.entries(form).map(([key, value]) => {
+        // @ts-ignore
+        formData.append(key, value);
+      });
+
+      console.log("formData: ", formData, typeof formData);
 
       const config = {
         url: url,
@@ -215,8 +227,91 @@ export function ActionConstructor2({
         headers: {
           "Content-Type": "multipart/form-data",
         },
-        data: {},
+        data: formData,
       };
+
+      // add Authorization to headers
+      if (authentication) {
+        try {
+          const {
+            userLoginStore: { data: userLogin },
+          } = getState();
+          config.headers = {
+            ...config.headers,
+            // @ts-ignore
+            Authorization: `Bearer ${userLogin.token}`,
+          };
+        } catch (error) {}
+      }
+
+      console.log("config: ", config, typeof config);
+
+      // @ts-ignore
+      const { data } = await axios(config);
+      if (data.response) {
+        const response = data.response;
+        dispatch({
+          type: constant.data,
+          payload: response,
+        });
+      } else {
+        const response = data.error;
+        dispatch({
+          type: constant.error,
+          payload: response,
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: constant.fail,
+        payload: ActionsFailUtility({ dispatch: dispatch, error: error }),
+      });
+    }
+  };
+}
+
+export function ActionConstructor3({
+  // @ts-ignore
+  form,
+  // @ts-ignore
+  url,
+  // @ts-ignore
+  method,
+  // @ts-ignore
+  timeout,
+  // @ts-ignore
+  constant,
+  // @ts-ignore
+  authentication,
+}) {
+  // @ts-ignore
+  return async function (dispatch, getState) {
+    try {
+      dispatch({
+        type: constant.load,
+      });
+
+      console.log("form: ", form, typeof form);
+
+      const formData = new FormData();
+      Object.entries(form).map(([key, value]) => {
+        // @ts-ignore
+        formData.append(key, value);
+      });
+
+      console.log("formData: ", formData, typeof formData);
+
+      const config = {
+        url: url,
+        method: method,
+        timeout: timeout,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        data: formData,
+      };
+
+      console.log("config: ", config, typeof config);
 
       if (authentication) {
         try {
@@ -231,7 +326,6 @@ export function ActionConstructor2({
         } catch (error) {}
       }
 
-      // @ts-ignore
       const { data } = await axios(config);
       if (data.response) {
         const response = data.response;
@@ -362,12 +456,12 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
       }
       switch (status) {
         case 401:
-          dispatch(action.User.UserLogoutAction());
+          dispatch(action.User.Logout());
           return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
         case 413:
           return "Ваш файл слишком большой! Измените его размер и перезагрузите страницу перед отправкой.";
         case 500:
-          dispatch(action.User.UserLogoutAction());
+          dispatch(action.User.Logout());
           return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
         case "timeout":
           return "Превышено время ожидания! Попробуйте повторить действие или ожидайте исправления.";
@@ -466,6 +560,95 @@ export const GetCleanDateTime = (dateTime, withTime = true) => {
       console.log(error);
     }
     return "";
+  }
+};
+
+export const GetCurrentDate = (withTime = true, yearAppend = 0) => {
+  try {
+    const today = new Date();
+    let year = today.getFullYear() + yearAppend;
+    let month = today.getMonth() + 1;
+    if (month < 10) {
+      // @ts-ignore
+      month = `0${month}`;
+    }
+    let day = today.getDate();
+    if (day < 10) {
+      // @ts-ignore
+      day = `0${day}`;
+    }
+    let time = today.getTime();
+    if (withTime) {
+      return `${year}-${month}-${day}T${time}`;
+    } else {
+      return `${year}-${month}-${day}`;
+    }
+  } catch (error) {
+    if (constant.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};
+
+export const GetCurrentYear = (yearAppend = 0) => {
+  try {
+    const today = new Date();
+    let year = today.getFullYear() + yearAppend;
+    return `${year}`;
+  } catch (error) {
+    if (constant.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};
+
+export const GetCurrentMonth = (withZero = false, yearMonth = 0) => {
+  try {
+    const today = new Date();
+    let month = today.getMonth() + 1 + yearMonth;
+    if (month > 12) {
+      month = month - 12;
+    }
+    if (month < 0) {
+      month = month + 12;
+    }
+    if (withZero) {
+      if (month < 10) {
+        // @ts-ignore
+        month = `0${month}`;
+      }
+      return `${month}`;
+    } else {
+      return `${month}`;
+    }
+  } catch (error) {
+    if (constant.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
+  }
+};
+
+export const GetCurrentDay = (withZero = false) => {
+  try {
+    const today = new Date();
+    let day = today.getDate();
+    if (withZero) {
+      if (day < 10) {
+        // @ts-ignore
+        day = `0${day}`;
+      }
+      return `${day}`;
+    } else {
+      return `${day}`;
+    }
+  } catch (error) {
+    if (constant.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return null;
   }
 };
 
@@ -708,6 +891,18 @@ export const CheckAccess = (userDetailStore, slug) => {
     return false;
   }
 };
+// @ts-ignore
+
+export const GetConstantStringName = ({ constant }) => {
+  try {
+    return constant.data.split("_")[0];
+  } catch (error) {
+    if (constant.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return "";
+  }
+};
 
 // @ts-ignore
 export const CheckPageAccess = (userGroups, pageAccess) => {
@@ -741,8 +936,8 @@ export const PageLogic = () => {
   useEffect(() => {
     if (userLoginStore.data) {
       localStorage.setItem("userToken", JSON.stringify(userLoginStore.data));
-      dispatch(action.User.UserDetailAction());
-      dispatch(action.Notification.ReadListAction({ limit: 1, page: 1 }));
+      dispatch(action.User.Read());
+      dispatch(action.Notification.ReadList({ form: { limit: 1, page: 1 } }));
     }
   }, [userLoginStore.data]);
 
@@ -755,7 +950,7 @@ export const PageLogic = () => {
         if (
           userDetailStore.data["user_model"]["activity_boolean_field"] === false
         ) {
-          dispatch(action.User.UserLogoutAction());
+          dispatch(action.User.Logout());
         }
         if (
           (!userDetailStore.data["user_model"]["secret_question_char_field"] ||

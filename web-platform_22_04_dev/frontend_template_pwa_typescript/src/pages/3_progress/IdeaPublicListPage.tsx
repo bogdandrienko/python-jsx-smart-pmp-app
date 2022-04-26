@@ -17,7 +17,7 @@ import * as paginator from "../../components/ui/paginator";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const IdeaListPage = () => {
+export const IdeaPublicListPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const IdeaReadListStore = hook.useSelectorCustom1(constant.IdeaReadListStore);
@@ -29,10 +29,11 @@ export const IdeaListPage = () => {
 
   const dispatch = useDispatch();
 
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(9);
-
-  const [paginationIdea, setPaginationIdea] = useState({ page: 3, limit: 9 });
+  const [paginationIdea, setPaginationIdea] = useState({
+    page: 1,
+    limit: 9,
+    detailView: true,
+  });
 
   const [filter, setFilter, resetFilter] = hook.useStateCustom1({
     sort: "дате публикации (свежие в начале)",
@@ -46,25 +47,24 @@ export const IdeaListPage = () => {
     place: "",
     description: "",
     moderate: "принято",
-    detailView: true,
   });
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [page]);
+  }, [paginationIdea.page]);
 
   useEffect(() => {
-    setPage(1);
+    setPaginationIdea({ ...paginationIdea, page: 1 });
     dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [limit]);
+  }, [paginationIdea.limit]);
 
   useEffect(() => {
     if (!IdeaReadListStore.data) {
       dispatch(
-        action.Idea.IdeaReadListAction2({
-          form: { ...filter, page: page, limit: limit },
+        action.Idea.ReadList({
+          form: { ...filter, ...paginationIdea },
         })
       );
     }
@@ -72,7 +72,7 @@ export const IdeaListPage = () => {
 
   useEffect(() => {
     if (!UsersReadListStore.data) {
-      dispatch(action.Users.UsersReadListAction());
+      dispatch(action.User.ReadList());
     }
   }, [UsersReadListStore.data]);
 
@@ -88,11 +88,9 @@ export const IdeaListPage = () => {
       event.preventDefault();
       event.stopPropagation();
     } catch (error) {}
-    setPage(1);
+    setPaginationIdea({ ...paginationIdea, page: 1 });
     dispatch({ type: constant.IdeaReadListStore.reset });
   };
-
-  console.log("custom: ", paginationIdea);
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -128,11 +126,11 @@ export const IdeaListPage = () => {
                       type="checkbox"
                       className="form-check-input m-0 p-1"
                       id="flexSwitchCheckDefault"
-                      checked={filter.detailView}
+                      checked={paginationIdea.detailView}
                       onChange={() =>
-                        setFilter({
-                          ...filter,
-                          detailView: !filter.detailView,
+                        setPaginationIdea({
+                          ...paginationIdea,
+                          detailView: !paginationIdea.detailView,
                         })
                       }
                     />
@@ -141,9 +139,14 @@ export const IdeaListPage = () => {
                     Количество идей на странице:
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
-                      value={limit}
-                      // @ts-ignore
-                      onChange={(event) => setLimit(event.target.value)}
+                      value={paginationIdea.limit}
+                      onChange={(event) =>
+                        setPaginationIdea({
+                          ...paginationIdea,
+                          // @ts-ignore
+                          limit: event.target.value,
+                        })
+                      }
                     >
                       <option disabled defaultValue={""} value="">
                         количество на странице
@@ -388,16 +391,22 @@ export const IdeaListPage = () => {
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={limit}
-          page={page}
-          changePage={setPage}
+          limit={paginationIdea.limit}
+          page={paginationIdea.page}
+          // @ts-ignore
+          changePage={(page) =>
+            setPaginationIdea({
+              ...paginationIdea,
+              page: page,
+            })
+          }
         />
       )}
       {!IdeaReadListStore.load && IdeaReadListStore.data ? (
         IdeaReadListStore.data.list.length > 0 ? (
           <div className={"m-0 p-0"}>
             {" "}
-            {filter.detailView ? (
+            {paginationIdea.detailView ? (
               <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
                 {IdeaReadListStore.data.list.map(
                   // @ts-ignore
@@ -410,7 +419,7 @@ export const IdeaListPage = () => {
                         <div className="card shadow custom-background-transparent-low m-0 p-0">
                           <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                             <Link
-                              to={`/idea/${idea.id}`}
+                              to={`/idea/public/${idea.id}`}
                               className="text-decoration-none text-dark m-0 p-0"
                             >
                               <h6 className="lead fw-bold m-0 p-0">
@@ -755,8 +764,8 @@ export const IdeaListPage = () => {
                           </div>
                           <div className="m-0 p-0">
                             <Link
-                              to={`/idea/${idea.id}`}
-                              className="btn btn-sm btn-primary w-100 m-1 p-2"
+                              to={`/idea/public/${idea.id}`}
+                              className="btn btn-sm btn-primary w-100 m-0 p-2"
                             >
                               подробнее
                             </Link>
@@ -774,7 +783,7 @@ export const IdeaListPage = () => {
                   (idea, index) => (
                     <Link
                       key={index}
-                      to={`/idea/${idea.id}`}
+                      to={`/idea/public/${idea.id}`}
                       className="text-decoration-none m-0 p-0"
                     >
                       <li className="border list-group-item-action text-start small m-0 p-1">
@@ -822,9 +831,15 @@ export const IdeaListPage = () => {
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={limit}
-          page={page}
-          changePage={setPage}
+          limit={paginationIdea.limit}
+          page={paginationIdea.page}
+          // @ts-ignore
+          changePage={(page) =>
+            setPaginationIdea({
+              ...paginationIdea,
+              page: page,
+            })
+          }
         />
       )}
     </base.Base1>

@@ -20,7 +20,7 @@ import * as paginator from "../../components/ui/paginator";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const IdeaDetailPage = () => {
+export const IdeaPublicPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const IdeaReadStore = hook.useSelectorCustom1(constant.IdeaReadStore);
@@ -42,48 +42,44 @@ export const IdeaDetailPage = () => {
   const dispatch = useDispatch();
   const id = useParams().id;
 
-  const [modalNotificationForm, setModalNotificationForm] = useState({});
-  const [isModalNotificationVisible, setIsModalNotificationVisible] =
-    useState(false);
-
-  const [modalLowRatingForm, setModalLowRatingForm] = useState({});
-  const [isModalLowRatingVisible, setIsModalLowRatingVisible] = useState(false);
-
-  const [comment, commentSet] = useState("");
-
   const [paginationComment, setPaginationComment, resetPaginationComment] =
     hook.useStateCustom1({ page: 1, limit: 10 });
+
+  // Notification Modal
+  const [isModalNotificationVisible, setIsModalNotificationVisible] =
+    useState(false);
+  const [modalNotificationForm, setModalNotificationForm] = useState({});
+
+  // Low Rating Modal
+  const [isModalLowRatingVisible, setIsModalLowRatingVisible] = useState(false);
+  const [modalLowRatingForm, setModalLowRatingForm] = useState({});
+
+  const [comment, SetComment, resetComment] = hook.useStateCustom1("");
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (!IdeaReadStore.data) {
-      dispatch(action.Idea.IdeaReadAction({ id: id }));
+      dispatch(action.Idea.Read({ idea_id: id }));
     }
   }, [IdeaReadStore.data]);
 
   useEffect(() => {
     if (!IdeaCommentReadListStore.data) {
-      dispatch(
-        action.IdeaComment.ReadListAction({ id: id, ...paginationComment })
-      );
+      dispatch(action.IdeaComment.ReadList({ id: id, ...paginationComment }));
     }
   }, [IdeaCommentReadListStore.data]);
 
   useEffect(() => {
     if (!IdeaRatingReadListStore.data) {
       dispatch(
-        action.IdeaRating.ReadListAction({ id: id, limit: 100, page: 1 })
+        action.IdeaRating.ReadList({
+          idea_id: id,
+          form: { limit: 100, page: 1 },
+        })
       );
     }
   }, [IdeaRatingReadListStore.data]);
-
-  useEffect(() => {
-    resetPaginationComment();
-    dispatch({ type: constant.IdeaReadStore.reset });
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-    dispatch({ type: constant.IdeaRatingReadListStore.reset });
-  }, [id]);
 
   useEffect(() => {
     dispatch({ type: constant.IdeaCommentReadListStore.reset });
@@ -96,13 +92,20 @@ export const IdeaDetailPage = () => {
 
   useEffect(() => {
     if (IdeaCommentCreateStore.data || IdeaRatingCreateStore.data) {
-      dispatch({ type: constant.IdeaReadStore.reset });
-      dispatch({ type: constant.IdeaCommentReadListStore.reset });
-      dispatch({ type: constant.IdeaRatingReadListStore.reset });
+      resetState();
     }
   }, [IdeaCommentCreateStore.data, IdeaRatingCreateStore.data]);
 
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const resetState = () => {
+    resetComment();
+    resetPaginationComment();
+    dispatch({ type: constant.IdeaReadStore.reset });
+    dispatch({ type: constant.IdeaCommentReadListStore.reset });
+    dispatch({ type: constant.IdeaUpdateStore.reset });
+    dispatch({ type: constant.IdeaCommentDeleteStore.reset });
+  };
 
   // @ts-ignore
   const handlerCommentCreateSubmit = async (event) => {
@@ -110,14 +113,14 @@ export const IdeaDetailPage = () => {
       event.preventDefault();
     } catch (error) {}
     dispatch(
-      action.IdeaComment.CreateAction({
-        id: id,
+      action.IdeaComment.Create({
+        idea_id: id,
         form: {
           comment: comment,
         },
       })
     );
-    commentSet("");
+    SetComment("");
   };
 
   // @ts-ignore
@@ -131,7 +134,7 @@ export const IdeaDetailPage = () => {
   const CreateNotification = (form) => {
     if (form) {
       dispatch(
-        action.Notification.CreateAction({
+        action.Notification.Create({
           form: {
             ...form,
             description: `${form.description}, причина:${form.answer}`,
@@ -154,8 +157,8 @@ export const IdeaDetailPage = () => {
       });
     } else {
       dispatch(
-        action.IdeaRating.CreateAction({
-          id: id,
+        action.IdeaRating.Create({
+          idea_id: id,
           form: {
             value: value,
           },
@@ -174,16 +177,16 @@ export const IdeaDetailPage = () => {
   const CreateLowLevelRating = (form) => {
     if (form) {
       dispatch(
-        action.IdeaRating.CreateAction({
-          id: id,
+        action.IdeaRating.Create({
+          idea_id: id,
           form: {
             value: `${form.value}`,
           },
         })
       );
       dispatch(
-        action.IdeaComment.CreateAction({
-          id: id,
+        action.IdeaComment.Create({
+          idea_id: id,
           form: {
             comment: `${form.answer}`,
           },
@@ -226,7 +229,10 @@ export const IdeaDetailPage = () => {
         failText={""}
       />
       <div className="btn-group text-start w-100 m-0 p-0">
-        <Link to={"/idea/list"} className="btn btn-sm btn-primary m-1 p-2">
+        <Link
+          to={"/idea/public/list"}
+          className="btn btn-sm btn-primary m-1 p-2"
+        >
           {"<="} назад к списку
         </Link>
         {IdeaReadStore.data && (
@@ -711,7 +717,7 @@ export const IdeaDetailPage = () => {
                             minLength={1}
                             maxLength={300}
                             onChange={(e) =>
-                              commentSet(
+                              SetComment(
                                 e.target.value.replace(
                                   util.GetRegexType({
                                     numbers: true,

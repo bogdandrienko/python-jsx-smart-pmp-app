@@ -57,7 +57,7 @@ export const ChangeProfilePage = () => {
   useEffect(() => {
     if (userChangeStore.data) {
       util.Delay(() => {
-        dispatch(action.User.UserLogoutAction());
+        dispatch(action.User.Logout());
       }, 10);
     }
   }, [userChangeStore.data]);
@@ -66,7 +66,7 @@ export const ChangeProfilePage = () => {
 
   const CreateConfirm = (create = false) => {
     if (create) {
-      dispatch(action.User.ChangeAction({ form: user }));
+      dispatch(action.User.Update({ form: user }));
       resetUser();
       setIsModalVisible(false);
     } else {
