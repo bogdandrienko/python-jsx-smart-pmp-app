@@ -6,6 +6,8 @@ import axios from "axios";
 
 import * as constant from "./constant";
 import * as util from "./util";
+import { useNavigate } from "react-router-dom";
+import { userRecoverPasswordChangePasswordStore } from "./constant";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -59,6 +61,12 @@ export class User {
         dispatch({ type: constant.userDetailStore.reset });
         dispatch({ type: constant.userChangeStore.reset });
         dispatch({ type: constant.NotificationReadListStore.reset });
+
+        dispatch({ type: constant.userRecoverPasswordStore.reset });
+        dispatch({ type: constant.userRecoverPasswordSendEmailStore.reset });
+        dispatch({
+          type: constant.userRecoverPasswordChangePasswordStore.reset,
+        });
       } catch (error) {
         console.log(error);
       }
@@ -132,8 +140,78 @@ export class User {
       );
     };
   }
+  // @ts-ignore
+  static Recover({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
+          url: `/api/user/recover/`,
+          method: constant.HttpMethods.POST(),
+          timeout: 20000,
+          constant: constant.userRecoverPasswordStore,
+          authentication: false,
+        })
+      );
+    };
+  }
+  // @ts-ignore
+  static RecoverSendEmail({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
+          url: `/api/user/recover/email/`,
+          method: constant.HttpMethods.POST(),
+          timeout: 20000,
+          constant: constant.userRecoverPasswordSendEmailStore,
+          authentication: false,
+        })
+      );
+    };
+  }
+  // @ts-ignore
+  static RecoverChangePassword({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
+          url: `/api/user/recover/password/`,
+          method: constant.HttpMethods.POST(),
+          timeout: 20000,
+          constant: constant.userRecoverPasswordChangePasswordStore,
+          authentication: false,
+        })
+      );
+    };
+  }
 }
 
+export class Admin {
+  // @ts-ignore
+  static ExportUsers() {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: {},
+          url: `/api/admin/export/users/`,
+          method: constant.HttpMethods.GET(),
+          timeout: 20000,
+          constant: constant.adminExportUsersStore,
+          authentication: true,
+        })
+      );
+    };
+  }
+}
 export class Notification {
   // @ts-ignore
   static Create({ form }) {

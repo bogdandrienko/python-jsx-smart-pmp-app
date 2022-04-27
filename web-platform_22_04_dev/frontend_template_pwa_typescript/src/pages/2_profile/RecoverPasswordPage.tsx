@@ -1,8 +1,7 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
-import React, { useState } from "react";
-// @ts-ignore
-import ReCAPTCHA from "react-google-recaptcha";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -10,228 +9,221 @@ import * as component from "../../components/ui/component";
 import * as util from "../../components/util";
 
 import * as base from "../../components/ui/base";
+import * as hook from "../../components/hook";
+import * as constant from "../../components/constant";
+import * as action from "../../components/action";
+import * as captcha from "../../components/ui/captcha";
+import { useNavigate } from "react-router-dom";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const RecoverPasswordPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // const userRecoverPasswordStore = useSelector(
-  //   // @ts-ignore
-  //   (state) => state.userRecoverPasswordStore
-  // );
-  // const {
-  //   // load: loadUserRecoverPassword,
-  //   data: dataUserRecoverPassword,
-  //   // error: errorUserRecoverPassword,
-  //   // fail: failUserRecoverPassword,
-  // } = userRecoverPasswordStore;
+  const captchaCheckStore = hook.useSelectorCustom1(constant.captchaCheckStore);
+  const userRecoverPasswordStore = hook.useSelectorCustom1(
+    constant.userRecoverPasswordStore
+  );
+  const userRecoverPasswordSendEmailStore = hook.useSelectorCustom1(
+    constant.userRecoverPasswordSendEmailStore
+  );
+  const userRecoverPasswordChangePasswordStore = hook.useSelectorCustom1(
+    constant.userRecoverPasswordChangePasswordStore
+  );
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const [captcha, captchaSet] = useState("");
-  const [username, usernameSet] = useState("");
-  const [secretQuestion, secretQuestionSet] = useState("");
-  const [secretAnswer, secretAnswerSet] = useState("");
-  const [email, emailSet] = useState("");
-  const [recoverPassword, recoverPasswordSet] = useState("");
-  const [success, successSet] = useState(false);
-  const [password, passwordSet] = useState("");
-  const [password2, password2Set] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [recover, setRecover, resetRecover] = hook.useStateCustom1({
+    stage: "First",
+    username: "",
+    secretQuestion: "",
+    secretAnswer: "",
+    email: "",
+    recoverPassword: "",
+  });
+
+  const [user, setUser, resetUser] = hook.useStateCustom1({
+    secretQuestion: "",
+    secretAnswer: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // useEffect(() => {
-  //   if (dataUserRecoverPassword) {
-  //     if (dataUserRecoverPassword["username"]) {
-  //       usernameSet(dataUserRecoverPassword["username"]);
-  //     } else {
-  //       usernameSet("");
-  //     }
-  //     if (dataUserRecoverPassword["secretQuestion"]) {
-  //       secretQuestionSet(dataUserRecoverPassword["secretQuestion"]);
-  //     } else {
-  //       secretQuestionSet("");
-  //     }
-  //     if (dataUserRecoverPassword["email"]) {
-  //       emailSet(dataUserRecoverPassword["email"]);
-  //     } else {
-  //       emailSet("");
-  //     }
-  //     if (dataUserRecoverPassword["success"]) {
-  //       successSet(dataUserRecoverPassword["success"]);
-  //     } else {
-  //       successSet(false);
-  //     }
-  //   } else {
-  //   }
-  // }, [dataUserRecoverPassword]);
+  useEffect(() => {
+    if (userRecoverPasswordStore.data) {
+      setRecover({ ...recover, ...userRecoverPasswordStore.data });
+    }
+  }, [userRecoverPasswordStore.data]);
+
+  useEffect(() => {
+    resetRecover();
+    resetUser();
+    dispatch({ type: constant.userRecoverPasswordSendEmailStore.reset });
+  }, []);
+
+  useEffect(() => {
+    if (userRecoverPasswordChangePasswordStore.data) {
+      util.Delay(() => {
+        resetRecover();
+        resetUser();
+        dispatch(action.User.Logout());
+        dispatch({
+          type: constant.userRecoverPasswordChangePasswordStore.reset,
+        });
+        navigate("/login");
+      }, 10);
+    }
+  }, [userRecoverPasswordChangePasswordStore.data]);
+
+  useEffect(() => {
+    if (
+      userRecoverPasswordSendEmailStore.data ||
+      userRecoverPasswordSendEmailStore.error
+    ) {
+      util.Delay(
+        () =>
+          dispatch({ type: constant.userRecoverPasswordSendEmailStore.reset }),
+        5000
+      );
+    }
+  }, [
+    userRecoverPasswordSendEmailStore.data ||
+      userRecoverPasswordSendEmailStore.error,
+  ]);
 
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // @ts-ignore
-  const handlerSubmitFindUser = (event) => {
-    event.preventDefault();
-    if (captcha !== "") {
-      // const form = {
-      //   "Action-type": "FIND_USER",
-      //   username: username,
-      // };
-      // dispatch(
-      //   utils.ActionConstructorUtility(
-      //     form,
-      //     "/api/any/user/recover/find/",
-      //     "POST",
-      //     30000,
-      //     constants.USER_RECOVER,
-      //     false
-      //   )
-      // );
+  const Check = () => {
+    if (captchaCheckStore.data) {
+      dispatch(
+        action.User.Recover({
+          form: { username: recover.username },
+        })
+      );
     }
   };
-  //////////////////////////////////////////////////////////
-  // @ts-ignore
-  const handlerSubmitCheckAnswer = (event) => {
-    event.preventDefault();
-    // const form = {
-    //   "Action-type": "CHECK_ANSWER",
-    //   username: username,
-    //   secretAnswer: secretAnswer,
-    // };
-    // dispatch(
-    //   utils.ActionConstructorUtility(
-    //     form,
-    //     "/api/any/user/recover/check_answer/",
-    //     "POST",
-    //     30000,
-    //     constants.USER_RECOVER,
-    //     false
-    //   )
-    // );
+
+  const CheckAnswer = () => {
+    dispatch(
+      action.User.Recover({
+        form: {
+          username: recover.username,
+          secretAnswer: recover.secretAnswer,
+        },
+      })
+    );
   };
-  //////////////////////////////////////////////////////////
-  // @ts-ignore
-  const handlerSubmitSendEmail = (event) => {
-    event.preventDefault();
-    // const form = {
-    //   "Action-type": "SEND_EMAIL_PASSWORD",
-    //   username: username,
-    // };
-    // dispatch(
-    //   utils.ActionConstructorUtility(
-    //     form,
-    //     "/api/any/user/recover/send_email/",
-    //     "POST",
-    //     30000,
-    //     constants.USER_RECOVER,
-    //     false
-    //   )
-    // );
+
+  const CheckRecoverCode = () => {
+    dispatch(
+      action.User.Recover({
+        form: {
+          username: recover.username,
+          recoverPassword: recover.recoverPassword,
+        },
+      })
+    );
   };
-  //////////////////////////////////////////////////////////
-  // @ts-ignore
-  const handlerSubmitRecoverEmail = (event) => {
-    event.preventDefault();
-    // const form = {
-    //   "Action-type": "CHECK_EMAIL_PASSWORD",
-    //   username: username,
-    //   recoverPassword: recoverPassword,
-    // };
-    // dispatch(
-    //   utils.ActionConstructorUtility(
-    //     form,
-    //     "/api/any/user/recover/check_email/",
-    //     "POST",
-    //     30000,
-    //     constants.USER_RECOVER,
-    //     false
-    //   )
-    // );
+
+  const SendMailCode = () => {
+    dispatch(
+      action.User.RecoverSendEmail({
+        form: { username: recover.username, ...user },
+      })
+    );
   };
-  //////////////////////////////////////////////////////////
-  // @ts-ignore
-  const handlerRecoverPasswordSubmit = (event) => {
-    event.preventDefault();
-    // const form = {
-    //   "Action-type": "CHANGE_PASSWORD",
-    //   username: username,
-    //   password: password,
-    //   password2: password2,
-    // };
-    // dispatch(
-    //   utils.ActionConstructorUtility(
-    //     form,
-    //     "/api/any/user/recover/change_password/",
-    //     "POST",
-    //     30000,
-    //     constants.USER_RECOVER,
-    //     false
-    //   )
-    // );
-  };
-  //////////////////////////////////////////////////////////
-  // @ts-ignore
-  const handlerRecoverPasswordReset = (event) => {
-    try {
-      event.preventDefault();
-    } catch (error) {}
-    passwordSet("");
-    password2Set("");
+
+  const ChangePassword = () => {
+    dispatch(
+      action.User.RecoverChangePassword({
+        form: { username: recover.username, ...user },
+      })
+    );
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <base.Base1>
-      {/*<component.StoreComponent*/}
-      {/*  storeStatus={constant.userRecoverPasswordStore}*/}
-      {/*  consoleLog={constant.DEBUG_CONSTANT}*/}
-      {/*  showLoad={true}*/}
-      {/*  loadText={""}*/}
-      {/*  showData={true}*/}
-      {/*  dataText={"Успешно!"}*/}
-      {/*  showError={true}*/}
-      {/*  errorText={""}*/}
-      {/*  showFail={true}*/}
-      {/*  failText={""}*/}
-      {/*/>*/}
+      <component.StoreComponent1
+        stateConstant={constant.userRecoverPasswordStore}
+        consoleLog={constant.DEBUG_CONSTANT}
+        showLoad={true}
+        loadText={""}
+        showData={true}
+        dataText={"Пользователь успешно найден или данные совпали!"}
+        showError={true}
+        errorText={""}
+        showFail={true}
+        failText={""}
+      />
+      <component.StoreComponent1
+        stateConstant={constant.userRecoverPasswordSendEmailStore}
+        consoleLog={constant.DEBUG_CONSTANT}
+        showLoad={true}
+        loadText={""}
+        showData={true}
+        dataText={"Письмо успешно отправлено!"}
+        showError={true}
+        errorText={""}
+        showFail={true}
+        failText={""}
+      />
+      <component.StoreComponent1
+        stateConstant={constant.userRecoverPasswordChangePasswordStore}
+        consoleLog={constant.DEBUG_CONSTANT}
+        showLoad={true}
+        loadText={""}
+        showData={true}
+        dataText={"Пароль успешно изменён!"}
+        showError={true}
+        errorText={""}
+        showFail={true}
+        failText={""}
+      />
       <div className="m-0 p-1">
-        {!success && !secretQuestion && !email ? (
+        {recover.stage === "First" && (
           <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
-            <form className="m-0 p-0" onSubmit={handlerSubmitFindUser}>
+            <form
+              className="m-0 p-0"
+              onSubmit={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                Check();
+              }}
+            >
               <div className="card shadow custom-background-transparent-low m-0 p-0">
-                {!captcha && (
-                  <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
-                    <i className="fa-solid fa-robot m-0 p-1" />
-                    Пройдите проверку на робота!
-                  </div>
-                )}
+                <div className="card-header m-0 p-1">
+                  <h2>Восстановить пароль от аккаунта</h2>
+                </div>
                 <div className="card-body m-0 p-0">
                   <div className="m-0 p-1">
-                    <label className="m-0 p-1">
-                      <ReCAPTCHA
-                        sitekey="6LchKGceAAAAAPh11VjsCtAd2Z1sQ8_Tr_taExbO"
-                        // @ts-ignore
-                        onChange={(e) => captchaSet(e)}
-                      />
-                    </label>
                     <label className="form-control-sm text-center w-75 m-0 p-1">
                       Введите Ваш ИИН:
                       <input
                         type="text"
                         className="form-control form-control-sm text-center m-0 p-1"
-                        value={username}
                         placeholder="введите ИИН тут..."
                         required
                         minLength={12}
                         maxLength={12}
-                        onChange={(e) =>
-                          usernameSet(
-                            e.target.value.replace(
-                              util.GetRegexType({ numbers: true }),
+                        value={recover.username}
+                        onChange={(event) =>
+                          setRecover({
+                            ...recover,
+                            username: event.target.value.replace(
+                              util.GetRegexType({
+                                numbers: true,
+                              }),
                               ""
-                            )
-                          )
+                            ),
+                          })
                         }
                         autoComplete="current-username"
                       />
@@ -242,6 +234,11 @@ export const RecoverPasswordPage = () => {
                           * длина: 12 символов
                         </small>
                       </small>
+                    </label>
+                  </div>
+                  <div className="m-0 p-1">
+                    <label className="m-0 p-1">
+                      <captcha.Captcha1 />
                     </label>
                   </div>
                 </div>
@@ -259,10 +256,8 @@ export const RecoverPasswordPage = () => {
               </div>
             </form>
           </ul>
-        ) : (
-          ""
         )}
-        {!success && (secretQuestion || email) ? (
+        {recover.stage === "Second" && (
           <div className="shadow m-0 p-0">
             <component.Accordion1
               key_target={"accordion1"}
@@ -293,7 +288,14 @@ export const RecoverPasswordPage = () => {
             <div className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 shadow m-0 p-0">
               <div className="col-6 m-0 p-0">
                 <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 justify-content-center text-center m-0 p-1">
-                  <form className="m-0 p-0" onSubmit={handlerSubmitCheckAnswer}>
+                  <form
+                    className="m-0 p-0"
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      CheckAnswer();
+                    }}
+                  >
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
                         Восстановление через секретный вопрос:
@@ -306,7 +308,8 @@ export const RecoverPasswordPage = () => {
                               Секретный вопрос:
                               <small className="custom-color-warning-1 fw-bold">
                                 <i className="fa-solid fa-message m-0 p-1" />'
-                                {`${secretQuestion}`}'
+                                <small className="lead">{`${recover.secretQuestion}`}</small>
+                                '
                               </small>
                             </div>
                             <input
@@ -316,21 +319,22 @@ export const RecoverPasswordPage = () => {
                               name="secretAnswer"
                               required
                               placeholder="введите секретный ответ тут..."
-                              value={secretAnswer}
-                              onChange={(e) =>
-                                secretAnswerSet(
-                                  e.target.value.replace(
+                              minLength={4}
+                              maxLength={32}
+                              value={recover.secretAnswer}
+                              onChange={(event) =>
+                                setRecover({
+                                  ...recover,
+                                  secretAnswer: event.target.value.replace(
                                     util.GetRegexType({
                                       numbers: true,
                                       cyrillic: true,
                                       space: true,
                                     }),
                                     ""
-                                  )
-                                )
+                                  ),
+                                })
                               }
-                              minLength={4}
-                              maxLength={32}
                             />
                             <small className="custom-color-warning-1 m-0 p-0">
                               * только кириллица
@@ -361,7 +365,11 @@ export const RecoverPasswordPage = () => {
                 <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 justify-content-center text-center m-0 p-1">
                   <form
                     className="m-0 p-0"
-                    onSubmit={handlerSubmitRecoverEmail}
+                    onSubmit={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      CheckRecoverCode();
+                    }}
                   >
                     <div className="card shadow custom-background-transparent-low m-0 p-0">
                       <div className="card-header bg-danger bg-opacity-10 text-danger m-0 p-1">
@@ -370,8 +378,11 @@ export const RecoverPasswordPage = () => {
                       <div className="card-header bg-secondary bg-opacity-10 text-muted m-0 p-1">
                         Часть почты, куда будет отправлено письмо: '
                         <small className="custom-color-warning-1">
-                          {email &&
-                            `${email.slice(0, 4)} ... ${email.slice(-5)}`}
+                          {recover.email &&
+                            `${recover.email.slice(
+                              0,
+                              4
+                            )} ... ${recover.email.slice(-5)}`}
                         </small>
                         '
                       </div>
@@ -384,15 +395,18 @@ export const RecoverPasswordPage = () => {
                               type="text"
                               id="recoverPassword"
                               name="recoverPassword"
+                              className="form-control form-control-sm text-center m-0 p-1"
                               required
                               placeholder="введите код с почты тут..."
-                              value={recoverPassword}
-                              onChange={(e) =>
-                                recoverPasswordSet(e.target.value)
-                              }
                               minLength={1}
                               maxLength={300}
-                              className="form-control form-control-sm text-center m-0 p-1"
+                              value={recover.recoverPassword}
+                              onChange={(event) =>
+                                setRecover({
+                                  ...recover,
+                                  recoverPassword: event.target.value,
+                                })
+                              }
                             />
                             <small className="custom-color-warning-1 m-0 p-0">
                               * вводить без кавычек
@@ -418,7 +432,11 @@ export const RecoverPasswordPage = () => {
                           </button>
                           <button
                             type="button"
-                            onClick={handlerSubmitSendEmail}
+                            onClick={(event) => {
+                              event.preventDefault();
+                              event.stopPropagation();
+                              SendMailCode();
+                            }}
                             className="btn btn-sm btn-danger m-1 p-2"
                           >
                             <i className="fa-solid fa-envelope m-0 p-1" />
@@ -432,12 +450,17 @@ export const RecoverPasswordPage = () => {
               </div>
             </div>
           </div>
-        ) : (
-          ""
         )}
-        {success && (
+        {recover.stage === "Third" && (
           <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
-            <form className="m-0 p-0" onSubmit={handlerRecoverPasswordSubmit}>
+            <form
+              className="m-0 p-0"
+              onSubmit={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                ChangePassword();
+              }}
+            >
               <div className="card shadow custom-background-transparent-low m-0 p-0">
                 <div className="card-body m-0 p-0">
                   <div className="m-0 p-1">
@@ -449,24 +472,25 @@ export const RecoverPasswordPage = () => {
                           type="password"
                           className="form-control form-control-sm text-center m-0 p-1"
                           id="password"
-                          value={password}
                           placeholder="введите новый пароль тут..."
                           required
-                          onChange={(e) =>
-                            passwordSet(
-                              e.target.value.replace(
+                          minLength={8}
+                          maxLength={18}
+                          autoComplete="off"
+                          value={user.password}
+                          onChange={(event) =>
+                            setUser({
+                              ...user,
+                              password: event.target.value.replace(
                                 util.GetRegexType({
                                   numbers: true,
                                   latin: true,
                                   lowerSpace: true,
                                 }),
                                 ""
-                              )
-                            )
+                              ),
+                            })
                           }
-                          minLength={8}
-                          maxLength={18}
-                          autoComplete="off"
                         />
                         <span className="">
                           <i
@@ -493,24 +517,25 @@ export const RecoverPasswordPage = () => {
                           type="password"
                           className="form-control form-control-sm text-center m-0 p-1"
                           id="password2"
-                          value={password2}
                           placeholder="введите новый пароль тут..."
                           required
-                          onChange={(e) =>
-                            password2Set(
-                              e.target.value.replace(
+                          minLength={8}
+                          maxLength={16}
+                          autoComplete="off"
+                          value={user.password2}
+                          onChange={(event) =>
+                            setUser({
+                              ...user,
+                              password2: event.target.value.replace(
                                 util.GetRegexType({
                                   numbers: true,
                                   latin: true,
                                   lowerSpace: true,
                                 }),
                                 ""
-                              )
-                            )
+                              ),
+                            })
                           }
-                          minLength={8}
-                          maxLength={16}
-                          autoComplete="off"
                         />
                         <span className="">
                           <i
@@ -543,7 +568,7 @@ export const RecoverPasswordPage = () => {
                     <button
                       className="btn btn-sm btn-warning m-1 p-2"
                       type="reset"
-                      onClick={(e) => handlerRecoverPasswordReset(e)}
+                      onClick={() => resetUser()}
                     >
                       <i className="fa-solid fa-pen-nib m-0 p-1" />
                       сбросить данные

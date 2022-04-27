@@ -581,7 +581,7 @@ export const StoreComponent1 = ({
             ? dataText
             : typeof StoreConstant.data === "string"
             ? StoreConstant.data
-            : "произошла ошибка"}
+            : "данные не подходят для отображения!"}
         </message.Message.Success>
       )}
       {showError && StoreConstant.error && (

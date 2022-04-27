@@ -124,6 +124,12 @@ urlpatterns = [
     re_path(r'^api/notification/(?P<notification_id>\d+)/$', backend_views.api_notification_id,
             name='api_notification_id'),
 
+    re_path(r'^api/user/recover/$', backend_views.api_user_recover, name='api_user_recover'),
+    re_path(r'^api/user/recover/email/$', backend_views.api_user_recover_email, name='api_user_recover_email'),
+    re_path(r'^api/user/recover/password/$', backend_views.api_user_recover_password, name='api_user_recover_password'),
+
+    re_path(r'^api/admin/export/users/$', backend_views.api_admin_export_users, name='api_admin_export_users'),
+
     re_path(r'^api/salary/$', backend_views.api_salary, name='api_salary'),
 
     re_path(r'^api/vacation/$', backend_views.api_vacation, name='api_vacation'),

@@ -943,23 +943,22 @@ export const PageLogic = () => {
   }, [userLoginStore.data]);
 
   useEffect(() => {
-    if (userDetailStore.data) {
-      if (userDetailStore.data["user_model"]) {
-        if (!CheckPageAccess(userDetailStore.data["group_model"], access)) {
-          navigate("/");
-        }
-        if (
-          userDetailStore.data["user_model"]["activity_boolean_field"] === false
-        ) {
-          dispatch(action.User.Logout());
-        }
-        if (
-          (!userDetailStore.data["user_model"]["secret_question_char_field"] ||
-            !userDetailStore.data["user_model"]["secret_answer_char_field"]) &&
-          location.pathname !== "/password/change"
-        ) {
-          navigate("/password/change");
-        }
+    if (userDetailStore.data && userDetailStore.data["user_model"]) {
+      if (!CheckPageAccess(userDetailStore.data["group_model"], access)) {
+        navigate("/");
+      }
+      if (
+        userDetailStore.data["user_model"]["activity_boolean_field"] === false
+      ) {
+        dispatch(action.User.Logout());
+      }
+      if (
+        (!userDetailStore.data["user_model"]["secret_question_char_field"] ||
+          !userDetailStore.data["user_model"]["secret_answer_char_field"]) &&
+        location.pathname !== "/password/change" &&
+        location.pathname !== "/"
+      ) {
+        navigate("/password/change");
       }
     }
   }, [userDetailStore.data]);
@@ -970,17 +969,19 @@ export const PageLogic = () => {
       function updateNotification() {
         dispatch(action.Notification.ReadList({ form: { limit: 1, page: 1 } }));
       }
+
       // const timeDelay = 10000;
       // const timeMultiply = 1;
       // for (let i = 1; i <= 10; i++) {
       //   util.Delay(() => updateNotification(), timeDelay * i * timeMultiply);
       // }
-      util.Delay(() => updateNotification(), 10000);
-      util.Delay(() => updateNotification(), 30000);
-      util.Delay(() => updateNotification(), 50000);
-      util.Delay(() => updateNotification(), 100000);
-      util.Delay(() => updateNotification(), 500000);
-      util.Delay(() => updateNotification(), 1000000);
+
+      // util.Delay(() => updateNotification(), 10000);
+      // util.Delay(() => updateNotification(), 30000);
+      // util.Delay(() => updateNotification(), 50000);
+      // util.Delay(() => updateNotification(), 100000);
+      // util.Delay(() => updateNotification(), 500000);
+      // util.Delay(() => updateNotification(), 1000000);
 
       //   let timerId;
       //   clearTimeout(timerId);

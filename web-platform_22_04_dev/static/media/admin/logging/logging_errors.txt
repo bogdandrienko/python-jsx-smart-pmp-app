@@ -730,3 +730,73 @@ None, 193.118.53.202, /, GET, , User matching query does not exist., 2022-04-27 
 000000000000, 127.0.0.1, /api/idea/, GET, , UserModel matching query does not exist., 2022-04-27 13:23:08.252956
 
 None, 65.49.20.69, /, GET, , User matching query does not exist., 2022-04-27 13:56:15.050624
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-27 18:47:23.748033
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 18:47:23.935979
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-27 18:47:25.330447
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 18:47:25.494039
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-27 18:49:05.525926
+
+None, 127.0.0.1, /api/user/recover/, POST, , User matching query does not exist., 2022-04-27 20:46:06.315927
+
+None, 127.0.0.1, /api/user/recover/, POST, , User matching query does not exist., 2022-04-27 20:54:44.318626
+
+None, 127.0.0.1, /api/user/recover/password/, POST, , 'NoneType' object has no attribute 'id', 2022-04-27 20:58:55.125307
+
+None, 127.0.0.1, /api/user/recover/password/, POST, , 'NoneType' object has no attribute 'id', 2022-04-27 21:00:14.414181
+
+None, 127.0.0.1, /api/user/recover/password/, POST, , 'NoneType' object has no attribute 'id', 2022-04-27 21:00:18.043451
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-27 21:01:20.157670
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 21:01:20.292658
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-27 21:01:21.359814
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 21:01:21.476603
+
+None, 127.0.0.1, /api/user/recover/, POST, , User matching query does not exist., 2022-04-27 21:05:46.020345
+
+None, 127.0.0.1, /api/user/recover/email/, POST, , [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-27 21:06:15.183448
+
+None, 127.0.0.1, /api/user/recover/, POST, , User matching query does not exist., 2022-04-27 21:06:22.940869
+
+None, 127.0.0.1, /api/user/recover/, POST, , list index out of range, 2022-04-27 21:07:15.562885
+
+None, 127.0.0.1, /api/user/recover/, POST, , list index out of range, 2022-04-27 21:08:50.823722
+
+None, 127.0.0.1, /api/user/recover/, POST, , list index out of range, 2022-04-27 21:08:55.061320
+
+None, 127.0.0.1, /api/user/recover/email/, POST, , [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-27 21:11:15.713862
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-27 21:16:23.613379
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 21:16:23.742372
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-27 21:16:24.995931
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 21:16:25.101930
+
+None, 127.0.0.1, /api/user/recover/email/, POST, , [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-27 21:18:42.991546
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-27 21:26:11.487855
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 21:26:11.674265
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-27 21:26:12.850919
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 21:26:12.984122
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-27 21:26:15.969075
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 21:26:16.089442
+
+000000000000, 127.0.0.1, /api/admin/export/users/, GET, , [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/users/__init__', 2022-04-27 21:43:48.005778
+
+000000000000, 127.0.0.1, /api/admin/export/users/, GET, , [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/users/__init__', 2022-04-27 21:45:56.419419
+
+000000000000, 127.0.0.1, /api/admin/export/users/, GET, , [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/users/__init__', 2022-04-27 21:46:22.359134

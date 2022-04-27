@@ -95,8 +95,25 @@ export const userRecoverPasswordStore = util.StoreReducerConstructorUtility(
   connectReducer
 );
 
+export const userRecoverPasswordSendEmailStore =
+  util.StoreReducerConstructorUtility(
+    "userRecoverPasswordSendEmailStore",
+    connectReducer
+  );
+
+export const userRecoverPasswordChangePasswordStore =
+  util.StoreReducerConstructorUtility(
+    "userRecoverPasswordChangePasswordStore",
+    connectReducer
+  );
+
 export const UsersReadListStore = util.StoreReducerConstructorUtility(
   "UsersReadListStore",
+  connectReducer
+);
+
+export const adminExportUsersStore = util.StoreReducerConstructorUtility(
+  "adminExportUsersStore",
   connectReducer
 );
 

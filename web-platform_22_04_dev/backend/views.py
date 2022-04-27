@@ -3935,7 +3935,6 @@ def sleep(multiply=1.0, stop=0):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-# @permission_classes([IsAuthenticated])
 @permission_classes([AllowAny])
 def api_user(request):
     """
@@ -3977,6 +3976,461 @@ def api_user(request):
                             "x-total-count": len(users)
                         }
                     }
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+
+                    sleep(3)
+
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([AllowAny])
+def api_user_recover(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    username = req_inst.get_value(key="username", default='')
+                    secret_answer = req_inst.get_value(key="secretAnswer", default='')
+                    recover_password = req_inst.get_value(key="recoverPassword", default='')
+
+                    # TODO action ######################################################################################
+
+                    response = {"error": "ошибка действия!"}
+
+                    if not secret_answer and not recover_password:
+                        user_model = backend_models.UserModel.objects.get(
+                            user_foreign_key_field=User.objects.get(username=username)
+                        )
+                        if user_model.temp_password_boolean_field:
+                            response = {"error": {"Пользователь ещё ни разу не менял пароль!"}}
+                        else:
+                            response = {"response": {
+                                "username": str(user_model.user_foreign_key_field.username),
+                                "secretQuestion": str(user_model.secret_question_char_field),
+                                "email": str(user_model.email_field),
+                                "stage": "Second",
+                            }}
+                    elif secret_answer:
+                        user_model = backend_models.UserModel.objects.get(
+                            user_foreign_key_field=User.objects.get(username=username)
+                        )
+                        if str(secret_answer).strip().lower() == \
+                                str(user_model.secret_answer_char_field).strip().lower():
+                            response = {"response": {
+                                "username": user_model.user_foreign_key_field.username,
+                                "stage": "Third",
+                            }}
+                        else:
+                            response = {"error": "Секретный ответ не совпадает!"}
+                    elif recover_password:
+                        user_model = backend_models.UserModel.objects.get(
+                            user_foreign_key_field=User.objects.get(username=username)
+                        )
+                        decrypt_text = backend_service.EncryptingClass.decrypt_text(
+                            recover_password, user_model.password_char_field
+                        )
+                        text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M')}_" \
+                               f"{user_model.password_char_field[-1]}" \
+                               f" {str(user_model.user_foreign_key_field)}{user_model.password_char_field} "
+                        time1 = int(
+                            decrypt_text.split('_')[0].split('T')[1].split(":")[0] +
+                            decrypt_text.split('_')[0].split('T')[1].split(":")[1]
+                        )
+                        time2 = int(
+                            text.split('_')[0].split('T')[1].split(":")[0] +
+                            text.split('_')[0].split('T')[1].split(":")[1]
+                        )
+                        if time1 - time2 > -60:
+                            if str(decrypt_text.split('_')[1]).strip() == str(text.split('_')[1]).strip():
+                                response = {"response": {
+                                    "username": user_model.user_foreign_key_field.username,
+                                    "stage": "Third",
+                                }}
+                            else:
+                                response = {"error": "Код не верный!"}
+                        else:
+                            response = {"error": "Код не верный или просрочен!"}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([AllowAny])
+def api_user_recover_email(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    username = req_inst.get_value(key="username", default='')
+
+                    # TODO action ######################################################################################
+
+                    user_model = backend_models.UserModel.objects.get(
+                        user_foreign_key_field=User.objects.get(username=username)
+                    )
+                    access_count = 0
+                    for log in backend_models.LoggingModel.objects.filter(
+                            username_slug_field=username,
+                            ip_genericipaddress_field=req_inst.ip,
+                            request_path_slug_field=req_inst.path,
+                            request_method_slug_field=f"{req_inst.method} | {req_inst.action_type}",
+                            error_text_field="-",
+                    ):
+                        if (log.created_datetime_field +
+                            datetime.timedelta(hours=6, minutes=3)).strftime('%Y-%m-%d %H:%M') \
+                                >= (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
+                            access_count += 1
+                    if access_count < 1:
+                        backend_models.LoggingModel.objects.create(
+                            username_slug_field=username,
+                            ip_genericipaddress_field=req_inst.ip,
+                            request_path_slug_field=req_inst.path,
+                            request_method_slug_field=f"{req_inst.method} | {req_inst.action_type}",
+                            error_text_field="-",
+                        )
+                        text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M')}_" \
+                               f"{user_model.password_char_field[-1]} {str(user_model.user_foreign_key_field)}" \
+                               f"{user_model.password_char_field}"
+                        encrypt_text = backend_service.EncryptingClass.encrypt_text(
+                            text,
+                            '31284'
+                        )
+                        subject = 'Восстановление пароля от веб платформы'
+                        message_s = f'{user_model.first_name_char_field} {user_model.last_name_char_field}, ' \
+                                    f'перейдите по ссылке: https://web.km.kz/recover_password => войти => ' \
+                                    f'восстановить доступ к аккаунту => введите Ваш ИИН и затем в окне восстановления' \
+                                    f' через почту введите этот код восстановления (без кавычек): "{encrypt_text}". ' \
+                                    f'Внимание! Этот код действует в течении часа с момента отправки!'
+                        if subject and message_s and user_model.email_field:
+                            send_mail(
+                                subject,
+                                message_s,
+                                "kostanayminerals@web.km.kz",
+                                [user_model.email_field, ''],
+                                fail_silently=False
+                            )
+                        response = {
+                            "response":
+                                {"username": str(user_model.user_foreign_key_field.username),
+                                 "secret_question_char_field": str(user_model.secret_question_char_field),
+                                 "email_field": str(user_model.email_field),
+                                 "success": False}
+                        }
+                    else:
+                        response = {"error": "Внимание, отправлять письмо можно не чаще раза в 3 минуты!"}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([AllowAny])
+def api_user_recover_password(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    username = req_inst.get_value(key="username", default='')
+                    secret_question = req_inst.get_value(key="secretQuestion", default='')
+                    secret_answer = req_inst.get_value(key="secretAnswer", default='')
+                    email = req_inst.get_value(key="email", default=None)
+                    password = req_inst.get_value(key="password", default='')
+                    password2 = req_inst.get_value(key="password2", default='')
+
+                    # TODO action ######################################################################################
+
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    if len(password) < 1:
+                        response = {"error": "Пароль пустой!"}
+                    elif password != password2:
+                        response = {"error": "Пароли не совпадают!"}
+                    elif password == user_model.password_char_field:
+                        response = {"error": "Пароль такой же как и предыдущий!"}
+                    else:
+                        user.set_password(password)
+                        user.save()
+                        user_model.password_char_field = password
+                        user_model.temp_password_boolean_field = False
+                        user_model.secret_question_char_field = secret_question
+                        user_model.secret_answer_char_field = secret_answer
+                        user_model.email_field = email
+                        user_model.save()
+                        response = {"response": "Изменение успешно проведено."}
+
+                    # TODO response ####################################################################################
+
+                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    return Response(response)
+                except Exception as error:
+                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "Произошла ошибка!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([IsAuthenticated])
+def api_admin_export_users(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO action ######################################################################################
+
+                    key = backend_service.UtilsClass.create_encrypted_password(
+                        _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
+                        _length=24
+                    )
+                    date = backend_service.DateTimeUtils.get_current_date()
+                    path = 'media/data/temp/users'
+                    file_name = f"users_{key}_{date}.xlsx"
+                    workbook = openpyxl.Workbook()
+                    sheet = workbook.active
+
+                    # Delete old files
+                    #######################################################
+                    for root, dirs, files in os.walk(f"static/{path}", topdown=True):
+                        for file in files:
+                            try:
+                                date_file = str(file).strip().split('.')[0].strip().split('_')[-1]
+                                if date != date_file:
+                                    os.remove(f'{path}/{file}')
+                            except Exception as error:
+                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    #######################################################
+
+                    users = User.objects.filter(is_superuser=False)
+
+                    def set_value(_col: Union[str, int], _row: Union[str, int], _value, _sheet):
+                        if isinstance(_col, int):
+                            _col = get_column_letter(_col)
+                        if isinstance(_row, str):
+                            _row = str(_row)
+                        if isinstance(_value, bool):
+                            if _value:
+                                _value = "true"
+                            else:
+                                _value = "false"
+                        if _value is None:
+                            _value = ""
+                        _sheet[str(_col).upper() + str(_row)] = str(_value)
+
+                    titles = ['Подразделение', 'Цех/Служба', 'Отдел/Участок', 'Фамилия', 'Имя', 'Отчество',
+                              'Табельный номер', 'Должность', 'Категория работника', 'Имя пользователя',
+                              'Пароль аккаунта', 'Активность аккаунта', 'Доступ к панели управления',
+                              'Права суперпользователя', 'Временный пароль', 'Группы доступа', 'Электронная почта',
+                              'Секретный вопрос', 'Секретный ответ']
+                    for title in titles:
+                        set_value(_col=titles.index(title) + 1, _row=1, _value=title, _sheet=sheet)
+                    _index = 1
+                    for user in users:
+                        try:
+                            _index += 1
+                            user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
+
+                            subdivision_char_field = user_model.subdivision_char_field
+                            set_value(_col="A", _row=_index, _value=subdivision_char_field, _sheet=sheet)
+
+                            workshop_service_char_field = user_model.workshop_service_char_field
+                            set_value(_col="B", _row=_index, _value=workshop_service_char_field,
+                                      _sheet=sheet)
+
+                            department_site_char_field = user_model.department_site_char_field
+                            set_value(_col="C", _row=_index, _value=department_site_char_field,
+                                      _sheet=sheet)
+
+                            last_name_char_field = user_model.last_name_char_field
+                            set_value(_col="D", _row=_index, _value=last_name_char_field, _sheet=sheet)
+
+                            first_name_char_field = user_model.first_name_char_field
+                            set_value(_col="E", _row=_index, _value=first_name_char_field, _sheet=sheet)
+
+                            patronymic_char_field = user_model.patronymic_char_field
+                            set_value(_col="F", _row=_index, _value=patronymic_char_field, _sheet=sheet)
+
+                            personnel_number_slug_field = user_model.personnel_number_slug_field
+                            set_value(_col="G", _row=_index, _value=personnel_number_slug_field,
+                                      _sheet=sheet)
+
+                            position_char_field = user_model.position_char_field
+                            set_value(_col="H", _row=_index, _value=position_char_field, _sheet=sheet)
+
+                            category_char_field = user_model.category_char_field
+                            set_value(_col="I", _row=_index, _value=category_char_field, _sheet=sheet)
+
+                            username = user.username
+                            set_value(_col="J", _row=_index, _value=username, _sheet=sheet)
+
+                            password_char_field = user_model.password_char_field
+                            set_value(_col="K", _row=_index, _value=password_char_field, _sheet=sheet)
+
+                            is_active = user_model.activity_boolean_field
+                            set_value(_col="L", _row=_index, _value=is_active, _sheet=sheet)
+
+                            is_staff = user.is_staff
+                            set_value(_col="M", _row=_index, _value=is_staff, _sheet=sheet)
+
+                            is_superuser = user.is_superuser
+                            set_value(_col="N", _row=_index, _value=is_superuser, _sheet=sheet)
+
+                            is_temp_password = user_model.temp_password_boolean_field
+                            set_value(_col="O", _row=_index, _value=is_temp_password, _sheet=sheet)
+
+                            group_models = backend_models.GroupModel.objects.filter(user_many_to_many_field=user_model)
+                            groups = ""
+                            for group_model in group_models:
+                                groups += f"{str(group_model.name_slug_field).lower().strip()}, "
+                            groups = groups[:-2]
+                            set_value(_col="P", _row=_index, _value=groups, _sheet=sheet)
+
+                            email_field = user_model.email_field
+                            set_value(_col="Q", _row=_index, _value=email_field, _sheet=sheet)
+
+                            secret_question_char_field = user_model.secret_question_char_field
+                            set_value(_col="R", _row=_index, _value=secret_question_char_field,
+                                      _sheet=sheet)
+
+                            secret_answer_char_field = user_model.secret_answer_char_field
+                            set_value(_col="S", _row=_index, _value=secret_answer_char_field, _sheet=sheet)
+                        except Exception as error:
+                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    # Set font
+                    #######################################################
+                    font_b = Font(name='Arial', size=8, bold=False)
+                    for row in range(1, _index + 1):
+                        for col in [get_column_letter(x) for x in range(1, 30 + 1)]:
+                            cell = sheet[f'{col}{row}']
+                            cell.font = font_b
+                    #######################################################
+
+                    # Height and width styles
+                    #######################################################
+                    for col in [get_column_letter(x) for x in range(1, 30 + 1)]:
+                        width = 1
+                        for row in range(1, _index + 1):
+                            cell = sheet[f'{col}{row}']
+                            value = len(str(cell.value))
+                            if value > width:
+                                width = value
+                        sheet.column_dimensions[col].height = 1
+                        sheet.column_dimensions[col].width = round((width * 0.95), 3)
+                    #######################################################
+
+                    try:
+                        backend_service.ExcelClass.workbook_save(
+                            workbook=workbook,
+                            excel_file=f"static/{path}/{file_name}"
+                        )
+                    except Exception as error:
+                        pass
+                    response = {"response": {"excel": f"static/{path}/{file_name}"}}
 
                     # TODO response ####################################################################################
 
@@ -4378,25 +4832,37 @@ def api_user_password_change(request):
             if req_inst.action_type == "":
                 try:
 
+                    # TODO get_value ###################################################################################
+
                     secret_question = req_inst.get_value(key="secretQuestion", default='')
                     secret_answer = req_inst.get_value(key="secretAnswer", default='')
                     email = req_inst.get_value(key="email", default=None)
                     password = req_inst.get_value(key="password", default='')
-
-                    user_model = req_inst.user_model
-                    user_model.secret_question_char_field = secret_question
-                    user_model.secret_answer_char_field = secret_answer
-                    user_model.email_field = email
-                    user_model.password_char_field = password
-                    user_model.save()
-
-                    user = req_inst.user
-                    user.set_password(password)
-                    user.save()
+                    password2 = req_inst.get_value(key="password2", default='')
 
                     # TODO action ######################################################################################
 
-                    response = {"response": "Данные успешно изменены!"}
+                    user = User.objects.get(id=req_inst.user.id)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    if len(password) < 1:
+                        response = {"error": "Пароль пустой!"}
+                    elif password != password2:
+                        response = {"error": "Пароли не совпадают!"}
+                    elif password == user_model.password_char_field:
+                        response = {"error": "Пароль такой же как и предыдущий!"}
+                    else:
+                        user.set_password(password)
+                        user.save()
+                        user_model.password_char_field = password
+                        user_model.temp_password_boolean_field = False
+                        if secret_question and secret_question != user_model.secret_question_char_field:
+                            user_model.secret_question_char_field = secret_question
+                        if secret_answer and secret_answer != user_model.secret_answer_char_field:
+                            user_model.secret_answer_char_field = secret_answer
+                        if email and email != user_model.email_field:
+                            user_model.email_field = email
+                        user_model.save()
+                        response = {"response": "Изменение успешно проведено."}
 
                     # TODO response ####################################################################################
 

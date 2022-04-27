@@ -31,6 +31,8 @@ import { IdeaSelfListPage } from "../pages/3_progress/IdeaSelfListPage";
 import { SalaryPage } from "../pages/4_buh/SalaryPage";
 import { VacationPage } from "../pages/5_sup/VacationPage";
 import { IdeaRatingListPage } from "../pages/3_progress/IdeaRatingListPage";
+import { TestPage } from "../pages/7_develop/TestPage";
+import { ExportUsersPage } from "../pages/6_moderate/ExportUsersPage";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -715,13 +717,16 @@ export const modules = [
           },
           {
             Header: "Выгрузить список пользователей",
-            Access: [""],
+            Access: ["superuser"],
             Active: true,
-            Link: "/admin_export_users",
+            Link: "/admin/export/users",
             ExternalLink: false,
             ShowLink: true,
             Title: "Выгрузить список пользователей",
             Description: "страница выгрузки всех пользователей системы",
+            path: "/admin/export/users",
+            element: <ExportUsersPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-dark",
@@ -754,18 +759,18 @@ export const modules = [
   },
   {
     Header: "Разработка",
-    Access: [""],
+    Access: ["superuser"],
     Image: "/static/img/modules/earth.png",
     ShowInModules: false,
     Sections: [
       {
         Header: "web version",
-        Access: [""],
+        Access: ["superuser"],
         Image: "/static/img/modules/earth.png",
         Links: [
           {
-            Header: "03.04.22 12:00",
-            Access: [""],
+            Header: "27.04.22 19:42",
+            Access: ["superuser"],
             Active: false,
             Link: "#",
             ExternalLink: false,
@@ -779,13 +784,16 @@ export const modules = [
           },
           {
             Header: "Test",
-            Access: [""],
+            Access: ["superuser"],
             Active: true,
             Link: "/test",
             ExternalLink: false,
             ShowLink: true,
             Title: "Test",
             Description: "test",
+            path: "/test",
+            element: <TestPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-dark",
