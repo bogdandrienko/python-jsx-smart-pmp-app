@@ -552,7 +552,8 @@ export const StoreComponent1 = ({
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <div key={`${new Date().getMilliseconds()}`} className="m-0 p-0">
+    // <div key={`${new Date().getMilliseconds()}`} className="m-0 p-0">
+    <div className="m-0 p-0">
       {showLoad &&
         StoreConstant.load &&
         (loadText ? (
@@ -831,11 +832,11 @@ export const ModulesComponent = () => {
                                                             {"  "}
                                                             {link.Header ===
                                                               "Уведомления" &&
-                                                              NotificationReadListStore.data &&
+                                                              (NotificationReadListStore.data &&
                                                               NotificationReadListStore
                                                                 .data.list
-                                                                .length > 0 && (
-                                                                <span className="badge rounded-pill text-danger m-0 p-1">
+                                                                .length > 0 ? (
+                                                                <span className="m-0 p-1">
                                                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                                                   {
                                                                     NotificationReadListStore
@@ -844,7 +845,12 @@ export const ModulesComponent = () => {
                                                                     ]
                                                                   }
                                                                 </span>
-                                                              )}
+                                                              ) : (
+                                                                <span className="m-0 p-1">
+                                                                  <i className="fa-solid fa-bell text-muted m-0 p-1" />
+                                                                  0
+                                                                </span>
+                                                              ))}
                                                           </small>
                                                         </Nav.Link>
                                                       </LinkContainer>

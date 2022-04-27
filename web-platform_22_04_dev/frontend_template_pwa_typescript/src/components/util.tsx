@@ -16,6 +16,7 @@ import * as action from "./action";
 import * as constant from "./constant";
 import * as router from "./router";
 import * as hook from "./hook";
+import * as util from "./util";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -960,6 +961,38 @@ export const PageLogic = () => {
           navigate("/password/change");
         }
       }
+    }
+  }, [userDetailStore.data]);
+
+  useEffect(() => {
+    if (userLoginStore.data && userDetailStore.data) {
+      // @ts-ignore
+      function updateNotification() {
+        dispatch(action.Notification.ReadList({ form: { limit: 1, page: 1 } }));
+      }
+      // const timeDelay = 10000;
+      // const timeMultiply = 1;
+      // for (let i = 1; i <= 10; i++) {
+      //   util.Delay(() => updateNotification(), timeDelay * i * timeMultiply);
+      // }
+      util.Delay(() => updateNotification(), 10000);
+      util.Delay(() => updateNotification(), 30000);
+      util.Delay(() => updateNotification(), 50000);
+      util.Delay(() => updateNotification(), 100000);
+      util.Delay(() => updateNotification(), 500000);
+      util.Delay(() => updateNotification(), 1000000);
+
+      //   let timerId;
+      //   clearTimeout(timerId);
+      //   timerId = setTimeout(
+      //     function tick() {
+      //       dispatch(
+      //         action.Notification.ReadList({ form: { limit: 1, page: 1 } })
+      //       );
+      //       timerId = setTimeout(tick, constant.DEBUG_CONSTANT ? 10000 : 30000);
+      //     },
+      //     constant.DEBUG_CONSTANT ? 10000 : 30000
+      //   );
     }
   }, [userDetailStore.data]);
 

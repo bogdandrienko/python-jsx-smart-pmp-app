@@ -35,13 +35,10 @@ export const IdeaCreatePage = () => {
     description: "",
     moderate: "на модерации",
   });
+
   const [isModalCreateVisible, setIsModalCreateVisible] = useState(false);
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  useEffect(() => {
-    dispatch({ type: constant.IdeaCreateStore.reset });
-  }, []);
 
   useEffect(() => {
     if (IdeaCreateStore.data) {
@@ -51,6 +48,10 @@ export const IdeaCreatePage = () => {
       }, 10000);
     }
   }, [IdeaCreateStore.data]);
+
+  useEffect(() => {
+    dispatch({ type: constant.IdeaCreateStore.reset });
+  }, []);
 
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 

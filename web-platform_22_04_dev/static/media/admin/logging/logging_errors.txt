@@ -706,3 +706,27 @@ None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 202
 None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-26 18:52:18.140997
 
 error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-04-26 18:53:43.014504
+
+None, 193.107.216.102, /, GET, , User matching query does not exist., 2022-04-27 05:40:01.470232
+
+None, 23.90.160.122, /, GET, , User matching query does not exist., 2022-04-27 06:59:12.462136
+
+None, 104.152.52.14, /, GET, , User matching query does not exist., 2022-04-27 09:59:02.971003
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-27 10:35:31.364663
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 10:35:31.824484
+
+None, 213.226.123.30, /, GET, , User matching query does not exist., 2022-04-27 11:12:48.967757
+
+None, 193.118.53.202, /, GET, , User matching query does not exist., 2022-04-27 11:29:56.155725
+
+000000000000, 127.0.0.1, /api/idea/, GET, , UserModel matching query does not exist., 2022-04-27 13:22:18.562811
+
+000000000000, 127.0.0.1, /api/idea/, GET, , UserModel matching query does not exist., 2022-04-27 13:22:49.711651
+
+000000000000, 127.0.0.1, /api/idea/, GET, , UserModel matching query does not exist., 2022-04-27 13:23:00.892637
+
+000000000000, 127.0.0.1, /api/idea/, GET, , UserModel matching query does not exist., 2022-04-27 13:23:08.252956
+
+None, 65.49.20.69, /, GET, , User matching query does not exist., 2022-04-27 13:56:15.050624

@@ -3927,7 +3927,7 @@ def api_post_id(request, post_id):
 
 
 def sleep(multiply=1.0, stop=0):
-    multiply = multiply / 0.75
+    multiply = multiply / 2
     if stop:
         time.sleep(multiply)
     else:
@@ -3982,7 +3982,7 @@ def api_user(request):
 
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
 
-                    time.sleep(3)
+                    sleep(3)
 
                     return Response(response)
                 except Exception as error:
@@ -4131,7 +4131,7 @@ def api_user_ratings(request):
 
                     backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
 
-                    time.sleep(3)
+                    sleep(3)
 
                     return Response(response)
                 except Exception as error:
@@ -5446,7 +5446,7 @@ def api_idea(request):
                             ideas_arr = []
                             for idea in ideas:
                                 ratings = backend_models.IdeaRatingModel.objects.filter(
-                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                    idea_foreign_key_field=idea
                                 )
                                 if ratings.count() <= 0:
                                     rate = 0
@@ -5454,15 +5454,16 @@ def api_idea(request):
                                     rate = 0
                                     for i in ratings:
                                         rate += i.rating_integer_field
-                                    rate = round(rate / ideas.count(), 2)
+                                    rate = round(rate / ratings.count(), 3)
                                 ideas_arr.append([rate, idea])
+
                             ideas_arr.sort(key=lambda x: x[0], reverse=True)
                             ideas = [x[1] for x in ideas_arr]
                         elif sort == "рейтингу (популярные в конце)":
                             ideas_arr = []
                             for idea in ideas:
                                 ratings = backend_models.IdeaRatingModel.objects.filter(
-                                    idea_foreign_key_field=backend_models.IdeaModel.objects.get(id=idea.id)
+                                    idea_foreign_key_field=idea
                                 )
                                 if ratings.count() <= 0:
                                     rate = 0
@@ -5470,7 +5471,7 @@ def api_idea(request):
                                     rate = 0
                                     for i in ratings:
                                         rate += i.rating_integer_field
-                                    rate = round(rate / ideas.count(), 2)
+                                    rate = round(rate / ratings.count(), 3)
                                 ideas_arr.append([rate, idea])
                             ideas_arr.sort(key=lambda x: x[0], reverse=False)
                             ideas = [x[1] for x in ideas_arr]

@@ -29,7 +29,7 @@ export const IdeaPublicListPage = () => {
 
   const dispatch = useDispatch();
 
-  const [paginationIdea, setPaginationIdea] = useState({
+  const [pagination, setPagination] = useState({
     page: 1,
     limit: 9,
     detailView: true,
@@ -47,24 +47,16 @@ export const IdeaPublicListPage = () => {
     place: "",
     description: "",
     moderate: "принято",
+    onlyMonth: false,
   });
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [paginationIdea.page]);
-
-  useEffect(() => {
-    setPaginationIdea({ ...paginationIdea, page: 1 });
-    dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [paginationIdea.limit]);
-
-  useEffect(() => {
     if (!IdeaReadListStore.data) {
       dispatch(
         action.Idea.ReadList({
-          form: { ...filter, ...paginationIdea },
+          form: { ...filter, ...pagination },
         })
       );
     }
@@ -77,20 +69,18 @@ export const IdeaPublicListPage = () => {
   }, [UsersReadListStore.data]);
 
   useEffect(() => {
+    dispatch({ type: constant.IdeaReadListStore.reset });
     dispatch({ type: constant.UsersReadListStore.reset });
   }, []);
 
-  // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // @ts-ignore
-  const ResetList = (event) => {
-    try {
-      event.preventDefault();
-      event.stopPropagation();
-    } catch (error) {}
-    setPaginationIdea({ ...paginationIdea, page: 1 });
+  useEffect(() => {
     dispatch({ type: constant.IdeaReadListStore.reset });
-  };
+  }, [pagination.page]);
+
+  useEffect(() => {
+    setPagination({ ...pagination, page: 1 });
+    dispatch({ type: constant.IdeaReadListStore.reset });
+  }, [pagination.limit]);
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -110,56 +100,44 @@ export const IdeaPublicListPage = () => {
       >
         {
           <ul className="row-cols-auto row-cols-sm-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
-            <form className="m-0 p-0" onSubmit={ResetList}>
+            <form
+              className="m-0 p-0"
+              onSubmit={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                setPagination({ ...pagination, page: 1 });
+                dispatch({ type: constant.IdeaReadListStore.reset });
+              }}
+            >
               <div className="card shadow custom-background-transparent-hard m-0 p-0">
                 <div className="card-header m-0 p-0">
-                  <label className="lead m-0 p-1">
-                    <i className="fa-solid fa-filter" /> Выберите нужные
-                    настройки фильтрации и сортировки, затем нажмите кнопку{" "}
-                    <p className="fw-bold text-primary m-0 p-0">
-                      "фильтровать"
-                    </p>
-                  </label>
-                  <label className="form-control-sm form-switch text-center m-0 p-1">
-                    Детальное отображение:
-                    <input
-                      type="checkbox"
-                      className="form-check-input m-0 p-1"
-                      id="flexSwitchCheckDefault"
-                      checked={paginationIdea.detailView}
-                      onChange={() =>
-                        setPaginationIdea({
-                          ...paginationIdea,
-                          detailView: !paginationIdea.detailView,
-                        })
-                      }
-                    />
-                  </label>
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Количество идей на странице:
-                    <select
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={paginationIdea.limit}
-                      onChange={(event) =>
-                        setPaginationIdea({
-                          ...paginationIdea,
-                          // @ts-ignore
-                          limit: event.target.value,
-                        })
-                      }
-                    >
-                      <option disabled defaultValue={""} value="">
-                        количество на странице
-                      </option>
-                      <option value="9">9</option>
-                      <option value="18">18</option>
-                      <option value="36">36</option>
-                      <option value="-1">все</option>
-                    </select>
-                  </label>
-                </div>
-                <div className="card-body m-0 p-0">
                   <div className="m-0 p-0">
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Сортировка по:
+                      <select
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={filter.sort}
+                        onChange={(e) =>
+                          setFilter({
+                            ...filter,
+                            sort: e.target.value,
+                          })
+                        }
+                      >
+                        <option value="дате публикации (свежие в начале)">
+                          дате публикации (свежие в начале)
+                        </option>
+                        <option value="дате публикации (свежие в конце)">
+                          дате публикации (свежие в конце)
+                        </option>
+                        <option value="названию (с начала алфавита)">
+                          названию (с начала алфавита)
+                        </option>
+                        <option value="названию (с конца алфавита)">
+                          названию (с конца алфавита)
+                        </option>
+                      </select>
+                    </label>
                     <label className="form-control-sm text-center m-0 p-1">
                       Подразделение:
                       <select
@@ -301,7 +279,7 @@ export const IdeaPublicListPage = () => {
                     <component.StoreComponent1
                       stateConstant={constant.UsersReadListStore}
                       consoleLog={constant.DEBUG_CONSTANT}
-                      showLoad={true}
+                      showLoad={false}
                       loadText={""}
                       showData={false}
                       dataText={""}
@@ -335,42 +313,16 @@ export const IdeaPublicListPage = () => {
                         }
                       />
                     </label>
-                    <label className="form-control-sm text-center m-0 p-1">
-                      Сортировка по:
-                      <select
-                        className="form-control form-control-sm text-center m-0 p-1"
-                        value={filter.sort}
-                        onChange={(e) =>
-                          setFilter({
-                            ...filter,
-                            sort: e.target.value,
-                          })
-                        }
-                      >
-                        <option value="дате публикации (свежие в начале)">
-                          дате публикации (свежие в начале)
-                        </option>
-                        <option value="дате публикации (свежие в конце)">
-                          дате публикации (свежие в конце)
-                        </option>
-                        <option value="названию (с начала алфавита)">
-                          названию (с начала алфавита)
-                        </option>
-                        <option value="названию (с конца алфавита)">
-                          названию (с конца алфавита
-                        </option>
-                      </select>
-                    </label>
                   </div>
                 </div>
-                <div className="card-footer m-0 p-0">
+                <div className="card-body m-0 p-0">
                   <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                     <button
                       className="btn btn-sm btn-primary m-1 p-2"
                       type="submit"
                     >
                       <i className="fa-solid fa-circle-check m-0 p-1" />
-                      фильтровать идеи
+                      обновить данные
                     </button>
                     <button
                       className="btn btn-sm btn-warning m-1 p-2"
@@ -382,31 +334,82 @@ export const IdeaPublicListPage = () => {
                     </button>
                   </ul>
                 </div>
+
+                <div className="card-footer text-end m-0 p-0">
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Количество идей на странице:
+                    <select
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      value={pagination.limit}
+                      onChange={(event) =>
+                        setPagination({
+                          ...pagination,
+                          // @ts-ignore
+                          limit: event.target.value,
+                        })
+                      }
+                    >
+                      <option disabled defaultValue={""} value="">
+                        количество на странице
+                      </option>
+                      <option value="9">9</option>
+                      <option value="18">18</option>
+                      <option value="36">36</option>
+                      <option value="-1">все</option>
+                    </select>
+                  </label>
+                  <label className="form-control-sm form-switch text-center m-0 p-1">
+                    Детальное отображение:
+                    <input
+                      type="checkbox"
+                      className="form-check-input m-0 p-1"
+                      id="flexSwitchCheckDefault"
+                      checked={pagination.detailView}
+                      onChange={() =>
+                        setPagination({
+                          ...pagination,
+                          detailView: !pagination.detailView,
+                        })
+                      }
+                    />
+                  </label>
+                </div>
               </div>
             </form>
           </ul>
         }
       </component.Accordion1>
-
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={paginationIdea.limit}
-          page={paginationIdea.page}
+          limit={pagination.limit}
+          page={pagination.page}
           // @ts-ignore
           changePage={(page) =>
-            setPaginationIdea({
-              ...paginationIdea,
+            setPagination({
+              ...pagination,
               page: page,
             })
           }
         />
       )}
+      <component.StoreComponent1
+        stateConstant={constant.IdeaReadListStore}
+        consoleLog={constant.DEBUG_CONSTANT}
+        showLoad={true}
+        loadText={""}
+        showData={false}
+        dataText={""}
+        showError={true}
+        errorText={""}
+        showFail={true}
+        failText={""}
+      />
       {!IdeaReadListStore.load && IdeaReadListStore.data ? (
         IdeaReadListStore.data.list.length > 0 ? (
           <div className={"m-0 p-0"}>
             {" "}
-            {paginationIdea.detailView ? (
+            {pagination.detailView ? (
               <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
                 {IdeaReadListStore.data.list.map(
                   // @ts-ignore
@@ -800,6 +803,14 @@ export const IdeaPublicListPage = () => {
                           " " + idea["user_model"]["first_name_char_field"],
                           20
                         )}
+                        {util.GetSliceString(
+                          " | " + idea["ratings"]["total_rate"],
+                          20
+                        )}
+                        {util.GetSliceString(
+                          " / " + idea["ratings"]["count"],
+                          20
+                        )}
                       </li>
                     </Link>
                   )
@@ -816,27 +827,15 @@ export const IdeaPublicListPage = () => {
       ) : (
         ""
       )}
-      <component.StoreComponent1
-        stateConstant={constant.IdeaReadListStore}
-        consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
-        showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
-      />
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={paginationIdea.limit}
-          page={paginationIdea.page}
+          limit={pagination.limit}
+          page={pagination.page}
           // @ts-ignore
           changePage={(page) =>
-            setPaginationIdea({
-              ...paginationIdea,
+            setPagination({
+              ...pagination,
               page: page,
             })
           }

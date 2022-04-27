@@ -15,8 +15,8 @@ import * as util from "../../components/util";
 
 import * as base from "../../components/ui/base";
 import * as modal from "../../components/ui/modal";
-import * as select from "../../components/ui/select";
 import * as paginator from "../../components/ui/paginator";
+import * as message from "../../components/ui/message";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -43,7 +43,7 @@ export const IdeaPublicPage = () => {
   const id = useParams().id;
 
   const [paginationComment, setPaginationComment, resetPaginationComment] =
-    hook.useStateCustom1({ page: 1, limit: 10 });
+    hook.useStateCustom1({ page: 1, limit: 5 });
 
   // Notification Modal
   const [isModalNotificationVisible, setIsModalNotificationVisible] =
@@ -86,13 +86,12 @@ export const IdeaPublicPage = () => {
   }, [IdeaRatingReadListStore.data]);
 
   useEffect(() => {
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-  }, [paginationComment.page]);
+    resetState();
+  }, []);
 
   useEffect(() => {
-    setPaginationComment({ ...paginationComment, page: 1 });
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-  }, [paginationComment.limit]);
+    resetState();
+  }, [id]);
 
   useEffect(() => {
     if (IdeaCommentCreateStore.data || IdeaRatingCreateStore.data) {
@@ -101,8 +100,13 @@ export const IdeaPublicPage = () => {
   }, [IdeaCommentCreateStore.data, IdeaRatingCreateStore.data]);
 
   useEffect(() => {
-    resetState();
-  }, [id]);
+    dispatch({ type: constant.IdeaCommentReadListStore.reset });
+  }, [paginationComment.page]);
+
+  useEffect(() => {
+    setPaginationComment({ ...paginationComment, page: 1 });
+    dispatch({ type: constant.IdeaCommentReadListStore.reset });
+  }, [paginationComment.limit]);
 
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -116,11 +120,7 @@ export const IdeaPublicPage = () => {
     dispatch({ type: constant.IdeaCommentDeleteStore.reset });
   };
 
-  // @ts-ignore
-  const handlerCommentCreateSubmit = async (event) => {
-    try {
-      event.preventDefault();
-    } catch (error) {}
+  const CreateComment = () => {
     dispatch(
       action.IdeaComment.Create({
         idea_id: id,
@@ -129,41 +129,29 @@ export const IdeaPublicPage = () => {
         },
       })
     );
-    SetComment("");
-  };
-
-  // @ts-ignore
-  const ShowNotificationModal = async (event, form) => {
-    event.preventDefault();
-    setModalNotificationForm(form);
-    setIsModalNotificationVisible(true);
   };
 
   // @ts-ignore
   const CreateNotification = (form) => {
-    if (form) {
-      dispatch(
-        action.Notification.Create({
-          form: {
-            ...form,
-            description: `${form.description}, причина:${form.answer}`,
-          },
-        })
-      );
-      setIsModalLowRatingVisible(false);
-    } else {
-      setIsModalLowRatingVisible(false);
-    }
+    dispatch(
+      action.Notification.Create({
+        form: {
+          ...form,
+          description: `${form.description}, причина: ${form.answer}`,
+        },
+      })
+    );
   };
 
   // @ts-ignore
-  const handlerRatingCreateSubmit = async (value) => {
+  const CreateRating = ({ value = 0 }) => {
     if (value < 4) {
-      ShowLowRatingModal({
+      setModalLowRatingForm({
         question: "Введите причину низкой оценки?",
         answer: "Мне не понравилась идея!",
         value: value,
       });
+      setIsModalLowRatingVisible(true);
     } else {
       dispatch(
         action.IdeaRating.Create({
@@ -177,34 +165,23 @@ export const IdeaPublicPage = () => {
   };
 
   // @ts-ignore
-  const ShowLowRatingModal = (form) => {
-    setModalLowRatingForm(form);
-    setIsModalLowRatingVisible(true);
-  };
-
-  // @ts-ignore
   const CreateLowLevelRating = (form) => {
-    if (form) {
-      dispatch(
-        action.IdeaRating.Create({
-          idea_id: id,
-          form: {
-            value: `${form.value}`,
-          },
-        })
-      );
-      dispatch(
-        action.IdeaComment.Create({
-          idea_id: id,
-          form: {
-            comment: `${form.answer}`,
-          },
-        })
-      );
-      setIsModalLowRatingVisible(false);
-    } else {
-      setIsModalLowRatingVisible(false);
-    }
+    dispatch(
+      action.IdeaRating.Create({
+        idea_id: id,
+        form: {
+          value: `${form.value}`,
+        },
+      })
+    );
+    dispatch(
+      action.IdeaComment.Create({
+        idea_id: id,
+        form: {
+          comment: `${form.answer}`,
+        },
+      })
+    );
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -248,15 +225,19 @@ export const IdeaPublicPage = () => {
           <button
             type="button"
             className="btn btn-sm btn-outline-danger m-1 p-2"
-            onClick={(event) =>
-              ShowNotificationModal(event, {
+            onClick={(event) => {
+              event.preventDefault();
+              event.stopPropagation();
+              setModalNotificationForm({
+                ...modalNotificationForm,
                 question: "Введите причину жалобы на идею?",
                 answer: "Идея неуместна!",
                 name: "жалоба на идею в банке идей",
                 place: "банк идей",
                 description: `название идеи: ${IdeaReadStore.data["name_char_field"]}`,
-              })
-            }
+              });
+              setIsModalNotificationVisible(true);
+            }}
           >
             <i className="fa-solid fa-skull-crossbones m-0 p-1" />
             жалоба на идею
@@ -507,7 +488,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(1)}
+                      onClick={() => CreateRating({ value: 1 })}
                     />
                     <i
                       style={{
@@ -525,7 +506,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(2)}
+                      onClick={() => CreateRating({ value: 2 })}
                     />
                     <i
                       style={{
@@ -543,7 +524,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(3)}
+                      onClick={() => CreateRating({ value: 3 })}
                     />
                     <i
                       style={{
@@ -561,7 +542,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(4)}
+                      onClick={() => CreateRating({ value: 4 })}
                     />
                     <i
                       style={{
@@ -579,7 +560,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(5)}
+                      onClick={() => CreateRating({ value: 5 })}
                     />
                     <i
                       style={{
@@ -597,7 +578,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(6)}
+                      onClick={() => CreateRating({ value: 6 })}
                     />
                     <i
                       style={{
@@ -615,7 +596,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(7)}
+                      onClick={() => CreateRating({ value: 7 })}
                     />
                     <i
                       style={{
@@ -633,7 +614,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(8)}
+                      onClick={() => CreateRating({ value: 8 })}
                     />
                     <i
                       style={{
@@ -651,7 +632,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(9)}
+                      onClick={() => CreateRating({ value: 9 })}
                     />
                     <i
                       style={{
@@ -669,7 +650,7 @@ export const IdeaPublicPage = () => {
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => handlerRatingCreateSubmit(10)}
+                      onClick={() => CreateRating({ value: 10 })}
                     />
                     <div className="m-0 p-0">Ваша оценка</div>
                   </span>
@@ -701,7 +682,11 @@ export const IdeaPublicPage = () => {
                   <div className="m-0 p-0 my-2">
                     <form
                       className="card"
-                      onSubmit={handlerCommentCreateSubmit}
+                      onSubmit={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        CreateComment();
+                      }}
                     >
                       <div className="input-group">
                         <input
@@ -738,168 +723,201 @@ export const IdeaPublicPage = () => {
                       </div>
                     </form>
                   </div>
-                  {!IdeaCommentReadListStore.load &&
-                    IdeaCommentReadListStore.data && (
-                      <label className="form-control-sm text-center m-0 p-1">
-                        Количество комментариев на странице:
-                        <select
-                          className="form-control form-control-sm text-center m-0 p-1"
-                          value={paginationComment.limit}
-                          onChange={(event) =>
-                            setPaginationComment({
-                              ...paginationComment,
-                              // @ts-ignore
-                              limit: event.target.value,
-                            })
-                          }
-                        >
-                          <option disabled defaultValue={""} value="">
-                            количество на странице
-                          </option>
-                          <option value="10">10</option>
-                          <option value="20">20</option>
-                          <option value="50">50</option>
-                          <option value="100">100</option>
-                        </select>
-                      </label>
-                    )}
-                  {IdeaCommentReadListStore.data &&
-                  IdeaCommentReadListStore.data.list.length < 1 ? (
-                    <div className="my-1">
-                      <component.MessageComponent variant={"warning"}>
-                        Комментарии не найдены!
-                      </component.MessageComponent>
-                    </div>
-                  ) : (
-                    <ul className="list-group m-0 p-0">
+                  <div className="card m-0 p-2">
+                    <div className="order-md-last m-0 p-0">
                       {!IdeaCommentReadListStore.load &&
-                        IdeaCommentReadListStore.data && (
-                          <paginator.Pagination1
-                            totalObjects={
-                              IdeaCommentReadListStore.data["x-total-count"]
-                            }
-                            limit={paginationComment.limit}
-                            page={paginationComment.page}
-                            // @ts-ignore
-                            changePage={(page) =>
-                              setPaginationComment({
-                                ...paginationComment,
-                                page: page,
-                              })
-                            }
-                          />
-                        )}
-                      <component.StoreComponent1
-                        stateConstant={constant.NotificationCreateStore}
-                        consoleLog={constant.DEBUG_CONSTANT}
-                        showLoad={true}
-                        loadText={""}
-                        showData={false}
-                        dataText={""}
-                        showError={true}
-                        errorText={""}
-                        showFail={true}
-                        failText={""}
-                      />
-                      <component.StoreComponent1
-                        stateConstant={constant.IdeaCommentReadListStore}
-                        consoleLog={constant.DEBUG_CONSTANT}
-                        showLoad={true}
-                        loadText={""}
-                        showData={false}
-                        dataText={""}
-                        showError={true}
-                        errorText={""}
-                        showFail={true}
-                        failText={""}
-                      />
-                      {!IdeaCommentReadListStore.load &&
-                        IdeaCommentReadListStore.data &&
-                        IdeaCommentReadListStore.data.list.map(
-                          // @ts-ignore
-                          (object, index) => (
-                            <li className="list-group-item m-0 p-1" key={index}>
-                              <div className="d-flex justify-content-between m-0 p-0">
-                                <h6 className="btn btn-sm btn-outline-warning m-0 p-2">
-                                  {object["user_model"]["last_name_char_field"]}{" "}
-                                  {
-                                    object["user_model"][
-                                      "first_name_char_field"
+                      IdeaCommentReadListStore.data ? (
+                        IdeaCommentReadListStore.data.list.length > 0 ? (
+                          <ul className="list-group m-0 p-0">
+                            <label className="form-control-sm text-center m-0 p-1">
+                              Количество комментариев на странице:
+                              <select
+                                className="form-control form-control-sm text-center m-0 p-1"
+                                value={paginationComment.limit}
+                                onChange={(event) =>
+                                  setPaginationComment({
+                                    ...paginationComment,
+                                    // @ts-ignore
+                                    limit: event.target.value,
+                                  })
+                                }
+                              >
+                                <option disabled defaultValue={""} value="">
+                                  количество на странице
+                                </option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="30">30</option>
+                                <option value="-1">все</option>
+                              </select>
+                            </label>
+                            {!IdeaCommentReadListStore.load &&
+                              IdeaCommentReadListStore.data && (
+                                <paginator.Pagination1
+                                  totalObjects={
+                                    IdeaCommentReadListStore.data[
+                                      "x-total-count"
                                     ]
                                   }
-                                </h6>
-                                <span className="text-muted m-0 p-0">
-                                  {util.GetCleanDateTime(
-                                    object["created_datetime_field"],
-                                    true
-                                  )}
-                                  <button
-                                    type="button"
-                                    className="btn btn-sm btn-outline-danger m-1 p-0"
-                                    onClick={(event) =>
-                                      ShowNotificationModal(event, {
-                                        question:
-                                          "Введите причину жалобы на комментарий?",
-                                        answer: "Не цензурная лексика!",
-                                        name: "жалоба на комментарий в банке идей",
-                                        place: "банк идей",
-                                        description: `название идеи: ${
-                                          IdeaReadStore.data["name_char_field"]
-                                        } (${
-                                          IdeaReadStore.data["user_model"][
+                                  limit={paginationComment.limit}
+                                  page={paginationComment.page}
+                                  // @ts-ignore
+                                  changePage={(page) =>
+                                    setPaginationComment({
+                                      ...paginationComment,
+                                      page: page,
+                                    })
+                                  }
+                                />
+                              )}
+                            {!IdeaCommentReadListStore.load &&
+                              IdeaCommentReadListStore.data &&
+                              IdeaCommentReadListStore.data.list.map(
+                                // @ts-ignore
+                                (object, index) => (
+                                  <li
+                                    className="list-group-item m-0 p-1"
+                                    key={index}
+                                  >
+                                    <div className="d-flex justify-content-between m-0 p-0">
+                                      <h6 className="btn btn-sm btn-outline-warning m-0 p-2">
+                                        {
+                                          object["user_model"][
                                             "last_name_char_field"
                                           ]
-                                        } ${
-                                          IdeaReadStore.data["user_model"][
+                                        }{" "}
+                                        {
+                                          object["user_model"][
                                             "first_name_char_field"
                                           ]
-                                        }), комментарий: ${util.GetCleanDateTime(
+                                        }
+                                      </h6>
+                                      <span className="text-muted m-0 p-0">
+                                        {util.GetCleanDateTime(
                                           object["created_datetime_field"],
                                           true
-                                        )} (${
-                                          object["user_model"][
-                                            "last_name_char_field"
-                                          ]
-                                        } ${
-                                          object["user_model"][
-                                            "first_name_char_field"
-                                          ]
-                                        })`,
-                                      })
-                                    }
-                                  >
-                                    <i className="fa-solid fa-skull-crossbones m-0 p-1" />
-                                    жалоба на комментарий
-                                  </button>
-                                </span>
-                              </div>
-                              <div className="d-flex justify-content-center m-0 p-1">
-                                <small className="text-muted m-0 p-1">
-                                  {object["comment_text_field"]}
-                                </small>
-                              </div>
-                            </li>
-                          )
-                        )}
-                      {!IdeaCommentReadListStore.load &&
-                        IdeaCommentReadListStore.data && (
-                          <paginator.Pagination1
-                            totalObjects={
-                              IdeaCommentReadListStore.data["x-total-count"]
-                            }
-                            limit={paginationComment.limit}
-                            page={paginationComment.page}
-                            // @ts-ignore
-                            changePage={(page) =>
-                              setPaginationComment({
-                                ...paginationComment,
-                                page: page,
-                              })
-                            }
-                          />
-                        )}
-                    </ul>
-                  )}
+                                        )}
+                                        <button
+                                          type="button"
+                                          className="btn btn-sm btn-outline-danger m-1 p-0"
+                                          onClick={(event) => {
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                            setModalNotificationForm({
+                                              ...modalNotificationForm,
+                                              question:
+                                                "Введите причину жалобы на комментарий?",
+                                              answer: "Нецензурная лексика!",
+                                              name: "жалоба на комментарий в банке идей",
+                                              place: "банк идей",
+                                              description: `название идеи: ${
+                                                IdeaReadStore.data[
+                                                  "name_char_field"
+                                                ]
+                                              } (${
+                                                IdeaReadStore.data[
+                                                  "user_model"
+                                                ]["last_name_char_field"]
+                                              } ${
+                                                IdeaReadStore.data[
+                                                  "user_model"
+                                                ]["first_name_char_field"]
+                                              }), комментарий: ${util.GetCleanDateTime(
+                                                object[
+                                                  "created_datetime_field"
+                                                ],
+                                                true
+                                              )} (${
+                                                object["user_model"][
+                                                  "last_name_char_field"
+                                                ]
+                                              } ${
+                                                object["user_model"][
+                                                  "first_name_char_field"
+                                                ]
+                                              })`,
+                                            });
+                                            setIsModalNotificationVisible(true);
+                                          }}
+                                          // onClick={(event) =>
+                                          //   ShowNotificationModal(event, {
+                                          //     question:
+                                          //       "Введите причину жалобы на комментарий?",
+                                          //     answer: "Не цензурная лексика!",
+                                          //     name: "жалоба на комментарий в банке идей",
+                                          //     place: "банк идей",
+                                          //     description: `название идеи: ${
+                                          //       IdeaReadStore.data[
+                                          //         "name_char_field"
+                                          //       ]
+                                          //     } (${
+                                          //       IdeaReadStore.data[
+                                          //         "user_model"
+                                          //       ]["last_name_char_field"]
+                                          //     } ${
+                                          //       IdeaReadStore.data[
+                                          //         "user_model"
+                                          //       ]["first_name_char_field"]
+                                          //     }), комментарий: ${util.GetCleanDateTime(
+                                          //       object[
+                                          //         "created_datetime_field"
+                                          //       ],
+                                          //       true
+                                          //     )} (${
+                                          //       object["user_model"][
+                                          //         "last_name_char_field"
+                                          //       ]
+                                          //     } ${
+                                          //       object["user_model"][
+                                          //         "first_name_char_field"
+                                          //       ]
+                                          //     })`,
+                                          //   })
+                                          // }
+                                        >
+                                          <i className="fa-solid fa-skull-crossbones m-0 p-1" />
+                                          жалоба на комментарий
+                                        </button>
+                                      </span>
+                                    </div>
+                                    <div className="d-flex justify-content-center m-0 p-1">
+                                      <small className="text-muted m-0 p-1">
+                                        {object["comment_text_field"]}
+                                      </small>
+                                    </div>
+                                  </li>
+                                )
+                              )}
+                            {!IdeaCommentReadListStore.load &&
+                              IdeaCommentReadListStore.data && (
+                                <paginator.Pagination1
+                                  totalObjects={
+                                    IdeaCommentReadListStore.data[
+                                      "x-total-count"
+                                    ]
+                                  }
+                                  limit={paginationComment.limit}
+                                  page={paginationComment.page}
+                                  // @ts-ignore
+                                  changePage={(page) =>
+                                    setPaginationComment({
+                                      ...paginationComment,
+                                      page: page,
+                                    })
+                                  }
+                                />
+                              )}
+                          </ul>
+                        ) : (
+                          <message.Message.Secondary>
+                            Комментарии не найдены!
+                          </message.Message.Secondary>
+                        )
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

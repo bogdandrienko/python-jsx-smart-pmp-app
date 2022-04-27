@@ -138,6 +138,7 @@ export const ModalPrompt2 = ({
   // @ts-ignore
   const returnCallback = (event) => {
     event.preventDefault();
+    event.stopPropagation();
     setIsModalVisible(false);
     callback({ ...form, answer: answ });
     setAnsw("Нарушение норм приличия!");
@@ -146,9 +147,8 @@ export const ModalPrompt2 = ({
   // @ts-ignore
   const cancelCallback = (event) => {
     event.preventDefault();
+    event.stopPropagation();
     setIsModalVisible(false);
-    callback(false);
-    setAnsw("Нарушение норм приличия!");
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -22,7 +22,7 @@ import { IdeaTemplatePage } from "../pages/3_progress/IdeaTemplatePage";
 import { ChangeProfilePage } from "../pages/2_profile/ChangeProfilePage";
 import { PostListUnlimitedScrollPage } from "../pages/7_develop/PostListUnlimitedScrollPage";
 import { RecoverPasswordPage } from "../pages/2_profile/RecoverPasswordPage";
-import { RatingsListPage } from "../pages/1_main/RatingsListPage";
+import { UsersRatingsListPage } from "../pages/1_main/UsersRatingsListPage";
 import { NewsPage } from "../pages/1_main/NewsPage";
 import { IdeaModeratePage } from "../pages/3_progress/IdeaModeratePage";
 import { IdeaModerateListPage } from "../pages/3_progress/IdeaModerateListPage";
@@ -30,7 +30,7 @@ import { IdeaSelfPage } from "../pages/3_progress/IdeaSelfPage";
 import { IdeaSelfListPage } from "../pages/3_progress/IdeaSelfListPage";
 import { SalaryPage } from "../pages/4_buh/SalaryPage";
 import { VacationPage } from "../pages/5_sup/VacationPage";
-import { IdeaTopListPage } from "../pages/3_progress/IdeaTopListPage";
+import { IdeaRatingListPage } from "../pages/3_progress/IdeaRatingListPage";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -141,7 +141,7 @@ export const modules = [
             Title: "Зал славы",
             Description: "страница с лучшими и самыми активными участниками",
             path: "/top/authors",
-            element: <RatingsListPage />,
+            element: <UsersRatingsListPage />,
             private: true,
             Logic: true,
             Redirect: true,
@@ -422,6 +422,23 @@ export const modules = [
             LinkIcon: "fa-solid fa-screwdriver-wrench m-0 p-1",
           },
           {
+            Header: "Редактирование своей идеи [скрыто]",
+            Access: ["user"],
+            Active: true,
+            Link: "/idea/self/:id",
+            ExternalLink: false,
+            ShowLink: false,
+            Title: "Редактирование своей идеи",
+            Description: "страница с идеей на доработку",
+            path: "/idea/self/:id",
+            element: <IdeaSelfPage />,
+            private: true,
+            Logic: true,
+            Redirect: true,
+            Style: "text-muted",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
             Header: "Список идей",
             Access: ["user"],
             Active: true,
@@ -440,6 +457,24 @@ export const modules = [
             LinkIcon: "fa-solid fa-list m-0 p-1",
           },
           {
+            Header: "Подробности идеи [скрыто]",
+            Access: ["user"],
+            Active: true,
+            Link: "/idea/public/:id",
+            ExternalLink: false,
+            ShowLink: false,
+            Title: "Подробности идеи",
+            Description:
+              "страница с подробной информацией об идеи в банке идей",
+            path: "/idea/public/:id",
+            element: <IdeaPublicPage />,
+            private: true,
+            Logic: true,
+            Redirect: true,
+            Style: "text-muted",
+            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
+          },
+          {
             Header: "Лучшие идеи",
             Access: ["user"],
             Active: true,
@@ -449,7 +484,7 @@ export const modules = [
             Title: "Лучшие идеи",
             Description: "страница с лучшими идеями в банке идей",
             path: "/idea/rating/list",
-            element: <IdeaTopListPage />,
+            element: <IdeaRatingListPage />,
             private: true,
             Logic: true,
             Redirect: true,
@@ -484,41 +519,6 @@ export const modules = [
             Description: "модерация идеи в банке идей",
             path: "/idea/moderate/:id",
             element: <IdeaModeratePage />,
-            private: true,
-            Logic: true,
-            Redirect: true,
-            Style: "text-muted",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Редактирование своей идеи [скрыто]",
-            Access: ["user"],
-            Active: true,
-            Link: "/idea/self/:id",
-            ExternalLink: false,
-            ShowLink: false,
-            Title: "Редактирование своей идеи",
-            Description: "страница с идеей на доработку",
-            path: "/idea/self/:id",
-            element: <IdeaSelfPage />,
-            private: true,
-            Logic: true,
-            Redirect: true,
-            Style: "text-muted",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
-          {
-            Header: "Подробности идеи [скрыто]",
-            Access: ["user"],
-            Active: true,
-            Link: "/idea/public/:id",
-            ExternalLink: false,
-            ShowLink: false,
-            Title: "Подробности идеи",
-            Description:
-              "страница с подробной информацией об идеи в банке идей",
-            path: "/idea/public/:id",
-            element: <IdeaPublicPage />,
             private: true,
             Logic: true,
             Redirect: true,

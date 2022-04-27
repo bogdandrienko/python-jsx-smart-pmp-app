@@ -20,7 +20,7 @@ export class Captcha {
           form: {},
           url: `/api/captcha/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.captchaCheckStore,
           authentication: false,
         })
@@ -40,7 +40,7 @@ export class User {
           form: form,
           url: `/api/user/login/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.userLoginStore,
           authentication: false,
         })
@@ -74,7 +74,7 @@ export class User {
           form: {},
           url: `/api/user/detail/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.userDetailStore,
           authentication: true,
         })
@@ -91,7 +91,7 @@ export class User {
           form: {},
           url: `/api/user/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.UsersReadListStore,
           authentication: true,
         })
@@ -108,7 +108,7 @@ export class User {
           form: form,
           url: `/api/user/rating/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.ratingsListStore,
           authentication: true,
         })
@@ -125,7 +125,7 @@ export class User {
           form: form,
           url: `/api/user/password/change/`,
           method: constant.HttpMethods.POST(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.userChangeStore,
           authentication: true,
         })
@@ -145,7 +145,7 @@ export class Notification {
           form: form,
           url: `/api/notification/`,
           method: constant.HttpMethods.POST(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.NotificationCreateStore,
           authentication: true,
         })
@@ -162,7 +162,7 @@ export class Notification {
           form: form,
           url: `/api/notification/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.NotificationReadListStore,
           authentication: true,
         })
@@ -179,7 +179,7 @@ export class Notification {
           form: {},
           url: `/api/notification/${notification_id}/`,
           method: constant.HttpMethods.DELETE(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.NotificationDeleteStore,
           authentication: true,
         })
@@ -198,7 +198,7 @@ export class Salary {
           form: form,
           url: `/api/salary/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 30000,
           constant: constant.SalaryReadStore,
           authentication: true,
         })
@@ -217,7 +217,7 @@ export class Vacation {
           form: form,
           url: `/api/vacation/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 30000,
           constant: constant.VacationReadStore,
           authentication: true,
         })
@@ -237,7 +237,7 @@ export class Idea {
           form: form,
           url: `/api/idea/`,
           method: constant.HttpMethods.POST(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.IdeaCreateStore,
           authentication: true,
         })
@@ -254,7 +254,7 @@ export class Idea {
           form: {},
           url: `/api/idea/${idea_id}/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.IdeaReadStore,
           authentication: true,
         })
@@ -271,7 +271,7 @@ export class Idea {
           form: form,
           url: `/api/idea/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.IdeaReadListStore,
           authentication: true,
         })
@@ -288,7 +288,7 @@ export class Idea {
           form: form,
           url: `/api/idea/${idea_id}/`,
           method: constant.HttpMethods.PUT(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.IdeaUpdateStore,
           authentication: true,
         })
@@ -308,7 +308,7 @@ export class IdeaComment {
           form: form,
           url: `/api/idea/${idea_id}/comment/`,
           method: constant.HttpMethods.POST(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.IdeaCommentCreateStore,
           authentication: true,
         })
@@ -324,7 +324,7 @@ export class IdeaComment {
           form: form,
           url: `/api/idea/${idea_id}/comment/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.IdeaCommentReadListStore,
           authentication: true,
         })
@@ -341,7 +341,7 @@ export class IdeaComment {
           form: {},
           url: `/api/idea/comment/${comment_id}/`,
           method: constant.HttpMethods.DELETE(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.IdeaCommentDeleteStore,
           authentication: true,
         })
@@ -361,7 +361,7 @@ export class IdeaRating {
           form: form,
           url: `/api/idea/${idea_id}/rating/`,
           method: constant.HttpMethods.POST(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.IdeaRatingCreateStore,
           authentication: true,
         })
@@ -377,7 +377,7 @@ export class IdeaRating {
           form: form,
           url: `/api/idea/${idea_id}/rating/`,
           method: constant.HttpMethods.GET(),
-          timeout: 10000,
+          timeout: 20000,
           constant: constant.IdeaRatingReadListStore,
           authentication: true,
         })

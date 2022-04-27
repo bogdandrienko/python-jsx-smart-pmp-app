@@ -70,14 +70,19 @@ export const IdeaSelfPage = () => {
   }, [IdeaReadStore.data]);
 
   useEffect(() => {
-    if (IdeaUpdateStore.data) {
-      resetState();
-    }
-  }, [IdeaUpdateStore.data]);
+    resetState();
+  }, []);
 
   useEffect(() => {
     resetState();
   }, [id]);
+
+  useEffect(() => {
+    if (IdeaUpdateStore.data) {
+      resetState();
+      navigate("/idea/self/list");
+    }
+  }, [IdeaUpdateStore.data]);
 
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -85,7 +90,6 @@ export const IdeaSelfPage = () => {
     resetIdea();
     dispatch({ type: constant.IdeaReadStore.reset });
     dispatch({ type: constant.IdeaUpdateStore.reset });
-    navigate("/idea/self/list");
   };
 
   const ChangeIdea = () => {

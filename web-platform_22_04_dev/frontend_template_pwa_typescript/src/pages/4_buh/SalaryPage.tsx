@@ -141,7 +141,10 @@ export const SalaryPage = () => {
                     </option>
                   </select>
                   {!SalaryReadStore.load && (
-                    <button type="submit" className="btn btn-sm btn-primary">
+                    <button
+                      type="submit"
+                      className="btn btn-sm btn-primary m-1 p-2"
+                    >
                       <i className="fa-solid fa-circle-check m-0 p-1" />
                       получить
                     </button>
@@ -149,7 +152,7 @@ export const SalaryPage = () => {
                   {!SalaryReadStore.load && (
                     <button
                       type="button"
-                      className="btn btn-sm btn-warning"
+                      className="btn btn-sm btn-warning m-1 p-2"
                       onClick={() => {
                         resetDateTime();
                         dispatch({ type: constant.SalaryReadStore.reset });
@@ -176,8 +179,8 @@ export const SalaryPage = () => {
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
         loadText={""}
-        showData={true}
-        dataText={"Данные успешно получены!"}
+        showData={false}
+        dataText={""}
         showError={true}
         errorText={""}
         showFail={true}

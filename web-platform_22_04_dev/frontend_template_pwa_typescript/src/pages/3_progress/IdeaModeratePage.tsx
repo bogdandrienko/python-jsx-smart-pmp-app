@@ -14,8 +14,8 @@ import * as util from "../../components/util";
 
 import * as base from "../../components/ui/base";
 import * as modal from "../../components/ui/modal";
-import * as select from "../../components/ui/select";
 import * as paginator from "../../components/ui/paginator";
+import * as message from "../../components/ui/message";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -36,8 +36,10 @@ export const IdeaModeratePage = () => {
   const dispatch = useDispatch();
   const id = useParams().id;
 
-  const [paginationComment, setPaginationComment, resetPaginationComment] =
-    hook.useStateCustom1({ page: 1, limit: 10 });
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 5,
+  });
 
   const [idea, setIdea, resetIdea] = hook.useStateCustom1({
     subdivision: "",
@@ -85,20 +87,19 @@ export const IdeaModeratePage = () => {
       dispatch(
         action.IdeaComment.ReadList({
           idea_id: id,
-          form: { ...paginationComment },
+          form: { ...pagination },
         })
       );
     }
   }, [IdeaCommentReadListStore.data]);
 
   useEffect(() => {
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-  }, [paginationComment.page]);
+    resetState();
+  }, []);
 
   useEffect(() => {
-    setPaginationComment({ ...paginationComment, page: 1 });
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-  }, [paginationComment.limit]);
+    resetState();
+  }, [id]);
 
   useEffect(() => {
     if (IdeaUpdateStore.data || IdeaCommentDeleteStore.data) {
@@ -107,26 +108,30 @@ export const IdeaModeratePage = () => {
   }, [IdeaUpdateStore.data, IdeaCommentDeleteStore.data]);
 
   useEffect(() => {
-    resetState();
-  }, [id]);
+    dispatch({ type: constant.IdeaCommentReadListStore.reset });
+  }, [pagination.page]);
+
+  useEffect(() => {
+    setPagination({ ...pagination, page: 1 });
+    dispatch({ type: constant.IdeaCommentReadListStore.reset });
+  }, [pagination.limit]);
 
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const resetState = () => {
     resetIdea();
     resetModerate();
-    resetPaginationComment();
     dispatch({ type: constant.IdeaReadStore.reset });
     dispatch({ type: constant.IdeaCommentReadListStore.reset });
     dispatch({ type: constant.IdeaUpdateStore.reset });
     dispatch({ type: constant.IdeaCommentDeleteStore.reset });
   };
 
-  const ChangeIdea = () => {
+  const UpdateIdea = () => {
     dispatch(action.Idea.Update({ idea_id: id, form: idea }));
   };
 
-  const UpdateIdea = () => {
+  const ModerateIdea = () => {
     dispatch(
       action.Idea.Update({
         idea_id: id,
@@ -173,39 +178,42 @@ export const IdeaModeratePage = () => {
                 isModalVisible={isModalModerateVisible}
                 setIsModalVisible={setIsModalModerateVisible}
                 description={"Изменить статус?"}
-                callback={UpdateIdea}
+                callback={ModerateIdea}
               />
               <div className="card shadow custom-background-transparent-hard m-0 p-0">
                 <div className="card-header m-0 p-0">
-                  <label className="m-0 p-1">
-                    Выберите заключение по идеи{" "}
-                    <p className="fw-bold text-secondary m-0 p-0">
-                      заполните комментарий "на доработку", чтобы автор идеи его
-                      увидел
-                    </p>
-                  </label>
+                  <div className="d-flex justify-content-center input-group text-center">
+                    <label className="form-control-sm text-center m-0 p-1">
+                      Заключение:
+                      <select
+                        className="form-control form-control-sm text-center m-0 p-1"
+                        value={moderate.moderate}
+                        required
+                        onChange={(event) =>
+                          setModerate({
+                            ...moderate,
+                            moderate: event.target.value,
+                          })
+                        }
+                      >
+                        <option value="">не выбрано</option>
+                        <option value="на модерации">на модерации</option>
+                        <option value="на доработку">на доработку</option>
+                        <option value="скрыто">скрыто</option>
+                        <option value="принято">принято</option>
+                      </select>
+                    </label>
+                    <button
+                      className="btn btn-sm btn-danger m-1 p-2"
+                      type="submit"
+                      style={{ zIndex: 0 }}
+                    >
+                      <i className="fa-solid fa-circle-check m-0 p-1" />
+                      вынести заключение
+                    </button>
+                  </div>
                 </div>
                 <div className="card-body m-0 p-0">
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Заключение:
-                    <select
-                      required
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={moderate.moderate}
-                      onChange={(event) =>
-                        setModerate({
-                          ...moderate,
-                          moderate: event.target.value,
-                        })
-                      }
-                    >
-                      <option value="">не выбрано</option>
-                      <option value="на модерации">на модерации</option>
-                      <option value="на доработку">на доработку</option>
-                      <option value="скрыто">скрыто</option>
-                      <option value="принято">принято</option>
-                    </select>
-                  </label>
                   {moderate.moderate === "на доработку" && (
                     <label className="w-75 form-control-sm">
                       Комментарий:
@@ -213,6 +221,7 @@ export const IdeaModeratePage = () => {
                         type="text"
                         className="form-control form-control-sm text-center m-0 p-1"
                         value={moderate.moderateComment}
+                        required
                         placeholder="вводите комментарий тут..."
                         minLength={1}
                         maxLength={300}
@@ -240,18 +249,6 @@ export const IdeaModeratePage = () => {
                       </small>
                     </label>
                   )}
-                </div>
-                <div className="card-footer m-0 p-0">
-                  <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
-                    <button
-                      className="btn btn-sm btn-danger m-1 p-2"
-                      type="submit"
-                      style={{ zIndex: 0 }}
-                    >
-                      <i className="fa-solid fa-circle-check m-0 p-1" />
-                      вынести заключение
-                    </button>
-                  </ul>
                 </div>
               </div>
             </form>
@@ -296,7 +293,7 @@ export const IdeaModeratePage = () => {
               isModalVisible={isModalUpdateVisible}
               setIsModalVisible={setIsModalUpdateVisible}
               description={"Заменить данные?"}
-              callback={ChangeIdea}
+              callback={UpdateIdea}
             />
             <div className="card shadow custom-background-transparent-low m-0 p-0">
               <div className="card-header bg-success bg-opacity-10 m-0 p-3">
@@ -513,8 +510,9 @@ export const IdeaModeratePage = () => {
                       type="checkbox"
                       className="form-check-input m-0 p-1"
                       id="flexSwitchCheckDefault"
-                      checked={idea.clearImage}
-                      onClick={() =>
+                      defaultChecked={idea.clearImage}
+                      value={idea.clearImage}
+                      onChange={() =>
                         setIdea({ ...idea, clearImage: !idea.clearImage })
                       }
                     />
@@ -647,144 +645,126 @@ export const IdeaModeratePage = () => {
                 <div className="card m-0 p-2">
                   <div className="order-md-last m-0 p-0">
                     {!IdeaCommentReadListStore.load &&
-                      IdeaCommentReadListStore.data && (
-                        <label className="form-control-sm text-center m-0 p-1">
-                          Количество комментариев на странице:
-                          <select
-                            className="form-control form-control-sm text-center m-0 p-1"
-                            value={paginationComment.limit}
-                            onChange={(event) =>
-                              setPaginationComment({
-                                ...paginationComment,
+                    IdeaCommentReadListStore.data ? (
+                      IdeaCommentReadListStore.data.list.length > 0 ? (
+                        <ul className="list-group m-0 p-0">
+                          <label className="form-control-sm text-center m-0 p-1">
+                            Количество комментариев на странице:
+                            <select
+                              className="form-control form-control-sm text-center m-0 p-1"
+                              value={pagination.limit}
+                              onChange={(event) =>
+                                setPagination({
+                                  ...pagination,
+                                  // @ts-ignore
+                                  limit: event.target.value,
+                                })
+                              }
+                            >
+                              <option disabled defaultValue={""} value="">
+                                количество на странице
+                              </option>
+                              <option value="5">5</option>
+                              <option value="10">10</option>
+                              <option value="30">30</option>
+                              <option value="-1">все</option>
+                            </select>
+                          </label>
+                          {!IdeaCommentReadListStore.load &&
+                            IdeaCommentReadListStore.data && (
+                              <paginator.Pagination1
+                                totalObjects={
+                                  IdeaCommentReadListStore.data["x-total-count"]
+                                }
+                                limit={pagination.limit}
+                                page={pagination.page}
                                 // @ts-ignore
-                                limit: event.target.value,
-                              })
-                            }
-                          >
-                            <option disabled defaultValue={""} value="">
-                              количество на странице
-                            </option>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                          </select>
-                        </label>
-                      )}
-                    {IdeaCommentReadListStore.data &&
-                    IdeaCommentReadListStore.data.list.length < 1 ? (
-                      <div className="my-1">
-                        <component.MessageComponent variant={"warning"}>
+                                changePage={(page) =>
+                                  setPagination({
+                                    ...pagination,
+                                    page: page,
+                                  })
+                                }
+                              />
+                            )}
+                          {!IdeaCommentReadListStore.load &&
+                            IdeaCommentReadListStore.data &&
+                            IdeaCommentReadListStore.data.list.map(
+                              // @ts-ignore
+                              (object, index) => (
+                                <li
+                                  className="list-group-item m-0 p-1"
+                                  key={index}
+                                >
+                                  <div className="d-flex justify-content-between m-0 p-0">
+                                    <h6 className="btn btn-sm btn-outline-warning m-0 p-2">
+                                      {
+                                        object["user_model"][
+                                          "last_name_char_field"
+                                        ]
+                                      }{" "}
+                                      {
+                                        object["user_model"][
+                                          "first_name_char_field"
+                                        ]
+                                      }
+                                    </h6>
+                                    <span className="text-muted m-0 p-0">
+                                      {util.GetCleanDateTime(
+                                        object["created_datetime_field"],
+                                        true
+                                      )}
+                                      <button
+                                        type="button"
+                                        className="btn btn-sm btn-outline-danger m-1 p-0"
+                                        onClick={(event) => {
+                                          event.preventDefault();
+                                          event.stopPropagation();
+                                          setModalCommentDeleteForm({
+                                            ...modalCommentDeleteForm,
+                                            comment_id: object.id,
+                                          });
+                                          setIsModalCommentDeleteVisible(true);
+                                        }}
+                                      >
+                                        <i className="fa-solid fa-skull-crossbones m-0 p-1" />
+                                        удалить комментарий
+                                      </button>
+                                    </span>
+                                  </div>
+                                  <div className="d-flex justify-content-center m-0 p-1">
+                                    <small className="text-muted m-0 p-1">
+                                      {object["comment_text_field"]}
+                                    </small>
+                                  </div>
+                                </li>
+                              )
+                            )}
+                          {!IdeaCommentReadListStore.load &&
+                            IdeaCommentReadListStore.data && (
+                              <paginator.Pagination1
+                                totalObjects={
+                                  IdeaCommentReadListStore.data["x-total-count"]
+                                }
+                                limit={pagination.limit}
+                                page={pagination.page}
+                                // @ts-ignore
+                                changePage={(page) =>
+                                  setPagination({
+                                    ...pagination,
+                                    page: page,
+                                  })
+                                }
+                              />
+                            )}
+                        </ul>
+                      ) : (
+                        <message.Message.Secondary>
                           Комментарии не найдены!
-                        </component.MessageComponent>
-                      </div>
+                        </message.Message.Secondary>
+                      )
                     ) : (
-                      <ul className="list-group m-0 p-0">
-                        {!IdeaCommentReadListStore.load &&
-                          IdeaCommentReadListStore.data && (
-                            <paginator.Pagination1
-                              totalObjects={
-                                IdeaCommentReadListStore.data["x-total-count"]
-                              }
-                              limit={paginationComment.limit}
-                              page={paginationComment.page}
-                              // @ts-ignore
-                              changePage={(page) =>
-                                setPaginationComment({
-                                  ...paginationComment,
-                                  page: page,
-                                })
-                              }
-                            />
-                          )}
-                        {!IdeaCommentReadListStore.load &&
-                          IdeaCommentReadListStore.data &&
-                          IdeaCommentReadListStore.data.list.map(
-                            // @ts-ignore
-                            (object, index) => (
-                              <li
-                                className="list-group-item m-0 p-1"
-                                key={index}
-                              >
-                                <div className="d-flex justify-content-between m-0 p-0">
-                                  <h6 className="btn btn-sm btn-outline-warning m-0 p-2">
-                                    {
-                                      object["user_model"][
-                                        "last_name_char_field"
-                                      ]
-                                    }{" "}
-                                    {
-                                      object["user_model"][
-                                        "first_name_char_field"
-                                      ]
-                                    }
-                                  </h6>
-                                  <span className="text-muted m-0 p-0">
-                                    {util.GetCleanDateTime(
-                                      object["created_datetime_field"],
-                                      true
-                                    )}
-                                    <modal.ModalConfirm2
-                                      isModalVisible={
-                                        isModalCommentDeleteVisible
-                                      }
-                                      setIsModalVisible={
-                                        setIsModalCommentDeleteVisible
-                                      }
-                                      description={
-                                        "Удалить выбранный комментарий?"
-                                      }
-                                      // @ts-ignore
-                                      callback={() =>
-                                        DeleteComment({
-                                          ...modalCommentDeleteForm,
-                                        })
-                                      }
-                                    />
-                                    <button
-                                      type="button"
-                                      className="btn btn-sm btn-outline-danger m-1 p-0"
-                                      onClick={(event) => {
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                        setModalCommentDeleteForm({
-                                          ...modalCommentDeleteForm,
-                                          comment_id: object.id,
-                                        });
-                                        setIsModalCommentDeleteVisible(true);
-                                      }}
-                                    >
-                                      <i className="fa-solid fa-skull-crossbones m-0 p-1" />
-                                      удалить комментарий
-                                    </button>
-                                  </span>
-                                </div>
-                                <div className="d-flex justify-content-center m-0 p-1">
-                                  <small className="text-muted m-0 p-1">
-                                    {object["comment_text_field"]}
-                                  </small>
-                                </div>
-                              </li>
-                            )
-                          )}
-                        {!IdeaCommentReadListStore.load &&
-                          IdeaCommentReadListStore.data && (
-                            <paginator.Pagination1
-                              totalObjects={
-                                IdeaCommentReadListStore.data["x-total-count"]
-                              }
-                              limit={paginationComment.limit}
-                              page={paginationComment.page}
-                              // @ts-ignore
-                              changePage={(page) =>
-                                setPaginationComment({
-                                  ...paginationComment,
-                                  page: page,
-                                })
-                              }
-                            />
-                          )}
-                      </ul>
+                      ""
                     )}
                   </div>
                 </div>
@@ -793,6 +773,17 @@ export const IdeaModeratePage = () => {
           </form>
         </ul>
       )}
+      <modal.ModalConfirm2
+        isModalVisible={isModalCommentDeleteVisible}
+        setIsModalVisible={setIsModalCommentDeleteVisible}
+        description={"Удалить выбранный комментарий?"}
+        // @ts-ignore
+        callback={() =>
+          DeleteComment({
+            ...modalCommentDeleteForm,
+          })
+        }
+      />
     </base.Base1>
   );
 };

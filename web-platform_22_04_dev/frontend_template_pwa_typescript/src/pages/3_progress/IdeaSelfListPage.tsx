@@ -26,7 +26,7 @@ export const IdeaSelfListPage = () => {
 
   const dispatch = useDispatch();
 
-  const [paginationIdea, setPaginationIdea] = useState({
+  const [pagination, setPagination] = useState({
     page: 1,
     limit: 9,
     detailView: true,
@@ -39,45 +39,38 @@ export const IdeaSelfListPage = () => {
     subdivision: "",
     sphere: "",
     category: "",
-    author: "self",
+    author: "",
     name: "",
     place: "",
     description: "",
     moderate: "на доработку",
+    onlyMonth: false,
   });
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [paginationIdea.page]);
-
-  useEffect(() => {
-    setPaginationIdea({ ...paginationIdea, page: 1 });
-    dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [paginationIdea.limit]);
-
-  useEffect(() => {
     if (!IdeaReadListStore.data) {
       dispatch(
         action.Idea.ReadList({
-          form: { ...filter, ...paginationIdea },
+          form: { ...filter, ...pagination },
         })
       );
     }
   }, [IdeaReadListStore.data]);
 
-  // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // @ts-ignore
-  const ResetList = (event) => {
-    try {
-      event.preventDefault();
-      event.stopPropagation();
-    } catch (error) {}
-    setPaginationIdea({ ...paginationIdea, page: 1 });
+  useEffect(() => {
     dispatch({ type: constant.IdeaReadListStore.reset });
-  };
+  }, []);
+
+  useEffect(() => {
+    dispatch({ type: constant.IdeaReadListStore.reset });
+  }, [pagination.page]);
+
+  useEffect(() => {
+    setPagination({ ...pagination, page: 1 });
+    dispatch({ type: constant.IdeaReadListStore.reset });
+  }, [pagination.limit]);
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -97,166 +90,44 @@ export const IdeaSelfListPage = () => {
       >
         {
           <ul className="row-cols-auto row-cols-sm-auto row-cols-md-auto row-cols-lg-auto justify-content-center text-center m-0 p-0">
-            <form className="m-0 p-0" onSubmit={ResetList}>
+            <form
+              className="m-0 p-0"
+              onSubmit={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                setPagination({ ...pagination, page: 1 });
+                dispatch({ type: constant.IdeaReadListStore.reset });
+              }}
+            >
               <div className="card shadow custom-background-transparent-hard m-0 p-0">
                 <div className="card-header m-0 p-0">
-                  <label className="lead m-0 p-1">
-                    <i className="fa-solid fa-filter" /> Выберите нужные
-                    настройки фильтрации и сортировки, затем нажмите кнопку{" "}
-                    <p className="fw-bold text-primary m-0 p-0">
-                      "фильтровать"
-                    </p>
-                  </label>
-                  <label className="form-control-sm form-switch text-center m-0 p-1">
-                    Детальное отображение:
-                    <input
-                      type="checkbox"
-                      className="form-check-input m-0 p-1"
-                      id="flexSwitchCheckDefault"
-                      checked={paginationIdea.detailView}
-                      onChange={() =>
-                        setPaginationIdea({
-                          ...paginationIdea,
-                          detailView: !paginationIdea.detailView,
-                        })
-                      }
-                    />
-                  </label>
-                  <label className="form-control-sm text-center m-0 p-1">
-                    Количество идей на странице:
-                    <select
-                      className="form-control form-control-sm text-center m-0 p-1"
-                      value={paginationIdea.limit}
-                      onChange={(event) =>
-                        setPaginationIdea({
-                          ...paginationIdea,
-                          // @ts-ignore
-                          limit: event.target.value,
-                        })
-                      }
-                    >
-                      <option disabled defaultValue={""} value="">
-                        количество на странице
-                      </option>
-                      <option value="9">9</option>
-                      <option value="18">18</option>
-                      <option value="36">36</option>
-                      <option value="-1">все</option>
-                    </select>
-                  </label>
-                </div>
-                <div className="card-body m-0 p-0">
                   <div className="m-0 p-0">
                     <label className="form-control-sm text-center m-0 p-1">
-                      Подразделение:
+                      Сортировка по:
                       <select
                         className="form-control form-control-sm text-center m-0 p-1"
-                        value={filter.subdivision}
+                        value={filter.sort}
                         onChange={(e) =>
                           setFilter({
                             ...filter,
-                            subdivision: e.target.value,
+                            sort: e.target.value,
                           })
                         }
                       >
-                        <option className="m-0 p-0" value="">
-                          все варианты
+                        <option value="дате публикации (свежие в начале)">
+                          дате публикации (свежие в начале)
                         </option>
-                        <option
-                          className="m-0 p-0"
-                          value="автотранспортное предприятие"
-                        >
-                          автотранспортное предприятие
+                        <option value="дате публикации (свежие в конце)">
+                          дате публикации (свежие в конце)
                         </option>
-                        <option
-                          className="m-0 p-0"
-                          value="горно-транспортный комплекс"
-                        >
-                          горно-транспортный комплекс
+                        <option value="названию (с начала алфавита)">
+                          названию (с начала алфавита)
                         </option>
-                        <option
-                          className="m-0 p-0"
-                          value="обогатительный комплекс"
-                        >
-                          обогатительный комплекс
-                        </option>
-                        <option
-                          className="m-0 p-0"
-                          value="управление предприятия"
-                        >
-                          управление предприятия
-                        </option>
-                        <option className="m-0 p-0" value="энергоуправление">
-                          энергоуправление
+                        <option value="названию (с конца алфавита)">
+                          названию (с конца алфавита)
                         </option>
                       </select>
                     </label>
-                    <label className="form-control-sm text-center m-0 p-1">
-                      Сфера:
-                      <select
-                        className="form-control form-control-sm text-center m-0 p-1"
-                        value={filter.sphere}
-                        onChange={(e) =>
-                          setFilter({
-                            ...filter,
-                            sphere: e.target.value,
-                          })
-                        }
-                      >
-                        <option className="m-0 p-0" value="">
-                          все варианты
-                        </option>
-                        <option className="m-0 p-0" value="технологическая">
-                          технологическая
-                        </option>
-                        <option className="m-0 p-0" value="не технологическая">
-                          не технологическая
-                        </option>
-                      </select>
-                    </label>
-                    <label className="form-control-sm text-center m-0 p-1">
-                      Категория:
-                      <select
-                        className="form-control form-control-sm text-center m-0 p-1"
-                        value={filter.category}
-                        onChange={(e) =>
-                          setFilter({
-                            ...filter,
-                            category: e.target.value,
-                          })
-                        }
-                      >
-                        <option className="m-0 p-0" value="">
-                          все варианты
-                        </option>
-                        <option className="m-0 p-0" value="индустрия 4.0">
-                          индустрия 4.0
-                        </option>
-                        <option className="m-0 p-0" value="инвестиции">
-                          инвестиции
-                        </option>
-                        <option className="m-0 p-0" value="инновации">
-                          инновации
-                        </option>
-                        <option className="m-0 p-0" value="модернизация">
-                          модернизация
-                        </option>
-                        <option className="m-0 p-0" value="экология">
-                          экология
-                        </option>
-                        <option className="m-0 p-0" value="спорт/культура">
-                          спорт/культура
-                        </option>
-                        <option className="m-0 p-0" value="социальное/персонал">
-                          социальное/персонал
-                        </option>
-                        <option className="m-0 p-0" value="другое">
-                          другое
-                        </option>
-                      </select>
-                    </label>
-                  </div>
-                  <div className="m-0 p-0">
                     <label className="form-control-sm text-center w-75 m-0 p-1">
                       Поле поиска по части названия:
                       <input
@@ -280,42 +151,16 @@ export const IdeaSelfListPage = () => {
                         }
                       />
                     </label>
-                    <label className="form-control-sm text-center m-0 p-1">
-                      Сортировка по:
-                      <select
-                        className="form-control form-control-sm text-center m-0 p-1"
-                        value={filter.sort}
-                        onChange={(e) =>
-                          setFilter({
-                            ...filter,
-                            sort: e.target.value,
-                          })
-                        }
-                      >
-                        <option value="дате публикации (свежие в начале)">
-                          дате публикации (свежие в начале)
-                        </option>
-                        <option value="дате публикации (свежие в конце)">
-                          дате публикации (свежие в конце)
-                        </option>
-                        <option value="названию (с начала алфавита)">
-                          названию (с начала алфавита)
-                        </option>
-                        <option value="названию (с конца алфавита)">
-                          названию (с конца алфавита
-                        </option>
-                      </select>
-                    </label>
                   </div>
                 </div>
-                <div className="card-footer m-0 p-0">
+                <div className="card-body m-0 p-0">
                   <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                     <button
                       className="btn btn-sm btn-primary m-1 p-2"
                       type="submit"
                     >
                       <i className="fa-solid fa-circle-check m-0 p-1" />
-                      фильтровать идеи
+                      обновить данные
                     </button>
                     <button
                       className="btn btn-sm btn-warning m-1 p-2"
@@ -327,6 +172,46 @@ export const IdeaSelfListPage = () => {
                     </button>
                   </ul>
                 </div>
+
+                <div className="card-footer m-0 p-0">
+                  <label className="form-control-sm text-center m-0 p-1">
+                    Количество идей на странице:
+                    <select
+                      className="form-control form-control-sm text-center m-0 p-1"
+                      value={pagination.limit}
+                      onChange={(event) =>
+                        setPagination({
+                          ...pagination,
+                          // @ts-ignore
+                          limit: event.target.value,
+                        })
+                      }
+                    >
+                      <option disabled defaultValue={""} value="">
+                        количество на странице
+                      </option>
+                      <option value="9">9</option>
+                      <option value="18">18</option>
+                      <option value="36">36</option>
+                      <option value="-1">все</option>
+                    </select>
+                  </label>
+                  <label className="form-control-sm form-switch text-center m-0 p-1">
+                    Детальное отображение:
+                    <input
+                      type="checkbox"
+                      className="form-check-input m-0 p-1"
+                      id="flexSwitchCheckDefault"
+                      checked={pagination.detailView}
+                      onChange={() =>
+                        setPagination({
+                          ...pagination,
+                          detailView: !pagination.detailView,
+                        })
+                      }
+                    />
+                  </label>
+                </div>
               </div>
             </form>
           </ul>
@@ -336,12 +221,12 @@ export const IdeaSelfListPage = () => {
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={paginationIdea.limit}
-          page={paginationIdea.page}
+          limit={pagination.limit}
+          page={pagination.page}
           // @ts-ignore
           changePage={(page) =>
-            setPaginationIdea({
-              ...paginationIdea,
+            setPagination({
+              ...pagination,
               page: page,
             })
           }
@@ -351,7 +236,7 @@ export const IdeaSelfListPage = () => {
         IdeaReadListStore.data.list.length > 0 ? (
           <div className={"m-0 p-0"}>
             {" "}
-            {paginationIdea.detailView ? (
+            {pagination.detailView ? (
               <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
                 {IdeaReadListStore.data.list.map(
                   // @ts-ignore
@@ -738,12 +623,8 @@ export const IdeaSelfListPage = () => {
                           true
                         )}
                         {util.GetSliceString(
-                          " | " + idea["user_model"]["last_name_char_field"],
-                          20
-                        )}
-                        {util.GetSliceString(
-                          " " + idea["user_model"]["first_name_char_field"],
-                          20
+                          " | " + idea["comment_moderate_char_field"],
+                          100
                         )}
                       </li>
                     </Link>
@@ -754,7 +635,7 @@ export const IdeaSelfListPage = () => {
           </div>
         ) : (
           <message.Message.Secondary>
-            Ничего не найдено! Попробуйте изменить условия фильтрации и/или
+            Идеи не найдены! Попробуйте изменить условия фильтрации и/или
             очистить строку поиска.
           </message.Message.Secondary>
         )
@@ -776,12 +657,12 @@ export const IdeaSelfListPage = () => {
       {!IdeaReadListStore.load && IdeaReadListStore.data && (
         <paginator.Pagination1
           totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={paginationIdea.limit}
-          page={paginationIdea.page}
+          limit={pagination.limit}
+          page={pagination.page}
           // @ts-ignore
           changePage={(page) =>
-            setPaginationIdea({
-              ...paginationIdea,
+            setPagination({
+              ...pagination,
               page: page,
             })
           }

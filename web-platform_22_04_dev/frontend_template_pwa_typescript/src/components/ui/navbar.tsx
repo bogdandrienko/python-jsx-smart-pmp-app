@@ -52,9 +52,16 @@ export const NavbarComponent1 = () => {
               />
             </a>
             {NotificationReadListStore.data &&
-              NotificationReadListStore.data.list.length > 0 && (
-                <i className="fa-solid fa-bell text-danger m-0 p-2" />
-              )}
+            NotificationReadListStore.data.list.length > 0 ? (
+              <span className="m-0 p-1">
+                <i className="fa-solid fa-bell text-danger m-0 p-1" />
+                {NotificationReadListStore.data["x-total-count"]}
+              </span>
+            ) : (
+              <span className="m-0 p-1">
+                <i className="fa-solid fa-bell text-muted m-0 p-1" />0
+              </span>
+            )}
             <Navbar.Toggle
               aria-controls="basic-navbar-nav"
               className="btn btn-success text-success bg-warning bg-opacity-50"
@@ -70,11 +77,12 @@ export const NavbarComponent1 = () => {
                         title={
                           <span>
                             <i className="fa-solid fa-earth-asia m-0 p-0" />{" "}
-                            {module.Header === "Профиль" ? (
-                              NotificationReadListStore.data &&
+                            {module.Header}
+                            {"  "}
+                            {module.Header === "Профиль" &&
+                              (NotificationReadListStore.data &&
                               NotificationReadListStore.data.list.length > 0 ? (
                                 <span className="m-0 p-1">
-                                  {module.Header}
                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                   {
                                     NotificationReadListStore.data[
@@ -83,11 +91,11 @@ export const NavbarComponent1 = () => {
                                   }
                                 </span>
                               ) : (
-                                module.Header
-                              )
-                            ) : (
-                              module.Header
-                            )}
+                                <span className="m-0 p-1">
+                                  <i className="fa-solid fa-bell text-muted m-0 p-1" />
+                                  0
+                                </span>
+                              ))}
                           </span>
                         }
                         key={m_index}
@@ -132,12 +140,13 @@ export const NavbarComponent1 = () => {
                                             />
                                           </span>
                                           <small>
-                                            {link.Header === "Уведомления" ? (
-                                              NotificationReadListStore.data &&
+                                            {link.Header}
+                                            {"  "}
+                                            {link.Header === "Уведомления" &&
+                                              (NotificationReadListStore.data &&
                                               NotificationReadListStore.data
                                                 .list.length > 0 ? (
                                                 <span className="m-0 p-1">
-                                                  {link.Header}
                                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                                   {
                                                     NotificationReadListStore
@@ -145,11 +154,11 @@ export const NavbarComponent1 = () => {
                                                   }
                                                 </span>
                                               ) : (
-                                                link.Header
-                                              )
-                                            ) : (
-                                              link.Header
-                                            )}
+                                                <span className="m-0 p-1">
+                                                  <i className="fa-solid fa-bell text-muted m-0 p-1" />
+                                                  0
+                                                </span>
+                                              ))}
                                           </small>
                                         </Nav.Link>
                                       </LinkContainer>
