@@ -800,3 +800,93 @@ None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-27 21:26
 000000000000, 127.0.0.1, /api/admin/export/users/, GET, , [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/users/__init__', 2022-04-27 21:45:56.419419
 
 000000000000, 127.0.0.1, /api/admin/export/users/, GET, , [WinError 3] Системе не удается найти указанный путь: 'media/data/temp/users/__init__', 2022-04-27 21:46:22.359134
+
+None, 80.82.77.139, /, GET, , User matching query does not exist., 2022-04-27 21:54:00.751514
+
+None, 130.211.54.158, /, GET, , User matching query does not exist., 2022-04-27 21:54:08.200061
+
+None, 162.142.125.212, /, GET, , User matching query does not exist., 2022-04-27 23:19:59.598249
+
+None, 104.152.52.69, /, GET, , User matching query does not exist., 2022-04-28 03:26:44.156158
+
+None, 165.227.237.213, /, GET, , User matching query does not exist., 2022-04-28 04:26:57.559241
+
+None, 165.227.237.213, /, GET, , User matching query does not exist., 2022-04-28 04:27:00.599293
+
+None, 165.227.237.213, /, GET, , User matching query does not exist., 2022-04-28 04:27:03.568546
+
+None, 165.227.237.213, /, GET, , User matching query does not exist., 2022-04-28 04:27:06.585582
+
+None, 165.227.237.213, /, GET, , User matching query does not exist., 2022-04-28 04:27:09.636765
+
+None, 165.227.237.213, /, GET, , User matching query does not exist., 2022-04-28 04:27:12.762624
+
+None, 165.227.237.213, /, GET, , User matching query does not exist., 2022-04-28 04:27:15.524807
+
+None, 67.205.133.246, /, GET, , User matching query does not exist., 2022-04-28 05:04:46.062253
+
+000000000000, 127.0.0.1, /api/admin/terminal/reboot/, POST, , a bytes-like object is required, not 'str', 2022-04-28 09:44:52.504266
+
+000000000000, 127.0.0.1, /api/admin/terminal/reboot/, POST, , a bytes-like object is required, not 'str', 2022-04-28 09:51:02.557448
+
+None, 167.94.138.61, /, GET, , User matching query does not exist., 2022-04-28 09:54:37.485166
+
+None, 167.94.138.61, /, GET, , User matching query does not exist., 2022-04-28 09:54:38.928305
+
+None, 104.152.52.3, /, GET, , User matching query does not exist., 2022-04-28 10:16:37.583049
+
+None, 192.168.1.202, /, GET, , User matching query does not exist., 2022-04-28 10:19:00.657071
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-28 10:47:52.395427
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 10:47:52.587914
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 10:47:54.885847
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 10:47:55.035448
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 10:47:57.359235
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 10:47:57.599592
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 10:47:59.954588
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 10:48:00.206885
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 10:48:02.119800
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 10:48:02.269398
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 10:48:05.026085
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 10:48:05.172689
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 10:48:11.569643
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 10:48:11.719239
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 10:48:15.418406
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 10:48:15.600922
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 10:48:22.315021
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 10:48:22.553387
+
+000000000000, 127.0.0.1, /api/admin/create/users/, POST, , [Errno 2] No such file or directory: 'users.xlsx', 2022-04-28 11:38:44.175388
+
+000000000000, 127.0.0.1, /api/admin/create/users/, POST, , [Errno 2] No such file or directory: 'users.xlsx', 2022-04-28 11:39:00.469911
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 11:46:43.826899
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 11:46:44.922972
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 11:46:45.634068
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-04-28 11:58:11.790831
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 11:58:11.985335
+
+None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-28 11:58:13.654076
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-28 11:58:13.796694

@@ -53,7 +53,7 @@ export const IdeaCreatePage = () => {
     dispatch({ type: constant.IdeaCreateStore.reset });
   }, []);
 
-  // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
+  // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const CreateConfirm = () => {
     dispatch(action.Idea.Create({ form: idea }));
@@ -161,8 +161,8 @@ export const IdeaCreatePage = () => {
                     Подразделение:
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
-                      value={idea.subdivision}
                       required
+                      value={idea.subdivision}
                       onChange={(event) =>
                         setIdea({
                           ...idea,

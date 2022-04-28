@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import { Base3 } from "../../components/ui/base";
+import { Base3 } from "../components/ui/base";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import * as constant from "../../components/constant";
-import * as action from "../../components/action";
+import * as constant from "../components/constant";
+import * as action from "../components/action";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 

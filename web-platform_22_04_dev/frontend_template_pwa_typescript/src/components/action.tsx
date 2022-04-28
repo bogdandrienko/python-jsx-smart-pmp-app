@@ -211,6 +211,40 @@ export class Admin {
       );
     };
   }
+  // @ts-ignore
+  static RebootTerminal({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
+          url: `/api/admin/terminal/reboot/`,
+          method: constant.HttpMethods.POST(),
+          timeout: 20000,
+          constant: constant.terminalRebootStore,
+          authentication: true,
+        })
+      );
+    };
+  }
+  // @ts-ignore
+  static CreateUsers({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
+          url: `/api/admin/create/users/`,
+          method: constant.HttpMethods.POST(),
+          timeout: 10000000,
+          constant: constant.adminCreateUsersStore,
+          authentication: true,
+        })
+      );
+    };
+  }
 }
 export class Notification {
   // @ts-ignore

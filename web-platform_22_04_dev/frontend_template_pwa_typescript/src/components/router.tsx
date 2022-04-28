@@ -20,7 +20,7 @@ import { IdeaPublicPage } from "../pages/3_progress/IdeaPublicPage";
 import { IdeaCreatePage } from "../pages/3_progress/IdeaCreatePage";
 import { IdeaTemplatePage } from "../pages/3_progress/IdeaTemplatePage";
 import { ChangeProfilePage } from "../pages/2_profile/ChangeProfilePage";
-import { PostListUnlimitedScrollPage } from "../pages/7_develop/PostListUnlimitedScrollPage";
+import { PostListUnlimitedScrollPage } from "../test/PostListUnlimitedScrollPage";
 import { RecoverPasswordPage } from "../pages/2_profile/RecoverPasswordPage";
 import { UsersRatingsListPage } from "../pages/1_main/UsersRatingsListPage";
 import { NewsPage } from "../pages/1_main/NewsPage";
@@ -33,6 +33,9 @@ import { VacationPage } from "../pages/5_sup/VacationPage";
 import { IdeaRatingListPage } from "../pages/3_progress/IdeaRatingListPage";
 import { TestPage } from "../pages/7_develop/TestPage";
 import { ExportUsersPage } from "../pages/6_moderate/ExportUsersPage";
+import { TerminalRebootPage } from "../pages/6_moderate/TerminalRebootPage";
+import { CreateOrChangeUsersPage } from "../pages/6_moderate/CreateOrChangeUsersPage";
+import { ActionsUserPage } from "../pages/6_moderate/ActionsUserPage";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -689,12 +692,15 @@ export const modules = [
             Header: "Действия над аккаунтом пользователя",
             Access: ["moderator_oit"],
             Active: true,
-            Link: "/admin_actions_user",
+            Link: "/admin/actions/user",
             ExternalLink: false,
             ShowLink: true,
             Title: "Действия над аккаунтом пользователя",
             Description:
               "страница действий модератора над аккаунтом пользователя",
+            path: "/admin/actions/user",
+            element: <ActionsUserPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-dark",
@@ -702,14 +708,17 @@ export const modules = [
           },
           {
             Header: "Создать или изменить пользователей",
-            Access: [""],
+            Access: ["superuser"],
             Active: true,
-            Link: "/admin_create_or_change_users",
+            Link: "/admin/create/users",
             ExternalLink: false,
             ShowLink: true,
             Title: "Создать или изменить пользователей",
             Description:
               "страница с формой и настройками для создания или изменения пользователей",
+            path: "/admin/create/users",
+            element: <CreateOrChangeUsersPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-dark",
@@ -736,18 +745,21 @@ export const modules = [
       },
       {
         Header: "Терминалы скуд",
-        Access: ["moderator_otiz"],
+        Access: ["superuser"],
         Image: "/static/img/modules/earth.png",
         Links: [
           {
             Header: "Перезагрузка терминалов",
-            Access: ["moderator_otiz"],
+            Access: ["superuser"],
             Active: true,
-            Link: "/terminal",
+            Link: "/admin/terminal/reboot",
             ExternalLink: false,
             ShowLink: true,
             Title: "Перезагрузка терминалов",
             Description: "страница с настройками для перезагрузки терминалов",
+            path: "/admin/terminal/reboot",
+            element: <TerminalRebootPage />,
+            private: true,
             Logic: true,
             Redirect: true,
             Style: "text-dark",

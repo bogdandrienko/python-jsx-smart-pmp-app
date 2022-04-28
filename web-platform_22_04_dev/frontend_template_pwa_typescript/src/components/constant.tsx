@@ -112,8 +112,18 @@ export const UsersReadListStore = util.StoreReducerConstructorUtility(
   connectReducer
 );
 
+export const adminCreateUsersStore = util.StoreReducerConstructorUtility(
+  "adminCreateUsersStore",
+  connectReducer
+);
+
 export const adminExportUsersStore = util.StoreReducerConstructorUtility(
   "adminExportUsersStore",
+  connectReducer
+);
+
+export const terminalRebootStore = util.StoreReducerConstructorUtility(
+  "terminalRebootStore",
   connectReducer
 );
 

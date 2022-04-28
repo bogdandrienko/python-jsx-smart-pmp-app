@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Base3 } from "../../components/ui/base";
+import { Base3 } from "../components/ui/base";
 import { useDispatch, useSelector } from "react-redux";
-import * as constant from "../../components/constant";
-import * as action from "../../components/action";
-import AuthContext from "../../components/context";
+import * as constant from "../components/constant";
+import * as action from "../components/action";
+import AuthContext from "../components/context";
 
 export const PostPage = () => {
   const { isAuth, setIsAuth } = useContext(AuthContext);

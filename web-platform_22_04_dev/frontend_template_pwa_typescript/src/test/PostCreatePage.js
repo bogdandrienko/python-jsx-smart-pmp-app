@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Base3 } from "../../components/ui/base";
+import { Base3 } from "../components/ui/base";
 import { useDispatch, useSelector } from "react-redux";
-import * as action from "../../components/action";
-import * as constant from "../../components/constant";
+import * as action from "../components/action";
+import * as constant from "../components/constant";
 
 export const PostCreatePage = () => {
   const dispatch = useDispatch();

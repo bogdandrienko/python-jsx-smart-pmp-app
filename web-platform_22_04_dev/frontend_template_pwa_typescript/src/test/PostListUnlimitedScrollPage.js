@@ -1,31 +1,31 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 import React, { useEffect, useRef, useState } from "react";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
-import { Button1 } from "../../components/ui/button";
-import { Loader1 } from "../../components/ui/loader";
-import { useFetching, useObserver, usePosts } from "../../components/hook";
-import { PostList, PostForm, PostFilter } from "../../components/ui/component";
-import { Base3 } from "../../components/ui/base";
-import { Modal1 } from "../../components/ui/modal";
-import { Select2 } from "../../components/ui/select";
+import { Button1 } from "../components/ui/button";
+import { Loader1 } from "../components/ui/loader";
+import { useFetching, useObserver, usePosts } from "../components/hook";
+import { PostList, PostForm, PostFilter } from "../components/ui/component";
+import { Base3 } from "../components/ui/base";
+import { Modal1 } from "../components/ui/modal";
+import { Select2 } from "../components/ui/select";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as action from "../../components/action";
-import * as component from "../../components/ui/component";
-import * as constant from "../../components/constant";
-import * as context from "../../components/context";
-import * as hook from "../../components/hook";
-import * as router from "../../components/router";
-import * as store from "../../components/store";
-import * as util from "../../components/util";
+import * as action from "../components/action";
+import * as component from "../components/ui/component";
+import * as constant from "../components/constant";
+import * as context from "../components/context";
+import * as hook from "../components/hook";
+import * as router from "../components/router";
+import * as store from "../components/store";
+import * as util from "../components/util";
 
-import * as base from "../../components/ui/base";
-import * as captcha from "../../components/ui/captcha";
-import * as footer from "../../components/ui/footer";
-import * as modal from "../../components/ui/modal";
-import * as navbar from "../../components/ui/navbar";
-import * as paginator from "../../components/ui/paginator";
+import * as base from "../components/ui/base";
+import * as captcha from "../components/ui/captcha";
+import * as footer from "../components/ui/footer";
+import * as modal from "../components/ui/modal";
+import * as navbar from "../components/ui/navbar";
+import * as paginator from "../components/ui/paginator";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 

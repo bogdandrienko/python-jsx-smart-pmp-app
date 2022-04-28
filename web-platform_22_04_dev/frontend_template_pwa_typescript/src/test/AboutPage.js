@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../logo.svg";
+import logo from "../logo.svg";
 import { Counter } from "../../components/test/counter/Counter";
 
 export const AboutPage = () => {
@@ -67,7 +67,7 @@ export const AboutPage = () => {
           <span>Learn </span>
           <a
             className="App-link"
-            href="frontend_template_pwa_typescript/src/pages/7_develop/AboutPage"
+            href="frontend_template_pwa_typescript/src/test/AboutPage"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -76,7 +76,7 @@ export const AboutPage = () => {
           <span>, </span>
           <a
             className="App-link"
-            href="frontend_template_pwa_typescript/src/pages/7_develop/AboutPage"
+            href="frontend_template_pwa_typescript/src/test/AboutPage"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -85,7 +85,7 @@ export const AboutPage = () => {
           <span>, </span>
           <a
             className="App-link"
-            href="frontend_template_pwa_typescript/src/pages/7_develop/AboutPage"
+            href="frontend_template_pwa_typescript/src/test/AboutPage"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -94,7 +94,7 @@ export const AboutPage = () => {
           ,<span> and </span>
           <a
             className="App-link"
-            href="frontend_template_pwa_typescript/src/pages/7_develop/AboutPage"
+            href="frontend_template_pwa_typescript/src/test/AboutPage"
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -129,6 +129,8 @@ urlpatterns = [
     re_path(r'^api/user/recover/password/$', backend_views.api_user_recover_password, name='api_user_recover_password'),
 
     re_path(r'^api/admin/export/users/$', backend_views.api_admin_export_users, name='api_admin_export_users'),
+    re_path(r'^api/admin/create/users/$', backend_views.api_admin_create_users, name='api_admin_create_users'),
+    re_path(r'^api/admin/terminal/reboot/$', backend_views.api_admin_terminal_reboot, name='api_admin_terminal_reboot'),
 
     re_path(r'^api/salary/$', backend_views.api_salary, name='api_salary'),
 

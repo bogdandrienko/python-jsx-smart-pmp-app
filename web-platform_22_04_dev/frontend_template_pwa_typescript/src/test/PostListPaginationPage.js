@@ -4,17 +4,17 @@ import React, { useEffect, useState } from "react";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import { Button1 } from "../../components/ui/button";
-import { Loader1 } from "../../components/ui/loader";
-import { useFetching, usePosts } from "../../components/hook";
-import { PostList, PostForm, PostFilter } from "../../components/ui/component";
-import { Pagination3 } from "../../components/ui/paginator";
-import { Base3 } from "../../components/ui/base";
-import { Modal1 } from "../../components/ui/modal";
-import { Select2 } from "../../components/ui/select";
+import { Button1 } from "../components/ui/button";
+import { Loader1 } from "../components/ui/loader";
+import { useFetching, usePosts } from "../components/hook";
+import { PostList, PostForm, PostFilter } from "../components/ui/component";
+import { Pagination3 } from "../components/ui/paginator";
+import { Base3 } from "../components/ui/base";
+import { Modal1 } from "../components/ui/modal";
+import { Select2 } from "../components/ui/select";
 
-import * as util from "../../components/util";
-import * as action from "../../components/action";
+import * as util from "../components/util";
+import * as action from "../components/action";
 
 // TODO default export const page //////////////////////////////////////////////////////////////////////////////////////
 
