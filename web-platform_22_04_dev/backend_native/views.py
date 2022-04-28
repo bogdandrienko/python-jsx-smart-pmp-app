@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
 
-from backend import service as backend_service, models as backend_models
+from backend import utils as backend_service, models as backend_models
 
 # Create your views here.
 from backend.models import UserModel

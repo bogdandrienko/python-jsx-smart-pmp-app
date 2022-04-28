@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-from backend import models as backend_models, service as backend_service
+from backend import models as backend_models, utils as backend_service
 
 
 def user_counter(request):

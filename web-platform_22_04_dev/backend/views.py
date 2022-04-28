@@ -35,7 +35,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 # TODO custom modules ##################################################################################################
 
-from backend import models as backend_models, serializers as backend_serializers, service as backend_service
+from backend import models as backend_models, serializers as backend_serializers, utils as backend_utils
 
 # TODO custom variables ################################################################################################
 
@@ -75,7 +75,7 @@ def api_auth_routes(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -144,17 +144,17 @@ def api_auth_routes(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -170,7 +170,7 @@ def index(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -186,14 +186,14 @@ def index(request):
 
                     return render(request, 'production/index.html', response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return render(request, "backend/404.html")
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -208,7 +208,7 @@ def api_auth_ratings_list(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -324,16 +324,16 @@ def api_auth_ratings_list(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -350,7 +350,7 @@ def api_any_user_login(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -410,17 +410,17 @@ def api_any_user_login(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -435,7 +435,7 @@ def api_auth_user_detail(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -452,17 +452,17 @@ def api_auth_user_detail(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -477,7 +477,7 @@ def api_any_user_recover_find(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -512,17 +512,17 @@ def api_any_user_recover_find(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -537,7 +537,7 @@ def api_any_user_recover_check_answer(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -569,17 +569,17 @@ def api_any_user_recover_check_answer(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -594,7 +594,7 @@ def api_any_user_recover_send_email(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -637,7 +637,7 @@ def api_any_user_recover_send_email(request):
                         text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M')}_" \
                                f"{user_model.password_char_field[-1]} {str(user_model.user_foreign_key_field)}" \
                                f"{user_model.password_char_field}"
-                        encrypt_text = backend_service.EncryptingClass.encrypt_text(
+                        encrypt_text = backend_utils.EncryptingClass.encrypt_text(
                             text,
                             '31284'
                         )
@@ -667,17 +667,17 @@ def api_any_user_recover_send_email(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -692,7 +692,7 @@ def api_any_user_recover_check_email(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -728,17 +728,17 @@ def api_any_user_recover_check_email(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -753,7 +753,7 @@ def api_any_user_recover_change_password(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -789,17 +789,17 @@ def api_any_user_recover_change_password(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -814,7 +814,7 @@ def api_auth_user_change(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -862,17 +862,17 @@ def api_auth_user_change(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -887,7 +887,7 @@ def api_auth_user_change_password(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -923,17 +923,17 @@ def api_auth_user_change_password(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -948,7 +948,7 @@ def api_auth_user_list_all(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -977,17 +977,17 @@ def api_auth_user_list_all(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -1002,7 +1002,7 @@ def api_auth_user_notification(request, notification_id=-1):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -1045,10 +1045,10 @@ def api_auth_user_notification(request, notification_id=-1):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
@@ -1082,17 +1082,17 @@ def api_auth_user_notification(request, notification_id=-1):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -1107,7 +1107,7 @@ def api_auth_user_notification_id_delete(request, notification_id):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -1127,17 +1127,17 @@ def api_auth_user_notification_id_delete(request, notification_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -1154,7 +1154,7 @@ def api_auth_idea(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -1202,10 +1202,10 @@ def api_auth_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_LIST":  # clean
                 try:
@@ -1339,10 +1339,10 @@ def api_auth_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_DETAIL":  # clean
                 try:
@@ -1362,10 +1362,10 @@ def api_auth_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_CHANGE":
                 try:
@@ -1423,10 +1423,10 @@ def api_auth_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_MODERATE":
                 try:
@@ -1476,10 +1476,10 @@ def api_auth_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_COMMENT_CREATE":  # clean
                 try:
@@ -1501,10 +1501,10 @@ def api_auth_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_COMMENT_DELETE":
                 try:
@@ -1522,10 +1522,10 @@ def api_auth_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_RATING_CREATE":
                 try:
@@ -1550,10 +1550,10 @@ def api_auth_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "IDEA_AUTHOR_LIST":
                 try:
@@ -1663,16 +1663,16 @@ def api_auth_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -1689,7 +1689,7 @@ def api_auth_user_salary(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -1707,7 +1707,7 @@ def api_auth_user_salary(request):
                     # TODO action ######################################################################################
 
                     # Get json response from 1c
-                    key = backend_service.UtilsClass.create_encrypted_password(
+                    key = backend_utils.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=10
                     )
@@ -1729,7 +1729,7 @@ def api_auth_user_salary(request):
                     h.add_credentials(_login, _password)
                     response, content = h.request(url)
 
-                    data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    data = backend_utils.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
                     error_word_list = ['ошибка', 'error', 'failed']
                     if data.find('send') == 0:
                         return Response({"error": f"{data.split('send')[1].strip()}"})
@@ -1828,8 +1828,8 @@ def api_auth_user_salary(request):
                                                 _summ_local)
                                             _summ += _summ_local
                                         except Exception as error_:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request,
-                                                                                           error=error_)
+                                            backend_utils.DjangoClass.LoggingClass.error(request=request,
+                                                                                         error=error_)
                                 json_data['global_objects'][table]['Ends'] = {
                                     'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
                                     'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
@@ -1845,8 +1845,8 @@ def api_auth_user_salary(request):
                                                 _summ_local)
                                             _summ += _summ_local
                                         except Exception as error_:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request,
-                                                                                           error=error_)
+                                            backend_utils.DjangoClass.LoggingClass.error(request=request,
+                                                                                         error=error_)
                                 json_data['global_objects'][table]['Ends'] = {
                                     'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
                                 }
@@ -1863,15 +1863,15 @@ def api_auth_user_salary(request):
                                 json_data[_key] = return_float_value(json_data[_key])
 
                         # create excel
-                        key = backend_service.UtilsClass.create_encrypted_password(
+                        key = backend_utils.UtilsClass.create_encrypted_password(
                             _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                             _length=24
                         )
-                        date = backend_service.DateTimeUtils.get_current_date()
+                        date = backend_utils.DateTimeUtils.get_current_date()
                         path = 'media/data/temp/salary'
                         file_name = f"salary_{key}_{date}.xlsx"
-                        workbook = backend_service.ExcelClass.workbook_create()
-                        sheet = backend_service.ExcelClass.workbook_activate(workbook)
+                        workbook = backend_utils.ExcelClass.workbook_create()
+                        sheet = backend_utils.ExcelClass.workbook_activate(workbook)
 
                         # Delete old files
                         for root, dirs, files in os.walk(f"static/{path}", topdown=True):
@@ -1884,7 +1884,7 @@ def api_auth_user_salary(request):
                                     pass
 
                         # Create 'TitleComponent'
-                        backend_service.ExcelClass.set_sheet_value(
+                        backend_utils.ExcelClass.set_sheet_value(
                             col=1,
                             row=1,
                             value='РАСЧЕТНЫЙ ЛИСТ',
@@ -1907,7 +1907,7 @@ def api_auth_user_salary(request):
                         row_i_1 = 1 + 1
                         for header in header_arr[0:4]:
                             col_i = 1
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=row_i_1,
                                 value=header,
@@ -1920,7 +1920,7 @@ def api_auth_user_salary(request):
                         row_i_2 = 1 + 1
                         for header in header_arr[4:8]:
                             col_i = 6
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=row_i_2,
                                 value=header,
@@ -1933,7 +1933,7 @@ def api_auth_user_salary(request):
                         row_i_3 = row_i_1
                         for header in header_arr[8:8 + header_len_devide // 2]:
                             col_i = 1
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=row_i_3,
                                 value=header,
@@ -1946,7 +1946,7 @@ def api_auth_user_salary(request):
                         row_i_4 = row_i_2
                         for header in header_arr[8 + header_len_devide // 2:]:
                             col_i = 6
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=row_i_4,
                                 value=header,
@@ -1991,7 +1991,7 @@ def api_auth_user_salary(request):
                             for value in body:
                                 if isinstance(value, int) and value == 0:
                                     value = ''
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_1,
                                     value=value,
@@ -2007,7 +2007,7 @@ def api_auth_user_salary(request):
                         for body in bodyes_arr_2:
                             col_i = 6
                             for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_2,
                                     value=value,
@@ -2029,7 +2029,7 @@ def api_auth_user_salary(request):
                         for body in bodyes_arr_3:
                             col_i = 1
                             for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_3,
                                     value=value,
@@ -2044,7 +2044,7 @@ def api_auth_user_salary(request):
                         for body in bodyes_arr_4:
                             col_i = 6
                             for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_4,
                                     value=value,
@@ -2066,7 +2066,7 @@ def api_auth_user_salary(request):
                         for body in bodyes_arr_5:
                             col_i = 1
                             for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_5,
                                     value=value,
@@ -2085,7 +2085,7 @@ def api_auth_user_salary(request):
                         bold_arr.append(body_low_row_6)
                         for body in ['.', 'Вид', *lowest]:
                             col_i = 6
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=body_low_row_6,
                                 value=body,
@@ -2114,19 +2114,19 @@ def api_auth_user_salary(request):
                         #######################################################
                         font_headers = Font(name='Arial', size=8, bold=False)
                         for row in range(1, header_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.font = font_headers
 
                         font_bodyes = Font(name='Arial', size=7, bold=False)
                         for row in range(header_low_row, body_low_row + 1):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.font = font_bodyes
 
                         font_tables = Font(name='Arial', size=8, bold=True)
                         for row in [header_low_row, body_color_2, body_color_3]:
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.font = font_tables
 
@@ -2135,20 +2135,20 @@ def api_auth_user_salary(request):
                         # shrink_to_fit = Alignment(shrink_to_fit=True)
                         aligment_center = Alignment(horizontal='center', vertical='center', wrap_text=True,
                                                     shrink_to_fit=True)
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             cell = sheet[f'{col}{1}']
                             cell.alignment = aligment_center
                         aligment_left = Alignment(horizontal='left', vertical='center', wrap_text=True,
                                                   shrink_to_fit=True)
                         for row in range(2, header_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.alignment = aligment_left
 
                         aligment_right = Alignment(horizontal='right', vertical='center', wrap_text=True,
                                                    shrink_to_fit=True)
                         for row in range(header_low_row, body_low_row + 1):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 if col == 'A' or col == 'F':
                                     cell.alignment = aligment_left
@@ -2179,17 +2179,17 @@ def api_auth_user_salary(request):
                             # bottom=side_think
                         )
                         for row in range(header_low_row, body_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 if col == 'G' and row > body_low_row_4 or col == 'H' and row > body_low_row_4:
                                     pass
                                 else:
                                     cell = sheet[f'{col}{row}']
                                     cell.border = border_vertical_light
-                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(1)}{row}']
+                            cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(1)}{row}']
                             cell.border = border_vertical_middle
-                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(6)}{row}']
+                            cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(6)}{row}']
                             cell.border = border_vertical_middle
-                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(9)}{row}']
+                            cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(9)}{row}']
                             cell.border = border_vertical_middle
                         side_think = Side(border_style="dotted", color="FF808080")
                         # {'mediumDashDotDot', 'thin', 'dashed', 'mediumDashed', 'dotted', 'double', 'thick',
@@ -2201,7 +2201,7 @@ def api_auth_user_salary(request):
                             bottom=side_think
                         )
                         for row in range(1, header_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.border = border_think
                         side_medium = Side(border_style="thin", color="FF808080")
@@ -2211,11 +2211,11 @@ def api_auth_user_salary(request):
                             right=side_medium,
                             bottom=side_medium
                         )
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
                                 cell = sheet[f'{col}{row - 1}']
                                 cell.border = border_medium
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             cell = sheet[f'{col}{body_low_row}']
                             cell.border = border_horizontal_middle
                         #######################################################
@@ -2223,36 +2223,36 @@ def api_auth_user_salary(request):
                         # Colored styles
                         #######################################################
                         color_green = PatternFill(fgColor="E6E6FF", fill_type="solid")
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
                                 cell = sheet[f'{col}{row}']
                                 cell.fill = color_green
                                 cell = sheet[f'{col}{row - 1}']
                                 cell.border = border_medium
                         color_yellow = PatternFill(fgColor="d0ffd8", fill_type="solid")
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
                             cell = sheet[f'{col}{body_low_row_1 - 1}']
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
                             cell = sheet[f'{col}{body_low_row_2 - 1}']
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
                             cell = sheet[f'{col}{body_low_row_3 - 1}']
                             cell.fill = color_yellow
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
                             cell = sheet[f'{col}{body_low_row_4 - 1}']
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
                             cell = sheet[f'{col}{body_low_row_5 - 1}']
                             cell.fill = color_yellow
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
                             cell = sheet[f'{col}{body_low_row_6 - 1}']
                             cell.fill = color_yellow
 
@@ -2260,7 +2260,7 @@ def api_auth_user_salary(request):
 
                         # Height and width styles
                         #######################################################
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             width = 1
                             for row in range(1, body_low_row + 1):
                                 cell = sheet[f'{col}{row}']
@@ -2294,7 +2294,7 @@ def api_auth_user_salary(request):
                         sheet.protection.enable()
                         #######################################################
                         try:
-                            backend_service.ExcelClass.workbook_save(
+                            backend_utils.ExcelClass.workbook_save(
                                 workbook=workbook,
                                 excel_file=f"static/{path}/{file_name}"
                             )
@@ -2321,17 +2321,17 @@ def api_auth_user_salary(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2348,7 +2348,7 @@ def api_auth_vacation(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -2365,7 +2365,7 @@ def api_auth_vacation(request):
 
                     # TODO action ######################################################################################
 
-                    key = backend_service.UtilsClass.create_encrypted_password(
+                    key = backend_utils.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=10
                     )
@@ -2387,7 +2387,7 @@ def api_auth_vacation(request):
                     h.add_credentials(_login, _password)
                     response, content = h.request(url)
 
-                    data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    data = backend_utils.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
                     error_word_list = ['ошибка', 'error', 'failed']
                     if data.find('send') == 0:
                         return Response({"error": f"{data.split('send')[1].strip()}"})
@@ -2449,17 +2449,17 @@ def api_auth_vacation(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2476,7 +2476,7 @@ def api_basic_admin_user_temp(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -2516,17 +2516,17 @@ def api_basic_admin_user_temp(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 else:
                     return Response({"error": "This action not allowed for this method."})
             except Exception as error:
-                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                 return Response({"error": "Произошла ошибка!"})
         else:
             return Response({"error": "Этот метод не реализован для этой точки доступа."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2541,7 +2541,7 @@ def api_auth_admin_terminal_reboot(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -2587,17 +2587,17 @@ def api_auth_admin_terminal_reboot(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2612,7 +2612,7 @@ def api_auth_admin_check_user(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -2638,17 +2638,17 @@ def api_auth_admin_check_user(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2663,7 +2663,7 @@ def api_auth_admin_change_user_password(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -2702,17 +2702,17 @@ def api_auth_admin_change_user_password(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2727,7 +2727,7 @@ def api_auth_admin_change_user_activity(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -2763,17 +2763,17 @@ def api_auth_admin_change_user_activity(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2788,7 +2788,7 @@ def api_auth_admin_create_or_change_users(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -2911,7 +2911,7 @@ def api_auth_admin_create_or_change_users(request):
                                         try:
                                             group.user_many_to_many_field.remove(user_model)
                                         except Exception as error:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                            backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                                 groups = [group.strip() for group in str(groups).lower().strip().split(',')]
                                 for group in groups:
                                     if len(group) > 1:
@@ -2921,28 +2921,28 @@ def api_auth_admin_create_or_change_users(request):
                                             )[0]
                                             group_model.user_many_to_many_field.add(user_model)
                                         except Exception as error:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                                if backend_service.DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                                            backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
+                                if backend_utils.DjangoClass.DefaultSettingsClass.get_actions_print_value():
                                     print(row, username)
                             except Exception as error:
-                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                         response = {"response": "Пользователи успешно созданы/изменены."}
                     else:
                         response = {"error": "Ошибка чтения файла!"}
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -2957,7 +2957,7 @@ def api_auth_admin_export_users(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -2970,11 +2970,11 @@ def api_auth_admin_export_users(request):
 
                     # TODO action ######################################################################################
 
-                    key = backend_service.UtilsClass.create_encrypted_password(
+                    key = backend_utils.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=24
                     )
-                    date = backend_service.DateTimeUtils.get_current_date()
+                    date = backend_utils.DateTimeUtils.get_current_date()
                     path = 'media/data/temp/users'
                     file_name = f"users_{key}_{date}.xlsx"
                     workbook = openpyxl.Workbook()
@@ -2989,7 +2989,7 @@ def api_auth_admin_export_users(request):
                                 if date != date_file:
                                     os.remove(f'{path}/{file}')
                             except Exception as error:
-                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     #######################################################
 
                     users = User.objects.filter(is_superuser=False)
@@ -3086,7 +3086,7 @@ def api_auth_admin_export_users(request):
                             secret_answer_char_field = user_model.secret_answer_char_field
                             set_value(_col="S", _row=_index, _value=secret_answer_char_field, _sheet=sheet)
                         except Exception as error:
-                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                            backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     # Set font
                     #######################################################
                     font_b = Font(name='Arial', size=8, bold=False)
@@ -3110,7 +3110,7 @@ def api_auth_admin_export_users(request):
                     #######################################################
 
                     try:
-                        backend_service.ExcelClass.workbook_save(
+                        backend_utils.ExcelClass.workbook_save(
                             workbook=workbook,
                             excel_file=f"static/{path}/{file_name}"
                         )
@@ -3120,17 +3120,17 @@ def api_auth_admin_export_users(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -3147,7 +3147,7 @@ def api_auth_rational(request, rational_id=-1):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -3165,10 +3165,10 @@ def api_auth_rational(request, rational_id=-1):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 try:
@@ -3244,10 +3244,10 @@ def api_auth_rational(request, rational_id=-1):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
         if req_inst.method == "POST":
 
@@ -3280,7 +3280,7 @@ def api_auth_rational(request, rational_id=-1):
                         count = count[0].id + 1
                     else:
                         count = 1
-                    number = f"{count}_{backend_service.DateTimeUtils.get_current_date()}"
+                    number = f"{count}_{backend_utils.DateTimeUtils.get_current_date()}"
                     author_1_foreign = req_inst.user_model
                     author_1_perc = user1
 
@@ -3375,10 +3375,10 @@ def api_auth_rational(request, rational_id=-1):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                 return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "RATIONAL_LIST":
                 try:
@@ -3454,10 +3454,10 @@ def api_auth_rational(request, rational_id=-1):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "RATIONAL_MODERATE":
                 try:
@@ -3503,16 +3503,16 @@ def api_auth_rational(request, rational_id=-1):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -3526,7 +3526,7 @@ def test(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -3540,17 +3540,17 @@ def test(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return render(request, 'test/index.html', response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return render(request, "backend/404.html")
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -3565,7 +3565,7 @@ def api_any_post(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -3598,17 +3598,17 @@ def api_any_post(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -3623,7 +3623,7 @@ def api_any_post_id(request, post_id):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -3641,17 +3641,17 @@ def api_any_post_id(request, post_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -3666,7 +3666,7 @@ def api_any_post_id_comments(request, post_id):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -3690,17 +3690,17 @@ def api_any_post_id_comments(request, post_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             else:
                 return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -3769,7 +3769,7 @@ def api_post(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -3801,13 +3801,13 @@ def api_post(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         if req_inst.method == "POST":
@@ -3837,19 +3837,19 @@ def api_post(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(4)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -3865,7 +3865,7 @@ def api_post_id(request, post_id):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -3885,13 +3885,13 @@ def api_post_id(request, post_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(1)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         if req_inst.method == "DELETE":
@@ -3910,19 +3910,19 @@ def api_post_id(request, post_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(4)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -3945,7 +3945,7 @@ def api_user(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -3979,19 +3979,19 @@ def api_user(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -4006,7 +4006,7 @@ def api_user_recover(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -4056,7 +4056,7 @@ def api_user_recover(request):
                         user_model = backend_models.UserModel.objects.get(
                             user_foreign_key_field=User.objects.get(username=username)
                         )
-                        decrypt_text = backend_service.EncryptingClass.decrypt_text(
+                        decrypt_text = backend_utils.EncryptingClass.decrypt_text(
                             recover_password, user_model.password_char_field
                         )
                         text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M')}_" \
@@ -4083,16 +4083,16 @@ def api_user_recover(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -4107,7 +4107,7 @@ def api_user_recover_email(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -4150,7 +4150,7 @@ def api_user_recover_email(request):
                         text = f"{datetime.datetime.now().strftime('%Y-%m-%dT%H:%M')}_" \
                                f"{user_model.password_char_field[-1]} {str(user_model.user_foreign_key_field)}" \
                                f"{user_model.password_char_field}"
-                        encrypt_text = backend_service.EncryptingClass.encrypt_text(
+                        encrypt_text = backend_utils.EncryptingClass.encrypt_text(
                             text,
                             '31284'
                         )
@@ -4180,16 +4180,16 @@ def api_user_recover_email(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -4204,7 +4204,7 @@ def api_user_recover_password(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -4247,16 +4247,16 @@ def api_user_recover_password(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -4271,7 +4271,7 @@ def api_admin_export_users(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -4284,11 +4284,11 @@ def api_admin_export_users(request):
 
                     # TODO action ######################################################################################
 
-                    key = backend_service.UtilsClass.create_encrypted_password(
+                    key = backend_utils.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=24
                     )
-                    date = backend_service.DateTimeUtils.get_current_date()
+                    date = backend_utils.DateTimeUtils.get_current_date()
                     path = 'media/data/temp/users'
                     file_name = f"users_{key}_{date}.xlsx"
                     workbook = openpyxl.Workbook()
@@ -4303,7 +4303,7 @@ def api_admin_export_users(request):
                                 if date != date_file:
                                     os.remove(f'{path}/{file}')
                             except Exception as error:
-                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     #######################################################
 
                     users = User.objects.filter(is_superuser=False)
@@ -4400,7 +4400,7 @@ def api_admin_export_users(request):
                             secret_answer_char_field = user_model.secret_answer_char_field
                             set_value(_col="S", _row=_index, _value=secret_answer_char_field, _sheet=sheet)
                         except Exception as error:
-                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                            backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     # Set font
                     #######################################################
                     font_b = Font(name='Arial', size=8, bold=False)
@@ -4424,7 +4424,7 @@ def api_admin_export_users(request):
                     #######################################################
 
                     try:
-                        backend_service.ExcelClass.workbook_save(
+                        backend_utils.ExcelClass.workbook_save(
                             workbook=workbook,
                             excel_file=f"static/{path}/{file_name}"
                         )
@@ -4434,19 +4434,19 @@ def api_admin_export_users(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -4461,7 +4461,7 @@ def api_admin_create_users(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -4589,7 +4589,7 @@ def api_admin_create_users(request):
                                         try:
                                             group.user_many_to_many_field.remove(user_model)
                                         except Exception as error:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                            backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                                 groups = [group.strip() for group in str(groups).lower().strip().split(',')]
                                 for group in groups:
                                     if len(group) > 1:
@@ -4599,30 +4599,30 @@ def api_admin_create_users(request):
                                             )[0]
                                             group_model.user_many_to_many_field.add(user_model)
                                         except Exception as error:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
-                                if backend_service.DjangoClass.DefaultSettingsClass.get_actions_print_value():
+                                            backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
+                                if backend_utils.DjangoClass.DefaultSettingsClass.get_actions_print_value():
                                     print(row, username)
                             except Exception as error:
-                                backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                                backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                         response = {"response": "Пользователи успешно созданы/изменены."}
                     else:
                         response = {"error": "Ошибка чтения файла!"}
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -4637,7 +4637,7 @@ def api_admin_terminal_reboot(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -4686,19 +4686,111 @@ def api_admin_terminal_reboot(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
+        return render(request, "backend/404.html")
+
+
+@api_view(http_method_names=HTTP_METHOD_NAMES)
+@permission_classes([IsAuthenticated])
+def api_admin_recover_password(request):
+    """
+    django-rest-framework
+    """
+
+    try:
+
+        # TODO Request #################################################################################################
+
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
+
+        # TODO Methods #################################################################################################
+
+        if req_inst.method == "GET":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    username = req_inst.get_value(key="username", default="")
+
+                    # TODO action ######################################################################################
+
+                    user = User.objects.get(username=username)
+
+                    response = {"response": backend_serializers.UserSerializer(req_inst.user, many=False).data}
+
+                    # TODO response ####################################################################################
+
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
+
+                    sleep(3)
+
+                    return Response(response)
+                except Exception as error:
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        if req_inst.method == "POST":
+
+            # TODO action ##############################################################################################
+
+            if req_inst.action_type == "":
+                try:
+
+                    # TODO get_value ###################################################################################
+
+                    username = req_inst.get_value(key="username", default="")
+                    password = req_inst.get_value(key="password", default="")
+                    password2 = req_inst.get_value(key="password2", default="")
+
+                    # TODO action ######################################################################################
+
+                    user = User.objects.get(username=username)
+                    user_model = backend_models.UserModel.objects.get(user_foreign_key_field=user)
+                    if len(password) < 1:
+                        response = {"error": "Пароль пустой!"}
+                    elif password != password2:
+                        response = {"error": "Пароли не совпадают!"}
+                    elif password == user_model.password_char_field:
+                        response = {"error": "Пароль такой же как и предыдущий!"}
+                    else:
+                        user.set_password(password)
+                        user.save()
+                        user_model.password_char_field = password
+                        user_model.temp_password_boolean_field = False
+                        user_model.save()
+                        response = {"response": "Изменение успешно проведено."}
+
+                    # TODO response ####################################################################################
+
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
+
+                    sleep(3)
+
+                    return Response(response)
+                except Exception as error:
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
+                    return Response({"error": "This action has error!"})
+            return Response({"error": "This action not allowed for this method."})
+        else:
+            return Response({"error": "This method not allowed for this endpoint."})
+    except Exception as error:
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -4714,7 +4806,7 @@ def api_user_ratings(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -4835,19 +4927,19 @@ def api_user_ratings(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -4862,7 +4954,7 @@ def api_captcha(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -4882,16 +4974,16 @@ def api_captcha(request):
 
                     sleep(3, 5)
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -4906,7 +4998,7 @@ def api_user_login(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -4967,10 +5059,10 @@ def api_user_login(request):
 
                     sleep(2)
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
             if req_inst.action_type == "123":
                 try:
@@ -5002,19 +5094,19 @@ def api_user_login(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(1)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -5029,7 +5121,7 @@ def api_user_detail(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -5046,19 +5138,19 @@ def api_user_detail(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -5073,7 +5165,7 @@ def api_user_password_change(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -5118,19 +5210,19 @@ def api_user_password_change(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(2)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -5145,7 +5237,7 @@ def api_notification(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -5192,13 +5284,13 @@ def api_notification(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         if req_inst.method == "POST":
@@ -5232,19 +5324,19 @@ def api_notification(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -5259,7 +5351,7 @@ def api_notification_id(request, notification_id):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -5279,19 +5371,19 @@ def api_notification_id(request, notification_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(4)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -5306,7 +5398,7 @@ def api_salary(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -5324,7 +5416,7 @@ def api_salary(request):
                     # TODO action ######################################################################################
 
                     # Get json response from 1c
-                    key = backend_service.UtilsClass.create_encrypted_password(
+                    key = backend_utils.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=10
                     )
@@ -5346,7 +5438,7 @@ def api_salary(request):
                     h.add_credentials(_login, _password)
                     response, content = h.request(url)
 
-                    data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    data = backend_utils.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
                     error_word_list = ['ошибка', 'error', 'failed']
                     if data.find('send') == 0:
                         return Response({"error": f"{data.split('send')[1].strip()}"})
@@ -5445,8 +5537,8 @@ def api_salary(request):
                                                 _summ_local)
                                             _summ += _summ_local
                                         except Exception as error_:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request,
-                                                                                           error=error_)
+                                            backend_utils.DjangoClass.LoggingClass.error(request=request,
+                                                                                         error=error_)
                                 json_data['global_objects'][table]['Ends'] = {
                                     'Вид': 'Итого', 'Период': '', 'Дни': _days, 'Часы': _hours,
                                     'ВсегоДни': 0, 'ВсегоЧасы': 0, 'Сумма': return_float_value(_summ)
@@ -5462,8 +5554,8 @@ def api_salary(request):
                                                 _summ_local)
                                             _summ += _summ_local
                                         except Exception as error_:
-                                            backend_service.DjangoClass.LoggingClass.error(request=request,
-                                                                                           error=error_)
+                                            backend_utils.DjangoClass.LoggingClass.error(request=request,
+                                                                                         error=error_)
                                 json_data['global_objects'][table]['Ends'] = {
                                     'Вид': 'Итого', 'Период': '', 'Сумма': return_float_value(_summ)
                                 }
@@ -5480,15 +5572,15 @@ def api_salary(request):
                                 json_data[_key] = return_float_value(json_data[_key])
 
                         # create excel
-                        key = backend_service.UtilsClass.create_encrypted_password(
+                        key = backend_utils.UtilsClass.create_encrypted_password(
                             _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                             _length=24
                         )
-                        date = backend_service.DateTimeUtils.get_current_date()
+                        date = backend_utils.DateTimeUtils.get_current_date()
                         path = 'media/data/temp/salary'
                         file_name = f"salary_{key}_{date}.xlsx"
-                        workbook = backend_service.ExcelClass.workbook_create()
-                        sheet = backend_service.ExcelClass.workbook_activate(workbook)
+                        workbook = backend_utils.ExcelClass.workbook_create()
+                        sheet = backend_utils.ExcelClass.workbook_activate(workbook)
 
                         # Delete old files
                         for root, dirs, files in os.walk(f"static/{path}", topdown=True):
@@ -5501,7 +5593,7 @@ def api_salary(request):
                                     pass
 
                         # Create 'TitleComponent'
-                        backend_service.ExcelClass.set_sheet_value(
+                        backend_utils.ExcelClass.set_sheet_value(
                             col=1,
                             row=1,
                             value='РАСЧЕТНЫЙ ЛИСТ',
@@ -5524,7 +5616,7 @@ def api_salary(request):
                         row_i_1 = 1 + 1
                         for header in header_arr[0:4]:
                             col_i = 1
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=row_i_1,
                                 value=header,
@@ -5537,7 +5629,7 @@ def api_salary(request):
                         row_i_2 = 1 + 1
                         for header in header_arr[4:8]:
                             col_i = 6
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=row_i_2,
                                 value=header,
@@ -5550,7 +5642,7 @@ def api_salary(request):
                         row_i_3 = row_i_1
                         for header in header_arr[8:8 + header_len_devide // 2]:
                             col_i = 1
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=row_i_3,
                                 value=header,
@@ -5563,7 +5655,7 @@ def api_salary(request):
                         row_i_4 = row_i_2
                         for header in header_arr[8 + header_len_devide // 2:]:
                             col_i = 6
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=row_i_4,
                                 value=header,
@@ -5608,7 +5700,7 @@ def api_salary(request):
                             for value in body:
                                 if isinstance(value, int) and value == 0:
                                     value = ''
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_1,
                                     value=value,
@@ -5624,7 +5716,7 @@ def api_salary(request):
                         for body in bodyes_arr_2:
                             col_i = 6
                             for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_2,
                                     value=value,
@@ -5646,7 +5738,7 @@ def api_salary(request):
                         for body in bodyes_arr_3:
                             col_i = 1
                             for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_3,
                                     value=value,
@@ -5661,7 +5753,7 @@ def api_salary(request):
                         for body in bodyes_arr_4:
                             col_i = 6
                             for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_4,
                                     value=value,
@@ -5683,7 +5775,7 @@ def api_salary(request):
                         for body in bodyes_arr_5:
                             col_i = 1
                             for value in body:
-                                backend_service.ExcelClass.set_sheet_value(
+                                backend_utils.ExcelClass.set_sheet_value(
                                     col=col_i,
                                     row=body_low_row_5,
                                     value=value,
@@ -5702,7 +5794,7 @@ def api_salary(request):
                         bold_arr.append(body_low_row_6)
                         for body in ['.', 'Вид', *lowest]:
                             col_i = 6
-                            backend_service.ExcelClass.set_sheet_value(
+                            backend_utils.ExcelClass.set_sheet_value(
                                 col=col_i,
                                 row=body_low_row_6,
                                 value=body,
@@ -5731,19 +5823,19 @@ def api_salary(request):
                         #######################################################
                         font_headers = Font(name='Arial', size=8, bold=False)
                         for row in range(1, header_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.font = font_headers
 
                         font_bodyes = Font(name='Arial', size=7, bold=False)
                         for row in range(header_low_row, body_low_row + 1):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.font = font_bodyes
 
                         font_tables = Font(name='Arial', size=8, bold=True)
                         for row in [header_low_row, body_color_2, body_color_3]:
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.font = font_tables
 
@@ -5752,20 +5844,20 @@ def api_salary(request):
                         # shrink_to_fit = Alignment(shrink_to_fit=True)
                         aligment_center = Alignment(horizontal='center', vertical='center', wrap_text=True,
                                                     shrink_to_fit=True)
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             cell = sheet[f'{col}{1}']
                             cell.alignment = aligment_center
                         aligment_left = Alignment(horizontal='left', vertical='center', wrap_text=True,
                                                   shrink_to_fit=True)
                         for row in range(2, header_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.alignment = aligment_left
 
                         aligment_right = Alignment(horizontal='right', vertical='center', wrap_text=True,
                                                    shrink_to_fit=True)
                         for row in range(header_low_row, body_low_row + 1):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 if col == 'A' or col == 'F':
                                     cell.alignment = aligment_left
@@ -5796,17 +5888,17 @@ def api_salary(request):
                             # bottom=side_think
                         )
                         for row in range(header_low_row, body_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 if col == 'G' and row > body_low_row_4 or col == 'H' and row > body_low_row_4:
                                     pass
                                 else:
                                     cell = sheet[f'{col}{row}']
                                     cell.border = border_vertical_light
-                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(1)}{row}']
+                            cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(1)}{row}']
                             cell.border = border_vertical_middle
-                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(6)}{row}']
+                            cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(6)}{row}']
                             cell.border = border_vertical_middle
-                            cell = sheet[f'{backend_service.ExcelClass.get_column_letter(9)}{row}']
+                            cell = sheet[f'{backend_utils.ExcelClass.get_column_letter(9)}{row}']
                             cell.border = border_vertical_middle
                         side_think = Side(border_style="dotted", color="FF808080")
                         # {'mediumDashDotDot', 'thin', 'dashed', 'mediumDashed', 'dotted', 'double', 'thick',
@@ -5818,7 +5910,7 @@ def api_salary(request):
                             bottom=side_think
                         )
                         for row in range(1, header_low_row):
-                            for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                            for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                                 cell = sheet[f'{col}{row}']
                                 cell.border = border_think
                         side_medium = Side(border_style="thin", color="FF808080")
@@ -5828,11 +5920,11 @@ def api_salary(request):
                             right=side_medium,
                             bottom=side_medium
                         )
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
                                 cell = sheet[f'{col}{row - 1}']
                                 cell.border = border_medium
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             cell = sheet[f'{col}{body_low_row}']
                             cell.border = border_horizontal_middle
                         #######################################################
@@ -5840,36 +5932,36 @@ def api_salary(request):
                         # Colored styles
                         #######################################################
                         color_green = PatternFill(fgColor="E6E6FF", fill_type="solid")
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             for row in [header_low_row + 1, body_color_2 + 1, body_color_3 + 1]:
                                 cell = sheet[f'{col}{row}']
                                 cell.fill = color_green
                                 cell = sheet[f'{col}{row - 1}']
                                 cell.border = border_medium
                         color_yellow = PatternFill(fgColor="d0ffd8", fill_type="solid")
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 5 + 1)]:
                             cell = sheet[f'{col}{body_low_row_1 - 1}']
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
                             cell = sheet[f'{col}{body_low_row_2 - 1}']
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
                             cell = sheet[f'{col}{body_low_row_3 - 1}']
                             cell.fill = color_yellow
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
                             cell = sheet[f'{col}{body_low_row_4 - 1}']
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 3 + 1)]:
                             cell = sheet[f'{col}{body_low_row_5 - 1}']
                             cell.fill = color_yellow
                             cell.fill = color_yellow
 
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(6, 8 + 1)]:
                             cell = sheet[f'{col}{body_low_row_6 - 1}']
                             cell.fill = color_yellow
 
@@ -5877,7 +5969,7 @@ def api_salary(request):
 
                         # Height and width styles
                         #######################################################
-                        for col in [backend_service.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
+                        for col in [backend_utils.ExcelClass.get_column_letter(x) for x in range(1, 8 + 1)]:
                             width = 1
                             for row in range(1, body_low_row + 1):
                                 cell = sheet[f'{col}{row}']
@@ -5911,7 +6003,7 @@ def api_salary(request):
                         sheet.protection.enable()
                         #######################################################
                         try:
-                            backend_service.ExcelClass.workbook_save(
+                            backend_utils.ExcelClass.workbook_save(
                                 workbook=workbook,
                                 excel_file=f"static/{path}/{file_name}"
                             )
@@ -5940,16 +6032,16 @@ def api_salary(request):
 
                     sleep(2)
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -5964,7 +6056,7 @@ def api_vacation(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -5981,7 +6073,7 @@ def api_vacation(request):
 
                     # TODO action ######################################################################################
 
-                    key = backend_service.UtilsClass.create_encrypted_password(
+                    key = backend_utils.UtilsClass.create_encrypted_password(
                         _random_chars='abcdefghijklnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890',
                         _length=10
                     )
@@ -6003,7 +6095,7 @@ def api_vacation(request):
                     h.add_credentials(_login, _password)
                     response, content = h.request(url)
 
-                    data = backend_service.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
+                    data = backend_utils.UtilsClass.decrypt_text_with_hash(content.decode()[1:], key_hash)
                     error_word_list = ['ошибка', 'error', 'failed']
                     if data.find('send') == 0:
                         return Response({"error": f"{data.split('send')[1].strip()}"})
@@ -6067,16 +6159,16 @@ def api_vacation(request):
 
                     sleep(2)
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -6091,7 +6183,7 @@ def api_idea(request):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -6243,13 +6335,13 @@ def api_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         if req_inst.method == "POST":
@@ -6310,19 +6402,19 @@ def api_idea(request):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -6337,7 +6429,7 @@ def api_idea_id(request, idea_id):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -6357,13 +6449,13 @@ def api_idea_id(request, idea_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(2)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         if req_inst.method == "DELETE":
@@ -6382,13 +6474,13 @@ def api_idea_id(request, idea_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(2)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         if req_inst.method == "PUT":
@@ -6469,15 +6561,15 @@ def api_idea_id(request, idea_id):
 
                     sleep(2)
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "Произошла ошибка!"})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -6492,7 +6584,7 @@ def api_idea_comment(request, idea_id):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -6528,13 +6620,13 @@ def api_idea_comment(request, idea_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         if req_inst.method == "POST":
@@ -6561,19 +6653,19 @@ def api_idea_comment(request, idea_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(2)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -6588,7 +6680,7 @@ def api_idea_comment_id(request, comment_id):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -6608,19 +6700,19 @@ def api_idea_comment_id(request, comment_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(2)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")
 
 
@@ -6635,7 +6727,7 @@ def api_idea_rating(request, idea_id):
 
         # TODO Request #################################################################################################
 
-        req_inst = backend_service.DjangoClass.TemplateClass.request(request=request)
+        req_inst = backend_utils.DjangoClass.TemplateClass.request(request=request)
 
         # TODO Methods #################################################################################################
 
@@ -6689,13 +6781,13 @@ def api_idea_rating(request, idea_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(3)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         if req_inst.method == "POST":
@@ -6725,17 +6817,17 @@ def api_idea_rating(request, idea_id):
 
                     # TODO response ####################################################################################
 
-                    backend_service.DjangoClass.TemplateClass.response(request=request, response=response)
+                    backend_utils.DjangoClass.TemplateClass.response(request=request, response=response)
 
                     sleep(2)
 
                     return Response(response)
                 except Exception as error:
-                    backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+                    backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
                     return Response({"error": "This action has error!"})
             return Response({"error": "This action not allowed for this method."})
         else:
             return Response({"error": "This method not allowed for this endpoint."})
     except Exception as error:
-        backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
+        backend_utils.DjangoClass.LoggingClass.error(request=request, error=error)
         return render(request, "backend/404.html")

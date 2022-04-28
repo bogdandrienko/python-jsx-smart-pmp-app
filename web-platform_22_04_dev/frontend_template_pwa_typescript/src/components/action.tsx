@@ -245,6 +245,40 @@ export class Admin {
       );
     };
   }
+  // @ts-ignore
+  static CheckUser({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
+          url: `/api/admin/recover_password/`,
+          method: constant.HttpMethods.GET(),
+          timeout: 20000,
+          constant: constant.adminCheckUserStore,
+          authentication: true,
+        })
+      );
+    };
+  }
+  // @ts-ignore
+  static ChangeUserPassword({ form }) {
+    // @ts-ignore
+    return async function (dispatch) {
+      dispatch(
+        util.ActionConstructor1({
+          // @ts-ignore
+          form: form,
+          url: `/api/admin/recover_password/`,
+          method: constant.HttpMethods.POST(),
+          timeout: 20000,
+          constant: constant.adminChangePasswordUserStore,
+          authentication: true,
+        })
+      );
+    };
+  }
 }
 export class Notification {
   // @ts-ignore

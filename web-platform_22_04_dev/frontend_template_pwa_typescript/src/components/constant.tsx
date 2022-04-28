@@ -122,6 +122,16 @@ export const adminExportUsersStore = util.StoreReducerConstructorUtility(
   connectReducer
 );
 
+export const adminCheckUserStore = util.StoreReducerConstructorUtility(
+  "adminCheckUserStore",
+  connectReducer
+);
+
+export const adminChangePasswordUserStore = util.StoreReducerConstructorUtility(
+  "adminChangePasswordUserStore",
+  connectReducer
+);
+
 export const terminalRebootStore = util.StoreReducerConstructorUtility(
   "terminalRebootStore",
   connectReducer

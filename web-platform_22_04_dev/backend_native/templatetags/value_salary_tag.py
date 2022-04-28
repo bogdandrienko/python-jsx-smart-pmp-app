@@ -1,6 +1,6 @@
 from django import template
 
-from backend import service as backend_service
+from backend import utils as backend_service
 
 
 register = template.Library()
