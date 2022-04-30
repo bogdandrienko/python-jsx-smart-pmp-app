@@ -1,0 +1,104 @@
+{% load access_tag %}
+
+
+<nav class="container-fluid navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url '' %}">ГЛАВНАЯ</a>
+    <a class="navbar-brand" href="{% url '' %}">Домашняя</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    {% access_tag 'module_modules' as module_modules %}
+    {% if module_modules %}
+        <ul class="navbar-nav navbar-collapse collapse" id="navbarSupportedContent">
+            {% access_tag 'superuser' as superuser %}
+            {% if superuser %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Development</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <strong class="dropdown-header">Веб-приложение</strong>
+                            {% access_tag 'product' as product %}
+                            {% if product %}
+                                <a class="dropdown-item" href="{% url 'home' %}">product</a>
+                            {% endif %}
+                            {% access_tag '7_develop' as develop %}
+                            {% if develop %}
+                                <a class="dropdown-item" href="http://localhost:3000/">develop</a>
+                            {% endif %}
+                            <hr class="dropdown-divider">
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+
+            {% access_tag 'module_progress' as module_progress %}
+            {% if module_progress %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Развитие</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% access_tag 'section_idea' as section_idea %}
+                        {% if section_idea %}
+                            <li>
+                                <strong class="dropdown-header">Банк идей:</strong>
+                                {% access_tag 'django_idea_create' as django_idea_create %}
+                                {% if django_idea_create %}
+                                    <a class="dropdown-item" href="{% url 'backend_native:django_idea_create' %}">Подать идею</a>
+                                {% endif %}
+                                {% access_tag 'backend_native:django_idea_list' as django_idea_list %}
+                                {% if django_idea_list %}
+                                    <a class="dropdown-item" href="{% url 'backend_native:django_idea_list' 'All' %}">Список идей</a>
+                                {% endif %}
+                                {% access_tag 'backend_native:django_idea_rating' as django_idea_rating %}
+                                {% if django_idea_rating %}
+                                    <a class="dropdown-item" href="{% url 'backend_native:django_idea_rating' %}">Рейтинги среди идей</a>
+                                {% endif %}
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                        {% access_tag 'section_rational' as section_rational %}
+                        {% if section_rational %}
+                            <li>
+                                <strong class="dropdown-header">Рационализаторство:</strong>
+                                <a class="dropdown-item disabled" href="#">Подать рац. предложение</a>
+                                <a class="dropdown-item disabled" href="#">Список рац. предложений</a>
+                                <a class="dropdown-item disabled" href="#">Рейтинги среди рац. предложений</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                        {% access_tag 'section_project' as section_project %}
+                        {% if section_project %}
+                            <li>
+                                <strong class="dropdown-header">Проектная деятельность:</strong>
+                                <a class="dropdown-item disabled" href="#">Подать проект</a>
+                                <a class="dropdown-item disabled" href="#">Список проектов</a>
+                                <a class="dropdown-item disabled" href="#">Рейтинги среди проектов</a>
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+
+            {% access_tag 'module_buhgalteria' as module_buhgalteria %}
+            {% if module_buhgalteria %}
+                <li class="dropend">
+                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Бухгалтерия</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% access_tag 'section_zarplata' as section_zarplata %}
+                        {% if section_zarplata %}
+                            <li>
+                                <strong class="dropdown-header">Сектор расчёта заработной платы:</strong>
+                                {% access_tag 'django_salary' as django_salary %}
+                                {% if django_salary %}
+                                    <a class="dropdown-item" href="#">Выгрузка расчётного листа</a>
+                                {% endif %}
+                                <hr class="dropdown-divider">
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+
+        </ul>
+    {% endif %}
+</nav>

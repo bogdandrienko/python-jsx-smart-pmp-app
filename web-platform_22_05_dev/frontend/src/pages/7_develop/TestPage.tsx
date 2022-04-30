@@ -1,0 +1,22 @@
+import React from "react";
+
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
+
+import * as component from "../../components/ui/component";
+import * as base from "../../components/ui/base";
+
+// TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const TestPage = () => {
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  return (
+    <base.Base1>
+      <h1>Test page</h1>
+      <component.TestComponent1 />
+      <component.TestComponent2 />
+      <component.TestComponent3 />
+      <component.TestComponent4 />
+    </base.Base1>
+  );
+};

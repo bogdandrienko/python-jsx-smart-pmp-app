@@ -4732,7 +4732,7 @@ def api_admin_recover_password(request):
 
                     user = User.objects.get(username=username)
 
-                    response = {"response": backend_serializers.UserSerializer(req_inst.user, many=False).data}
+                    response = {"response": backend_serializers.UserSerializer(user, many=False).data}
 
                     # TODO response ####################################################################################
 
@@ -4772,7 +4772,10 @@ def api_admin_recover_password(request):
                         user.set_password(password)
                         user.save()
                         user_model.password_char_field = password
-                        user_model.temp_password_boolean_field = False
+                        user_model.temp_password_boolean_field = True
+                        user_model.secret_question_char_field = ""
+                        user_model.secret_answer_char_field = ""
+                        user_model.email_field = None
                         user_model.save()
                         response = {"response": "Изменение успешно проведено."}
 
