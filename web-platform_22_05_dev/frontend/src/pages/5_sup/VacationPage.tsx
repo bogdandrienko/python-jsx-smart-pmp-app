@@ -6,10 +6,11 @@ import { useDispatch } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as constant from "../../components/constant";
-import * as action from "../../components/action";
 import * as util from "../../components/util";
-import * as component from "../../components/ui/component";
 import * as hook from "../../components/hook";
+import * as slice from "../../components/slice";
+
+import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +18,9 @@ import * as base from "../../components/ui/base";
 export const VacationPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const VacationReadStore = hook.useSelectorCustom1(constant.VacationReadStore);
+  const VacationReadStore = hook.useSelectorCustom2(
+    slice.vacation.vacationReadStore
+  );
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -32,7 +35,7 @@ export const VacationPage = () => {
 
   const getVacation = () => {
     dispatch(
-      action.Vacation.Read({
+      slice.vacation.vacationReadStore.action({
         form: {
           dateTime: `${dateTime.dateTime.split("-")[0]}${
             dateTime.dateTime.split("-")[1]
@@ -92,7 +95,9 @@ export const VacationPage = () => {
                     className="btn btn-sm btn-warning m-1 p-2"
                     onClick={() => {
                       resetDateTime();
-                      dispatch({ type: constant.VacationReadStore.reset });
+                      dispatch({
+                        type: slice.vacation.vacationReadStore.constant.reset,
+                      });
                     }}
                   >
                     <i className="fa-solid fa-circle-check m-0 p-1" />
@@ -110,17 +115,10 @@ export const VacationPage = () => {
         </form>
       </ul>
       <hr />
-      <component.StoreComponent1
-        stateConstant={constant.VacationReadStore}
+      <component.StoreComponent2
+        slice={slice.vacation.vacationReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
       {VacationReadStore.data && (
         <div className="bg-light bg-opacity-10 custom-background-transparent-low-middle">

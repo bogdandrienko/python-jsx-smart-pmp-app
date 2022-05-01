@@ -1,15 +1,15 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, MouseEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as action from "../../components/action";
 import * as constant from "../../components/constant";
 import * as hook from "../../components/hook";
 import * as util from "../../components/util";
+import * as slice from "../../components/slice";
 
 import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
@@ -20,8 +20,8 @@ import * as modal from "../../components/ui/modal";
 export function IdeaSelfPage(): JSX.Element {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const IdeaReadStore = hook.useSelectorCustom1(constant.IdeaReadStore);
-  const IdeaUpdateStore = hook.useSelectorCustom1(constant.IdeaUpdateStore);
+  const ideaReadStore = hook.useSelectorCustom2(slice.idea.ideaReadStore);
+  const ideaUpdateStore = hook.useSelectorCustom2(slice.idea.ideaUpdateStore);
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,18 +29,19 @@ export function IdeaSelfPage(): JSX.Element {
   const navigate = useNavigate();
   const id = useParams().id;
 
-  const [idea, setIdea, resetIdea] = hook.useStateCustom1({
-    subdivision: "",
-    sphere: "",
-    category: "",
-    avatar: null,
-    clearImage: false,
-    name: "",
-    place: "",
-    description: "",
-    moderate: "на модерации",
-    moderateComment: "Автор внёс изменения",
-  });
+  const [ideaUpdateObject, setIdeaUpdateObject, resetIdeaUpdateObject] =
+    hook.useStateCustom1({
+      subdivision: "",
+      sphere: "",
+      category: "",
+      avatar: null,
+      clearImage: false,
+      name: "",
+      place: "",
+      description: "",
+      moderate: "на модерации",
+      moderateComment: "Автор внёс изменения",
+    });
 
   const [isModalUpdateVisible, setIsModalUpdateVisible] = useState(false);
 
@@ -49,131 +50,147 @@ export function IdeaSelfPage(): JSX.Element {
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    if (!IdeaReadStore.data) {
-      dispatch(action.Idea.Read(Number(id)));
+    if (!ideaReadStore.data) {
+      dispatch(slice.idea.ideaReadStore.action({ id: Number(id) }));
+      // dispatch(action.Idea.Read(Number(id)));
     } else {
-      setIdea({
-        ...idea,
-        subdivision: IdeaReadStore.data["subdivision_char_field"],
-        sphere: IdeaReadStore.data["sphere_char_field"],
-        category: IdeaReadStore.data["category_char_field"],
-        name: IdeaReadStore.data["name_char_field"],
-        place: IdeaReadStore.data["place_char_field"],
-        description: IdeaReadStore.data["description_text_field"],
+      setIdeaUpdateObject({
+        ...ideaUpdateObject,
+        subdivision: ideaReadStore.data["subdivision_char_field"],
+        sphere: ideaReadStore.data["sphere_char_field"],
+        category: ideaReadStore.data["category_char_field"],
+        name: ideaReadStore.data["name_char_field"],
+        place: ideaReadStore.data["place_char_field"],
+        description: ideaReadStore.data["description_text_field"],
       });
     }
-  }, [IdeaReadStore.data]);
+  }, [ideaReadStore.data]);
 
   useEffect(() => {
-    resetState();
+    resetIdeaUpdateObject();
+    dispatch({ type: slice.idea.ideaReadStore.constant.reset });
+    dispatch({ type: slice.idea.ideaUpdateStore.constant.reset });
   }, []);
 
   useEffect(() => {
-    resetState();
+    resetIdeaUpdateObject();
+    dispatch({ type: slice.idea.ideaReadStore.constant.reset });
+    dispatch({ type: slice.idea.ideaUpdateStore.constant.reset });
   }, [id]);
 
   useEffect(() => {
-    if (IdeaUpdateStore.data) {
-      resetState();
-      navigate("/idea/self/list");
+    if (ideaUpdateStore.data) {
+      util.Delay(() => {
+        if (ideaUpdateStore.data) {
+          resetIdeaUpdateObject();
+          dispatch({ type: slice.idea.ideaReadStore.constant.reset });
+          dispatch({ type: slice.idea.ideaUpdateStore.constant.reset });
+          navigate("/idea/self/list");
+        }
+      }, 1000);
     }
-  }, [IdeaUpdateStore.data]);
+  }, [ideaUpdateStore.data]);
 
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const resetState = () => {
-    resetIdea();
-    dispatch({ type: constant.IdeaReadStore.reset });
-    dispatch({ type: constant.IdeaUpdateStore.reset });
-  };
-
-  const ChangeIdea = () => {
-    dispatch(action.Idea.Update(Number(id), { ...idea }));
-  };
-
-  const HideIdea = () => {
+  function HideIdea() {
     dispatch(
-      action.Idea.Update(Number(id), {
-        moderate: "скрыто",
-        moderateComment: "Автор скрыл свою идею",
+      slice.idea.ideaUpdateStore.action({
+        idea_id: Number(id),
+        form: { moderate: "скрыто", moderateComment: "Автор скрыл свою идею" },
       })
     );
-  };
+  }
+
+  function ChangeIdea() {
+    dispatch(
+      slice.idea.ideaUpdateStore.action({
+        idea_id: Number(id),
+        form: { ...ideaUpdateObject },
+      })
+    );
+  }
+
+  function ButtonHideIdea(event: MouseEvent<any>) {
+    util.EventMouse1(event, true, true, () => {
+      setIsModalHideVisible(true);
+    });
+  }
+
+  function FormIdeaUpdateSubmit(event: FormEvent<any>) {
+    util.EventForm1(event, true, true, () => {
+      setIsModalUpdateVisible(true);
+    });
+  }
+
+  function FormIdeaUpdateReset(event: FormEvent<any>) {
+    util.EventForm1(event, false, true, () => {
+      resetIdeaUpdateObject();
+      dispatch({ type: slice.idea.ideaReadStore.constant.reset });
+      dispatch({ type: slice.idea.ideaUpdateStore.constant.reset });
+    });
+  }
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <base.Base1>
-      <modal.ModalConfirm2
+      <modal.ModalConfirm1
         isModalVisible={isModalHideVisible}
         setIsModalVisible={setIsModalHideVisible}
         description={"Скрыть свою идею?"}
-        callback={() => HideIdea()}
+        callback={HideIdea}
+      />
+      <modal.ModalConfirm1
+        isModalVisible={isModalUpdateVisible}
+        setIsModalVisible={setIsModalUpdateVisible}
+        description={"Заменить данные?"}
+        callback={ChangeIdea}
       />
       <div className="btn-group m-0 p-1 text-start w-100">
         <Link to={"/idea/self/list"} className="btn btn-sm btn-primary m-1 p-2">
           {"<="} назад к списку
         </Link>
-        {IdeaReadStore.data && (
+        {ideaReadStore.data && (
           <button
             type="button"
-            className="btn btn-sm btn-warning m-1 p-2"
-            onClick={() => setIsModalHideVisible(true)}
-            style={{ zIndex: 0 }}
+            className="btn btn-sm btn-warning m-1 p-2 custom-z-index-0"
+            onClick={(event) => ButtonHideIdea(event)}
           >
             скрыть
           </button>
         )}
       </div>
-      <component.StoreComponent1
-        stateConstant={constant.IdeaReadStore}
+      <component.StoreComponent2
+        slice={slice.idea.ideaReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      <component.StoreComponent1
-        stateConstant={constant.IdeaUpdateStore}
+      <component.StoreComponent2
+        slice={slice.idea.ideaUpdateStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      {IdeaReadStore.data && (
+      {ideaReadStore.data && (
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
           <form
             className="m-0 p-0"
             onSubmit={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              setIsModalUpdateVisible(true);
+              FormIdeaUpdateSubmit(event);
+            }}
+            onReset={(event) => {
+              FormIdeaUpdateReset(event);
             }}
           >
-            <modal.ModalConfirm2
-              isModalVisible={isModalUpdateVisible}
-              setIsModalVisible={setIsModalUpdateVisible}
-              description={"Заменить данные?"}
-              callback={ChangeIdea}
-            />
             <div className="card shadow custom-background-transparent-low m-0 p-0">
               <div className="card-header bg-success bg-opacity-10 m-0 p-3">
                 <h6 className="lead fw-bold m-0 p-0">
-                  {IdeaReadStore.data["name_char_field"]}
+                  {ideaReadStore.data["name_char_field"]}
                 </h6>
                 <h6 className="text-danger lead small m-0 p-0">
                   {"[ "}
                   {util.GetSliceString(
-                    IdeaReadStore.data["comment_moderate_char_field"],
+                    ideaReadStore.data["comment_moderate_char_field"],
                     30
                   )}
                   {" ]"}
@@ -189,11 +206,11 @@ export function IdeaSelfPage(): JSX.Element {
                       placeholder="введите название тут..."
                       minLength={1}
                       maxLength={200}
-                      value={idea.name}
+                      value={ideaUpdateObject.name}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaUpdateObject({
+                          ...ideaUpdateObject,
                           name: event.target.value.replace(
                             util.GetRegexType({
                               numbers: true,
@@ -220,11 +237,11 @@ export function IdeaSelfPage(): JSX.Element {
                     Подразделение:
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
-                      value={idea.subdivision}
+                      value={ideaUpdateObject.subdivision}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaUpdateObject({
+                          ...ideaUpdateObject,
                           subdivision: event.target.value,
                         })
                       }
@@ -269,11 +286,11 @@ export function IdeaSelfPage(): JSX.Element {
                       placeholder="введите место тут..."
                       minLength={1}
                       maxLength={100}
-                      value={idea.place}
+                      value={ideaUpdateObject.place}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaUpdateObject({
+                          ...ideaUpdateObject,
                           place: event.target.value.replace(
                             util.GetRegexType({
                               numbers: true,
@@ -300,11 +317,11 @@ export function IdeaSelfPage(): JSX.Element {
                     Сфера:
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
-                      value={idea.sphere}
+                      value={ideaUpdateObject.sphere}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaUpdateObject({
+                          ...ideaUpdateObject,
                           sphere: event.target.value,
                         })
                       }
@@ -324,11 +341,11 @@ export function IdeaSelfPage(): JSX.Element {
                     Категория:
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
-                      value={idea.category}
+                      value={ideaUpdateObject.category}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaUpdateObject({
+                          ...ideaUpdateObject,
                           category: event.target.value,
                         })
                       }
@@ -365,7 +382,7 @@ export function IdeaSelfPage(): JSX.Element {
                 </div>
                 <div className="m-0 p-0">
                   <img
-                    src={util.GetStaticFile(IdeaReadStore.data["image_field"])}
+                    src={util.GetStaticFile(ideaReadStore.data["image_field"])}
                     className="card-img-top img-fluid w-25 m-0 p-1"
                     alt="изображение отсутствует"
                   />
@@ -375,9 +392,12 @@ export function IdeaSelfPage(): JSX.Element {
                       type="checkbox"
                       className="form-check-input m-0 p-1"
                       id="flexSwitchCheckDefault"
-                      checked={idea.clearImage}
+                      checked={ideaUpdateObject.clearImage}
                       onClick={() =>
-                        setIdea({ ...idea, clearImage: !idea.clearImage })
+                        setIdeaUpdateObject({
+                          ...ideaUpdateObject,
+                          clearImage: !ideaUpdateObject.clearImage,
+                        })
                       }
                     />
                   </label>
@@ -388,8 +408,8 @@ export function IdeaSelfPage(): JSX.Element {
                       className="form-control form-control-sm text-center m-0 p-1"
                       accept=".jpg, .png"
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaUpdateObject({
+                          ...ideaUpdateObject,
                           // @ts-ignore
                           avatar: event.target.files[0],
                         })
@@ -409,11 +429,11 @@ export function IdeaSelfPage(): JSX.Element {
                       minLength={1}
                       maxLength={3000}
                       rows={3}
-                      value={idea.description}
+                      value={ideaUpdateObject.description}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaUpdateObject({
+                          ...ideaUpdateObject,
                           description: event.target.value.replace(
                             util.GetRegexType({
                               numbers: true,
@@ -435,9 +455,9 @@ export function IdeaSelfPage(): JSX.Element {
                 <div className="m-0 p-0">
                   <Link to={`#`} className="btn btn-sm btn-warning m-0 p-2">
                     Автор:{" "}
-                    {IdeaReadStore.data["user_model"]["last_name_char_field"]}{" "}
-                    {IdeaReadStore.data["user_model"]["first_name_char_field"]}{" "}
-                    {IdeaReadStore.data["user_model"]["position_char_field"]}
+                    {ideaReadStore.data["user_model"]["last_name_char_field"]}{" "}
+                    {ideaReadStore.data["user_model"]["first_name_char_field"]}{" "}
+                    {ideaReadStore.data["user_model"]["position_char_field"]}
                   </Link>
                 </div>
                 <div className="d-flex justify-content-between m-0 p-1">
@@ -445,7 +465,7 @@ export function IdeaSelfPage(): JSX.Element {
                     подано:{" "}
                     <p className="m-0 p-0">
                       {util.GetCleanDateTime(
-                        IdeaReadStore.data["created_datetime_field"],
+                        ideaReadStore.data["created_datetime_field"],
                         true
                       )}
                     </p>
@@ -454,7 +474,7 @@ export function IdeaSelfPage(): JSX.Element {
                     зарегистрировано:{" "}
                     <p className="m-0 p-0">
                       {util.GetCleanDateTime(
-                        IdeaReadStore.data["register_datetime_field"],
+                        ideaReadStore.data["register_datetime_field"],
                         true
                       )}
                     </p>
@@ -464,20 +484,18 @@ export function IdeaSelfPage(): JSX.Element {
               <div className="card-footer m-0 p-0">
                 <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                   <button
-                    className="btn btn-sm btn-primary m-1 p-2"
+                    className="btn btn-sm btn-primary m-1 p-2 custom-z-index-0"
                     type="submit"
-                    style={{ zIndex: 0 }}
                   >
                     <i className="fa-solid fa-circle-check m-0 p-1" />
-                    заменить данные
+                    заменить
                   </button>
                   <button
                     className="btn btn-sm btn-warning m-1 p-2"
                     type="reset"
-                    onClick={() => resetState()}
                   >
                     <i className="fa-solid fa-pen-nib m-0 p-1" />
-                    сбросить данные
+                    сбросить
                   </button>
                 </ul>
               </div>

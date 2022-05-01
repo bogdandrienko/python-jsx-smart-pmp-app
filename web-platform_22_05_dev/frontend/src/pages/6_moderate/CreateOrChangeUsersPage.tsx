@@ -6,10 +6,11 @@ import { useDispatch } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as constant from "../../components/constant";
-import * as action from "../../components/action";
 import * as util from "../../components/util";
-import * as component from "../../components/ui/component";
 import * as hook from "../../components/hook";
+import * as slice from "../../components/slice";
+
+import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
 import * as modal from "../../components/ui/modal";
 
@@ -18,8 +19,8 @@ import * as modal from "../../components/ui/modal";
 export const CreateOrChangeUsersPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const adminCreateUsersStore = hook.useSelectorCustom1(
-    constant.adminCreateUsersStore
+  const adminCreateUsersStore = hook.useSelectorCustom2(
+    slice.moderator.adminCreateUsersStore
   );
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -49,14 +50,18 @@ export const CreateOrChangeUsersPage = () => {
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const ResetState = () => {
-    dispatch({ type: constant.adminCreateUsersStore.reset });
+    dispatch({
+      type: slice.moderator.adminCreateUsersStore.constant.reset,
+    });
     resetUsers();
   };
 
   const CreateUsers = () => {
     dispatch(
-      action.Admin.CreateUsers({
-        form: { ...users },
+      slice.moderator.adminCreateUsersStore.action({
+        form: {
+          ...users,
+        },
       })
     );
   };
@@ -65,17 +70,9 @@ export const CreateOrChangeUsersPage = () => {
 
   return (
     <base.Base1>
-      <component.StoreComponent1
-        stateConstant={constant.adminCreateUsersStore}
+      <component.StoreComponent2
+        slice={slice.moderator.adminCreateUsersStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
-        showData={true}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
       {!adminCreateUsersStore.load && (
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
@@ -87,7 +84,7 @@ export const CreateOrChangeUsersPage = () => {
               setIsModalCreateUsersVisible(true);
             }}
           >
-            <modal.ModalConfirm2
+            <modal.ModalConfirm1
               isModalVisible={isModalCreateUsersVisible}
               setIsModalVisible={setIsModalCreateUsersVisible}
               description={"Подтвердите создание пользователей?"}

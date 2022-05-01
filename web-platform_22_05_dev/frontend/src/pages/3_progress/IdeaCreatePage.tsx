@@ -1,14 +1,14 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as action from "../../components/action";
 import * as constant from "../../components/constant";
 import * as hook from "../../components/hook";
 import * as util from "../../components/util";
+import * as slice from "../../components/slice";
 
 import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
@@ -19,45 +19,65 @@ import * as modal from "../../components/ui/modal";
 export function IdeaCreatePage(): JSX.Element {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const IdeaCreateStore = hook.useSelectorCustom1(constant.IdeaCreateStore);
+  const ideaCreateStore = hook.useSelectorCustom2(slice.idea.ideaCreateStore);
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
 
-  const [idea, setIdea, resetIdea] = hook.useStateCustom1({
-    subdivision: "",
-    sphere: "",
-    category: "",
-    avatar: null,
-    name: "",
-    place: "",
-    description: "",
-    moderate: "на модерации",
-  });
+  const [ideaCreateObject, setIdeaCreateObject, resetIdeaCreateObject] =
+    hook.useStateCustom1({
+      subdivision: "",
+      sphere: "",
+      category: "",
+      avatar: null,
+      name: "",
+      place: "",
+      description: "",
+      moderate: "на модерации",
+    });
 
-  const [isModalCreateVisible, setIsModalCreateVisible] = useState(false);
+  const [isModalCreateCreateVisible, setIsModalCreateCreateVisible] =
+    useState(false);
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    if (IdeaCreateStore.data) {
+    if (ideaCreateStore.data) {
       util.Delay(() => {
-        dispatch({ type: constant.IdeaCreateStore.reset });
-        resetIdea();
+        if (ideaCreateStore.data) {
+          resetIdeaCreateObject();
+          dispatch({ type: slice.idea.ideaCreateStore.constant.reset });
+        }
       }, 10000);
     }
-  }, [IdeaCreateStore.data]);
+  }, [ideaCreateStore.data]);
 
   useEffect(() => {
-    dispatch({ type: constant.IdeaCreateStore.reset });
+    resetIdeaCreateObject();
+    dispatch({ type: slice.idea.ideaCreateStore.constant.reset });
   }, []);
 
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const CreateConfirm = () => {
-    dispatch(action.Idea.Create({ ...idea }));
-  };
+  function CreateIdea() {
+    dispatch(
+      slice.idea.ideaCreateStore.action({ form: { ...ideaCreateObject } })
+    );
+  }
+
+  function FormCreateSubmit(event: FormEvent<HTMLFormElement>) {
+    util.EventForm1(event, true, true, () => {
+      setIsModalCreateCreateVisible(true);
+    });
+  }
+
+  function FormCreateReset(event: FormEvent<HTMLFormElement>) {
+    util.EventForm1(event, false, true, () => {
+      resetIdeaCreateObject();
+      dispatch({ type: slice.idea.ideaCreateStore.constant.reset });
+    });
+  }
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -87,33 +107,26 @@ export function IdeaCreatePage(): JSX.Element {
           </div>
         }
       </component.Accordion1>
-      <component.StoreComponent1
-        stateConstant={constant.IdeaCreateStore}
+      <component.StoreComponent2
+        slice={slice.idea.ideaCreateStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
-        showData={true}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      {!IdeaCreateStore.data && !IdeaCreateStore.load && (
+      {!ideaCreateStore.data && !ideaCreateStore.load && (
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
           <form
             className="m-0 p-0"
             onSubmit={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              setIsModalCreateVisible(true);
+              FormCreateSubmit(event);
+            }}
+            onReset={(event) => {
+              FormCreateReset(event);
             }}
           >
-            <modal.ModalConfirm2
-              isModalVisible={isModalCreateVisible}
-              setIsModalVisible={setIsModalCreateVisible}
+            <modal.ModalConfirm1
+              isModalVisible={isModalCreateCreateVisible}
+              setIsModalVisible={setIsModalCreateCreateVisible}
               description={"Отправить идею на модерацию?"}
-              callback={CreateConfirm}
+              callback={CreateIdea}
             />
             <div className="card shadow custom-background-transparent-low m-0 p-0">
               <div className="card-header bg-success bg-opacity-10 m-0 p-2">
@@ -130,11 +143,11 @@ export function IdeaCreatePage(): JSX.Element {
                       placeholder="введите название тут..."
                       minLength={1}
                       maxLength={200}
-                      value={idea.name}
+                      value={ideaCreateObject.name}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaCreateObject({
+                          ...ideaCreateObject,
                           name: event.target.value.replace(
                             util.GetRegexType({
                               numbers: true,
@@ -162,10 +175,10 @@ export function IdeaCreatePage(): JSX.Element {
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
                       required
-                      value={idea.subdivision}
+                      value={ideaCreateObject.subdivision}
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaCreateObject({
+                          ...ideaCreateObject,
                           subdivision: event.target.value,
                         })
                       }
@@ -210,11 +223,11 @@ export function IdeaCreatePage(): JSX.Element {
                       placeholder="введите место тут..."
                       minLength={1}
                       maxLength={100}
-                      value={idea.place}
+                      value={ideaCreateObject.place}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaCreateObject({
+                          ...ideaCreateObject,
                           place: event.target.value.replace(
                             util.GetRegexType({
                               numbers: true,
@@ -241,11 +254,11 @@ export function IdeaCreatePage(): JSX.Element {
                     Сфера:
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
-                      value={idea.sphere}
+                      value={ideaCreateObject.sphere}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaCreateObject({
+                          ...ideaCreateObject,
                           sphere: event.target.value,
                         })
                       }
@@ -265,11 +278,11 @@ export function IdeaCreatePage(): JSX.Element {
                     Категория:
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
-                      value={idea.category}
+                      value={ideaCreateObject.category}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaCreateObject({
+                          ...ideaCreateObject,
                           category: event.target.value,
                         })
                       }
@@ -312,8 +325,8 @@ export function IdeaCreatePage(): JSX.Element {
                       className="form-control form-control-sm text-center m-0 p-1"
                       accept=".jpg, .png"
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaCreateObject({
+                          ...ideaCreateObject,
                           // @ts-ignore
                           avatar: event.target.files[0],
                         })
@@ -333,11 +346,11 @@ export function IdeaCreatePage(): JSX.Element {
                       minLength={1}
                       maxLength={3000}
                       rows={3}
-                      value={idea.description}
+                      value={ideaCreateObject.description}
                       required
                       onChange={(event) =>
-                        setIdea({
-                          ...idea,
+                        setIdeaCreateObject({
+                          ...ideaCreateObject,
                           description: event.target.value.replace(
                             util.GetRegexType({
                               numbers: true,
@@ -369,7 +382,6 @@ export function IdeaCreatePage(): JSX.Element {
                   <button
                     className="btn btn-sm btn-warning m-1 p-2"
                     type="reset"
-                    onClick={() => resetIdea()}
                   >
                     <i className="fa-solid fa-pen-nib m-0 p-1" />
                     сбросить данные

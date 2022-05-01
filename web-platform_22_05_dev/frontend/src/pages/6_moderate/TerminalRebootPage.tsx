@@ -6,10 +6,11 @@ import { useDispatch } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as constant from "../../components/constant";
-import * as action from "../../components/action";
 import * as util from "../../components/util";
-import * as component from "../../components/ui/component";
 import * as hook from "../../components/hook";
+import * as slice from "../../components/slice";
+
+import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
 import * as message from "../../components/ui/message";
 import * as modal from "../../components/ui/modal";
@@ -117,8 +118,8 @@ export const terminals = [
 export const TerminalRebootPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const terminalRebootStore = hook.useSelectorCustom1(
-    constant.terminalRebootStore
+  const terminalRebootStore = hook.useSelectorCustom2(
+    slice.moderator.terminalRebootStore
   );
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,7 +138,9 @@ export const TerminalRebootPage = () => {
   useEffect(() => {
     if (terminalRebootStore.data) {
       util.Delay(() => {
-        dispatch({ type: constant.terminalRebootStore.reset });
+        dispatch({
+          type: slice.moderator.terminalRebootStore.constant.reset,
+        });
         resetTerminal();
       }, 10000);
     }
@@ -147,8 +150,10 @@ export const TerminalRebootPage = () => {
 
   const RebootOne = () => {
     dispatch(
-      action.Admin.RebootTerminal({
-        form: { ips: terminal.ip },
+      slice.moderator.terminalRebootStore.action({
+        form: {
+          ips: terminal.ip,
+        },
       })
     );
   };
@@ -160,9 +165,11 @@ export const TerminalRebootPage = () => {
       ips.push(object.Ip);
     });
     dispatch(
-      action.Admin.RebootTerminal({
-        // @ts-ignore
-        form: { ips: ips },
+      slice.moderator.terminalRebootStore.action({
+        form: {
+          // @ts-ignore
+          ips: ips,
+        },
       })
     );
   };
@@ -174,17 +181,10 @@ export const TerminalRebootPage = () => {
       <message.Message.Danger>
         Все Ваши действия записываются в логи!
       </message.Message.Danger>
-      <component.StoreComponent1
-        stateConstant={constant.terminalRebootStore}
+      <component.StoreComponent2
+        slice={slice.moderator.terminalRebootStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
-        showData={true}
         dataText={"Успешно перезагружено(-ы)!"}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
       {terminalRebootStore.data && (
         <ol className="bg-light bg-opacity-75">
@@ -234,31 +234,29 @@ export const TerminalRebootPage = () => {
                         </option>
                       ))}
                     </select>
-                    <modal.ModalConfirm2
+                    <modal.ModalConfirm1
                       isModalVisible={isModalRebootOneVisible}
                       setIsModalVisible={setIsModalRebootOneVisible}
                       description={"Перезагрузить выбранный терминал?"}
                       callback={() => RebootOne()}
                     />
                     <button
-                      className="btn btn-sm btn-outline-danger m-1 p-2"
+                      className="btn btn-sm btn-outline-danger m-1 p-2 custom-z-index-0"
                       type="submit"
-                      style={{ zIndex: 0 }}
                     >
                       <i className="fa-solid fa-circle-check m-0 p-1" />
                       перезагрузить выбранный
                     </button>
-                    <modal.ModalConfirm2
+                    <modal.ModalConfirm1
                       isModalVisible={isModalRebootAllVisible}
                       setIsModalVisible={setIsModalRebootAllVisible}
                       description={"Перезагрузить ВСЕ терминалы?"}
                       callback={() => RebootAll()}
                     />
                     <button
-                      className="btn btn-sm btn-danger w-100 m-1 p-2"
+                      className="btn btn-sm btn-danger w-100 m-1 p-2 custom-z-index-0"
                       type="button"
                       onClick={() => setIsModalRebootAllVisible(true)}
-                      style={{ zIndex: 0 }}
                     >
                       <i className="fa-solid fa-circle-check m-0 p-1" />
                       перезагрузить все

@@ -8,27 +8,6 @@ import * as util from "../util";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// @ts-ignore
-export const Modal1 = ({ children, visible, setVisible }) => {
-  const rootClasses = ["custom_modal_1"];
-  if (visible) {
-    rootClasses.push("custom_modal_1_active");
-  }
-
-  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  return (
-    <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
-      <div
-        className={"custom_modal_content_1"}
-        onClick={(e) => e.stopPropagation()}
-      >
-        {children}
-      </div>
-    </div>
-  );
-};
-
 export const ModalConfirm1 = ({
   isModalVisible = false,
   // @ts-ignore
@@ -43,51 +22,8 @@ export const ModalConfirm1 = ({
     <div
       className={
         isModalVisible
-          ? "custom_modal_1 custom_modal_1_active"
-          : "custom_modal_1"
-      }
-      onClick={() => callback(false)}
-    >
-      <div
-        className={"custom_modal_content_1"}
-        onClick={(event) => event.stopPropagation()}
-      >
-        {description && <h2>{description}</h2>}
-        <button
-          type="button"
-          onClick={() => callback(true)}
-          className="btn btn-lg btn-outline-success m-1 p-2"
-        >
-          подтвердить
-        </button>
-        <button
-          type="button"
-          onClick={() => callback(false)}
-          className="btn btn-lg btn-outline-secondary m-1 p-2"
-        >
-          отмена
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export const ModalConfirm2 = ({
-  isModalVisible = false,
-  // @ts-ignore
-  setIsModalVisible,
-  description = "Подтвердить действие?",
-  // @ts-ignore
-  callback,
-}) => {
-  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  return (
-    <div
-      className={
-        isModalVisible
-          ? "custom_modal_1 custom_modal_1_active"
-          : "custom_modal_1"
+          ? "custom_modal_1 custom_modal_1_active custom-z-index-1"
+          : "custom_modal_1 custom-z-index-1"
       }
       onClick={() => setIsModalVisible(false)}
     >
@@ -118,7 +54,7 @@ export const ModalConfirm2 = ({
   );
 };
 
-export const ModalPrompt2 = ({
+export const ModalPrompt1 = ({
   isModalVisible = false,
   // @ts-ignore
   setIsModalVisible,

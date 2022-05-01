@@ -52,11 +52,16 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "cover 99.5%",
+      "last 10 version",
+      "last 5 years",
+      ">0.1%",
+      "not dead"
     ],
     "development": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all",
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"

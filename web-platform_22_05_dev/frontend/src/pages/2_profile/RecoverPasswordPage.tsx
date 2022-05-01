@@ -2,33 +2,36 @@
 
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as component from "../../components/ui/component";
 import * as util from "../../components/util";
+import * as slice from "../../components/slice";
 
 import * as base from "../../components/ui/base";
 import * as hook from "../../components/hook";
 import * as constant from "../../components/constant";
 import * as action from "../../components/action";
 import * as captcha from "../../components/ui/captcha";
-import { useNavigate } from "react-router-dom";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const RecoverPasswordPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const captchaCheckStore = hook.useSelectorCustom1(constant.captchaCheckStore);
-  const userRecoverPasswordStore = hook.useSelectorCustom1(
-    constant.userRecoverPasswordStore
+  const captchaCheckStore = hook.useSelectorCustom2(
+    slice.captcha.captchaCheckStore
   );
-  const userRecoverPasswordSendEmailStore = hook.useSelectorCustom1(
-    constant.userRecoverPasswordSendEmailStore
+  const userRecoverPasswordStore = hook.useSelectorCustom2(
+    slice.user.userRecoverPasswordStore
   );
-  const userRecoverPasswordChangePasswordStore = hook.useSelectorCustom1(
-    constant.userRecoverPasswordChangePasswordStore
+  const userRecoverPasswordSendEmailStore = hook.useSelectorCustom2(
+    slice.user.userRecoverPasswordSendEmailStore
+  );
+  const userRecoverPasswordChangePasswordStore = hook.useSelectorCustom2(
+    slice.user.userRecoverPasswordChangePasswordStore
   );
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -64,7 +67,9 @@ export const RecoverPasswordPage = () => {
   useEffect(() => {
     resetRecover();
     resetUser();
-    dispatch({ type: constant.userRecoverPasswordSendEmailStore.reset });
+    dispatch({
+      type: slice.user.userRecoverPasswordSendEmailStore.constant.reset,
+    });
   }, []);
 
   useEffect(() => {
@@ -72,9 +77,10 @@ export const RecoverPasswordPage = () => {
       util.Delay(() => {
         resetRecover();
         resetUser();
-        dispatch(action.User.Logout());
+        dispatch(action.user.logout());
         dispatch({
-          type: constant.userRecoverPasswordChangePasswordStore.reset,
+          type: slice.user.userRecoverPasswordChangePasswordStore.constant
+            .reset,
         });
         navigate("/login");
       }, 10);
@@ -82,27 +88,35 @@ export const RecoverPasswordPage = () => {
   }, [userRecoverPasswordChangePasswordStore.data]);
 
   useEffect(() => {
-    if (
-      userRecoverPasswordSendEmailStore.data ||
-      userRecoverPasswordSendEmailStore.error
-    ) {
+    if (userRecoverPasswordSendEmailStore.data) {
       util.Delay(
         () =>
-          dispatch({ type: constant.userRecoverPasswordSendEmailStore.reset }),
+          dispatch({
+            type: slice.user.userRecoverPasswordSendEmailStore.constant.reset,
+          }),
         5000
       );
     }
-  }, [
-    userRecoverPasswordSendEmailStore.data ||
-      userRecoverPasswordSendEmailStore.error,
-  ]);
+  }, [userRecoverPasswordSendEmailStore.data]);
+
+  useEffect(() => {
+    if (userRecoverPasswordSendEmailStore.error) {
+      util.Delay(
+        () =>
+          dispatch({
+            type: slice.user.userRecoverPasswordSendEmailStore.constant.reset,
+          }),
+        5000
+      );
+    }
+  }, [userRecoverPasswordSendEmailStore.error]);
 
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const Check = () => {
     if (captchaCheckStore.data) {
       dispatch(
-        action.User.Recover({
+        slice.user.userRecoverPasswordStore.action({
           form: { username: recover.username },
         })
       );
@@ -111,7 +125,7 @@ export const RecoverPasswordPage = () => {
 
   const CheckAnswer = () => {
     dispatch(
-      action.User.Recover({
+      slice.user.userRecoverPasswordStore.action({
         form: {
           username: recover.username,
           secretAnswer: recover.secretAnswer,
@@ -122,7 +136,7 @@ export const RecoverPasswordPage = () => {
 
   const CheckRecoverCode = () => {
     dispatch(
-      action.User.Recover({
+      slice.user.userRecoverPasswordStore.action({
         form: {
           username: recover.username,
           recoverPassword: recover.recoverPassword,
@@ -133,16 +147,22 @@ export const RecoverPasswordPage = () => {
 
   const SendMailCode = () => {
     dispatch(
-      action.User.RecoverSendEmail({
-        form: { username: recover.username, ...user },
+      slice.user.userRecoverPasswordSendEmailStore.action({
+        form: {
+          username: recover.username,
+          ...user,
+        },
       })
     );
   };
 
   const ChangePassword = () => {
     dispatch(
-      action.User.RecoverChangePassword({
-        form: { username: recover.username, ...user },
+      slice.user.userRecoverPasswordChangePasswordStore.action({
+        form: {
+          username: recover.username,
+          ...user,
+        },
       })
     );
   };
@@ -151,41 +171,20 @@ export const RecoverPasswordPage = () => {
 
   return (
     <base.Base1>
-      <component.StoreComponent1
-        stateConstant={constant.userRecoverPasswordStore}
+      <component.StoreComponent2
+        slice={slice.user.userRecoverPasswordStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
-        showData={true}
         dataText={"Пользователь успешно найден или данные совпали!"}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      <component.StoreComponent1
-        stateConstant={constant.userRecoverPasswordSendEmailStore}
+      <component.StoreComponent2
+        slice={slice.user.userRecoverPasswordSendEmailStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
-        showData={true}
         dataText={"Письмо успешно отправлено!"}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      <component.StoreComponent1
-        stateConstant={constant.userRecoverPasswordChangePasswordStore}
+      <component.StoreComponent2
+        slice={slice.user.userRecoverPasswordChangePasswordStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
-        showData={true}
         dataText={"Пароль успешно изменён!"}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
       <div className="m-0 p-1">
         {recover.stage === "First" && (

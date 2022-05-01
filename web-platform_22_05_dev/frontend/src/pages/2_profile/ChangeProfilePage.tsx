@@ -13,15 +13,16 @@ import * as util from "../../components/util";
 
 import * as base from "../../components/ui/base";
 import * as modal from "../../components/ui/modal";
+import * as slice from "../../components/slice";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const ChangeProfilePage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const userDetailStore = hook.useSelectorCustom1(constant.userDetailStore);
-  const userPasswordUpdateStore = hook.useSelectorCustom1(
-    constant.userPasswordUpdateStore
+  const userDetailStore = hook.useSelectorCustom2(slice.user.userDetailStore);
+  const userPasswordUpdateStore = hook.useSelectorCustom2(
+    slice.user.userPasswordUpdateStore
   );
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +60,7 @@ export const ChangeProfilePage = () => {
   useEffect(() => {
     if (userPasswordUpdateStore.data) {
       util.Delay(() => {
-        dispatch(action.User.Logout());
+        dispatch(action.user.logout());
       }, 10);
     }
   }, [userPasswordUpdateStore.data]);
@@ -67,24 +68,21 @@ export const ChangeProfilePage = () => {
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const CreateConfirm = () => {
-    dispatch(action.User.Update({ form: user }));
+    dispatch(
+      slice.user.userPasswordUpdateStore.action({
+        form: { ...user },
+      })
+    );
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <base.Base1>
-      <component.StoreComponent1
-        stateConstant={constant.userDetailStore}
+      <component.StoreComponent2
+        slice={slice.user.userDetailStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
       <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
         <form
@@ -94,7 +92,7 @@ export const ChangeProfilePage = () => {
             setIsModalUpdateVisible(true);
           }}
         >
-          <modal.ModalConfirm2
+          <modal.ModalConfirm1
             isModalVisible={isModalUpdateVisible}
             setIsModalVisible={setIsModalUpdateVisible}
             description={"Заменить данные?"}
@@ -106,17 +104,9 @@ export const ChangeProfilePage = () => {
               перенаправлять на эту страницу постоянно!
             </div>
             <div className="card-header m-0 p-0">
-              <component.StoreComponent1
-                stateConstant={constant.userPasswordUpdateStore}
+              <component.StoreComponent2
+                slice={slice.user.userPasswordUpdateStore}
                 consoleLog={constant.DEBUG_CONSTANT}
-                showLoad={true}
-                loadText={""}
-                showData={true}
-                dataText={""}
-                showError={true}
-                errorText={""}
-                showFail={true}
-                failText={""}
               />
             </div>
             <div className="card-body m-0 p-0">

@@ -5,9 +5,10 @@ import { useDispatch } from "react-redux";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as action from "../../components/action";
+import * as slice from "../../components/slice";
 import * as constant from "../../components/constant";
 import * as hook from "../../components/hook";
+
 import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
 
@@ -16,8 +17,8 @@ import * as base from "../../components/ui/base";
 export const ExportUsersPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const adminExportUsersStore = hook.useSelectorCustom1(
-    constant.adminExportUsersStore
+  const adminExportUsersStore = hook.useSelectorCustom2(
+    slice.moderator.adminExportUsersStore
   );
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,23 +28,16 @@ export const ExportUsersPage = () => {
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const getUsers = () => {
-    dispatch(action.Admin.ExportUsers());
+    dispatch(slice.moderator.adminExportUsersStore.action({}));
   };
 
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <base.Base1>
-      <component.StoreComponent1
-        stateConstant={constant.adminExportUsersStore}
+      <component.StoreComponent2
+        slice={slice.moderator.adminExportUsersStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
       {!adminExportUsersStore.load && (
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">

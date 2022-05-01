@@ -6,10 +6,11 @@ import { useDispatch } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as constant from "../../components/constant";
-import * as action from "../../components/action";
 import * as util from "../../components/util";
-import * as component from "../../components/ui/component";
 import * as hook from "../../components/hook";
+import * as slice from "../../components/slice";
+
+import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
 import * as modal from "../../components/ui/modal";
 import * as message from "../../components/ui/message";
@@ -19,11 +20,11 @@ import * as message from "../../components/ui/message";
 export const RecoverUserPasswordPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const adminCheckUserStore = hook.useSelectorCustom1(
-    constant.adminCheckUserStore
+  const adminCheckUserStore = hook.useSelectorCustom2(
+    slice.moderator.adminCheckUserStore
   );
-  const adminChangePasswordUserStore = hook.useSelectorCustom1(
-    constant.adminChangePasswordUserStore
+  const adminChangePasswordUserStore = hook.useSelectorCustom2(
+    slice.moderator.adminChangePasswordUserStore
   );
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,8 +48,12 @@ export const RecoverUserPasswordPage = () => {
   useEffect(() => {
     if (adminChangePasswordUserStore.data) {
       util.Delay(() => {
-        dispatch({ type: constant.adminCheckUserStore.reset });
-        dispatch({ type: constant.adminChangePasswordUserStore.reset });
+        dispatch({
+          type: slice.moderator.adminCheckUserStore.constant.reset,
+        });
+        dispatch({
+          type: slice.moderator.adminChangePasswordUserStore.constant.reset,
+        });
         Check();
       }, 100);
     }
@@ -57,18 +62,24 @@ export const RecoverUserPasswordPage = () => {
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const Check = () => {
-    dispatch({ type: constant.adminCheckUserStore.reset });
-    dispatch({ type: constant.adminChangePasswordUserStore.reset });
+    dispatch({
+      type: slice.moderator.adminCheckUserStore.constant.reset,
+    });
+    dispatch({
+      type: slice.moderator.adminChangePasswordUserStore.constant.reset,
+    });
     dispatch(
-      action.Admin.CheckUser({
-        form: { username: user.username },
+      slice.moderator.adminCheckUserStore.action({
+        form: {
+          username: user.username,
+        },
       })
     );
   };
 
   const ChangeUserPassword = () => {
     dispatch(
-      action.Admin.ChangeUserPassword({
+      slice.moderator.adminChangePasswordUserStore.action({
         form: {
           username: adminCheckUserStore.data["username"],
           ...passwords,
@@ -84,29 +95,14 @@ export const RecoverUserPasswordPage = () => {
       <message.Message.Danger>
         Все Ваши действия записываются в логи!
       </message.Message.Danger>
-      <component.StoreComponent1
-        stateConstant={constant.adminCheckUserStore}
+      <component.StoreComponent2
+        slice={slice.moderator.adminCheckUserStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
-        showData={true}
         dataText={"Пользователь успешно найден!"}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      <component.StoreComponent1
-        stateConstant={constant.adminChangePasswordUserStore}
+      <component.StoreComponent2
+        slice={slice.moderator.adminChangePasswordUserStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
-        showData={true}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
       {!adminCheckUserStore.load && (
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
@@ -170,7 +166,10 @@ export const RecoverUserPasswordPage = () => {
                     className="btn btn-sm btn-warning m-1 p-2"
                     type="button"
                     onClick={() => {
-                      dispatch({ type: constant.adminCheckUserStore.reset });
+                      dispatch({
+                        type: slice.moderator.adminCheckUserStore.constant
+                          .reset,
+                      });
                       resetUser();
                     }}
                   >
@@ -324,7 +323,7 @@ export const RecoverUserPasswordPage = () => {
                 setIsModalChangePasswordVisible(true);
               }}
             >
-              <modal.ModalConfirm2
+              <modal.ModalConfirm1
                 isModalVisible={isModalChangePasswordVisible}
                 setIsModalVisible={setIsModalChangePasswordVisible}
                 description={"Заменить пароль пользователя?"}

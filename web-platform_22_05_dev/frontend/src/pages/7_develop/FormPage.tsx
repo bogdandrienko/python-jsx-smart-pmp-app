@@ -1,19 +1,18 @@
-import React, { useState } from "react";
+import React, { FormEvent, MouseEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
-const FormPage = () => {
+export function FormPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const submit = (event) => {
+  const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
-  const reset = (event) => {
+
+  const switchPasswordVisibility = (event: MouseEvent<HTMLElement>) => {
     event.preventDefault();
   };
-  const switchPasswordVisibility = (event) => {
-    event.preventDefault();
-  };
+
   return (
     <div className="text-center">
       <hr />
@@ -32,8 +31,8 @@ const FormPage = () => {
                     value={username}
                     placeholder="введите ИИН тут..."
                     required
-                    minLength="12"
-                    maxLength="12"
+                    minLength={12}
+                    maxLength={12}
                     onChange={(event) => setUsername(event.target.value)}
                     autoComplete="current-username"
                   />
@@ -57,8 +56,8 @@ const FormPage = () => {
                       required
                       onChange={(event) => setPassword(event.target.value)}
                       autoComplete="current-password"
-                      minLength="8"
-                      maxLength="16"
+                      minLength={8}
+                      maxLength={16}
                     />
                     <span className="m-0 p-1">
                       <i
@@ -130,6 +129,7 @@ const FormPage = () => {
                   <input
                     type="image"
                     className="form-control form-control-sm text-center m-0 p-1"
+                    alt={"image"}
                   />
                   <small className="text-danger m-0 p-0">
                     * first
@@ -433,11 +433,7 @@ const FormPage = () => {
                   <i className="fa-solid fa-circle-check m-0 p-1" />
                   submit
                 </button>
-                <button
-                  className="btn btn-sm btn-warning m-1 p-2"
-                  type="reset"
-                  onClick={(event) => reset(event)}
-                >
+                <button className="btn btn-sm btn-warning m-1 p-2" type="reset">
                   <i className="fa-solid fa-pen-nib m-0 p-1" />
                   reset
                 </button>
@@ -455,6 +451,4 @@ const FormPage = () => {
       <hr />
     </div>
   );
-};
-
-export default FormPage;
+}

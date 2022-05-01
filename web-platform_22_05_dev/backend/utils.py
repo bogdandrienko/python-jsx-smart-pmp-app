@@ -800,6 +800,14 @@ class DjangoClass:
 
 class DateTimeUtils:
     @staticmethod
+    def sleep(multiply=1.0, stop=0):
+        multiply = multiply / 2
+        if stop:
+            time.sleep(multiply)
+        else:
+            time.sleep(round(random.uniform(multiply, stop), 2))
+
+    @staticmethod
     def get_current_datetime():
         return f"{time.strftime('%Y-%m-%d %H:%M:%S')}"
 

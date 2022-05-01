@@ -8,24 +8,22 @@ import { LinkContainer } from "react-router-bootstrap";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as constant from "../constant";
 import * as hook from "../hook";
 import * as router from "../router";
 import * as util from "../util";
 import * as context from "../context";
 import * as button from "./button";
+import * as slice from "../slice";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const NavbarComponent1 = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const userLoginStore = hook.useSelectorCustom1(constant.userLoginStore);
-
-  const userDetailStore = hook.useSelectorCustom1(constant.userDetailStore);
-
-  const NotificationReadListStore = hook.useSelectorCustom1(
-    constant.NotificationReadListStore
+  const userLoginStore = hook.useSelectorCustom2(slice.user.userLoginStore);
+  const userDetailStore = hook.useSelectorCustom2(slice.user.userDetailStore);
+  const notificationReadListStore = hook.useSelectorCustom2(
+    slice.notification.notificationReadListStore
   );
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,11 +49,11 @@ export const NavbarComponent1 = () => {
                 alt="id"
               />
             </a>
-            {NotificationReadListStore.data &&
-            NotificationReadListStore.data.list.length > 0 ? (
+            {notificationReadListStore.data &&
+            notificationReadListStore.data.list.length > 0 ? (
               <span className="m-0 p-1">
                 <i className="fa-solid fa-bell text-danger m-0 p-1" />
-                {NotificationReadListStore.data["x-total-count"]}
+                {notificationReadListStore.data["x-total-count"]}
               </span>
             ) : (
               <span className="m-0 p-1">
@@ -80,12 +78,12 @@ export const NavbarComponent1 = () => {
                             {module.Header}
                             {"  "}
                             {module.Header === "Профиль" &&
-                              (NotificationReadListStore.data &&
-                              NotificationReadListStore.data.list.length > 0 ? (
+                              (notificationReadListStore.data &&
+                              notificationReadListStore.data.list.length > 0 ? (
                                 <span className="m-0 p-1">
                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                   {
-                                    NotificationReadListStore.data[
+                                    notificationReadListStore.data[
                                       "x-total-count"
                                     ]
                                   }
@@ -143,13 +141,13 @@ export const NavbarComponent1 = () => {
                                             {link.Header}
                                             {"  "}
                                             {link.Header === "Уведомления" &&
-                                              (NotificationReadListStore.data &&
-                                              NotificationReadListStore.data
+                                              (notificationReadListStore.data &&
+                                              notificationReadListStore.data
                                                 .list.length > 0 ? (
                                                 <span className="m-0 p-1">
                                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                                   {
-                                                    NotificationReadListStore
+                                                    notificationReadListStore
                                                       .data["x-total-count"]
                                                   }
                                                 </span>

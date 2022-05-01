@@ -86,6 +86,12 @@ export const useSelectorCustom1 = (constant) => {
 };
 
 // @ts-ignore
+export const useSelectorCustom2 = (slice) => {
+  // @ts-ignore
+  return useSelector((state) => state[slice.name]);
+};
+
+// @ts-ignore
 export const useStateCustom1 = (initialState) => {
   // @ts-ignore
   const [variable, setVariable] = useState({ ...initialState });

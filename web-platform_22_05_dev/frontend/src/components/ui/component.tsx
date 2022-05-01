@@ -18,6 +18,7 @@ import * as hook from "../hook";
 import * as constant from "../constant";
 import * as router from "../router";
 import * as util from "../util";
+import * as slice from "../slice";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -598,9 +599,9 @@ export const StoreComponent1 = ({
   );
 };
 
-export const StoreStatus1 = ({
+export const StoreComponent2 = ({
   // @ts-ignore
-  storeConstant,
+  slice,
   consoleLog = false,
   showLoad = true,
   loadText = "",
@@ -611,34 +612,24 @@ export const StoreStatus1 = ({
   showFail = true,
   failText = "",
 }) => {
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO react components
-  const {
-    load: loadStore,
-    data: dataStore,
-    error: errorStore,
-    fail: failStore,
-    // @ts-ignore
-  } = storeConstant;
+  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  // @ts-ignore
+  const storeConstant = useSelector((state) => state[slice.name]);
   if (consoleLog) {
-    console.log(`${storeConstant}`, {
-      load: loadStore,
-      data: dataStore,
-      error: errorStore,
-      fail: failStore,
-    });
+    console.log(`StoreComponent2 ${slice.name}`, storeConstant);
   }
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <div key={storeConstant} className="m-0 p-0">
-      {showLoad && loadStore && (
-        <div className="row justify-content-center m-0 p-0">
-          {loadText ? (
-            <Alert variant={"secondary"} className="text-center m-0 p-1">
-              {loadText}
-            </Alert>
-          ) : (
+    <div className="m-0 p-0">
+      {showLoad &&
+        storeConstant.load &&
+        (loadText ? (
+          <message.Message.Secondary>{loadText}</message.Message.Secondary>
+        ) : (
+          <div className="row justify-content-center m-0 p-0">
             <Spinner
               animation="border"
               role="status"
@@ -652,37 +643,31 @@ export const StoreStatus1 = ({
             >
               <span className="sr-only m-0 p-0" />
             </Spinner>
-          )}
-        </div>
+          </div>
+        ))}
+      {showData && storeConstant.data && (
+        <message.Message.Success>
+          {dataText
+            ? dataText
+            : typeof storeConstant.data === "string"
+            ? storeConstant.data
+            : "данные не подходят для отображения!"}
+        </message.Message.Success>
       )}
-      {showData && dataStore && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"success"} className="text-center m-0 p-1">
-            {dataText
-              ? dataText
-              : typeof dataStore === "string"
-              ? dataStore
-              : "произошла ошибка"}
-          </Alert>
-        </div>
+      {showError && storeConstant.error && (
+        <message.Message.Danger>
+          {errorText ? errorText : storeConstant.error}
+        </message.Message.Danger>
       )}
-      {showError && errorStore && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"danger"} className="text-center m-0 p-1">
-            {errorText ? errorText : errorStore}
-          </Alert>
-        </div>
-      )}
-      {showFail && failStore && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"warning"} className="text-center m-0 p-1">
-            {failText ? failText : failStore}
-          </Alert>
-        </div>
+      {showFail && storeConstant.fail && (
+        <message.Message.Warning>
+          {failText ? failText : storeConstant.fail}
+        </message.Message.Warning>
       )}
     </div>
   );
 };
+
 // @ts-ignore
 export const MessageComponent = ({ variant, children }) => {
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -718,10 +703,10 @@ export const LoaderComponent = () => {
 export const ModulesComponent = () => {
   // TODO react store variables ////////////////////////////////////////////////////////////////////////////////////////
 
-  const NotificationReadListStore = hook.useSelectorCustom1(
-    constant.NotificationReadListStore
+  const notificationReadListStore = hook.useSelectorCustom2(
+    slice.notification.notificationReadListStore
   );
-  const userDetailStore = hook.useSelectorCustom1(constant.userDetailStore);
+  const userDetailStore = hook.useSelectorCustom2(slice.user.userDetailStore);
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -832,14 +817,14 @@ export const ModulesComponent = () => {
                                                             {"  "}
                                                             {link.Header ===
                                                               "Уведомления" &&
-                                                              (NotificationReadListStore.data &&
-                                                              NotificationReadListStore
+                                                              (notificationReadListStore.data &&
+                                                              notificationReadListStore
                                                                 .data.list
                                                                 .length > 0 ? (
                                                                 <span className="m-0 p-1">
                                                                   <i className="fa-solid fa-bell text-danger m-0 p-1" />
                                                                   {
-                                                                    NotificationReadListStore
+                                                                    notificationReadListStore
                                                                       .data[
                                                                       "x-total-count"
                                                                     ]

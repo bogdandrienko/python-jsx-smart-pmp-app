@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as action from "../../components/action";
+import * as slice from "../../components/slice";
 import * as component from "../../components/ui/component";
 import * as constant from "../../components/constant";
 import * as hook from "../../components/hook";
@@ -20,7 +20,7 @@ import * as captcha from "../../components/ui/captcha";
 export const LoginPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const captchaCheckStore = hook.useSelectorCustom1(constant.captchaCheckStore);
+  const captchaCheck = hook.useSelectorCustom2(slice.captcha.captchaCheckStore);
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -39,8 +39,8 @@ export const LoginPage = () => {
       event.preventDefault();
       event.stopPropagation();
     } catch (error) {}
-    if (captchaCheckStore.data) {
-      dispatch(action.User.Login({ ...user }));
+    if (captchaCheck.data) {
+      dispatch(slice.user.userLoginStore.action({ form: { ...user } }));
     }
   }
 
@@ -141,17 +141,9 @@ export const LoginPage = () => {
               </div>
             </div>
             <div className="card-footer m-0 p-0">
-              <component.StoreComponent1
-                stateConstant={constant.userLoginStore}
+              <component.StoreComponent2
+                slice={slice.user.userLoginStore}
                 consoleLog={constant.DEBUG_CONSTANT}
-                showLoad={true}
-                loadText={""}
-                showData={true}
-                dataText={""}
-                showError={true}
-                errorText={""}
-                showFail={true}
-                failText={""}
               />
               <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                 <button

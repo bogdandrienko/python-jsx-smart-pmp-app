@@ -2,7 +2,7 @@
 
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import { reducers } from "./constant";
+import { reducers } from "./slice";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 

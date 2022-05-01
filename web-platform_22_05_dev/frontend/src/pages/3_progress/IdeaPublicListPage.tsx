@@ -1,13 +1,12 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as constant from "../../components/constant";
-import * as action from "../../components/action";
 import * as util from "../../components/util";
 import * as hook from "../../components/hook";
 
@@ -15,67 +14,95 @@ import * as component from "../../components/ui/component";
 import * as message from "../../components/ui/message";
 import * as base from "../../components/ui/base";
 import * as paginator from "../../components/ui/paginator";
+import * as slice from "../../components/slice";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export function IdeaPublicListPage(): JSX.Element {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const IdeaReadListStore = hook.useSelectorCustom1(constant.IdeaReadListStore);
-  const userReadListStore = hook.useSelectorCustom1(constant.userReadListStore);
+  const ideaReadListStore = hook.useSelectorCustom2(
+    slice.idea.ideaReadListStore
+  );
+  const userReadListStore = hook.useSelectorCustom2(
+    slice.user.userReadListStore
+  );
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
 
-  const [pagination, setPagination] = useState({
+  const [
+    paginationIdeaListForm,
+    setPaginationIdeaListForm,
+    resetPaginationIdeaListForm,
+  ] = hook.useStateCustom1({
     page: 1,
     limit: 9,
     detailView: true,
   });
 
-  const [filter, setFilter, resetFilter] = hook.useStateCustom1({
-    sort: "дате публикации (свежие в начале)",
-    query: "",
-    search: "",
-    subdivision: "",
-    sphere: "",
-    category: "",
-    author: "",
-    name: "",
-    place: "",
-    description: "",
-    moderate: "принято",
-    onlyMonth: false,
-  });
+  const [filterIdeaListForm, setFilterIdeaListForm, resetFilterIdeaListForm] =
+    hook.useStateCustom1({
+      sort: "дате публикации (свежие в начале)",
+      moderate: "принято",
+      subdivision: "",
+      sphere: "",
+      category: "",
+      author: "",
+      search: "",
+    });
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    if (!IdeaReadListStore.data) {
-      dispatch(action.Idea.ReadList({ ...filter, ...pagination }));
-    }
-  }, [IdeaReadListStore.data]);
-
-  useEffect(() => {
     if (!userReadListStore.data) {
-      dispatch(action.User.ReadList());
+      dispatch(slice.user.userReadListStore.action({}));
     }
   }, [userReadListStore.data]);
 
   useEffect(() => {
-    dispatch({ type: constant.IdeaReadListStore.reset });
-    dispatch({ type: constant.userReadListStore.reset });
+    if (!ideaReadListStore.data) {
+      dispatch(
+        slice.idea.ideaReadListStore.action({
+          form: { ...filterIdeaListForm, ...paginationIdeaListForm },
+        })
+      );
+    }
+  }, [ideaReadListStore.data]);
+
+  useEffect(() => {
+    resetPaginationIdeaListForm();
+    resetFilterIdeaListForm();
+    dispatch({ type: slice.user.userReadListStore.constant.reset });
+    dispatch({ type: slice.idea.ideaReadListStore.constant.reset });
   }, []);
 
   useEffect(() => {
-    dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [pagination.page]);
+    dispatch({ type: slice.idea.ideaReadListStore.constant.reset });
+  }, [paginationIdeaListForm.page]);
 
   useEffect(() => {
-    setPagination({ ...pagination, page: 1 });
-    dispatch({ type: constant.IdeaReadListStore.reset });
-  }, [pagination.limit]);
+    setPaginationIdeaListForm({ ...paginationIdeaListForm, page: 1 });
+    dispatch({ type: slice.idea.ideaReadListStore.constant.reset });
+  }, [paginationIdeaListForm.limit]);
+
+  // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  function FormIdeaListSubmit(event: FormEvent<HTMLFormElement>) {
+    util.EventForm1(event, true, true, () => {
+      setPaginationIdeaListForm({ ...paginationIdeaListForm, page: 1 });
+      dispatch({ type: slice.idea.ideaReadListStore.constant.reset });
+    });
+  }
+
+  function FormIdeaListReset(event: FormEvent<HTMLFormElement>) {
+    util.EventForm1(event, false, true, () => {
+      resetPaginationIdeaListForm();
+      resetFilterIdeaListForm();
+      dispatch({ type: slice.idea.ideaReadListStore.constant.reset });
+    });
+  }
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -98,10 +125,10 @@ export function IdeaPublicListPage(): JSX.Element {
             <form
               className="m-0 p-0"
               onSubmit={(event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                setPagination({ ...pagination, page: 1 });
-                dispatch({ type: constant.IdeaReadListStore.reset });
+                FormIdeaListSubmit(event);
+              }}
+              onReset={(event) => {
+                FormIdeaListReset(event);
               }}
             >
               <div className="card shadow custom-background-transparent-hard m-0 p-0">
@@ -111,10 +138,10 @@ export function IdeaPublicListPage(): JSX.Element {
                       Сортировка по:
                       <select
                         className="form-control form-control-sm text-center m-0 p-1"
-                        value={filter.sort}
+                        value={filterIdeaListForm.sort}
                         onChange={(e) =>
-                          setFilter({
-                            ...filter,
+                          setFilterIdeaListForm({
+                            ...filterIdeaListForm,
                             sort: e.target.value,
                           })
                         }
@@ -137,10 +164,10 @@ export function IdeaPublicListPage(): JSX.Element {
                       Подразделение:
                       <select
                         className="form-control form-control-sm text-center m-0 p-1"
-                        value={filter.subdivision}
+                        value={filterIdeaListForm.subdivision}
                         onChange={(e) =>
-                          setFilter({
-                            ...filter,
+                          setFilterIdeaListForm({
+                            ...filterIdeaListForm,
                             subdivision: e.target.value,
                           })
                         }
@@ -181,10 +208,10 @@ export function IdeaPublicListPage(): JSX.Element {
                       Сфера:
                       <select
                         className="form-control form-control-sm text-center m-0 p-1"
-                        value={filter.sphere}
+                        value={filterIdeaListForm.sphere}
                         onChange={(e) =>
-                          setFilter({
-                            ...filter,
+                          setFilterIdeaListForm({
+                            ...filterIdeaListForm,
                             sphere: e.target.value,
                           })
                         }
@@ -204,10 +231,10 @@ export function IdeaPublicListPage(): JSX.Element {
                       Категория:
                       <select
                         className="form-control form-control-sm text-center m-0 p-1"
-                        value={filter.category}
+                        value={filterIdeaListForm.category}
                         onChange={(e) =>
-                          setFilter({
-                            ...filter,
+                          setFilterIdeaListForm({
+                            ...filterIdeaListForm,
                             category: e.target.value,
                           })
                         }
@@ -241,48 +268,53 @@ export function IdeaPublicListPage(): JSX.Element {
                         </option>
                       </select>
                     </label>
-                    {userReadListStore.data && (
-                      <label className="form-control-sm text-center m-0 p-1">
-                        Автор:
-                        <select
-                          className="form-control form-control-sm text-center m-0 p-1"
-                          value={filter.author}
-                          onChange={(e) =>
-                            setFilter({
-                              ...filter,
-                              author: e.target.value,
-                            })
-                          }
-                        >
-                          <option className="m-0 p-0" value="">
-                            все варианты
-                          </option>
-                          {userReadListStore.data.list.map(
-                            (user = "", index = 0) => (
-                              <option
-                                key={index}
-                                value={user}
-                                className="m-0 p-0"
-                              >
-                                {user}
-                              </option>
-                            )
-                          )}
-                        </select>
-                      </label>
-                    )}
-                    <component.StoreComponent1
-                      stateConstant={constant.userReadListStore}
-                      consoleLog={constant.DEBUG_CONSTANT}
-                      showLoad={false}
-                      loadText={""}
-                      showData={false}
-                      dataText={""}
-                      showError={true}
-                      errorText={""}
-                      showFail={true}
-                      failText={""}
-                    />
+                    {/*{userReadListStore.data && (*/}
+                    {/*  <label className="form-control-sm text-center m-0 p-1">*/}
+                    {/*    Автор:*/}
+                    {/*    <select*/}
+                    {/*      className="form-control form-control-sm text-center m-0 p-1"*/}
+                    {/*      value={filterIdeaListForm.author}*/}
+                    {/*      onChange={(e) =>*/}
+                    {/*        setFilterIdeaListForm({*/}
+                    {/*          ...filterIdeaListForm,*/}
+                    {/*          author: e.target.value,*/}
+                    {/*        })*/}
+                    {/*      }*/}
+                    {/*    >*/}
+                    {/*      <option className="m-0 p-0" value="">*/}
+                    {/*        все варианты*/}
+                    {/*      </option>*/}
+                    {/*      {userReadListStore.data.list.map(*/}
+                    {/*        (user = "", index = 0) => (*/}
+                    {/*          <option*/}
+                    {/*            key={index}*/}
+                    {/*            value={user}*/}
+                    {/*            className="m-0 p-0"*/}
+                    {/*          >*/}
+                    {/*            {user}*/}
+                    {/*          </option>*/}
+                    {/*        )*/}
+                    {/*      )}*/}
+                    {/*    </select>*/}
+                    {/*  </label>*/}
+                    {/*)}*/}
+                    {/*<component.StoreComponent1*/}
+                    {/*  stateConstant={constant.userReadListStore}*/}
+                    {/*  consoleLog={constant.DEBUG_CONSTANT}*/}
+                    {/*  showLoad={false}*/}
+                    {/*  loadText={""}*/}
+                    {/*  showData={false}*/}
+                    {/*  dataText={""}*/}
+                    {/*  showError={true}*/}
+                    {/*  errorText={""}*/}
+                    {/*  showFail={true}*/}
+                    {/*  failText={""}*/}
+                    {/*/>*/}
+                    {/*<component.StoreComponent2*/}
+                    {/*  slice={slice.idea.ideaReadListStore}*/}
+                    {/*  consoleLog={constant.DEBUG_CONSTANT}*/}
+                    {/*  showData={false}*/}
+                    {/*/>*/}
                   </div>
                   <div className="m-0 p-0">
                     <label className="form-control-sm text-center w-75 m-0 p-1">
@@ -291,10 +323,10 @@ export function IdeaPublicListPage(): JSX.Element {
                         type="text"
                         className="form-control form-control-sm text-center m-0 p-1"
                         placeholder="введите часть названия тут..."
-                        value={filter.search}
+                        value={filterIdeaListForm.search}
                         onChange={(e) =>
-                          setFilter({
-                            ...filter,
+                          setFilterIdeaListForm({
+                            ...filterIdeaListForm,
                             search: e.target.value.replace(
                               util.GetRegexType({
                                 numbers: true,
@@ -317,15 +349,14 @@ export function IdeaPublicListPage(): JSX.Element {
                       type="submit"
                     >
                       <i className="fa-solid fa-circle-check m-0 p-1" />
-                      обновить данные
+                      обновить
                     </button>
                     <button
                       className="btn btn-sm btn-warning m-1 p-2"
                       type="reset"
-                      onClick={() => resetFilter()}
                     >
                       <i className="fa-solid fa-pen-nib m-0 p-1" />
-                      сбросить фильтры
+                      сбросить
                     </button>
                   </ul>
                 </div>
@@ -335,10 +366,10 @@ export function IdeaPublicListPage(): JSX.Element {
                     Количество идей на странице:
                     <select
                       className="form-control form-control-sm text-center m-0 p-1"
-                      value={pagination.limit}
+                      value={paginationIdeaListForm.limit}
                       onChange={(event) =>
-                        setPagination({
-                          ...pagination,
+                        setPaginationIdeaListForm({
+                          ...paginationIdeaListForm,
                           // @ts-ignore
                           limit: event.target.value,
                         })
@@ -359,11 +390,11 @@ export function IdeaPublicListPage(): JSX.Element {
                       type="checkbox"
                       className="form-check-input m-0 p-1"
                       id="flexSwitchCheckDefault"
-                      checked={pagination.detailView}
+                      checked={paginationIdeaListForm.detailView}
                       onChange={() =>
-                        setPagination({
-                          ...pagination,
-                          detailView: !pagination.detailView,
+                        setPaginationIdeaListForm({
+                          ...paginationIdeaListForm,
+                          detailView: !paginationIdeaListForm.detailView,
                         })
                       }
                     />
@@ -374,39 +405,32 @@ export function IdeaPublicListPage(): JSX.Element {
           </ul>
         }
       </component.Accordion1>
-      {!IdeaReadListStore.load && IdeaReadListStore.data && (
+      {!ideaReadListStore.load && ideaReadListStore.data && (
         <paginator.Pagination1
-          totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={pagination.limit}
-          page={pagination.page}
+          totalObjects={ideaReadListStore.data["x-total-count"]}
+          limit={paginationIdeaListForm.limit}
+          page={paginationIdeaListForm.page}
           // @ts-ignore
           changePage={(page) =>
-            setPagination({
-              ...pagination,
+            setPaginationIdeaListForm({
+              ...paginationIdeaListForm,
               page: page,
             })
           }
         />
       )}
-      <component.StoreComponent1
-        stateConstant={constant.IdeaReadListStore}
+      <component.StoreComponent2
+        slice={slice.idea.ideaReadListStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      {!IdeaReadListStore.load && IdeaReadListStore.data ? (
-        IdeaReadListStore.data.list.length > 0 ? (
+      {!ideaReadListStore.load && ideaReadListStore.data ? (
+        ideaReadListStore.data.list.length > 0 ? (
           <div className={"m-0 p-0"}>
             {" "}
-            {pagination.detailView ? (
+            {paginationIdeaListForm.detailView ? (
               <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center shadow text-center m-0 p-0 my-1">
-                {IdeaReadListStore.data.list.map(
+                {ideaReadListStore.data.list.map(
                   // @ts-ignore
                   (idea, index) => (
                     <div
@@ -776,7 +800,7 @@ export function IdeaPublicListPage(): JSX.Element {
               </ul>
             ) : (
               <div className="card shadow m-0 p-0 my-1">
-                {IdeaReadListStore.data.list.map(
+                {ideaReadListStore.data.list.map(
                   // @ts-ignore
                   (idea, index) => (
                     <Link
@@ -822,15 +846,15 @@ export function IdeaPublicListPage(): JSX.Element {
       ) : (
         ""
       )}
-      {!IdeaReadListStore.load && IdeaReadListStore.data && (
+      {!ideaReadListStore.load && ideaReadListStore.data && (
         <paginator.Pagination1
-          totalObjects={IdeaReadListStore.data["x-total-count"]}
-          limit={pagination.limit}
-          page={pagination.page}
+          totalObjects={ideaReadListStore.data["x-total-count"]}
+          limit={paginationIdeaListForm.limit}
+          page={paginationIdeaListForm.page}
           // @ts-ignore
           changePage={(page) =>
-            setPagination({
-              ...pagination,
+            setPaginationIdeaListForm({
+              ...paginationIdeaListForm,
               page: page,
             })
           }

@@ -2,12 +2,10 @@
 
 import axios from "axios";
 
+import { FormEvent, MouseEvent } from "react";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Nav, Spinner, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
-// @ts-ignore
-import { LinkContainer } from "react-router-bootstrap";
+import { useDispatch } from "react-redux";
+import { Dispatch } from "redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,113 +14,96 @@ import * as action from "./action";
 import * as constant from "./constant";
 import * as router from "./router";
 import * as hook from "./hook";
-import * as util from "./util";
-import { Dispatch } from "redux";
+
+import * as slice from "./slice";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // TODO constructors ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-export function ActionConstructorUtility(
-  // @ts-ignore
-  form,
-  // @ts-ignore
-  url,
-  // @ts-ignore
-  method,
-  // @ts-ignore
-  timeout,
-  // @ts-ignore
-  constant,
-  auth = true
+export function ConstructorSlice1(
+  constantName: string,
+  connectReducerCallback: any,
+  actionStore: any
 ) {
+  const constantLocal = ConstantConstructor1(constantName);
+  const reducerLocal = ConstructorReducer1(constantLocal);
   // @ts-ignore
-  return async function (dispatch, getState) {
-    try {
-      dispatch({
-        type: constant.load,
-      });
-      let config = {};
-      const formData = new FormData();
-      Object.entries(form).map(([key, value]) => {
-        // @ts-ignore
-        formData.append(key, value);
-      });
-      if (auth) {
-        const {
-          userLoginStore: { data: userLogin },
-        } = getState();
-        if (userLogin !== null) {
-          config = {
-            url: url,
-            method: method,
-            timeout: timeout,
-            headers: {
-              "Content-Type": "multipart/form-data",
-              Authorization: `Bearer ${userLogin.token}`,
-            },
-            data: formData,
-          };
-        }
-      } else {
-        config = {
-          url: url,
-          method: method,
-          timeout: timeout,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          data: formData,
+  connectReducerCallback(constantName, reducerLocal);
+  return {
+    name: constantName,
+    constant: constantLocal,
+    reducer: reducerLocal,
+    action: actionStore,
+  };
+}
+
+export function ConstantConstructor1(name: string) {
+  return {
+    load: name + "_LOAD_CONSTANT",
+    data: name + "_DATA_CONSTANT",
+    error: name + "_ERROR_CONSTANT",
+    fail: name + "_FAIL_CONSTANT",
+    reset: name + "_RESET_CONSTANT",
+  };
+}
+
+export function ConstructorReducer1(
+  constantStore = { load: {}, data: {}, error: {}, fail: {}, reset: {} }
+) {
+  return function (state = {}, action = null) {
+    // @ts-ignore
+    switch (action.type) {
+      case constantStore.load:
+        return { load: true };
+      case constantStore.data:
+        return {
+          load: false,
+          // @ts-ignore
+          data: action.payload,
         };
-      }
-      const { data } = await axios(config);
-      if (data.response) {
-        const response = data.response;
-        dispatch({
-          type: constant.data,
-          payload: response,
-        });
-      } else {
-        const response = data.error;
-        dispatch({
-          type: constant.error,
-          payload: response,
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: constant.fail,
-        payload: ActionsFailUtility({ dispatch: dispatch, error: error }),
-      });
+      case constantStore.error:
+        return {
+          load: false,
+          // @ts-ignore
+          error: action.payload,
+        };
+      case constantStore.fail:
+        // @ts-ignore
+        return { load: false, fail: action.payload };
+      case constantStore.reset:
+        return {};
+      default:
+        return state;
     }
   };
 }
 
-export function ActionConstructor1(
+export function ConstructorAction1(
   form: object,
   url: string,
   method: string,
   timeout: number,
-  constant: any,
+  constantStore = { load: {}, data: {}, error: {}, fail: {}, reset: {} },
   authentication: boolean
 ) {
   return async function (dispatch: Dispatch<any>, getState: any) {
     try {
       dispatch({
-        type: constant.load,
+        type: constantStore.load,
       });
-
-      let config = {};
 
       // add "Action-Type" to { url | formData }
       form = {
         ...form,
-        "Action-Type": GetConstantStringName({ constant: constant }),
+        // @ts-ignore
+        "Action-Type": constantStore.data.split("_")[0],
       };
 
       // add {form} to "request.GET" GET | DELETE
       if (method === "GET" || method === "DELETE") {
         url = url + `?`;
+        // eslint-disable-next-line array-callback-return
         Object.entries(form).map(([key, value]) => {
           url = url + `${key}=${value}&`;
         });
@@ -132,6 +113,7 @@ export function ActionConstructor1(
       const formData = new FormData();
       // add {form} to "request.data" POST | PUT
       if (method === "POST" || method === "PUT") {
+        // eslint-disable-next-line array-callback-return
         Object.entries(form).map(([key, value]) => {
           // @ts-ignore
           formData.append(key, value);
@@ -139,6 +121,7 @@ export function ActionConstructor1(
       }
 
       // add Authorization to headers
+      let config = {};
       if (authentication) {
         try {
           const {
@@ -173,272 +156,27 @@ export function ActionConstructor1(
       if (data.response) {
         const response = data.response;
         dispatch({
-          type: constant.data,
+          type: constantStore.data,
           payload: response,
         });
       } else {
         const response = data.error;
         dispatch({
-          type: constant.error,
+          type: constantStore.error,
           payload: response,
         });
       }
     } catch (error) {
       dispatch({
-        type: constant.fail,
-        payload: ActionsFailUtility({ dispatch: dispatch, error: error }),
-      });
-    }
-  };
-}
-
-export function ActionConstructor2({
-  form = {},
-  url = "/",
-  method = "GET",
-  timeout = 10000,
-  constant = { load: {}, data: {}, error: {}, fail: {} },
-  authentication = true,
-}) {
-  // @ts-ignore
-  return async function (dispatch, getState) {
-    try {
-      dispatch({
-        type: constant.load,
-      });
-
-      const formData = new FormData();
-
-      console.log("form: ", form, typeof form);
-
-      Object.entries(form).map(([key, value]) => {
-        // @ts-ignore
-        formData.append(key, value);
-      });
-
-      console.log("formData: ", formData, typeof formData);
-
-      const config = {
-        url: url,
-        method: method,
-        timeout: timeout,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        data: formData,
-      };
-
-      // add Authorization to headers
-      if (authentication) {
-        try {
-          const {
-            userLoginStore: { data: userLogin },
-          } = getState();
-          config.headers = {
-            ...config.headers,
-            // @ts-ignore
-            Authorization: `Bearer ${userLogin.token}`,
-          };
-        } catch (error) {}
-      }
-
-      console.log("config: ", config, typeof config);
-
-      // @ts-ignore
-      const { data } = await axios(config);
-      if (data.response) {
-        const response = data.response;
-        dispatch({
-          type: constant.data,
-          payload: response,
-        });
-      } else {
-        const response = data.error;
-        dispatch({
-          type: constant.error,
-          payload: response,
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: constant.fail,
-        payload: ActionsFailUtility({ dispatch: dispatch, error: error }),
-      });
-    }
-  };
-}
-
-export function ActionConstructor3({
-  // @ts-ignore
-  form,
-  // @ts-ignore
-  url,
-  // @ts-ignore
-  method,
-  // @ts-ignore
-  timeout,
-  // @ts-ignore
-  constant,
-  // @ts-ignore
-  authentication,
-}) {
-  // @ts-ignore
-  return async function (dispatch, getState) {
-    try {
-      dispatch({
-        type: constant.load,
-      });
-
-      console.log("form: ", form, typeof form);
-
-      const formData = new FormData();
-      Object.entries(form).map(([key, value]) => {
-        // @ts-ignore
-        formData.append(key, value);
-      });
-
-      console.log("formData: ", formData, typeof formData);
-
-      const config = {
-        url: url,
-        method: method,
-        timeout: timeout,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        data: formData,
-      };
-
-      console.log("config: ", config, typeof config);
-
-      if (authentication) {
-        try {
-          const {
-            userLoginStore: { data: userLogin },
-          } = getState();
-          config.headers = {
-            ...config.headers,
-            // @ts-ignore
-            Authorization: `Bearer ${userLogin.token}`,
-          };
-        } catch (error) {}
-      }
-
-      const { data } = await axios(config);
-      if (data.response) {
-        const response = data.response;
-        dispatch({
-          type: constant.data,
-          payload: response,
-        });
-      } else {
-        const response = data.error;
-        dispatch({
-          type: constant.error,
-          payload: response,
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: constant.fail,
-        payload: ActionsFailUtility({ dispatch: dispatch, error: error }),
+        type: constantStore.fail,
+        payload: ConstructorActionFail1(dispatch, error),
       });
     }
   };
 }
 
 // @ts-ignore
-export function ReducerConstructorUtility({ load, data, error, fail, reset }) {
-  try {
-    return function (state = {}, action = null) {
-      // @ts-ignore
-      switch (action.type) {
-        case load:
-          return { load: true };
-        case data:
-          return {
-            load: false,
-            // @ts-ignore
-            data: action.payload,
-          };
-        case error:
-          return {
-            load: false,
-            // @ts-ignore
-            error: action.payload,
-          };
-        case fail:
-          // @ts-ignore
-          return { load: false, fail: action.payload };
-        case reset:
-          return {};
-        default:
-          return state;
-      }
-    };
-  } catch (error) {
-    if (constant.DEBUG_CONSTANT) {
-      console.log("ReducerConstructorUtility: ", error);
-    }
-  }
-}
-
-export const AxiosConfigConstructor = ({
-  url = "",
-  method = "GET",
-  timeout = 10000,
-  // @ts-ignore
-  form,
-  getState = null,
-}) => {
-  try {
-    const formData = new FormData();
-    Object.entries(form).map(([key, value]) => {
-      // @ts-ignore
-      formData.append(key, value);
-    });
-    if (getState) {
-      const {
-        userLoginStore: { data: userLogin },
-        // @ts-ignore
-      } = getState();
-      if (userLogin.token) {
-        const config = {
-          url: url,
-          method: method,
-          timeout: timeout,
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${userLogin.token}`,
-          },
-          data: formData,
-        };
-        return { config };
-      }
-    } else {
-      const config = {
-        url: url,
-        method: method,
-        timeout: timeout,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        data: formData,
-      };
-      return { config };
-    }
-  } catch (error) {
-    if (constant.DEBUG_CONSTANT) {
-      console.log(
-        `ActionsFormDataUtilityError: ${url} ${form["Action-type"]}`,
-        error
-      );
-    }
-  }
-};
-
-// @ts-ignore
-export const ActionsFailUtility = ({ dispatch, error }) => {
+export function ConstructorActionFail1(dispatch: Dispatch<any>, error: any) {
   try {
     if (constant.DEBUG_CONSTANT) {
       console.log("fail: ", error);
@@ -454,12 +192,12 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
       }
       switch (status) {
         case 401:
-          dispatch(action.User.Logout());
+          dispatch(action.user.logout());
           return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
         case 413:
           return "Ваш файл слишком большой! Измените его размер и перезагрузите страницу перед отправкой.";
         case 500:
-          dispatch(action.User.Logout());
+          dispatch(action.user.logout());
           return "Ваши данные для входа не получены! Попробуйте выйти из системы и снова войти.";
         case "timeout":
           return "Превышено время ожидания! Попробуйте повторить действие или ожидайте исправления.";
@@ -469,42 +207,194 @@ export const ActionsFailUtility = ({ dispatch, error }) => {
     }
   } catch (error) {
     if (constant.DEBUG_CONSTANT) {
-      console.log("ActionsFailUtilityError: ", error);
+      console.log("ConstructorActionFail1: ", error);
     }
+    return "Неизвестная ошибка! Обратитесь к администратору.";
   }
-};
-
-export function ConstantConstructorUtility(name = "") {
-  return {
-    load: name + "_LOAD_CONSTANT",
-    data: name + "_DATA_CONSTANT",
-    error: name + "_ERROR_CONSTANT",
-    fail: name + "_FAIL_CONSTANT",
-    reset: name + "_RESET_CONSTANT",
-  };
-}
-
-// @ts-ignore
-export function StoreReducerConstructorUtility(name = "", callback) {
-  const store = ConstantConstructorUtility(name);
-  callback(name, ReducerConstructorUtility(store));
-  return store;
 }
 
 // TODO custom /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // @ts-ignore
-export const getPageCount = (totalCount, limit) => {
-  return Math.ceil(totalCount / limit);
+export const CheckAccess = (userDetailStore, slug) => {
+  try {
+    if (slug === "all" || slug.includes("all")) {
+      return true;
+    }
+    if (userDetailStore.data && userDetailStore.data["group_model"]) {
+      if (userDetailStore.data["group_model"].includes("superuser")) {
+        return true;
+      }
+      if (typeof slug === "string") {
+        return userDetailStore.data["group_model"].includes(slug);
+      } else {
+        for (let object of slug) {
+          if (userDetailStore.data["group_model"].includes(object)) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  } catch (error) {
+    if (constant.DEBUG_CONSTANT) {
+      console.log(error);
+    }
+    return false;
+  }
 };
 
 // @ts-ignore
-export const getPagesArray = (totalPages) => {
-  let result = [];
-  for (let i = 0; i < totalPages; i++) {
-    result.push(i + 1);
+export const CheckPageAccess = (userGroups, pageAccess) => {
+  for (let access of pageAccess) {
+    if (
+      access === "all" ||
+      userGroups.includes("superuser") ||
+      userGroups.includes(access)
+    ) {
+      return true;
+    }
   }
-  return result;
+  return false;
+};
+
+// @ts-ignore
+export const GetInfoPage = (path) => {
+  for (let module of router.modules) {
+    for (let section of module.Sections) {
+      for (let link of section.Links) {
+        if (link.Link.split("/").includes(":id")) {
+          if (
+            link.Link.split("/")
+              .slice(0, -1)
+              .every((v, i) => v === path.split("/").slice(0, -1)[i])
+          ) {
+            return {
+              title: link.Title,
+              description: link.Description,
+              access: link.Access,
+            };
+          }
+        } else {
+          if (link.Link === path) {
+            return {
+              title: link.Title,
+              description: link.Description,
+              access: link.Access,
+            };
+          }
+        }
+      }
+    }
+  }
+  return {
+    title: "Страница",
+    description: "страница веб платформы",
+    access: ["null"],
+  };
+};
+
+export const PageLogic = () => {
+  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const userLoginStore = hook.useSelectorCustom2(slice.user.userLoginStore);
+  const userDetailStore = hook.useSelectorCustom2(slice.user.userDetailStore);
+
+  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // TODO variable /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const { access } = GetInfoPage(location.pathname);
+
+  // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    if (userLoginStore.data) {
+      localStorage.setItem("userToken", JSON.stringify(userLoginStore.data));
+      dispatch(slice.user.userDetailStore.action({ form: {} }));
+      dispatch(
+        slice.notification.notificationReadListStore.action({
+          form: {
+            limit: 1,
+            page: 1,
+          },
+        })
+      );
+    }
+  }, [userLoginStore.data]);
+
+  useEffect(() => {
+    if (userDetailStore.data && userDetailStore.data["user_model"]) {
+      if (
+        !CheckPageAccess(userDetailStore.data["group_model"], access) &&
+        location.pathname !== "/"
+      ) {
+        navigate("/");
+      }
+      if (
+        userDetailStore.data["user_model"]["activity_boolean_field"] === false
+      ) {
+        dispatch(action.user.logout());
+      }
+      if (
+        (!userDetailStore.data["user_model"]["secret_question_char_field"] ||
+          !userDetailStore.data["user_model"]["secret_answer_char_field"]) &&
+        location.pathname !== "/password/change" &&
+        location.pathname !== "/"
+      ) {
+        navigate("/password/change");
+      }
+    }
+  }, [userDetailStore.data]);
+
+  // useEffect(() => {
+  //   if (userLoginStore.data && userDetailStore.data) {
+  // @ts-ignore
+  // function updateNotification() {
+  //   dispatch(
+  //     slice.notification.notificationReadListStore.action({
+  //       form: {
+  //         limit: 1,
+  //         page: 1,
+  //       },
+  //     })
+  //   );
+  // }
+
+  // const timeDelay = 10000;
+  // const timeMultiply = 1;
+  // for (let i = 1; i <= 10; i++) {
+  //   util.Delay(() => updateNotification(), timeDelay * i * timeMultiply);
+  // }
+
+  // util.Delay(() => updateNotification(), 10000);
+  // util.Delay(() => updateNotification(), 30000);
+  // util.Delay(() => updateNotification(), 50000);
+  // util.Delay(() => updateNotification(), 100000);
+  // util.Delay(() => updateNotification(), 500000);
+  // util.Delay(() => updateNotification(), 1000000);
+
+  //   let timerId;
+  //   clearTimeout(timerId);
+  //   timerId = setTimeout(
+  //     function tick() {
+  //       dispatch(
+  //         action.Notification.GetList({ form: { limit: 1, page: 1 } })
+  //       );
+  //       timerId = setTimeout(tick, constant.DEBUG_CONSTANT ? 10000 : 30000);
+  //     },
+  //     constant.DEBUG_CONSTANT ? 10000 : 30000
+  //   );
+  //   }
+  // }, [userDetailStore.data]);
+
+  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  return <div className="d-none">.</div>;
 };
 
 export const GetSliceString = (string = "", length = 30, withDots = true) => {
@@ -752,35 +642,6 @@ export const Delay = (callbackAfterDelay, time = 1000) => {
   }
 };
 
-export const Sleep = (time = 1000) => {
-  try {
-    return new Promise((resolve) => setTimeout(resolve, time));
-  } catch (error) {
-    if (constant.DEBUG_CONSTANT) {
-      console.log(error);
-    }
-    return null;
-  }
-};
-
-export const GetPagesArray = (totalCount = 0, limit = 1) => {
-  try {
-    const page = Math.ceil(totalCount / limit);
-    let result = [];
-    if (totalCount) {
-      for (let i = 0; i < page; i++) {
-        result.push(i + 1);
-      }
-    }
-    return result;
-  } catch (error) {
-    if (constant.DEBUG_CONSTANT) {
-      console.log(error);
-    }
-    return [];
-  }
-};
-
 export const GetRoutes = (privateRoute = true) => {
   try {
     // @ts-ignore
@@ -790,6 +651,7 @@ export const GetRoutes = (privateRoute = true) => {
       // @ts-ignore
       module.Sections.map((section) =>
         // @ts-ignore
+        // eslint-disable-next-line array-callback-return
         section.Links.map((link) => {
           if (privateRoute) {
             // @ts-ignore
@@ -825,75 +687,21 @@ export const GetRoutes = (privateRoute = true) => {
   }
 };
 
-// @ts-ignore
-export const GetInfoPage = (path) => {
-  for (let module of router.modules) {
-    for (let section of module.Sections) {
-      for (let link of section.Links) {
-        if (link.Link.split("/").includes(":id")) {
-          if (
-            link.Link.split("/")
-              .slice(0, -1)
-              .every((v, i) => v === path.split("/").slice(0, -1)[i])
-          ) {
-            return {
-              title: link.Title,
-              description: link.Description,
-              access: link.Access,
-            };
-          }
-        } else {
-          if (link.Link === path) {
-            return {
-              title: link.Title,
-              description: link.Description,
-              access: link.Access,
-            };
-          }
-        }
-      }
-    }
-  }
-  return {
-    title: "Страница",
-    description: "страница веб платформы",
-    access: ["null"],
-  };
-};
-
-// @ts-ignore
-export const CheckAccess = (userDetailStore, slug) => {
+export const EventForm1 = (
+  event: FormEvent<any>,
+  preventDefault = true,
+  stropPropagation = true,
+  callBack: any
+) => {
   try {
-    if (slug === "all" || slug.includes("all")) {
-      return true;
+    if (preventDefault) {
+      event.preventDefault();
     }
-    if (userDetailStore.data && userDetailStore.data["group_model"]) {
-      if (userDetailStore.data["group_model"].includes("superuser")) {
-        return true;
-      }
-      if (typeof slug === "string") {
-        return userDetailStore.data["group_model"].includes(slug);
-      } else {
-        for (let object of slug) {
-          if (userDetailStore.data["group_model"].includes(object)) {
-            return true;
-          }
-        }
-      }
+    if (stropPropagation) {
+      event.stopPropagation();
     }
-    return false;
-  } catch (error) {
-    if (constant.DEBUG_CONSTANT) {
-      console.log(error);
-    }
-    return false;
-  }
-};
-// @ts-ignore
-
-export const GetConstantStringName = ({ constant }) => {
-  try {
-    return constant.data.split("_")[0];
+    callBack();
+    return true;
   } catch (error) {
     if (constant.DEBUG_CONSTANT) {
       console.log(error);
@@ -902,106 +710,57 @@ export const GetConstantStringName = ({ constant }) => {
   }
 };
 
-// @ts-ignore
-export const CheckPageAccess = (userGroups, pageAccess) => {
-  for (let access of pageAccess) {
-    if (
-      access === "all" ||
-      userGroups.includes("superuser") ||
-      userGroups.includes(access)
-    ) {
-      return true;
+export const EventMouse1 = (
+  event: MouseEvent<any>,
+  preventDefault = true,
+  stropPropagation = true,
+  callBack: any
+) => {
+  try {
+    if (preventDefault) {
+      event.preventDefault();
     }
+    if (stropPropagation) {
+      event.stopPropagation();
+    }
+    callBack();
+    return true;
+  } catch (error) {
+    if (constant.DEBUG_CONSTANT) {
+      console.log("EventMouse1: ", error);
+    }
+    return undefined;
   }
-  return false;
 };
 
-export const PageLogic = () => {
-  // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const userLoginStore = hook.useSelectorCustom1(constant.userLoginStore);
-
-  const userDetailStore = hook.useSelectorCustom1(constant.userDetailStore);
-
-  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  // TODO variable /////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const { title, description, access } = GetInfoPage(location.pathname);
-
-  // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  useEffect(() => {
-    if (userLoginStore.data) {
-      localStorage.setItem("userToken", JSON.stringify(userLoginStore.data));
-      dispatch(action.User.Read());
-      dispatch(action.Notification.ReadList({ limit: 1, page: 1 }));
-    }
-  }, [userLoginStore.data]);
-
-  useEffect(() => {
-    if (userDetailStore.data && userDetailStore.data["user_model"]) {
-      if (
-        !CheckPageAccess(userDetailStore.data["group_model"], access) &&
-        location.pathname !== "/"
-      ) {
-        navigate("/");
-      }
-      if (
-        userDetailStore.data["user_model"]["activity_boolean_field"] === false
-      ) {
-        dispatch(action.User.Logout());
-      }
-      if (
-        (!userDetailStore.data["user_model"]["secret_question_char_field"] ||
-          !userDetailStore.data["user_model"]["secret_answer_char_field"]) &&
-        location.pathname !== "/password/change" &&
-        location.pathname !== "/"
-      ) {
-        navigate("/password/change");
+export const GetPagesArray = (totalCount = 0, limit = 1) => {
+  try {
+    const page = Math.ceil(totalCount / limit);
+    let result = [];
+    if (totalCount) {
+      for (let i = 0; i < page; i++) {
+        result.push(i + 1);
       }
     }
-  }, [userDetailStore.data]);
-
-  useEffect(() => {
-    if (userLoginStore.data && userDetailStore.data) {
-      // @ts-ignore
-      function updateNotification() {
-        dispatch(action.Notification.ReadList({ form: { limit: 1, page: 1 } }));
-      }
-
-      // const timeDelay = 10000;
-      // const timeMultiply = 1;
-      // for (let i = 1; i <= 10; i++) {
-      //   util.Delay(() => updateNotification(), timeDelay * i * timeMultiply);
-      // }
-
-      // util.Delay(() => updateNotification(), 10000);
-      // util.Delay(() => updateNotification(), 30000);
-      // util.Delay(() => updateNotification(), 50000);
-      // util.Delay(() => updateNotification(), 100000);
-      // util.Delay(() => updateNotification(), 500000);
-      // util.Delay(() => updateNotification(), 1000000);
-
-      //   let timerId;
-      //   clearTimeout(timerId);
-      //   timerId = setTimeout(
-      //     function tick() {
-      //       dispatch(
-      //         action.Notification.GetList({ form: { limit: 1, page: 1 } })
-      //       );
-      //       timerId = setTimeout(tick, constant.DEBUG_CONSTANT ? 10000 : 30000);
-      //     },
-      //     constant.DEBUG_CONSTANT ? 10000 : 30000
-      //   );
+    return result;
+  } catch (error) {
+    if (constant.DEBUG_CONSTANT) {
+      console.log(error);
     }
-  }, [userDetailStore.data]);
+    return [];
+  }
+};
 
-  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
+// @ts-ignore
+export const getPageCount = (totalCount, limit) => {
+  return Math.ceil(totalCount / limit);
+};
 
-  return <div className="d-none">.</div>;
+// @ts-ignore
+export const getPagesArray = (totalPages) => {
+  let result = [];
+  for (let i = 0; i < totalPages; i++) {
+    result.push(i + 1);
+  }
+  return result;
 };

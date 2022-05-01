@@ -9,10 +9,10 @@ import * as component from "../../components/ui/component";
 import * as constant from "../../components/constant";
 import * as hook from "../../components/hook";
 import * as util from "../../components/util";
+import * as slice from "../../components/slice";
 
 import * as base from "../../components/ui/base";
 import * as paginator from "../../components/ui/paginator";
-import * as action from "../../components/action";
 import * as modal from "../../components/ui/modal";
 import * as message from "../../components/ui/message";
 
@@ -21,11 +21,11 @@ import * as message from "../../components/ui/message";
 export const NotificationListPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const NotificationReadListStore = hook.useSelectorCustom1(
-    constant.NotificationReadListStore
+  const notificationReadListStore = hook.useSelectorCustom2(
+    slice.notification.notificationReadListStore
   );
-  const NotificationDeleteStore = hook.useSelectorCustom1(
-    constant.NotificationDeleteStore
+  const notificationUpdateStore = hook.useSelectorCustom2(
+    slice.notification.notificationUpdateStore
   );
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,92 +36,103 @@ export const NotificationListPage = () => {
     hook.useStateCustom1({ page: 1, limit: 10 });
 
   const [
-    isModalNotificationDeleteVisible,
-    setIsModalNotificationDeleteVisible,
+    isModalnotificationDeleteVisible,
+    setIsModalnotificationDeleteVisible,
   ] = useState(false);
-  const [modalNotificationDeleteForm, setModalNotificationDeleteForm] =
+  const [modalnotificationDeleteForm, setModalnotificationDeleteForm] =
     useState({});
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    dispatch({ type: constant.NotificationReadListStore.reset });
+    dispatch({
+      type: slice.notification.notificationReadListStore.constant.reset,
+    });
   }, [paginationComment.page]);
 
   useEffect(() => {
     if (
-      !NotificationReadListStore.data ||
-      (NotificationReadListStore.data["x-total-count"] > 1 &&
-        NotificationReadListStore.data.list.length === 1)
+      !notificationReadListStore.data ||
+      (notificationReadListStore.data["x-total-count"] > 1 &&
+        notificationReadListStore.data.list.length === 1)
     ) {
       dispatch(
-        action.Notification.ReadList({ form: { ...paginationComment } })
+        slice.notification.notificationReadListStore.action({
+          form: {
+            ...paginationComment,
+          },
+        })
       );
     }
-  }, [NotificationReadListStore.data]);
+  }, [notificationReadListStore.data]);
 
   useEffect(() => {
-    if (NotificationDeleteStore.data) {
+    if (notificationUpdateStore.data) {
       setPaginationComment({ ...paginationComment, page: 1 });
-      dispatch({ type: constant.NotificationReadListStore.reset });
-      dispatch({ type: constant.NotificationDeleteStore.reset });
+      dispatch({
+        type: slice.notification.notificationReadListStore.constant.reset,
+      });
+      dispatch({
+        type: slice.notification.notificationUpdateStore.constant.reset,
+      });
     }
-  }, [NotificationDeleteStore.data]);
+  }, [notificationUpdateStore.data]);
+
+  useEffect(() => {
+    resetPaginationComment();
+    setPaginationComment({ ...paginationComment, page: 1 });
+    dispatch({
+      type: slice.notification.notificationReadListStore.constant.reset,
+    });
+    dispatch({
+      type: slice.notification.notificationUpdateStore.constant.reset,
+    });
+  }, []);
 
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   // @ts-ignore
-  const DeleteNotification = ({ notification_id }) => {
-    dispatch(action.Notification.Delete(Number(notification_id)));
+  const Deletenotification = ({ notification_id }) => {
+    dispatch(
+      slice.notification.notificationUpdateStore.action({
+        notification_id: Number(notification_id),
+      })
+    );
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <base.Base1>
-      <modal.ModalConfirm2
-        isModalVisible={isModalNotificationDeleteVisible}
-        setIsModalVisible={setIsModalNotificationDeleteVisible}
+      <modal.ModalConfirm1
+        isModalVisible={isModalnotificationDeleteVisible}
+        setIsModalVisible={setIsModalnotificationDeleteVisible}
         description={"Удалить выбранное уведомление?"}
         callback={() =>
           // @ts-ignore
-          DeleteNotification({
-            ...modalNotificationDeleteForm,
+          Deletenotification({
+            ...modalnotificationDeleteForm,
           })
         }
       />
-      <component.StoreComponent1
-        stateConstant={constant.NotificationReadListStore}
+      <component.StoreComponent2
+        slice={slice.notification.notificationReadListStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      <component.StoreComponent1
-        stateConstant={constant.NotificationDeleteStore}
+      <component.StoreComponent2
+        slice={slice.notification.notificationUpdateStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      {!NotificationReadListStore.load &&
-        NotificationReadListStore.data &&
+      {!notificationReadListStore.load &&
+        notificationReadListStore.data &&
         !(
-          NotificationReadListStore.data["x-total-count"] > 1 &&
-          NotificationReadListStore.data.list.length === 1
+          notificationReadListStore.data["x-total-count"] > 1 &&
+          notificationReadListStore.data.list.length === 1
         ) && (
           <paginator.Pagination1
-            totalObjects={NotificationReadListStore.data["x-total-count"]}
+            totalObjects={notificationReadListStore.data["x-total-count"]}
             limit={paginationComment.limit}
             page={paginationComment.page}
             // @ts-ignore
@@ -133,12 +144,12 @@ export const NotificationListPage = () => {
             }
           />
         )}
-      {!NotificationReadListStore.load ? (
-        NotificationReadListStore.data &&
-        NotificationReadListStore.data.list.length > 0 ? (
+      {!notificationReadListStore.load ? (
+        notificationReadListStore.data &&
+        notificationReadListStore.data.list.length > 0 ? (
           !(
-            NotificationReadListStore.data["x-total-count"] > 1 &&
-            NotificationReadListStore.data.list.length === 1
+            notificationReadListStore.data["x-total-count"] > 1 &&
+            notificationReadListStore.data.list.length === 1
           ) && (
             <table className="table table-sm table-hover table-borderless table-striped border border-1 border-dark shadow custom-background-transparent-middle m-0 p-0">
               <tbody className="text-center m-0 p-0">
@@ -150,7 +161,7 @@ export const NotificationListPage = () => {
                   <td className="fw-bold small m-0 p-1">описание</td>
                   <td className="small m-0 p-1" />
                 </tr>
-                {NotificationReadListStore.data.list.map(
+                {notificationReadListStore.data.list.map(
                   // @ts-ignore
                   (notification, index = 0) => (
                     <tr
@@ -191,11 +202,11 @@ export const NotificationListPage = () => {
                           onClick={(event) => {
                             event.preventDefault();
                             event.stopPropagation();
-                            setModalNotificationDeleteForm({
-                              ...modalNotificationDeleteForm,
+                            setModalnotificationDeleteForm({
+                              ...modalnotificationDeleteForm,
                               notification_id: notification.id,
                             });
-                            setIsModalNotificationDeleteVisible(true);
+                            setIsModalnotificationDeleteVisible(true);
                           }}
                         >
                           скрыть
@@ -215,14 +226,14 @@ export const NotificationListPage = () => {
       ) : (
         ""
       )}
-      {!NotificationReadListStore.load &&
-        NotificationReadListStore.data &&
+      {!notificationReadListStore.load &&
+        notificationReadListStore.data &&
         !(
-          NotificationReadListStore.data["x-total-count"] > 1 &&
-          NotificationReadListStore.data.list.length === 1
+          notificationReadListStore.data["x-total-count"] > 1 &&
+          notificationReadListStore.data.list.length === 1
         ) && (
           <paginator.Pagination1
-            totalObjects={NotificationReadListStore.data["x-total-count"]}
+            totalObjects={notificationReadListStore.data["x-total-count"]}
             limit={paginationComment.limit}
             page={paginationComment.page}
             // @ts-ignore

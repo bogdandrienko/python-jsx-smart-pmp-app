@@ -6,10 +6,11 @@ import { useDispatch } from "react-redux";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as constant from "../../components/constant";
-import * as action from "../../components/action";
 import * as util from "../../components/util";
-import * as component from "../../components/ui/component";
 import * as hook from "../../components/hook";
+import * as slice from "../../components/slice";
+
+import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +18,7 @@ import * as base from "../../components/ui/base";
 export const SalaryPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const SalaryReadStore = hook.useSelectorCustom1(constant.SalaryReadStore);
+  const salaryReadStore = hook.useSelectorCustom2(slice.salary.salaryReadStore);
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -40,7 +41,7 @@ export const SalaryPage = () => {
 
   const getSalary = () => {
     dispatch(
-      action.Salary.Read({
+      slice.salary.salaryReadStore.action({
         form: {
           dateTime: `${dateTime.year}${
             dateTime.month > 9 ? dateTime.month : "0" + dateTime.month
@@ -140,7 +141,7 @@ export const SalaryPage = () => {
                       2023
                     </option>
                   </select>
-                  {!SalaryReadStore.load && (
+                  {!salaryReadStore.load && (
                     <button
                       type="submit"
                       className="btn btn-sm btn-primary m-1 p-2"
@@ -149,13 +150,15 @@ export const SalaryPage = () => {
                       получить
                     </button>
                   )}
-                  {!SalaryReadStore.load && (
+                  {!salaryReadStore.load && (
                     <button
                       type="button"
                       className="btn btn-sm btn-warning m-1 p-2"
                       onClick={() => {
                         resetDateTime();
-                        dispatch({ type: constant.SalaryReadStore.reset });
+                        dispatch({
+                          type: slice.salary.salaryReadStore.constant.reset,
+                        });
                       }}
                     >
                       <i className="fa-solid fa-circle-check m-0 p-1" />
@@ -174,24 +177,17 @@ export const SalaryPage = () => {
         </form>
       </ul>
       <hr />
-      <component.StoreComponent1
-        stateConstant={constant.SalaryReadStore}
+      <component.StoreComponent2
+        slice={slice.salary.salaryReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      {SalaryReadStore.data && (
+      {salaryReadStore.data && (
         <div className="bg-light bg-opacity-10 custom-background-transparent-low text-center m-0 p-0">
           <div className="text-center custom-background-transparent-low m-0 p-1">
             <a
               className="btn btn-sm btn-success text-center m-0 p-2"
-              href={`/${SalaryReadStore.data["excelPath"]}`}
+              href={`/${salaryReadStore.data["excelPath"]}`}
             >
               Скачать excel-документ
             </a>
@@ -211,7 +207,7 @@ export const SalaryPage = () => {
                     </tr>
                   </thead>
                   <tbody className="m-0 p-0">
-                    {SalaryReadStore.data["headers"].slice(-2).map(
+                    {salaryReadStore.data["headers"].slice(-2).map(
                       // @ts-ignore
                       (head, index) => (
                         <tr key={index} className="m-0 p-0">
@@ -259,7 +255,7 @@ export const SalaryPage = () => {
                           </tr>
                         </thead>
                         <tbody className="m-0 p-0">
-                          {SalaryReadStore.data["headers"].slice(5, -2).map(
+                          {salaryReadStore.data["headers"].slice(5, -2).map(
                             // @ts-ignore
                             (head, index) => (
                               <tr key={index} className="m-0 p-0">
@@ -275,7 +271,7 @@ export const SalaryPage = () => {
                     </li>
                   </ul>
                   <ul className="row row-cols-auto row-cols-md-auto row-cols-lg-auto nav justify-content-center bg-light bg-opacity-50 custom-background-transparent-low m-0 p-0">
-                    {SalaryReadStore.data["tables"].map(
+                    {salaryReadStore.data["tables"].map(
                       // @ts-ignore
                       (tab, index) => (
                         <component.SalaryTableComponent key={index} tab={tab} />
@@ -291,7 +287,7 @@ export const SalaryPage = () => {
                           </tr>
                         </thead>
                         <tbody className="m-0 p-0">
-                          {SalaryReadStore.data["headers"].slice(-2).map(
+                          {salaryReadStore.data["headers"].slice(-2).map(
                             // @ts-ignore
                             (head, index) => (
                               <tr key={index} className="m-0 p-0">

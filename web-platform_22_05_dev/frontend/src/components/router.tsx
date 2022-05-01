@@ -5,9 +5,9 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as constant from "./constant";
 import * as hook from "./hook";
 import * as util from "./util";
+import * as slice from "./slice";
 
 import { LoginPage } from "../pages/2_profile/LoginPage";
 import { LogoutPage } from "../pages/2_profile/LogoutPage";
@@ -20,7 +20,6 @@ import { IdeaPublicPage } from "../pages/3_progress/IdeaPublicPage";
 import { IdeaCreatePage } from "../pages/3_progress/IdeaCreatePage";
 import { IdeaTemplatePage } from "../pages/3_progress/IdeaTemplatePage";
 import { ChangeProfilePage } from "../pages/2_profile/ChangeProfilePage";
-import { PostListUnlimitedScrollPage } from "../test/PostListUnlimitedScrollPage";
 import { RecoverPasswordPage } from "../pages/2_profile/RecoverPasswordPage";
 import { UsersRatingsListPage } from "../pages/1_main/UsersRatingsListPage";
 import { NewsPage } from "../pages/1_main/NewsPage";
@@ -36,6 +35,7 @@ import { ExportUsersPage } from "../pages/6_moderate/ExportUsersPage";
 import { TerminalRebootPage } from "../pages/6_moderate/TerminalRebootPage";
 import { CreateOrChangeUsersPage } from "../pages/6_moderate/CreateOrChangeUsersPage";
 import { RecoverUserPasswordPage } from "../pages/6_moderate/RecoverUserPasswordPage";
+import { FormPage } from "../pages/7_develop/FormPage";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -811,23 +811,6 @@ export const modules = [
             Style: "text-dark",
             LinkIcon: "fa-solid fa-toolbox m-0 p-1",
           },
-          {
-            Header: "PostListUnlimitedScrollPage",
-            Access: ["superuser"],
-            Active: true,
-            Link: "/posts/list",
-            ExternalLink: false,
-            ShowLink: true,
-            Title: "Test",
-            Description: "test",
-            path: "/posts/list",
-            element: <PostListUnlimitedScrollPage />,
-            private: true,
-            Logic: true,
-            Redirect: true,
-            Style: "text-dark",
-            LinkIcon: "fa-solid fa-toolbox m-0 p-1",
-          },
         ],
       },
     ],
@@ -835,7 +818,7 @@ export const modules = [
 ];
 
 export function Routers() {
-  const userLoginStore = hook.useSelectorCustom1(constant.userLoginStore);
+  const userLoginStore = hook.useSelectorCustom2(slice.user.userLoginStore);
   return userLoginStore.data ? (
     <Routes>
       {util.GetRoutes(true).map(({ path, element }, key) => (

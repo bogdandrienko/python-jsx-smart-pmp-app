@@ -1,16 +1,16 @@
 // TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
 
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, MouseEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
-import * as action from "../../components/action";
 import * as constant from "../../components/constant";
 import * as hook from "../../components/hook";
 import * as util from "../../components/util";
+import * as slice from "../../components/slice";
 
 import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
@@ -23,18 +23,18 @@ import * as message from "../../components/ui/message";
 export function IdeaPublicPage(): JSX.Element {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const IdeaReadStore = hook.useSelectorCustom1(constant.IdeaReadStore);
-  const IdeaCommentReadListStore = hook.useSelectorCustom1(
-    constant.IdeaCommentReadListStore
+  const ideaReadStore = hook.useSelectorCustom2(slice.idea.ideaReadStore);
+  const ideaCommentCreateStore = hook.useSelectorCustom2(
+    slice.ideaComment.ideaCommentCreateStore
   );
-  const IdeaCommentCreateStore = hook.useSelectorCustom1(
-    constant.IdeaCommentCreateStore
+  const ideaCommentReadListStore = hook.useSelectorCustom2(
+    slice.ideaComment.ideaCommentReadListStore
   );
-  const IdeaRatingReadListStore = hook.useSelectorCustom1(
-    constant.IdeaRatingReadListStore
+  const ideaRatingReadListStore = hook.useSelectorCustom2(
+    slice.ideaRating.ideaRatingReadListStore
   );
-  const IdeaRatingCreateStore = hook.useSelectorCustom1(
-    constant.IdeaRatingCreateStore
+  const ideaRatingUpdateStore = hook.useSelectorCustom2(
+    slice.ideaRating.ideaRatingUpdateStore
   );
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,43 +42,59 @@ export function IdeaPublicPage(): JSX.Element {
   const dispatch = useDispatch();
   const id = useParams().id;
 
-  const [paginationComment, setPaginationComment, resetPaginationComment] =
-    hook.useStateCustom1({ page: 1, limit: 5 });
-
-  // Notification Modal
-  const [isModalNotificationVisible, setIsModalNotificationVisible] =
-    useState(false);
-  const [modalNotificationForm, setModalNotificationForm] = useState({});
-
-  // Low Rating Modal
-  const [isModalLowRatingVisible, setIsModalLowRatingVisible] = useState(false);
-  const [modalLowRatingForm, setModalLowRatingForm] = useState({});
-
-  const [comment, SetComment, resetComment] = hook.useStateCustom1({
+  const [
+    ideaCommentCreateObject,
+    setIdeaCommentCreateObject,
+    resetIdeaCommentCreateObject,
+  ] = hook.useStateCustom1({
     comment: "",
   });
+
+  const [
+    paginationIdeaCommentListObject,
+    setPaginationIdeaCommentListObject,
+    resetPaginationIdeaCommentListObject,
+  ] = hook.useStateCustom1({ page: 1, limit: 5 });
+
+  const [
+    isModalnotificationCreateVisible,
+    setIsModalnotificationCreateVisible,
+  ] = useState(false);
+  const [modalnotificationCreateForm, setModalnotificationCreateForm] =
+    useState({});
+
+  const [isModalLowRatingVisible, setIsModalLowRatingVisible] = useState(false);
+  const [modalLowRatingForm, setModalLowRatingForm] = useState({});
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
-    if (!IdeaReadStore.data) {
-      dispatch(action.Idea.Read(Number(id)));
+    if (!ideaReadStore.data) {
+      dispatch(slice.idea.ideaReadStore.action({ idea_id: Number(id) }));
     }
-  }, [IdeaReadStore.data]);
+  }, [ideaReadStore.data]);
 
   useEffect(() => {
-    if (!IdeaCommentReadListStore.data) {
+    if (!ideaCommentReadListStore.data) {
       dispatch(
-        action.IdeaComment.ReadList(Number(id), { ...paginationComment })
+        slice.ideaComment.ideaCommentReadListStore.action({
+          idea_id: Number(id),
+          form: { ...paginationIdeaCommentListObject },
+        })
       );
     }
-  }, [IdeaCommentReadListStore.data]);
+  }, [ideaCommentReadListStore.data]);
 
   useEffect(() => {
-    if (!IdeaRatingReadListStore.data) {
-      dispatch(action.IdeaRating.RedList(Number(id), { limit: 100, page: 1 }));
+    if (!ideaRatingReadListStore.data) {
+      dispatch(
+        slice.ideaRating.ideaRatingReadListStore.action({
+          idea_id: Number(id),
+          form: { limit: -1, page: 1 },
+        })
+      );
     }
-  }, [IdeaRatingReadListStore.data]);
+  }, [ideaRatingReadListStore.data]);
 
   useEffect(() => {
     resetState();
@@ -89,102 +105,169 @@ export function IdeaPublicPage(): JSX.Element {
   }, [id]);
 
   useEffect(() => {
-    if (IdeaCommentCreateStore.data || IdeaRatingCreateStore.data) {
+    if (ideaCommentCreateStore.data || ideaRatingUpdateStore.data) {
       resetState();
     }
-  }, [IdeaCommentCreateStore.data, IdeaRatingCreateStore.data]);
+  }, [ideaCommentCreateStore.data, ideaRatingUpdateStore.data]);
 
   useEffect(() => {
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-  }, [paginationComment.page]);
+    dispatch({
+      type: slice.ideaComment.ideaCommentReadListStore.constant.reset,
+    });
+  }, [paginationIdeaCommentListObject.page]);
 
   useEffect(() => {
-    setPaginationComment({ ...paginationComment, page: 1 });
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-  }, [paginationComment.limit]);
+    setPaginationIdeaCommentListObject({
+      ...paginationIdeaCommentListObject,
+      page: 1,
+    });
+    dispatch({
+      type: slice.ideaComment.ideaCommentReadListStore.constant.reset,
+    });
+  }, [paginationIdeaCommentListObject.limit]);
 
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const resetState = () => {
-    resetComment();
-    resetPaginationComment();
-    dispatch({ type: constant.IdeaReadStore.reset });
-    dispatch({ type: constant.IdeaRatingReadListStore.reset });
-    dispatch({ type: constant.IdeaCommentCreateStore.reset });
-    dispatch({ type: constant.IdeaCommentReadListStore.reset });
-    dispatch({ type: constant.IdeaCommentDeleteStore.reset });
-    dispatch({ type: constant.NotificationCreateStore.reset });
-  };
+  function resetState() {
+    resetIdeaCommentCreateObject();
+    resetPaginationIdeaCommentListObject();
+    dispatch({ type: slice.idea.ideaReadStore.constant.reset });
+    dispatch({ type: slice.ideaRating.ideaRatingReadListStore.constant.reset });
+    dispatch({ type: slice.ideaComment.ideaCommentCreateStore.constant.reset });
+    dispatch({
+      type: slice.ideaComment.ideaCommentReadListStore.constant.reset,
+    });
+    dispatch({ type: slice.ideaComment.ideaCommentDeleteStore.constant.reset });
+    dispatch({
+      type: slice.notification.notificationCreateStore.constant.reset,
+    });
+  }
 
-  const CreateComment = () => {
+  function CreateNotification(form: object) {
     dispatch(
-      action.IdeaComment.Create(Number(id), { comment: comment.comment })
-    );
-  };
-
-  // @ts-ignore
-  const CreateNotification = (form) => {
-    dispatch(
-      action.Notification.Create({
+      slice.notification.notificationCreateStore.action({
         form: {
           ...form,
-          description: `${form.description}, причина: ${form.answer}`,
+          // @ts-ignore
+          description: `${form["description"]}, причина: ${form["answer"]}`,
         },
       })
     );
-  };
+  }
 
-  // @ts-ignore
-  const CreateRating = ({ value = 0 }) => {
-    if (value < 4) {
+  function ButtonNotificationIdeaCreate(event: MouseEvent<any>) {
+    util.EventMouse1(event, true, true, () => {
+      setModalnotificationCreateForm({
+        ...modalnotificationCreateForm,
+        question: "Введите причину жалобы на идею?",
+        answer: "Идея неуместна!",
+        name: "жалоба на идею в банке идей",
+        place: "банк идей",
+        description: `название идеи: ${ideaReadStore.data["name_char_field"]}`,
+      });
+      setIsModalnotificationCreateVisible(true);
+    });
+  }
+
+  function ButtonnotificationIdeaCommentCreate(
+    event: MouseEvent<any>,
+    object: any
+  ) {
+    util.EventMouse1(event, true, true, () => {
+      setModalnotificationCreateForm({
+        ...modalnotificationCreateForm,
+        question: "Введите причину жалобы на комментарий?",
+        answer: "Нецензурная лексика!",
+        name: "жалоба на комментарий в банке идей",
+        place: "банк идей",
+        description: `название идеи: ${
+          ideaReadStore.data["name_char_field"]
+        } (${ideaReadStore.data["user_model"]["last_name_char_field"]} ${
+          ideaReadStore.data["user_model"]["first_name_char_field"]
+        }), комментарий: ${util.GetCleanDateTime(
+          object["created_datetime_field"],
+          true
+        )} (${object["user_model"]["last_name_char_field"]} ${
+          object["user_model"]["first_name_char_field"]
+        })`,
+      });
+      setIsModalnotificationCreateVisible(true);
+    });
+  }
+
+  function CreateComment() {
+    dispatch(
+      slice.ideaComment.ideaCommentCreateStore.action({
+        idea_id: Number(id),
+        form: { comment: ideaCommentCreateObject.comment },
+      })
+    );
+  }
+
+  function FormIdeaCommentCreateSubmit(event: FormEvent<HTMLFormElement>) {
+    util.EventForm1(event, true, true, () => {
+      CreateComment();
+    });
+  }
+
+  function CreateRating(rating: number) {
+    if (rating < 4) {
       setModalLowRatingForm({
         question: "Введите причину низкой оценки?",
         answer: "Мне не понравилась идея!",
-        value: value,
+        rating: rating,
       });
       setIsModalLowRatingVisible(true);
     } else {
-      dispatch(action.IdeaRating.Create(Number(id), { value: value }));
+      dispatch(
+        slice.ideaRating.ideaRatingUpdateStore.action({
+          idea_id: Number(id),
+          form: { rating: rating },
+        })
+      );
     }
-  };
+  }
 
-  // @ts-ignore
-  const CreateLowLevelRating = (form) => {
-    dispatch(action.IdeaRating.Create(Number(id), { value: `${form.value}` }));
+  function CreateLowLevelRating(form: object) {
     dispatch(
-      action.IdeaComment.Create(Number(id), { comment: `${form.answer}` })
+      slice.ideaRating.ideaRatingUpdateStore.action({
+        idea_id: Number(id),
+        // @ts-ignore
+        form: { rating: `${form.rating}` },
+      })
     );
-  };
+    dispatch(
+      slice.ideaComment.ideaCommentCreateStore.action({
+        idea_id: Number(id),
+        // @ts-ignore
+        form: { comment: `${form.answer}` },
+      })
+    );
+  }
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <base.Base1>
-      <modal.ModalPrompt2
-        isModalVisible={isModalNotificationVisible}
-        setIsModalVisible={setIsModalNotificationVisible}
+      <modal.ModalPrompt1
+        isModalVisible={isModalnotificationCreateVisible}
+        setIsModalVisible={setIsModalnotificationCreateVisible}
         callback={CreateNotification}
         // @ts-ignore
-        form={modalNotificationForm}
+        form={modalnotificationCreateForm}
       />
-      <modal.ModalPrompt2
+      <modal.ModalPrompt1
         isModalVisible={isModalLowRatingVisible}
         setIsModalVisible={setIsModalLowRatingVisible}
         callback={CreateLowLevelRating}
         // @ts-ignore
         form={modalLowRatingForm}
       />
-      <component.StoreComponent1
-        stateConstant={constant.NotificationCreateStore}
+      <component.StoreComponent2
+        slice={slice.notification.notificationCreateStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={true}
         dataText={"Жалоба успешно отправлена!"}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
       <div className="btn-group text-start w-100 m-0 p-0">
         <Link
@@ -193,47 +276,28 @@ export function IdeaPublicPage(): JSX.Element {
         >
           {"<="} назад к списку
         </Link>
-        {IdeaReadStore.data && (
+        {ideaReadStore.data && (
           <button
             type="button"
-            className="btn btn-sm btn-outline-danger m-1 p-2"
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              setModalNotificationForm({
-                ...modalNotificationForm,
-                question: "Введите причину жалобы на идею?",
-                answer: "Идея неуместна!",
-                name: "жалоба на идею в банке идей",
-                place: "банк идей",
-                description: `название идеи: ${IdeaReadStore.data["name_char_field"]}`,
-              });
-              setIsModalNotificationVisible(true);
-            }}
+            className="btn btn-sm btn-outline-danger m-1 p-2 custom-z-index-0"
+            onClick={(event) => ButtonNotificationIdeaCreate(event)}
           >
             <i className="fa-solid fa-skull-crossbones m-0 p-1" />
             жалоба на идею
           </button>
         )}
       </div>
-      <component.StoreComponent1
-        stateConstant={constant.IdeaReadStore}
+      <component.StoreComponent2
+        slice={slice.idea.ideaReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
-      {IdeaReadStore.data && !IdeaReadStore.load && (
+      {ideaReadStore.data && !ideaReadStore.load && (
         <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
           <div className="card shadow custom-background-transparent-low text-center p-0">
             <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
               <h6 className="lead fw-bold m-0 p-0">
-                {IdeaReadStore.data["name_char_field"]}
+                {ideaReadStore.data["name_char_field"]}
               </h6>
             </div>
             <div className="card-body m-0 p-0">
@@ -245,7 +309,7 @@ export function IdeaPublicPage(): JSX.Element {
                     required
                   >
                     <option className="m-0 p-0" value="">
-                      {IdeaReadStore.data["subdivision_char_field"]}
+                      {ideaReadStore.data["subdivision_char_field"]}
                     </option>
                   </select>
                 </label>
@@ -256,7 +320,7 @@ export function IdeaPublicPage(): JSX.Element {
                     required
                   >
                     <option className="m-0 p-0" value="">
-                      {IdeaReadStore.data["sphere_char_field"]}
+                      {ideaReadStore.data["sphere_char_field"]}
                     </option>
                   </select>
                 </label>
@@ -267,7 +331,7 @@ export function IdeaPublicPage(): JSX.Element {
                     required
                   >
                     <option className="m-0 p-0" value="">
-                      {IdeaReadStore.data["category_char_field"]}
+                      {ideaReadStore.data["category_char_field"]}
                     </option>
                   </select>
                 </label>
@@ -275,8 +339,8 @@ export function IdeaPublicPage(): JSX.Element {
               <div className="m-0 p-0">
                 <img
                   src={
-                    IdeaReadStore.data["image_field"]
-                      ? util.GetStaticFile(IdeaReadStore.data["image_field"])
+                    ideaReadStore.data["image_field"]
+                      ? util.GetStaticFile(ideaReadStore.data["image_field"])
                       : util.GetStaticFile(
                           "/media/default/idea/default_idea.jpg"
                         )
@@ -291,7 +355,7 @@ export function IdeaPublicPage(): JSX.Element {
                   <input
                     type="text"
                     className="form-control form-control-sm text-center m-0 p-1"
-                    defaultValue={IdeaReadStore.data["place_char_field"]}
+                    defaultValue={ideaReadStore.data["place_char_field"]}
                     readOnly={true}
                     placeholder="введите место изменения тут..."
                     required
@@ -305,7 +369,7 @@ export function IdeaPublicPage(): JSX.Element {
                   Описание:
                   <textarea
                     className="form-control form-control-sm text-center m-0 p-1"
-                    defaultValue={IdeaReadStore.data["description_text_field"]}
+                    defaultValue={ideaReadStore.data["description_text_field"]}
                     readOnly={true}
                     required
                     placeholder="введите описание тут..."
@@ -318,9 +382,9 @@ export function IdeaPublicPage(): JSX.Element {
               <div className="m-0 p-0">
                 <Link to={`#`} className="btn btn-sm btn-warning m-0 p-2">
                   Автор:{" "}
-                  {IdeaReadStore.data["user_model"]["last_name_char_field"]}{" "}
-                  {IdeaReadStore.data["user_model"]["first_name_char_field"]}{" "}
-                  {IdeaReadStore.data["user_model"]["position_char_field"]}
+                  {ideaReadStore.data["user_model"]["last_name_char_field"]}{" "}
+                  {ideaReadStore.data["user_model"]["first_name_char_field"]}{" "}
+                  {ideaReadStore.data["user_model"]["position_char_field"]}
                 </Link>
               </div>
               <div className="d-flex justify-content-between m-1 p-0">
@@ -328,7 +392,7 @@ export function IdeaPublicPage(): JSX.Element {
                   подано:{" "}
                   <p className="m-0">
                     {util.GetCleanDateTime(
-                      IdeaReadStore.data["created_datetime_field"],
+                      ideaReadStore.data["created_datetime_field"],
                       true
                     )}
                   </p>
@@ -337,7 +401,7 @@ export function IdeaPublicPage(): JSX.Element {
                   зарегистрировано:{" "}
                   <p className="m-0 p-0">
                     {util.GetCleanDateTime(
-                      IdeaReadStore.data["register_datetime_field"],
+                      ideaReadStore.data["register_datetime_field"],
                       true
                     )}
                   </p>
@@ -345,24 +409,22 @@ export function IdeaPublicPage(): JSX.Element {
               </div>
             </div>
             <div className="card-footer m-0 p-1">
-              <component.StoreComponent1
-                stateConstant={constant.IdeaRatingCreateStore}
+              <component.StoreComponent2
+                slice={slice.ideaRating.ideaRatingReadListStore}
                 consoleLog={constant.DEBUG_CONSTANT}
-                showLoad={true}
-                loadText={""}
                 showData={false}
-                dataText={""}
-                showError={true}
-                errorText={""}
-                showFail={true}
-                failText={""}
+              />
+              <component.StoreComponent2
+                slice={slice.ideaRating.ideaRatingUpdateStore}
+                consoleLog={constant.DEBUG_CONSTANT}
+                showData={false}
               />
               <div className="d-flex justify-content-between m-0 p-1">
                 <span
                   className={
-                    IdeaReadStore.data["ratings"]["total_rate"] > 7
+                    ideaReadStore.data["ratings"]["total_rate"] > 7
                       ? "text-success m-0 p-1"
-                      : IdeaReadStore.data["ratings"]["total_rate"] > 4
+                      : ideaReadStore.data["ratings"]["total_rate"] > 4
                       ? "custom-color-warning-1 m-0 p-1"
                       : "text-danger m-0 p-1"
                   }
@@ -378,42 +440,35 @@ export function IdeaPublicPage(): JSX.Element {
                       <NavDropdown
                         title={
                           util.GetSliceString(
-                            IdeaReadStore.data["ratings"]["total_rate"],
+                            ideaReadStore.data["ratings"]["total_rate"],
                             3,
                             false
                           ) +
                           " /  " +
-                          IdeaReadStore.data["ratings"]["count"]
+                          ideaReadStore.data["ratings"]["count"]
                         }
                         className={
-                          IdeaReadStore.data["ratings"]["total_rate"] > 7
-                            ? IdeaReadStore.data["ratings"]["count"] > 0
+                          ideaReadStore.data["ratings"]["total_rate"] > 7
+                            ? ideaReadStore.data["ratings"]["count"] > 0
                               ? "btn btn-sm bg-success bg-opacity-50 badge rounded-pill"
                               : "btn btn-sm bg-success bg-opacity-50 badge rounded-pill disabled"
-                            : IdeaReadStore.data["ratings"]["total_rate"] > 4
-                            ? IdeaReadStore.data["ratings"]["count"] > 0
+                            : ideaReadStore.data["ratings"]["total_rate"] > 4
+                            ? ideaReadStore.data["ratings"]["count"] > 0
                               ? "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill"
                               : "btn btn-sm bg-warning bg-opacity-50 badge rounded-pill disabled"
-                            : IdeaReadStore.data["ratings"]["count"] > 0
+                            : ideaReadStore.data["ratings"]["count"] > 0
                             ? "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill"
                             : "btn btn-sm bg-danger bg-opacity-50 badge rounded-pill disabled"
                         }
                       >
                         <ul className="m-0 p-0">
-                          <component.StoreComponent1
-                            stateConstant={constant.IdeaRatingReadListStore}
+                          <component.StoreComponent2
+                            slice={slice.ideaRating.ideaRatingReadListStore}
                             consoleLog={constant.DEBUG_CONSTANT}
-                            showLoad={true}
-                            loadText={""}
                             showData={false}
-                            dataText={""}
-                            showError={true}
-                            errorText={""}
-                            showFail={true}
-                            failText={""}
                           />
-                          {IdeaRatingReadListStore.data &&
-                            IdeaRatingReadListStore.data.list.map(
+                          {ideaRatingReadListStore.data &&
+                            ideaRatingReadListStore.data.list.map(
                               // @ts-ignore
                               (rate, index) => (
                                 <li
@@ -439,7 +494,7 @@ export function IdeaPublicPage(): JSX.Element {
                     </Nav>
                   </Container>
                 </Navbar>
-                {IdeaRatingReadListStore.data && (
+                {ideaRatingReadListStore.data && (
                   <span className="m-0 p-1">
                     <div className="m-0 p-0">
                       Нажмите на одну из 10 звезд для оценки идеи:
@@ -447,182 +502,182 @@ export function IdeaPublicPage(): JSX.Element {
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 1
+                        ideaRatingReadListStore.data["self_rate"] >= 1
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 0.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 0.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 1 })}
+                      onClick={() => CreateRating(1)}
                     />
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 2
+                        ideaRatingReadListStore.data["self_rate"] >= 2
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 1.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 1.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 2 })}
+                      onClick={() => CreateRating(2)}
                     />
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 3
+                        ideaRatingReadListStore.data["self_rate"] >= 3
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 2.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 2.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 3 })}
+                      onClick={() => CreateRating(3)}
                     />
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 4
+                        ideaRatingReadListStore.data["self_rate"] >= 4
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 3.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 3.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 4 })}
+                      onClick={() => CreateRating(4)}
                     />
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 5
+                        ideaRatingReadListStore.data["self_rate"] >= 5
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 4.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 4.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 5 })}
+                      onClick={() => CreateRating(5)}
                     />
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 6
+                        ideaRatingReadListStore.data["self_rate"] >= 6
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 5.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 5.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 6 })}
+                      onClick={() => CreateRating(6)}
                     />
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 7
+                        ideaRatingReadListStore.data["self_rate"] >= 7
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 6.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 6.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 7 })}
+                      onClick={() => CreateRating(7)}
                     />
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 8
+                        ideaRatingReadListStore.data["self_rate"] >= 8
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 7.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 7.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 8 })}
+                      onClick={() => CreateRating(8)}
                     />
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 9
+                        ideaRatingReadListStore.data["self_rate"] >= 9
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 8.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 8.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 9 })}
+                      onClick={() => CreateRating(9)}
                     />
                     <i
                       style={{
                         color:
-                          IdeaRatingReadListStore.data["self_rate"] > 7
+                          ideaRatingReadListStore.data["self_rate"] > 7
                             ? "#00ff00"
-                            : IdeaRatingReadListStore.data["self_rate"] > 4
+                            : ideaRatingReadListStore.data["self_rate"] > 4
                             ? "#ffaa00"
                             : "#ff0000",
                       }}
                       className={
-                        IdeaRatingReadListStore.data["self_rate"] >= 10
+                        ideaRatingReadListStore.data["self_rate"] >= 10
                           ? "btn fas fa-star m-0 p-0"
-                          : IdeaRatingReadListStore.data["self_rate"] >= 9.5
+                          : ideaRatingReadListStore.data["self_rate"] >= 9.5
                           ? "btn fas fa-star-half-alt m-0 p-0"
                           : "btn far fa-star m-0 p-0"
                       }
-                      onClick={() => CreateRating({ value: 10 })}
+                      onClick={() => CreateRating(10)}
                     />
                     <div className="m-0 p-0">Ваша оценка</div>
                   </span>
@@ -632,22 +687,15 @@ export function IdeaPublicPage(): JSX.Element {
                 <span className="text-secondary m-0 p-1">Комментарии</span>
                 <i className="fa-solid fa-comment m-0 p-1">
                   {" "}
-                  {IdeaReadStore.data["comments"]["count"]}
+                  {ideaReadStore.data["comments"]["count"]}
                 </i>
               </div>
             </div>
             <div className="card-footer m-0 p-0">
-              <component.StoreComponent1
-                stateConstant={constant.IdeaCommentCreateStore}
+              <component.StoreComponent2
+                slice={slice.ideaComment.ideaCommentCreateStore}
                 consoleLog={constant.DEBUG_CONSTANT}
-                showLoad={true}
-                loadText={""}
                 showData={false}
-                dataText={""}
-                showError={true}
-                errorText={""}
-                showFail={true}
-                failText={""}
               />
               <div className="card m-0 p-2">
                 <div className="order-md-last m-0 p-0">
@@ -655,23 +703,21 @@ export function IdeaPublicPage(): JSX.Element {
                     <form
                       className="card"
                       onSubmit={(event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        CreateComment();
+                        FormIdeaCommentCreateSubmit(event);
                       }}
                     >
                       <div className="input-group">
                         <input
                           type="text"
                           className="form-control form-control-sm text-center m-0 p-1"
-                          value={comment.comment}
+                          value={ideaCommentCreateObject.comment}
                           required
                           placeholder="введите комментарий тут..."
                           minLength={1}
                           maxLength={300}
                           onChange={(e) =>
-                            SetComment({
-                              ...comment,
+                            setIdeaCommentCreateObject({
+                              ...ideaCommentCreateObject,
                               comment: e.target.value.replace(
                                 util.GetRegexType({
                                   numbers: true,
@@ -686,8 +732,7 @@ export function IdeaPublicPage(): JSX.Element {
                         />
                         <button
                           type="submit"
-                          className="btn btn-secondary"
-                          style={{ zIndex: 0 }}
+                          className="btn btn-secondary custom-z-index-0"
                         >
                           <i className="fa-solid fa-circle-check m-0 p-1" />
                           отправить
@@ -697,18 +742,18 @@ export function IdeaPublicPage(): JSX.Element {
                   </div>
                   <div className="card m-0 p-2">
                     <div className="order-md-last m-0 p-0">
-                      {!IdeaCommentReadListStore.load &&
-                      IdeaCommentReadListStore.data ? (
-                        IdeaCommentReadListStore.data.list.length > 0 ? (
+                      {!ideaCommentReadListStore.load &&
+                      ideaCommentReadListStore.data ? (
+                        ideaCommentReadListStore.data.list.length > 0 ? (
                           <ul className="list-group m-0 p-0">
                             <label className="form-control-sm text-center m-0 p-1">
                               Количество комментариев на странице:
                               <select
                                 className="form-control form-control-sm text-center m-0 p-1"
-                                value={paginationComment.limit}
+                                value={paginationIdeaCommentListObject.limit}
                                 onChange={(event) =>
-                                  setPaginationComment({
-                                    ...paginationComment,
+                                  setPaginationIdeaCommentListObject({
+                                    ...paginationIdeaCommentListObject,
                                     // @ts-ignore
                                     limit: event.target.value,
                                   })
@@ -723,28 +768,28 @@ export function IdeaPublicPage(): JSX.Element {
                                 <option value="-1">все</option>
                               </select>
                             </label>
-                            {!IdeaCommentReadListStore.load &&
-                              IdeaCommentReadListStore.data && (
+                            {!ideaCommentReadListStore.load &&
+                              ideaCommentReadListStore.data && (
                                 <paginator.Pagination1
                                   totalObjects={
-                                    IdeaCommentReadListStore.data[
+                                    ideaCommentReadListStore.data[
                                       "x-total-count"
                                     ]
                                   }
-                                  limit={paginationComment.limit}
-                                  page={paginationComment.page}
+                                  limit={paginationIdeaCommentListObject.limit}
+                                  page={paginationIdeaCommentListObject.page}
                                   // @ts-ignore
                                   changePage={(page) =>
-                                    setPaginationComment({
-                                      ...paginationComment,
+                                    setPaginationIdeaCommentListObject({
+                                      ...paginationIdeaCommentListObject,
                                       page: page,
                                     })
                                   }
                                 />
                               )}
-                            {!IdeaCommentReadListStore.load &&
-                              IdeaCommentReadListStore.data &&
-                              IdeaCommentReadListStore.data.list.map(
+                            {!ideaCommentReadListStore.load &&
+                              ideaCommentReadListStore.data &&
+                              ideaCommentReadListStore.data.list.map(
                                 // @ts-ignore
                                 (object, index) => (
                                   <li
@@ -772,80 +817,12 @@ export function IdeaPublicPage(): JSX.Element {
                                         <button
                                           type="button"
                                           className="btn btn-sm btn-outline-danger m-1 p-0"
-                                          onClick={(event) => {
-                                            event.preventDefault();
-                                            event.stopPropagation();
-                                            setModalNotificationForm({
-                                              ...modalNotificationForm,
-                                              question:
-                                                "Введите причину жалобы на комментарий?",
-                                              answer: "Нецензурная лексика!",
-                                              name: "жалоба на комментарий в банке идей",
-                                              place: "банк идей",
-                                              description: `название идеи: ${
-                                                IdeaReadStore.data[
-                                                  "name_char_field"
-                                                ]
-                                              } (${
-                                                IdeaReadStore.data[
-                                                  "user_model"
-                                                ]["last_name_char_field"]
-                                              } ${
-                                                IdeaReadStore.data[
-                                                  "user_model"
-                                                ]["first_name_char_field"]
-                                              }), комментарий: ${util.GetCleanDateTime(
-                                                object[
-                                                  "created_datetime_field"
-                                                ],
-                                                true
-                                              )} (${
-                                                object["user_model"][
-                                                  "last_name_char_field"
-                                                ]
-                                              } ${
-                                                object["user_model"][
-                                                  "first_name_char_field"
-                                                ]
-                                              })`,
-                                            });
-                                            setIsModalNotificationVisible(true);
-                                          }}
-                                          // onClick={(event) =>
-                                          //   ShowNotificationModal(event, {
-                                          //     question:
-                                          //       "Введите причину жалобы на комментарий?",
-                                          //     answer: "Не цензурная лексика!",
-                                          //     name: "жалоба на комментарий в банке идей",
-                                          //     place: "банк идей",
-                                          //     description: `название идеи: ${
-                                          //       IdeaReadStore.data[
-                                          //         "name_char_field"
-                                          //       ]
-                                          //     } (${
-                                          //       IdeaReadStore.data[
-                                          //         "user_model"
-                                          //       ]["last_name_char_field"]
-                                          //     } ${
-                                          //       IdeaReadStore.data[
-                                          //         "user_model"
-                                          //       ]["first_name_char_field"]
-                                          //     }), комментарий: ${util.GetCleanDateTime(
-                                          //       object[
-                                          //         "created_datetime_field"
-                                          //       ],
-                                          //       true
-                                          //     )} (${
-                                          //       object["user_model"][
-                                          //         "last_name_char_field"
-                                          //       ]
-                                          //     } ${
-                                          //       object["user_model"][
-                                          //         "first_name_char_field"
-                                          //       ]
-                                          //     })`,
-                                          //   })
-                                          // }
+                                          onClick={(event) =>
+                                            ButtonnotificationIdeaCommentCreate(
+                                              event,
+                                              object
+                                            )
+                                          }
                                         >
                                           <i className="fa-solid fa-skull-crossbones m-0 p-1" />
                                           жалоба на комментарий
@@ -860,20 +837,20 @@ export function IdeaPublicPage(): JSX.Element {
                                   </li>
                                 )
                               )}
-                            {!IdeaCommentReadListStore.load &&
-                              IdeaCommentReadListStore.data && (
+                            {!ideaCommentReadListStore.load &&
+                              ideaCommentReadListStore.data && (
                                 <paginator.Pagination1
                                   totalObjects={
-                                    IdeaCommentReadListStore.data[
+                                    ideaCommentReadListStore.data[
                                       "x-total-count"
                                     ]
                                   }
-                                  limit={paginationComment.limit}
-                                  page={paginationComment.page}
+                                  limit={paginationIdeaCommentListObject.limit}
+                                  page={paginationIdeaCommentListObject.page}
                                   // @ts-ignore
                                   changePage={(page) =>
-                                    setPaginationComment({
-                                      ...paginationComment,
+                                    setPaginationIdeaCommentListObject({
+                                      ...paginationIdeaCommentListObject,
                                       page: page,
                                     })
                                   }

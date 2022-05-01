@@ -9,10 +9,10 @@ import { Link } from "react-router-dom";
 import * as component from "../../components/ui/component";
 import * as constant from "../../components/constant";
 import * as util from "../../components/util";
+import * as slice from "../../components/slice";
+import * as hook from "../../components/hook";
 
 import * as base from "../../components/ui/base";
-import * as hook from "../../components/hook";
-import * as action from "../../components/action";
 import * as message from "../../components/ui/message";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,7 +20,9 @@ import * as message from "../../components/ui/message";
 export const UsersRatingsListPage = () => {
   // TODO store ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const ratingsListStore = hook.useSelectorCustom1(constant.ratingsListStore);
+  const ratingsListStore = hook.useSelectorCustom2(
+    slice.rating.ratingsListStore
+  );
 
   // TODO hook /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -42,7 +44,7 @@ export const UsersRatingsListPage = () => {
   useEffect(() => {
     if (!ratingsListStore.data) {
       dispatch(
-        action.User.ReadTopList({
+        slice.rating.ratingsListStore.action({
           form: { ...filter, ...pagination },
         })
       );
@@ -50,13 +52,17 @@ export const UsersRatingsListPage = () => {
   }, [ratingsListStore.data]);
 
   useEffect(() => {
-    dispatch({ type: constant.ratingsListStore.reset });
+    dispatch({
+      type: slice.rating.ratingsListStore.constant.reset,
+    });
   }, []);
 
   // TODO handlers /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const ResetList = () => {
-    dispatch({ type: constant.ratingsListStore.reset });
+    dispatch({
+      type: slice.rating.ratingsListStore.constant.reset,
+    });
   };
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -206,17 +212,10 @@ export const UsersRatingsListPage = () => {
           </ul>
         }
       </component.Accordion1>
-      <component.StoreComponent1
-        stateConstant={constant.ratingsListStore}
+      <component.StoreComponent2
+        slice={slice.rating.ratingsListStore}
         consoleLog={constant.DEBUG_CONSTANT}
-        showLoad={true}
-        loadText={""}
         showData={false}
-        dataText={""}
-        showError={true}
-        errorText={""}
-        showFail={true}
-        failText={""}
       />
       {!ratingsListStore.load && ratingsListStore.data ? (
         ratingsListStore.data.list.length > 0 ? (

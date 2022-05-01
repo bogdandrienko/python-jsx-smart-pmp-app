@@ -1,11 +1,31 @@
-// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
-
-import * as util from "./util";
-
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // export const DEBUG_CONSTANT = process.env.NODE_ENV === "production";
 export const DEBUG_CONSTANT = true;
+
+export class HttpMethods {
+  static GET() {
+    return "GET";
+  }
+  static READ() {
+    return "GET";
+  }
+  static POST() {
+    return "POST";
+  }
+  static CREATE() {
+    return "POST";
+  }
+  static PUT() {
+    return "PUT";
+  }
+  static UPDATE() {
+    return "PUT";
+  }
+  static DELETE() {
+    return "DELETE";
+  }
+}
 
 export const news = [
   {
@@ -61,199 +81,3 @@ export const news = [
     Danger: "'контрактникам' выгрузка недоступна!",
   },
 ];
-
-export class HttpMethods {
-  static GET() {
-    return "GET";
-  }
-  static READ() {
-    return "GET";
-  }
-  static POST() {
-    return "POST";
-  }
-  static CREATE() {
-    return "POST";
-  }
-  static PUT() {
-    return "PUT";
-  }
-  static UPDATE() {
-    return "PUT";
-  }
-  static DELETE() {
-    return "DELETE";
-  }
-}
-
-export const reducers = {};
-
-function connectReducer(name: string, reducer: object) {
-  // @ts-ignore
-  reducers[name] = reducer;
-}
-
-export const userLoginStore = util.StoreReducerConstructorUtility(
-  "userLoginStore",
-  connectReducer
-);
-
-export const userDetailStore = util.StoreReducerConstructorUtility(
-  "userDetailStore",
-  connectReducer
-);
-
-export const userPasswordUpdateStore = util.StoreReducerConstructorUtility(
-  "userPasswordUpdateStore",
-  connectReducer
-);
-
-export const userRecoverPasswordStore = util.StoreReducerConstructorUtility(
-  "userRecoverPasswordStore",
-  connectReducer
-);
-
-export const userRecoverPasswordSendEmailStore =
-  util.StoreReducerConstructorUtility(
-    "userRecoverPasswordSendEmailStore",
-    connectReducer
-  );
-
-export const userRecoverPasswordChangePasswordStore =
-  util.StoreReducerConstructorUtility(
-    "userRecoverPasswordChangePasswordStore",
-    connectReducer
-  );
-
-export const userReadListStore = util.StoreReducerConstructorUtility(
-  "userReadListStore",
-  connectReducer
-);
-
-export const adminCreateUsersStore = util.StoreReducerConstructorUtility(
-  "adminCreateUsersStore",
-  connectReducer
-);
-
-export const adminExportUsersStore = util.StoreReducerConstructorUtility(
-  "adminExportUsersStore",
-  connectReducer
-);
-
-export const adminCheckUserStore = util.StoreReducerConstructorUtility(
-  "adminCheckUserStore",
-  connectReducer
-);
-
-export const adminChangePasswordUserStore = util.StoreReducerConstructorUtility(
-  "adminChangePasswordUserStore",
-  connectReducer
-);
-
-export const terminalRebootStore = util.StoreReducerConstructorUtility(
-  "terminalRebootStore",
-  connectReducer
-);
-
-export const NotificationCreateStore = util.StoreReducerConstructorUtility(
-  "NotificationCreateStore",
-  connectReducer
-);
-
-export const NotificationReadListStore = util.StoreReducerConstructorUtility(
-  "NotificationReadListStore",
-  connectReducer
-);
-
-export const NotificationDeleteStore = util.StoreReducerConstructorUtility(
-  "NotificationDeleteStore",
-  connectReducer
-);
-
-export const SalaryReadStore = util.StoreReducerConstructorUtility(
-  "SalaryReadStore",
-  connectReducer
-);
-
-export const VacationReadStore = util.StoreReducerConstructorUtility(
-  "VacationReadStore",
-  connectReducer
-);
-
-export const ratingsListStore = util.StoreReducerConstructorUtility(
-  "ratingsListStore",
-  connectReducer
-);
-
-// TODO clear //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export const captchaCheckStore = util.StoreReducerConstructorUtility(
-  "captchaCheckStore",
-  connectReducer
-);
-
-// paste here
-
-export const IdeaCreateStore = util.StoreReducerConstructorUtility(
-  "IdeaCreateStore",
-  connectReducer
-);
-
-export const IdeaReadStore = util.StoreReducerConstructorUtility(
-  "IdeaReadStore",
-  connectReducer
-);
-
-export const IdeaReadListStore = util.StoreReducerConstructorUtility(
-  "IdeaReadListStore",
-  connectReducer
-);
-
-export const IdeaUpdateStore = util.StoreReducerConstructorUtility(
-  "IdeaUpdateStore",
-  connectReducer
-);
-
-export const IdeaCommentCreateStore = util.StoreReducerConstructorUtility(
-  "IdeaCommentCreateStore",
-  connectReducer
-);
-
-export const IdeaCommentReadListStore = util.StoreReducerConstructorUtility(
-  "IdeaCommentReadListStore",
-  connectReducer
-);
-
-export const IdeaCommentDeleteStore = util.StoreReducerConstructorUtility(
-  "IdeaCommentDeleteStore",
-  connectReducer
-);
-
-export const IdeaRatingCreateStore = util.StoreReducerConstructorUtility(
-  "IdeaRatingCreateStore",
-  connectReducer
-);
-
-export const IdeaRatingReadListStore = util.StoreReducerConstructorUtility(
-  "IdeaRatingReadListStore",
-  connectReducer
-);
-
-// TODO dirty //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-export const PostCreateStore = util.StoreReducerConstructorUtility(
-  "PostCreateStore",
-  connectReducer
-);
-export const PostReadListStore = util.StoreReducerConstructorUtility(
-  "PostReadListStore",
-  connectReducer
-);
-export const PostReadStore = util.StoreReducerConstructorUtility(
-  "PostReadStore",
-  connectReducer
-);
-export const PostDeleteStore = util.StoreReducerConstructorUtility(
-  "PostDeleteStore",
-  connectReducer
-);
