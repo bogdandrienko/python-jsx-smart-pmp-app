@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User, Group
-from django.core.validators import MinLengthValidator, MaxLengthValidator, MinValueValidator, MaxValueValidator, \
-    FileExtensionValidator
+from django.core.validators import MinLengthValidator, MaxLengthValidator, FileExtensionValidator
 from django.db import models
 from django.utils import timezone
 
@@ -11,10 +10,10 @@ class IdeaTestModel(models.Model):
     """
     Idea Model
     """
-    author_foreign_key_field = models.ForeignKey(
-        db_column='author_foreign_key_field_db_column',
+    author = models.ForeignKey(
+        db_column='author_db_column',
         db_index=True,
-        db_tablespace='author_foreign_key_field_db_tablespace',
+        db_tablespace='author_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique_for_date=False,
@@ -26,7 +25,7 @@ class IdeaTestModel(models.Model):
         null=True,
         default=None,
         verbose_name='Автор',
-        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+        help_text='<small class="text-muted">author</small><hr><br>',
 
         to=UserModel,
         on_delete=models.SET_NULL,
@@ -159,10 +158,10 @@ class IdeaTestModel(models.Model):
         upload_to='uploads/idea/files/',
         max_length=100,
     )
-    visibility_boolean_field = models.BooleanField(
-        db_column='visibility_boolean_field_db_column',
+    is_visible = models.BooleanField(
+        db_column='is_visible_db_column',
         db_index=True,
-        db_tablespace='visibility_boolean_field_db_tablespace',
+        db_tablespace='is_visible_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique_for_date=False,
@@ -174,7 +173,7 @@ class IdeaTestModel(models.Model):
         null=False,
         default=False,
         verbose_name='Видимость идеи в общем списке',
-        help_text='<small class="text-muted">visibility_boolean_field</small><hr><br>',
+        help_text='<small class="text-muted">is_visible</small><hr><br>',
     )
     created_datetime_field = models.DateTimeField(
         db_column='created_datetime_field_db_column',
@@ -225,7 +224,7 @@ class IdeaTestModel(models.Model):
         db_table = 'idea_test_model_table'
 
     def __str__(self):
-        return f'{self.name_char_field} : {self.category_slug_field} : {self.author_foreign_key_field}'
+        return f'{self.name_char_field} : {self.category_slug_field} : {self.author}'
 
     @staticmethod
     def get_all_category():
@@ -257,10 +256,10 @@ class IdeaTestCommentModel(models.Model):
     """
     Ideas Comment Model
     """
-    author_foreign_key_field = models.ForeignKey(
-        db_column='author_foreign_key_field_db_column',
+    author = models.ForeignKey(
+        db_column='author_db_column',
         db_index=True,
-        db_tablespace='author_foreign_key_field_db_tablespace',
+        db_tablespace='author_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique_for_date=False,
@@ -272,7 +271,7 @@ class IdeaTestCommentModel(models.Model):
         null=True,
         default=None,
         verbose_name='Автор',
-        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+        help_text='<small class="text-muted">author</small><hr><br>',
 
         to=UserModel,
         on_delete=models.SET_NULL,
@@ -348,7 +347,7 @@ class IdeaTestCommentModel(models.Model):
         db_table = 'idea_test_comment_model_table'
 
     def __str__(self):
-        return f'{self.author_foreign_key_field} :: {self.idea_foreign_key_field} :: {self.text_field[:10]}... ' \
+        return f'{self.author} :: {self.idea_foreign_key_field} :: {self.text_field[:10]}... ' \
                f':: {self.datetime_field}'
 
 
@@ -356,10 +355,10 @@ class IdeaTestRatingModel(models.Model):
     """
     Idea Rating Model
     """
-    author_foreign_key_field = models.ForeignKey(
-        db_column='author_foreign_key_field_db_column',
+    author = models.ForeignKey(
+        db_column='author_db_column',
         db_index=True,
-        db_tablespace='author_foreign_key_field_db_tablespace',
+        db_tablespace='author_db_tablespace',
         error_messages=False,
         primary_key=False,
         unique_for_date=False,
@@ -371,7 +370,7 @@ class IdeaTestRatingModel(models.Model):
         null=True,
         default=None,
         verbose_name='Автор',
-        help_text='<small class="text-muted">author_foreign_key_field</small><hr><br>',
+        help_text='<small class="text-muted">author</small><hr><br>',
 
         to=UserModel,
         on_delete=models.SET_NULL,
@@ -442,5 +441,5 @@ class IdeaTestRatingModel(models.Model):
         db_table = 'idea_test_rating_model_table'
 
     def __str__(self):
-        return f'{self.author_foreign_key_field} :: {self.idea_foreign_key_field} :: {self.status_boolean_field} ' \
+        return f'{self.author} :: {self.idea_foreign_key_field} :: {self.status_boolean_field} ' \
                f':: {self.datetime_field}'

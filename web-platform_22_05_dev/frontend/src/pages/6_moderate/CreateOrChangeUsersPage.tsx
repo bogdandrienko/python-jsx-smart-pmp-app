@@ -70,7 +70,7 @@ export const CreateOrChangeUsersPage = () => {
 
   return (
     <base.Base1>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.moderator.adminCreateUsersStore}
         consoleLog={constant.DEBUG_CONSTANT}
       />

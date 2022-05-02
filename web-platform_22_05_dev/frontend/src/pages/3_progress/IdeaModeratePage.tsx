@@ -2,7 +2,7 @@
 
 import React, { FormEvent, MouseEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,10 +30,12 @@ export function IdeaModeratePage(): JSX.Element {
   const ideaCommentDeleteStore = hook.useSelectorCustom2(
     slice.ideaComment.ideaCommentDeleteStore
   );
+  const userDetailStore = hook.useSelectorCustom2(slice.user.userDetailStore);
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const id = useParams().id;
 
   const [ideaUpdateObject, setIdeaUpdateObject, resetIdeaUpdateObject] =
@@ -63,22 +65,28 @@ export function IdeaModeratePage(): JSX.Element {
     limit: 5,
   });
 
-  const [isModalIdeaUpdateVisible, setIsModalIdeaUpdateVisible] =
+  const [isModalConfirmIdeaUpdateVisible, setIsModalConfirmIdeaUpdateVisible] =
     useState(false);
 
-  const [isModalIdeaModerateVisible, setIsModalIdeaModerateVisible] =
-    useState(false);
+  const [
+    isModalConfirmIdeaModerateVisible,
+    setIsModalConfirmIdeaModerateVisible,
+  ] = useState(false);
 
-  const [isModalIdeaCommentDeleteVisible, setIsModalIdeaCommentDeleteVisible] =
-    useState(false);
-  const [modalIdeaCommentDeleteCallback, setModalIdeaCommentDeleteCallback] =
-    useState({});
+  const [
+    isModalConfirmIdeaCommentDeleteVisible,
+    setIsModalConfirmIdeaCommentDeleteVisible,
+  ] = useState(false);
+  const [
+    modalConfirmIdeaCommentDeleteCallback,
+    setModalConfirmIdeaCommentDeleteCallback,
+  ] = useState({});
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (!ideaReadStore.data) {
-      dispatch(slice.idea.ideaReadStore.action({ id: Number(id) }));
+      dispatch(slice.idea.ideaReadStore.action({ idea_id: Number(id) }));
     }
   }, [ideaReadStore.data]);
 
@@ -126,15 +134,23 @@ export function IdeaModeratePage(): JSX.Element {
     if (ideaReadStore.data) {
       setIdeaUpdateObject({
         ...ideaUpdateObject,
-        subdivision: ideaReadStore.data["subdivision_char_field"],
-        sphere: ideaReadStore.data["sphere_char_field"],
-        category: ideaReadStore.data["category_char_field"],
-        name: ideaReadStore.data["name_char_field"],
-        place: ideaReadStore.data["place_char_field"],
-        description: ideaReadStore.data["description_text_field"],
+        subdivision: ideaReadStore.data["subdivision"],
+        sphere: ideaReadStore.data["sphere"],
+        category: ideaReadStore.data["category"],
+        name: ideaReadStore.data["name"],
+        place: ideaReadStore.data["place"],
+        description: ideaReadStore.data["description"],
       });
     }
   }, [ideaReadStore.data]);
+
+  useEffect(() => {
+    if (userDetailStore.data) {
+      if (!util.CheckAccess(userDetailStore, "moderator_idea")) {
+        navigate("/idea/public/list");
+      }
+    }
+  }, [userDetailStore.data]);
 
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -161,7 +177,7 @@ export function IdeaModeratePage(): JSX.Element {
 
   function FormIdeaModerateSubmit(event: FormEvent<HTMLFormElement>) {
     util.EventForm1(event, true, true, () => {
-      setIsModalIdeaModerateVisible(true);
+      setIsModalConfirmIdeaModerateVisible(true);
     });
   }
 
@@ -176,7 +192,7 @@ export function IdeaModeratePage(): JSX.Element {
 
   function FormIdeaUpdateSubmit(event: FormEvent<HTMLFormElement>) {
     util.EventForm1(event, true, true, () => {
-      setIsModalIdeaUpdateVisible(true);
+      setIsModalConfirmIdeaUpdateVisible(true);
     });
   }
 
@@ -198,12 +214,12 @@ export function IdeaModeratePage(): JSX.Element {
     event: MouseEvent<HTMLButtonElement>,
     comment_id: number
   ) {
-    setModalIdeaCommentDeleteCallback({
+    setModalConfirmIdeaCommentDeleteCallback({
       callback: () => {
         DeleteComment(comment_id);
       },
     });
-    setIsModalIdeaCommentDeleteVisible(true);
+    setIsModalConfirmIdeaCommentDeleteVisible(true);
   }
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -211,23 +227,23 @@ export function IdeaModeratePage(): JSX.Element {
   return (
     <base.Base1>
       <modal.ModalConfirm1
-        isModalVisible={isModalIdeaModerateVisible}
-        setIsModalVisible={setIsModalIdeaModerateVisible}
+        isModalVisible={isModalConfirmIdeaModerateVisible}
+        setIsModalVisible={setIsModalConfirmIdeaModerateVisible}
         description={"Изменить статус?"}
         callback={ModerateIdea}
       />
       <modal.ModalConfirm1
-        isModalVisible={isModalIdeaUpdateVisible}
-        setIsModalVisible={setIsModalIdeaUpdateVisible}
+        isModalVisible={isModalConfirmIdeaUpdateVisible}
+        setIsModalVisible={setIsModalConfirmIdeaUpdateVisible}
         description={"Заменить данные?"}
         callback={UpdateIdea}
       />
       <modal.ModalConfirm1
-        isModalVisible={isModalIdeaCommentDeleteVisible}
-        setIsModalVisible={setIsModalIdeaCommentDeleteVisible}
+        isModalVisible={isModalConfirmIdeaCommentDeleteVisible}
+        setIsModalVisible={setIsModalConfirmIdeaCommentDeleteVisible}
         description={"Удалить выбранный комментарий?"}
         // @ts-ignore
-        callback={modalIdeaCommentDeleteCallback["callback"]}
+        callback={modalConfirmIdeaCommentDeleteCallback["callback"]}
       />
       <div className="btn-group m-0 p-1 text-start w-100">
         <Link
@@ -301,7 +317,7 @@ export function IdeaModeratePage(): JSX.Element {
                           setIdeaModerateObject({
                             ...ideaModerateObject,
                             moderateComment: event.target.value.replace(
-                              util.GetRegexType({
+                              util.RegularExpression.GetRegexType({
                                 numbers: true,
                                 cyrillic: true,
                                 space: true,
@@ -327,7 +343,7 @@ export function IdeaModeratePage(): JSX.Element {
           </ul>
         }
       </component.Accordion1>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.idea.ideaReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
@@ -339,7 +355,7 @@ export function IdeaModeratePage(): JSX.Element {
         showFail={true}
         failText={""}
       />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.idea.ideaUpdateStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showLoad={true}
@@ -365,17 +381,17 @@ export function IdeaModeratePage(): JSX.Element {
             <div className="card shadow custom-background-transparent-low m-0 p-0">
               <div className="card-header bg-success bg-opacity-10 m-0 p-3">
                 <h6 className="lead fw-bold m-0 p-0">
-                  {ideaReadStore.data["name_char_field"]}
+                  {ideaReadStore.data["name"]}
                 </h6>
                 <h6 className="text-danger lead small m-0 p-0">
                   {" [ "}
                   {util.GetSliceString(
-                    ideaReadStore.data["status_moderate_char_field"],
+                    ideaReadStore.data["moderate_status"],
                     30
                   )}
                   {" : "}
                   {util.GetSliceString(
-                    ideaReadStore.data["comment_moderate_char_field"],
+                    ideaReadStore.data["moderate_comment"],
                     30
                   )}
                   {" ]"}
@@ -397,7 +413,7 @@ export function IdeaModeratePage(): JSX.Element {
                         setIdeaUpdateObject({
                           ...ideaUpdateObject,
                           name: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               cyrillic: true,
                               space: true,
@@ -477,7 +493,7 @@ export function IdeaModeratePage(): JSX.Element {
                         setIdeaUpdateObject({
                           ...ideaUpdateObject,
                           place: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               cyrillic: true,
                               space: true,
@@ -567,7 +583,7 @@ export function IdeaModeratePage(): JSX.Element {
                 </div>
                 <div className="m-0 p-0">
                   <img
-                    src={util.GetStaticFile(ideaReadStore.data["image_field"])}
+                    src={util.GetStaticFile(ideaReadStore.data["image"])}
                     className="card-img-top img-fluid w-25 m-0 p-1"
                     alt="изображение отсутствует"
                   />
@@ -621,7 +637,7 @@ export function IdeaModeratePage(): JSX.Element {
                         setIdeaUpdateObject({
                           ...ideaUpdateObject,
                           description: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               cyrillic: true,
                               space: true,
@@ -640,10 +656,9 @@ export function IdeaModeratePage(): JSX.Element {
                 </div>
                 <div className="m-0 p-0">
                   <Link to={`#`} className="btn btn-sm btn-warning m-0 p-2">
-                    Автор:{" "}
-                    {ideaReadStore.data["user_model"]["last_name_char_field"]}{" "}
-                    {ideaReadStore.data["user_model"]["first_name_char_field"]}{" "}
-                    {ideaReadStore.data["user_model"]["position_char_field"]}
+                    Автор: {ideaReadStore.data["author"]["last_name"]}{" "}
+                    {ideaReadStore.data["author"]["first_name"]}{" "}
+                    {ideaReadStore.data["author"]["position"]}
                   </Link>
                 </div>
                 <div className="d-flex justify-content-between m-0 p-1">
@@ -651,7 +666,7 @@ export function IdeaModeratePage(): JSX.Element {
                     подано:{" "}
                     <p className="m-0 p-0">
                       {util.GetCleanDateTime(
-                        ideaReadStore.data["created_datetime_field"],
+                        ideaReadStore.data["created"],
                         true
                       )}
                     </p>
@@ -660,7 +675,7 @@ export function IdeaModeratePage(): JSX.Element {
                     зарегистрировано:{" "}
                     <p className="m-0 p-0">
                       {util.GetCleanDateTime(
-                        ideaReadStore.data["register_datetime_field"],
+                        ideaReadStore.data["updated"],
                         true
                       )}
                     </p>
@@ -686,7 +701,7 @@ export function IdeaModeratePage(): JSX.Element {
                 </ul>
               </div>
               <div className="card-footer m-0 p-0">
-                <component.StoreComponent2
+                <component.StatusStore1
                   slice={slice.ideaComment.ideaCommentReadListStore}
                   consoleLog={constant.DEBUG_CONSTANT}
                   showLoad={true}
@@ -698,7 +713,7 @@ export function IdeaModeratePage(): JSX.Element {
                   showFail={true}
                   failText={""}
                 />
-                <component.StoreComponent2
+                <component.StatusStore1
                   slice={slice.ideaComment.ideaCommentDeleteStore}
                   consoleLog={constant.DEBUG_CONSTANT}
                   showLoad={true}
@@ -766,20 +781,12 @@ export function IdeaModeratePage(): JSX.Element {
                                 >
                                   <div className="d-flex justify-content-between m-0 p-0">
                                     <h6 className="btn btn-sm btn-outline-warning m-0 p-2">
-                                      {
-                                        object["user_model"][
-                                          "last_name_char_field"
-                                        ]
-                                      }{" "}
-                                      {
-                                        object["user_model"][
-                                          "first_name_char_field"
-                                        ]
-                                      }
+                                      {object["author"]["last_name"]}{" "}
+                                      {object["author"]["first_name"]}
                                     </h6>
                                     <span className="text-muted m-0 p-0">
                                       {util.GetCleanDateTime(
-                                        object["created_datetime_field"],
+                                        object["created"],
                                         true
                                       )}
                                       <button
@@ -799,7 +806,7 @@ export function IdeaModeratePage(): JSX.Element {
                                   </div>
                                   <div className="d-flex justify-content-center m-0 p-1">
                                     <small className="text-muted m-0 p-1">
-                                      {object["comment_text_field"]}
+                                      {object["comment"]}
                                     </small>
                                   </div>
                                 </li>

@@ -159,6 +159,23 @@
           }
 }
 
+.loader_2 {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid black;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    animation: loader_2_rotate 0.5s infinite linear;
+}
+
+@keyframes loader_2_rotate {
+    from {
+        transform: rotate(0deg) scale(1);
+    } to {
+        transform: rotate(360deg) scale(1);
+          }
+}
+
 .custom_button_1 {
     margin: 3px;
     padding: 5px 15px;

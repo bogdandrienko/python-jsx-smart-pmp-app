@@ -53,12 +53,12 @@
                         <label class="form-control-lg m-1">
                             Автор:
                             <select type="select"
-                                    id="author_foreign_key_field_id"
-                                    name="author_foreign_key_field_id"
+                                    id="author_id"
+                                    name="author_id"
                                     required=""
                                     class="form-control form-control-lg"
                             >
-                                <option selected value="{{ idea.author_foreign_key_field.id }}">Текущий автор: {{ idea.author_foreign_key_field }}</option>
+                                <option selected value="{{ idea.author.id }}">Текущий автор: {{ idea.author }}</option>
                                 {% for user in users %}
                                     <option value="{{ user.id }}">{{ user }}</option>
                                 {% endfor %}

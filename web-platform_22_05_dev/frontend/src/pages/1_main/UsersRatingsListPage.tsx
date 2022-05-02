@@ -65,6 +65,8 @@ export const UsersRatingsListPage = () => {
     });
   };
 
+  console.log("ratingsListStore: ", ratingsListStore);
+
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
@@ -121,6 +123,12 @@ export const UsersRatingsListPage = () => {
                           })
                         }
                       >
+                        <option value="отметкам рейтинга (наибольшие в начале)">
+                          отметкам рейтинга (наибольшие в начале)
+                        </option>
+                        <option value="отметкам рейтинга (наибольшие в конце)">
+                          отметкам рейтинга (наибольшие в конце)
+                        </option>
                         <option value="количеству (наибольшие в начале)">
                           количеству (наибольшие в начале)
                         </option>
@@ -132,12 +140,6 @@ export const UsersRatingsListPage = () => {
                         </option>
                         <option value="рейтингу (популярные в конце)">
                           рейтингу (популярные в конце)
-                        </option>
-                        <option value="отметкам рейтинга (наибольшие в начале)">
-                          отметкам рейтинга (наибольшие в начале)
-                        </option>
-                        <option value="отметкам рейтинга (наибольшие в конце)">
-                          отметкам рейтинга (наибольшие в конце)
                         </option>
                         <option value="комментариям (наибольшие в начале)">
                           комментариям (наибольшие в начале)
@@ -212,7 +214,7 @@ export const UsersRatingsListPage = () => {
           </ul>
         }
       </component.Accordion1>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.rating.ratingsListStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}
@@ -238,15 +240,15 @@ export const UsersRatingsListPage = () => {
                           <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
                             <h5 className="lead fw-bold m-0 p-0">
                               {util.GetSliceString(
-                                author["user_model"]["last_name_char_field"] +
+                                author["user_model"]["last_name"] +
                                   " " +
-                                  author["user_model"]["first_name_char_field"],
+                                  author["user_model"]["first_name"],
                                 50
                               )}
                             </h5>
                             <h6 className="fw-bold m-0 p-0">
                               {util.GetSliceString(
-                                author["user_model"]["position_char_field"],
+                                author["user_model"]["position"],
                                 70
                               )}
                             </h6>
@@ -256,11 +258,11 @@ export const UsersRatingsListPage = () => {
                               <div className="m-0 p-0">
                                 <img
                                   src={
-                                    author["user_model"]["image_field"] !==
+                                    author["user_model"]["image"] !==
                                       "/media/default/account/default_avatar.jpg" &&
-                                    author["user_model"]["image_field"]
+                                    author["user_model"]["image"]
                                       ? util.GetStaticFile(
-                                          author["user_model"]["image_field"]
+                                          author["user_model"]["image"]
                                         )
                                       : util.GetStaticFile(
                                           "/media/default/top/default_user.png"
@@ -396,9 +398,9 @@ export const UsersRatingsListPage = () => {
                     >
                       <li className="border list-group-item-action text-start small m-0 p-1">
                         {util.GetSliceString(
-                          author["user_model"]["last_name_char_field"] +
+                          author["user_model"]["last_name"] +
                             " " +
-                            author["user_model"]["first_name_char_field"],
+                            author["user_model"]["first_name"],
                           50
                         )}
                         {" | количество идей: " +

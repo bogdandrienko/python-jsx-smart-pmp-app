@@ -23,7 +23,7 @@ def idea_create(request):
     response = 0
     category = IdeaTestModel.get_all_category()
     if request.method == 'POST':
-        author_foreign_key_field = UserModel.objects.get(user_foreign_key_field=request.user)
+        author = UserModel.objects.get(user=request.user)
         name_char_field = request.POST.get("name_char_field")
         category_slug_field = request.POST.get("category_slug_field")
         short_description_char_field = request.POST.get("short_description_char_field")
@@ -31,14 +31,14 @@ def idea_create(request):
         avatar_image_field = request.FILES.get("avatar_image_field")
         addiction_file_field = request.FILES.get("addiction_file_field")
         IdeaTestModel.objects.create(
-            author_foreign_key_field=author_foreign_key_field,
+            author=author,
             name_char_field=name_char_field,
             category_slug_field=category_slug_field,
             short_description_char_field=short_description_char_field,
             full_description_text_field=full_description_text_field,
             avatar_image_field=avatar_image_field,
             addiction_file_field=addiction_file_field,
-            visibility_boolean_field=False,
+            is_visible=False,
         )
 
         response = 1
@@ -55,8 +55,8 @@ def idea_change(request, idea_int):
     users = UserModel.objects.all()
     categoryes = IdeaTestModel.get_all_category()
     if request.method == 'POST':
-        author_foreign_key_field_id = request.POST.get("author_foreign_key_field_id")
-        author_foreign_key_field = UserModel.objects.get(id=author_foreign_key_field_id)
+        author_id = request.POST.get("author_id")
+        author = UserModel.objects.get(id=author_id)
         name_char_field = request.POST.get("name_char_field")
         category_slug_field = request.POST.get("category_slug_field")
         short_description_char_field = request.POST.get("short_description_char_field")
@@ -64,8 +64,8 @@ def idea_change(request, idea_int):
         avatar_image_field = request.FILES.get("avatar_image_field")
         addiction_file_field = request.FILES.get("addiction_file_field")
 
-        if author_foreign_key_field and author_foreign_key_field != idea.author_foreign_key_field:
-            idea.author_foreign_key_field = author_foreign_key_field
+        if author and author != idea.author:
+            idea.author = author
         if name_char_field and name_char_field != idea.name_char_field:
             idea.name_char_field = name_char_field
         if category_slug_field and category_slug_field != idea.category_slug_field:
@@ -108,11 +108,11 @@ def idea_list(request, category_slug='All'):
     categoryes = IdeaTestModel.get_all_category()
     num_page = 5
     if category_slug == 'idea_change_visibility':
-        ideas = IdeaTestModel.objects.filter(visibility_boolean_field=False)
+        ideas = IdeaTestModel.objects.filter(is_visible=False)
     elif category_slug.lower() != 'all':
-        ideas = IdeaTestModel.objects.filter(category_slug_field=category_slug, visibility_boolean_field=True)
+        ideas = IdeaTestModel.objects.filter(category_slug_field=category_slug, is_visible=True)
     else:
-        ideas = IdeaTestModel.objects.filter(visibility_boolean_field=True)
+        ideas = IdeaTestModel.objects.filter(is_visible=True)
     if request.method == 'POST':
         search_char_field = request.POST.get("search_char_field")
         if search_char_field:
@@ -136,7 +136,7 @@ def idea_change_visibility(request, idea_int):
         elif status == 'false':
             status = False
         data = IdeaTestModel.objects.get(id=idea_int)
-        data.visibility_boolean_field = status
+        data.is_visible = status
 
         data.save()
     return redirect(reverse('backend_native:django_idea_list', args=()))
@@ -157,23 +157,23 @@ def idea_view(request, idea_int):
 
 def idea_like(request, idea_int):
     idea = IdeaTestModel.objects.get(id=idea_int)
-    author = UserModel.objects.get(user_foreign_key_field=request.user)
+    author = UserModel.objects.get(user=request.user)
     if request.POST['status'] == 'like':
         try:
             IdeaTestRatingModel.objects.get(
-                author_foreign_key_field=author,
+                author=author,
                 idea_foreign_key_field=idea,
                 status_boolean_field=True
             ).delete()
         except Exception as error:
             IdeaTestRatingModel.objects.create(
-                author_foreign_key_field=author,
+                author=author,
                 idea_foreign_key_field=idea,
                 status_boolean_field=True
             )
         try:
             IdeaTestRatingModel.objects.get(
-                author_foreign_key_field=author,
+                author=author,
                 idea_foreign_key_field=idea,
                 status_boolean_field=False
             ).delete()
@@ -182,24 +182,24 @@ def idea_like(request, idea_int):
     else:
         try:
             IdeaTestRatingModel.objects.get(
-                author_foreign_key_field=author,
+                author=author,
                 idea_foreign_key_field=idea,
                 status_boolean_field=False
             ).delete()
         except Exception as error:
             IdeaTestRatingModel.objects.create(
-                author_foreign_key_field=author,
+                author=author,
                 idea_foreign_key_field=idea,
                 status_boolean_field=False
             )
             IdeaTestCommentModel.objects.create(
-                author_foreign_key_field=UserModel.objects.get(user_foreign_key_field=request.user),
+                author=UserModel.objects.get(user=request.user),
                 idea_foreign_key_field=IdeaTestModel.objects.get(id=idea_int),
                 text_field=request.POST['text_field']
             )
         try:
             IdeaTestRatingModel.objects.get(
-                author_foreign_key_field=author,
+                author=author,
                 idea_foreign_key_field=idea,
                 status_boolean_field=True
             ).delete()
@@ -211,7 +211,7 @@ def idea_like(request, idea_int):
 def idea_comment(request, idea_int):
     if request.method == 'POST':
         IdeaTestCommentModel.objects.create(
-            author_foreign_key_field=UserModel.objects.get(user_foreign_key_field=request.user),
+            author=UserModel.objects.get(user=request.user),
             idea_foreign_key_field=IdeaTestModel.objects.get(id=idea_int),
             text_field=request.POST.get("text_field")
         )
@@ -222,13 +222,13 @@ def idea_rating(request):
     idea = IdeaTestModel.objects.order_by('-id')
     authors = []
     for query in idea:
-        authors.append(query.author_foreign_key_field)
+        authors.append(query.author)
     authors_dict = {}
     for author in authors:
         authors_dict[author] = authors.count(author)
     user_counts = []
     for author in authors_dict:
-        ideas = IdeaTestModel.objects.filter(author_foreign_key_field=author)
+        ideas = IdeaTestModel.objects.filter(author=author)
         total_rating = 0
         for idea in ideas:
             total_rating += idea.get_ratings()

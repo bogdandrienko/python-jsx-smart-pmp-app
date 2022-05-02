@@ -11,7 +11,7 @@ import * as util from "./util";
 
 export const reducers = {};
 
-export function connectReducer(name: string, reducer: object) {
+export function ConnectReducer1(name: string, reducer: object) {
   // @ts-ignore
   reducers[name] = reducer;
 }
@@ -21,7 +21,7 @@ export function connectReducer(name: string, reducer: object) {
 export const rating = {
   ratingsListStore: util.ConstructorSlice1(
     "ratingsListStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -44,7 +44,7 @@ export const rating = {
 export const captcha = {
   captchaCheckStore: util.ConstructorSlice1(
     "captchaCheckStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -65,7 +65,7 @@ export const captcha = {
 export const user = {
   userLoginStore: util.ConstructorSlice1(
     "userLoginStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -83,7 +83,7 @@ export const user = {
   ),
   userDetailStore: util.ConstructorSlice1(
     "userDetailStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -101,7 +101,7 @@ export const user = {
   ),
   userReadListStore: util.ConstructorSlice1(
     "userReadListStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -119,7 +119,7 @@ export const user = {
   ),
   userPasswordUpdateStore: util.ConstructorSlice1(
     "userPasswordUpdateStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -137,7 +137,7 @@ export const user = {
   ),
   userRecoverPasswordStore: util.ConstructorSlice1(
     "userRecoverPasswordStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -155,7 +155,7 @@ export const user = {
   ),
   userRecoverPasswordSendEmailStore: util.ConstructorSlice1(
     "userRecoverPasswordSendEmailStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -173,7 +173,7 @@ export const user = {
   ),
   userRecoverPasswordChangePasswordStore: util.ConstructorSlice1(
     "userRecoverPasswordChangePasswordStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -194,7 +194,7 @@ export const user = {
 export const notification = {
   notificationCreateStore: util.ConstructorSlice1(
     "notificationCreateStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -212,7 +212,7 @@ export const notification = {
   ),
   notificationReadListStore: util.ConstructorSlice1(
     "notificationReadListStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -230,7 +230,7 @@ export const notification = {
   ),
   notificationUpdateStore: util.ConstructorSlice1(
     "notificationUpdateStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -253,7 +253,7 @@ export const notification = {
 export const idea = {
   ideaCreateStore: util.ConstructorSlice1(
     "ideaCreateStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -271,7 +271,7 @@ export const idea = {
   ),
   ideaReadStore: util.ConstructorSlice1(
     "ideaReadStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -289,7 +289,7 @@ export const idea = {
   ),
   ideaReadListStore: util.ConstructorSlice1(
     "ideaReadListStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -307,7 +307,7 @@ export const idea = {
   ),
   ideaUpdateStore: util.ConstructorSlice1(
     "ideaUpdateStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -325,7 +325,7 @@ export const idea = {
   ),
   userReadListStore: util.ConstructorSlice1(
     "userReadListStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -343,67 +343,10 @@ export const idea = {
   ),
 };
 
-export const ideaComment = {
-  ideaCommentCreateStore: util.ConstructorSlice1(
-    "ideaCommentCreateStore",
-    connectReducer,
-    function ({ ...args }) {
-      return async function (dispatch: Dispatch<any>) {
-        dispatch(
-          util.ConstructorAction1(
-            { ...args.form },
-            `/api/idea/${args.idea_id}/comment/`,
-            constant.HttpMethods.POST(),
-            20000,
-            util.ConstantConstructor1("ideaCommentCreateStore"),
-            true
-          )
-        );
-      };
-    }
-  ),
-  ideaCommentReadListStore: util.ConstructorSlice1(
-    "ideaCommentReadListStore",
-    connectReducer,
-    function ({ ...args }) {
-      return async function (dispatch: Dispatch<any>) {
-        dispatch(
-          util.ConstructorAction1(
-            { ...args.form },
-            `/api/idea/${args.idea_id}/comment/`,
-            constant.HttpMethods.GET(),
-            20000,
-            util.ConstantConstructor1("ideaCommentReadListStore"),
-            true
-          )
-        );
-      };
-    }
-  ),
-  ideaCommentDeleteStore: util.ConstructorSlice1(
-    "ideaCommentDeleteStore",
-    connectReducer,
-    function ({ ...args }) {
-      return async function (dispatch: Dispatch<any>) {
-        dispatch(
-          util.ConstructorAction1(
-            { ...args.form },
-            `/api/idea/comment/${args.comment_id}/`,
-            constant.HttpMethods.DELETE(),
-            20000,
-            util.ConstantConstructor1("ideaCommentDeleteStore"),
-            true
-          )
-        );
-      };
-    }
-  ),
-};
-
 export const ideaRating = {
   ideaRatingReadListStore: util.ConstructorSlice1(
     "ideaRatingReadListStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -421,7 +364,7 @@ export const ideaRating = {
   ),
   ideaRatingUpdateStore: util.ConstructorSlice1(
     "ideaRatingUpdateStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -439,12 +382,69 @@ export const ideaRating = {
   ),
 };
 
+export const ideaComment = {
+  ideaCommentCreateStore: util.ConstructorSlice1(
+    "ideaCommentCreateStore",
+    ConnectReducer1,
+    function ({ ...args }) {
+      return async function (dispatch: Dispatch<any>) {
+        dispatch(
+          util.ConstructorAction1(
+            { ...args.form },
+            `/api/idea/${args.idea_id}/comment/`,
+            constant.HttpMethods.POST(),
+            20000,
+            util.ConstantConstructor1("ideaCommentCreateStore"),
+            true
+          )
+        );
+      };
+    }
+  ),
+  ideaCommentReadListStore: util.ConstructorSlice1(
+    "ideaCommentReadListStore",
+    ConnectReducer1,
+    function ({ ...args }) {
+      return async function (dispatch: Dispatch<any>) {
+        dispatch(
+          util.ConstructorAction1(
+            { ...args.form },
+            `/api/idea/${args.idea_id}/comment/`,
+            constant.HttpMethods.GET(),
+            20000,
+            util.ConstantConstructor1("ideaCommentReadListStore"),
+            true
+          )
+        );
+      };
+    }
+  ),
+  ideaCommentDeleteStore: util.ConstructorSlice1(
+    "ideaCommentDeleteStore",
+    ConnectReducer1,
+    function ({ ...args }) {
+      return async function (dispatch: Dispatch<any>) {
+        dispatch(
+          util.ConstructorAction1(
+            { ...args.form },
+            `/api/idea/comment/${args.comment_id}/`,
+            constant.HttpMethods.DELETE(),
+            20000,
+            util.ConstantConstructor1("ideaCommentDeleteStore"),
+            true
+          )
+        );
+      };
+    }
+  ),
+};
+
 // TODO buh ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const salary = {
   salaryReadStore: util.ConstructorSlice1(
     "salaryReadStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -467,7 +467,7 @@ export const salary = {
 export const vacation = {
   vacationReadStore: util.ConstructorSlice1(
     "vacationReadStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -490,7 +490,7 @@ export const vacation = {
 export const moderator = {
   adminExportUsersStore: util.ConstructorSlice1(
     "adminExportUsersStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -508,7 +508,7 @@ export const moderator = {
   ),
   terminalRebootStore: util.ConstructorSlice1(
     "terminalRebootStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -526,7 +526,7 @@ export const moderator = {
   ),
   adminCreateUsersStore: util.ConstructorSlice1(
     "adminCreateUsersStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -544,7 +544,7 @@ export const moderator = {
   ),
   adminCheckUserStore: util.ConstructorSlice1(
     "adminCheckUserStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -562,7 +562,7 @@ export const moderator = {
   ),
   adminChangePasswordUserStore: util.ConstructorSlice1(
     "adminChangePasswordUserStore",
-    connectReducer,
+    ConnectReducer1,
     function ({ ...args }) {
       return async function (dispatch: Dispatch<any>) {
         dispatch(
@@ -590,7 +590,7 @@ export const captchaExampleReducer =
   util.ConstructorReducer1(captchaExampleStore);
 
 // @ts-ignore
-connectReducer("captchaExampleStore", captchaExampleReducer);
+ConnectReducer1("captchaExampleStore", captchaExampleReducer);
 
 export function CaptchaAction(id: number, form: object) {
   return async function (dispatch: Dispatch<any>) {

@@ -2,7 +2,7 @@
 
 import React, { FormEvent, MouseEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -40,6 +40,7 @@ export function IdeaPublicPage(): JSX.Element {
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const id = useParams().id;
 
   const [
@@ -57,14 +58,17 @@ export function IdeaPublicPage(): JSX.Element {
   ] = hook.useStateCustom1({ page: 1, limit: 5 });
 
   const [
-    isModalnotificationCreateVisible,
-    setIsModalnotificationCreateVisible,
+    isModalPromptNotificationCreateVisible,
+    setIsModalPromptNotificationCreateVisible,
   ] = useState(false);
-  const [modalnotificationCreateForm, setModalnotificationCreateForm] =
-    useState({});
+  const [
+    modalPromptNotificationCreateForm,
+    setModalPromptNotificationCreateForm,
+  ] = useState({});
 
-  const [isModalLowRatingVisible, setIsModalLowRatingVisible] = useState(false);
-  const [modalLowRatingForm, setModalLowRatingForm] = useState({});
+  const [isModalPromptLowRatingVisible, setIsModalPromptLowRatingVisible] =
+    useState(false);
+  const [modalPromptLowRatingForm, setModalPromptLowRatingForm] = useState({});
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -126,6 +130,14 @@ export function IdeaPublicPage(): JSX.Element {
     });
   }, [paginationIdeaCommentListObject.limit]);
 
+  useEffect(() => {
+    if (ideaReadStore.data) {
+      if (ideaReadStore.data["moderate_status"] !== "принято") {
+        navigate("/idea/public/list");
+      }
+    }
+  }, [ideaReadStore.data]);
+
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   function resetState() {
@@ -157,15 +169,15 @@ export function IdeaPublicPage(): JSX.Element {
 
   function ButtonNotificationIdeaCreate(event: MouseEvent<any>) {
     util.EventMouse1(event, true, true, () => {
-      setModalnotificationCreateForm({
-        ...modalnotificationCreateForm,
+      setModalPromptNotificationCreateForm({
+        ...modalPromptNotificationCreateForm,
         question: "Введите причину жалобы на идею?",
         answer: "Идея неуместна!",
         name: "жалоба на идею в банке идей",
         place: "банк идей",
-        description: `название идеи: ${ideaReadStore.data["name_char_field"]}`,
+        description: `название идеи: ${ideaReadStore.data["name"]}`,
       });
-      setIsModalnotificationCreateVisible(true);
+      setIsModalPromptNotificationCreateVisible(true);
     });
   }
 
@@ -174,24 +186,21 @@ export function IdeaPublicPage(): JSX.Element {
     object: any
   ) {
     util.EventMouse1(event, true, true, () => {
-      setModalnotificationCreateForm({
-        ...modalnotificationCreateForm,
+      setModalPromptNotificationCreateForm({
+        ...modalPromptNotificationCreateForm,
         question: "Введите причину жалобы на комментарий?",
         answer: "Нецензурная лексика!",
         name: "жалоба на комментарий в банке идей",
         place: "банк идей",
-        description: `название идеи: ${
-          ideaReadStore.data["name_char_field"]
-        } (${ideaReadStore.data["user_model"]["last_name_char_field"]} ${
-          ideaReadStore.data["user_model"]["first_name_char_field"]
-        }), комментарий: ${util.GetCleanDateTime(
-          object["created_datetime_field"],
-          true
-        )} (${object["user_model"]["last_name_char_field"]} ${
-          object["user_model"]["first_name_char_field"]
-        })`,
+        description: `название идеи: ${ideaReadStore.data["name"]} (${
+          ideaReadStore.data["author"]["last_name"]
+        } ${
+          ideaReadStore.data["author"]["first_name"]
+        }), комментарий: ${util.GetCleanDateTime(object["created"], true)} (${
+          object["author"]["last_name"]
+        } ${object["author"]["first_name"]})`,
       });
-      setIsModalnotificationCreateVisible(true);
+      setIsModalPromptNotificationCreateVisible(true);
     });
   }
 
@@ -212,12 +221,12 @@ export function IdeaPublicPage(): JSX.Element {
 
   function CreateRating(rating: number) {
     if (rating < 4) {
-      setModalLowRatingForm({
+      setModalPromptLowRatingForm({
         question: "Введите причину низкой оценки?",
         answer: "Мне не понравилась идея!",
         rating: rating,
       });
-      setIsModalLowRatingVisible(true);
+      setIsModalPromptLowRatingVisible(true);
     } else {
       dispatch(
         slice.ideaRating.ideaRatingUpdateStore.action({
@@ -250,20 +259,20 @@ export function IdeaPublicPage(): JSX.Element {
   return (
     <base.Base1>
       <modal.ModalPrompt1
-        isModalVisible={isModalnotificationCreateVisible}
-        setIsModalVisible={setIsModalnotificationCreateVisible}
+        isModalVisible={isModalPromptNotificationCreateVisible}
+        setIsModalVisible={setIsModalPromptNotificationCreateVisible}
         callback={CreateNotification}
         // @ts-ignore
-        form={modalnotificationCreateForm}
+        form={modalPromptNotificationCreateForm}
       />
       <modal.ModalPrompt1
-        isModalVisible={isModalLowRatingVisible}
-        setIsModalVisible={setIsModalLowRatingVisible}
+        isModalVisible={isModalPromptLowRatingVisible}
+        setIsModalVisible={setIsModalPromptLowRatingVisible}
         callback={CreateLowLevelRating}
         // @ts-ignore
-        form={modalLowRatingForm}
+        form={modalPromptLowRatingForm}
       />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.notification.notificationCreateStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={true}
@@ -287,7 +296,7 @@ export function IdeaPublicPage(): JSX.Element {
           </button>
         )}
       </div>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.idea.ideaReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}
@@ -297,7 +306,7 @@ export function IdeaPublicPage(): JSX.Element {
           <div className="card shadow custom-background-transparent-low text-center p-0">
             <div className="card-header bg-warning bg-opacity-10 m-0 p-3">
               <h6 className="lead fw-bold m-0 p-0">
-                {ideaReadStore.data["name_char_field"]}
+                {ideaReadStore.data["name"]}
               </h6>
             </div>
             <div className="card-body m-0 p-0">
@@ -309,7 +318,7 @@ export function IdeaPublicPage(): JSX.Element {
                     required
                   >
                     <option className="m-0 p-0" value="">
-                      {ideaReadStore.data["subdivision_char_field"]}
+                      {ideaReadStore.data["subdivision"]}
                     </option>
                   </select>
                 </label>
@@ -320,7 +329,7 @@ export function IdeaPublicPage(): JSX.Element {
                     required
                   >
                     <option className="m-0 p-0" value="">
-                      {ideaReadStore.data["sphere_char_field"]}
+                      {ideaReadStore.data["sphere"]}
                     </option>
                   </select>
                 </label>
@@ -331,7 +340,7 @@ export function IdeaPublicPage(): JSX.Element {
                     required
                   >
                     <option className="m-0 p-0" value="">
-                      {ideaReadStore.data["category_char_field"]}
+                      {ideaReadStore.data["category"]}
                     </option>
                   </select>
                 </label>
@@ -339,8 +348,8 @@ export function IdeaPublicPage(): JSX.Element {
               <div className="m-0 p-0">
                 <img
                   src={
-                    ideaReadStore.data["image_field"]
-                      ? util.GetStaticFile(ideaReadStore.data["image_field"])
+                    ideaReadStore.data["image"]
+                      ? util.GetStaticFile(ideaReadStore.data["image"])
                       : util.GetStaticFile(
                           "/media/default/idea/default_idea.jpg"
                         )
@@ -355,7 +364,7 @@ export function IdeaPublicPage(): JSX.Element {
                   <input
                     type="text"
                     className="form-control form-control-sm text-center m-0 p-1"
-                    defaultValue={ideaReadStore.data["place_char_field"]}
+                    defaultValue={ideaReadStore.data["place"]}
                     readOnly={true}
                     placeholder="введите место изменения тут..."
                     required
@@ -369,7 +378,7 @@ export function IdeaPublicPage(): JSX.Element {
                   Описание:
                   <textarea
                     className="form-control form-control-sm text-center m-0 p-1"
-                    defaultValue={ideaReadStore.data["description_text_field"]}
+                    defaultValue={ideaReadStore.data["description"]}
                     readOnly={true}
                     required
                     placeholder="введите описание тут..."
@@ -381,40 +390,33 @@ export function IdeaPublicPage(): JSX.Element {
               </div>
               <div className="m-0 p-0">
                 <Link to={`#`} className="btn btn-sm btn-warning m-0 p-2">
-                  Автор:{" "}
-                  {ideaReadStore.data["user_model"]["last_name_char_field"]}{" "}
-                  {ideaReadStore.data["user_model"]["first_name_char_field"]}{" "}
-                  {ideaReadStore.data["user_model"]["position_char_field"]}
+                  Автор: {ideaReadStore.data["author"]["last_name"]}{" "}
+                  {ideaReadStore.data["author"]["first_name"]}{" "}
+                  {ideaReadStore.data["author"]["position"]}
                 </Link>
               </div>
               <div className="d-flex justify-content-between m-1 p-0">
                 <label className="text-muted border m-0 p-2">
                   подано:{" "}
                   <p className="m-0">
-                    {util.GetCleanDateTime(
-                      ideaReadStore.data["created_datetime_field"],
-                      true
-                    )}
+                    {util.GetCleanDateTime(ideaReadStore.data["created"], true)}
                   </p>
                 </label>
                 <label className="text-muted border m-1 p-2">
                   зарегистрировано:{" "}
                   <p className="m-0 p-0">
-                    {util.GetCleanDateTime(
-                      ideaReadStore.data["register_datetime_field"],
-                      true
-                    )}
+                    {util.GetCleanDateTime(ideaReadStore.data["updated"], true)}
                   </p>
                 </label>
               </div>
             </div>
             <div className="card-footer m-0 p-1">
-              <component.StoreComponent2
+              <component.StatusStore1
                 slice={slice.ideaRating.ideaRatingReadListStore}
                 consoleLog={constant.DEBUG_CONSTANT}
                 showData={false}
               />
-              <component.StoreComponent2
+              <component.StatusStore1
                 slice={slice.ideaRating.ideaRatingUpdateStore}
                 consoleLog={constant.DEBUG_CONSTANT}
                 showData={false}
@@ -462,7 +464,7 @@ export function IdeaPublicPage(): JSX.Element {
                         }
                       >
                         <ul className="m-0 p-0">
-                          <component.StoreComponent2
+                          <component.StatusStore1
                             slice={slice.ideaRating.ideaRatingReadListStore}
                             consoleLog={constant.DEBUG_CONSTANT}
                             showData={false}
@@ -474,17 +476,17 @@ export function IdeaPublicPage(): JSX.Element {
                                 <li
                                   key={index}
                                   className={
-                                    rate["rating_integer_field"] > 7
+                                    rate["rating"] > 7
                                       ? "list-group-item bg-success bg-opacity-10"
-                                      : rate["rating_integer_field"] > 4
+                                      : rate["rating"] > 4
                                       ? "list-group-item bg-warning bg-opacity-10"
                                       : "list-group-item bg-danger bg-opacity-10"
                                   }
                                 >
                                   <small className="">
-                                    {`${rate["user_model"]["last_name_char_field"]} 
-                                    ${rate["user_model"]["first_name_char_field"]} : 
-                                    ${rate["rating_integer_field"]}`}
+                                    {`${rate["author"]["last_name"]} 
+                                    ${rate["author"]["first_name"]} : 
+                                    ${rate["rating"]}`}
                                   </small>
                                 </li>
                               )
@@ -692,7 +694,7 @@ export function IdeaPublicPage(): JSX.Element {
               </div>
             </div>
             <div className="card-footer m-0 p-0">
-              <component.StoreComponent2
+              <component.StatusStore1
                 slice={slice.ideaComment.ideaCommentCreateStore}
                 consoleLog={constant.DEBUG_CONSTANT}
                 showData={false}
@@ -719,7 +721,7 @@ export function IdeaPublicPage(): JSX.Element {
                             setIdeaCommentCreateObject({
                               ...ideaCommentCreateObject,
                               comment: e.target.value.replace(
-                                util.GetRegexType({
+                                util.RegularExpression.GetRegexType({
                                   numbers: true,
                                   cyrillic: true,
                                   space: true,
@@ -798,20 +800,12 @@ export function IdeaPublicPage(): JSX.Element {
                                   >
                                     <div className="d-flex justify-content-between m-0 p-0">
                                       <h6 className="btn btn-sm btn-outline-warning m-0 p-2">
-                                        {
-                                          object["user_model"][
-                                            "last_name_char_field"
-                                          ]
-                                        }{" "}
-                                        {
-                                          object["user_model"][
-                                            "first_name_char_field"
-                                          ]
-                                        }
+                                        {object["author"]["last_name"]}{" "}
+                                        {object["author"]["first_name"]}
                                       </h6>
                                       <span className="text-muted m-0 p-0">
                                         {util.GetCleanDateTime(
-                                          object["created_datetime_field"],
+                                          object["created"],
                                           true
                                         )}
                                         <button
@@ -831,7 +825,7 @@ export function IdeaPublicPage(): JSX.Element {
                                     </div>
                                     <div className="d-flex justify-content-center m-0 p-1">
                                       <small className="text-muted m-0 p-1">
-                                        {object["comment_text_field"]}
+                                        {object["comment"]}
                                       </small>
                                     </div>
                                   </li>

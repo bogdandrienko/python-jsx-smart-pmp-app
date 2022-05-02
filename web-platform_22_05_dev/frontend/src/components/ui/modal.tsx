@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 // TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
 
 import * as util from "../util";
+import { RegularExpression } from "../util";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -114,7 +115,7 @@ export const ModalPrompt1 = ({
           onChange={(event) =>
             setAnsw(
               event.target.value.replace(
-                util.GetRegexType({
+                util.RegularExpression.GetRegexType({
                   numbers: true,
                   cyrillic: true,
                   space: true,

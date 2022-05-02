@@ -35,10 +35,10 @@
     {% include 'components/aborted.html' %}
 {% else %}
     {% access_tag 'django_idea_moderator' as django_idea_moderator %}
-    {% if idea.visibility_boolean_field or django_idea_moderator %}
+    {% if idea.is_visible or django_idea_moderator %}
         <div class="container">
             {% access_tag 'django_idea_moderator' as django_idea_moderator %}
-            {% if idea.visibility_boolean_field or django_idea_moderator %}
+            {% if idea.is_visible or django_idea_moderator %}
                 <div class="card shadow-sm text-center m-1">
                     <div class="card-header">
                         <a class="text-decoration-none text-dark display-6" href="{% url 'backend_native:django_idea_view' idea.id %}">
@@ -49,7 +49,7 @@
                         {% if idea_moderator %}
                             <form action="{% url 'backend_native:django_idea_change_visibility' idea.id %}" method="POST">
                                 {% csrf_token %}
-                                {% if idea.visibility_boolean_field %}
+                                {% if idea.is_visible %}
                                     <label class="form-control-lg">
                                         Скрыть идею:
                                         <input type="text"
@@ -84,19 +84,19 @@
                                 {% endif %}
                             </form>
                         {% endif %}
-                        {% if idea.author_foreign_key_field.user_foreign_key_field.username == request.user.username or idea_moderator %}
+                        {% if idea.author.user.username == request.user.username or idea_moderator %}
                             <div class="form-control-lg">
                                 Редактировать идею:
                                 <a class="btn btn-sm btn-outline-warning" target="_blank" href="{% url 'backend_native:django_idea_change' idea.id %}">Редактировать</a>
                             </div>
                         {% endif %}
                         <div class="container-fluid d-flex justify-content-between">
-                            {% if idea.author_foreign_key_field %}
+                            {% if idea.author %}
                                 <a class="btn btn-sm btn-outline-success m-1" href="#">
                                     Автор:
-                                        {% if idea.author_foreign_key_field.last_name_char_field %}{{ idea.author_foreign_key_field.last_name_char_field }} {% endif %}
-                                        {% if idea.author_foreign_key_field.first_name_char_field %}{{ idea.author_foreign_key_field.first_name_char_field }} {% endif %}
-                                        {% if idea.author_foreign_key_field.patronymic_char_field %}{{ idea.author_foreign_key_field.patronymic_char_field }} {% endif %}
+                                        {% if idea.author.last_name_char_field %}{{ idea.author.last_name_char_field }} {% endif %}
+                                        {% if idea.author.first_name_char_field %}{{ idea.author.first_name_char_field }} {% endif %}
+                                        {% if idea.author.patronymic_char_field %}{{ idea.author.patronymic_char_field }} {% endif %}
                                 </a>
                             {% else %}
                                 <small class="m-1">
@@ -242,7 +242,7 @@
                                        name="text_field"
                                        required=""
                                        placeholder=""
-                                       value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author_foreign_key_field }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
+                                       value="[ Пользователь: {{ request.user }} ] | [ id статьи: {{ idea.id }} ] | [ Автор статьи: {{ idea.author }} ] | [ Идея в банке идей: {{ idea.name_char_field }} ]"
                                        class="form-control form-control-lg d-none"
                                 />
                                 <button class="btn btn-sm btn-outline-danger" type="submit">Пожаловаться на идею</button>
@@ -305,7 +305,7 @@
                                                name="text_field"
                                                required=""
                                                placeholder=""
-                                               value="[ Пользователь: {{ request.user }} ] | [ id комментария: {{comment.id}} ] | [ Автор комментария: {{ comment.author_foreign_key_field }} ] | [ Идея в банке идей: {{ comment.idea_foreign_key_field }} ]"
+                                               value="[ Пользователь: {{ request.user }} ] | [ id комментария: {{comment.id}} ] | [ Автор комментария: {{ comment.author }} ] | [ Идея в банке идей: {{ comment.idea_foreign_key_field }} ]"
                                                class="form-control form-control-lg d-none"
                                         />
                                         <button class="btn btn-sm btn-outline-danger w-100" type="submit">Пожаловаться на комментарий</button>
@@ -313,10 +313,10 @@
                                 {% endif %}
                             </div>
                             <div class="d-flex justify-content-between align-items-center m-1">
-                                {% if comment.author_foreign_key_field %}
+                                {% if comment.author %}
                                     <a class="btn btn-sm btn-outline-dark" href="#">
                                         <small class="">
-                                            {{ comment.author_foreign_key_field.last_name_char_field }} {{ comment.author_foreign_key_field.first_name_char_field }} {{ comment.author_foreign_key_field.patronymic_char_field }}
+                                            {{ comment.author.last_name_char_field }} {{ comment.author.first_name_char_field }} {{ comment.author.patronymic_char_field }}
                                         </small>
                                     </a>
                                 {% else %}

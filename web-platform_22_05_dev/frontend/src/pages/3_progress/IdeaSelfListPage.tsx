@@ -157,7 +157,7 @@ export function IdeaSelfListPage(): JSX.Element {
                           setFilterIdeaListForm({
                             ...filterIdeaListForm,
                             search: e.target.value.replace(
-                              util.GetRegexType({
+                              util.RegularExpression.GetRegexType({
                                 numbers: true,
                                 cyrillic: true,
                                 space: true,
@@ -270,10 +270,15 @@ export function IdeaSelfListPage(): JSX.Element {
                               className="text-decoration-none text-dark m-0 p-0"
                             >
                               <h6 className="lead fw-bold m-0 p-0">
+                                {util.GetSliceString(idea["name"], 50)}
+                              </h6>
+                              <h6 className="text-danger lead small m-0 p-0">
+                                {"[ "}
                                 {util.GetSliceString(
-                                  idea["name_char_field"],
-                                  50
+                                  idea["moderate_comment"],
+                                  30
                                 )}
+                                {" ]"}
                               </h6>
                             </Link>
                           </div>
@@ -286,7 +291,7 @@ export function IdeaSelfListPage(): JSX.Element {
                                   required
                                 >
                                   <option className="m-0 p-0" value="">
-                                    {idea["subdivision_char_field"]}
+                                    {idea["subdivision"]}
                                   </option>
                                 </select>
                               </label>
@@ -297,7 +302,7 @@ export function IdeaSelfListPage(): JSX.Element {
                                   required
                                 >
                                   <option className="m-0 p-0" value="">
-                                    {idea["sphere_char_field"]}
+                                    {idea["sphere"]}
                                   </option>
                                 </select>
                               </label>
@@ -308,7 +313,7 @@ export function IdeaSelfListPage(): JSX.Element {
                                   required
                                 >
                                   <option className="m-0 p-0" value="">
-                                    {idea["category_char_field"]}
+                                    {idea["category"]}
                                   </option>
                                 </select>
                               </label>
@@ -316,8 +321,8 @@ export function IdeaSelfListPage(): JSX.Element {
                             <div className="m-0 p-0">
                               <img
                                 src={
-                                  idea["image_field"]
-                                    ? util.GetStaticFile(idea["image_field"])
+                                  idea["image"]
+                                    ? util.GetStaticFile(idea["image"])
                                     : util.GetStaticFile(
                                         "/media/default/idea/default_idea.jpg"
                                       )
@@ -333,7 +338,7 @@ export function IdeaSelfListPage(): JSX.Element {
                                   type="text"
                                   className="form-control form-control-sm text-center m-0 p-1"
                                   defaultValue={util.GetSliceString(
-                                    idea["place_char_field"],
+                                    idea["place"],
                                     50
                                   )}
                                   readOnly={true}
@@ -350,7 +355,7 @@ export function IdeaSelfListPage(): JSX.Element {
                                 <textarea
                                   className="form-control form-control-sm text-center m-0 p-1"
                                   defaultValue={util.GetSliceString(
-                                    idea["description_text_field"],
+                                    idea["description"],
                                     100
                                   )}
                                   readOnly={true}
@@ -365,31 +370,23 @@ export function IdeaSelfListPage(): JSX.Element {
                             <div className="m-0 p-0">
                               <div className="btn btn-sm btn-warning m-0 p-2">
                                 Автор:{" "}
-                                {idea["user_model"]["last_name_char_field"] &&
-                                  idea["user_model"][
-                                    "last_name_char_field"
-                                  ]}{" "}
-                                {idea["user_model"]["first_name_char_field"]}{" "}
-                                {idea["user_model"]["position_char_field"]}
+                                {idea["author"]["last_name"] &&
+                                  idea["author"]["last_name"]}{" "}
+                                {idea["author"]["first_name"]}{" "}
+                                {idea["author"]["position"]}
                               </div>
                             </div>
                             <div className="d-flex justify-content-between m-1 p-0">
                               <label className="text-muted border m-0 p-2">
                                 подано:{" "}
                                 <p className="m-0">
-                                  {util.GetCleanDateTime(
-                                    idea["created_datetime_field"],
-                                    true
-                                  )}
+                                  {util.GetCleanDateTime(idea["created"], true)}
                                 </p>
                               </label>
                               <label className="text-muted border m-1 p-2">
                                 зарегистрировано:{" "}
                                 <p className="m-0 p-0">
-                                  {util.GetCleanDateTime(
-                                    idea["register_datetime_field"],
-                                    true
-                                  )}
+                                  {util.GetCleanDateTime(idea["updated"], true)}
                                 </p>
                               </label>
                             </div>
@@ -634,13 +631,10 @@ export function IdeaSelfListPage(): JSX.Element {
                       className="text-decoration-none m-0 p-0"
                     >
                       <li className="border list-group-item-action text-start small m-0 p-1">
-                        {util.GetSliceString(idea["name_char_field"], 50)}
-                        {util.GetCleanDateTime(
-                          " | " + idea["register_datetime_field"],
-                          true
-                        )}
+                        {util.GetSliceString(idea["name"], 50)}
+                        {util.GetCleanDateTime(" | " + idea["updated"], true)}
                         {util.GetSliceString(
-                          " | " + idea["comment_moderate_char_field"],
+                          " | " + idea["moderate_comment"],
                           100
                         )}
                       </li>
@@ -659,7 +653,7 @@ export function IdeaSelfListPage(): JSX.Element {
       ) : (
         ""
       )}
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.idea.ideaReadListStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}

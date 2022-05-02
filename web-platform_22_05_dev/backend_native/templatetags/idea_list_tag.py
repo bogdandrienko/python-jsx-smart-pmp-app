@@ -12,7 +12,7 @@ def is_liked_tag(context, idea):
     request = context['request']
     try:
         models.IdeaTestRatingModel.objects.get(
-            author_foreign_key_field=backend_models.UserModel.objects.get(user_foreign_key_field=request.user),
+            author=backend_models.UserModel.objects.get(user=request.user),
             idea_foreign_key_field=models.IdeaTestModel.objects.get(id=idea),
             status_boolean_field=True
         )
@@ -28,7 +28,7 @@ def is_disliked_tag(context, idea):
     request = context['request']
     try:
         models.IdeaTestRatingModel.objects.get(
-            author_foreign_key_field=backend_models.UserModel.objects.get(user_foreign_key_field=request.user),
+            author=backend_models.UserModel.objects.get(user=request.user),
             idea_foreign_key_field=models.IdeaTestModel.objects.get(id=idea),
             status_boolean_field=False
         )

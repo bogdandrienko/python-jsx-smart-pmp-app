@@ -115,7 +115,7 @@ export const VacationPage = () => {
         </form>
       </ul>
       <hr />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.vacation.vacationReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}

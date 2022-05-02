@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Nav, Spinner, Alert } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 // @ts-ignore
 import { LinkContainer } from "react-router-bootstrap";
 
@@ -14,6 +14,8 @@ import * as button from "./button";
 import * as input from "./input";
 import * as select from "./select";
 import * as message from "./message";
+import * as loader from "./loader";
+
 import * as hook from "../hook";
 import * as constant from "../constant";
 import * as router from "../router";
@@ -363,243 +365,7 @@ export class TestComponent4 extends React.Component {
   }
 }
 
-export const StoreStatusComponent = ({
-  // @ts-ignore
-  storeStatus,
-  keyStatus = "StoreStatus",
-  consoleLog = false,
-  showLoad = true,
-  loadText = "",
-  showData = true,
-  dataText = "",
-  showError = true,
-  errorText = "",
-  showFail = true,
-  failText = "",
-}) => {
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO react components
-  const {
-    load: loadStatus,
-    data: dataStatus,
-    error: errorStatus,
-    fail: failStatus,
-  } = storeStatus;
-  if (consoleLog) {
-    console.log(`${keyStatus}`, storeStatus);
-  }
-
-  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  return (
-    <div key={keyStatus} className="m-0 p-0">
-      {showLoad && loadStatus && (
-        <div className="row justify-content-center m-0 p-0">
-          {loadText !== "" ? (
-            <Alert variant={"secondary"} className="text-center m-0 p-1">
-              {loadText}
-            </Alert>
-          ) : (
-            <Spinner
-              animation="border"
-              role="status"
-              style={{
-                height: "50px",
-                width: "50px",
-                margin: "auto",
-                display: "block",
-              }}
-              className="text-center m-0 p-0"
-            >
-              <small className="m-0 p-0">ждите</small>
-              <span className="sr-only m-0 p-0" />
-            </Spinner>
-          )}
-        </div>
-      )}
-      {showData && dataStatus && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"success"} className="text-center m-0 p-1">
-            {dataText !== "" ? dataText : dataStatus}
-          </Alert>
-        </div>
-      )}
-      {showError && errorStatus && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"danger"} className="text-center m-0 p-1">
-            {errorText !== "" ? errorText : errorStatus}
-          </Alert>
-        </div>
-      )}
-      {showFail && failStatus && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"warning"} className="text-center m-0 p-1">
-            {failText !== "" ? failText : failStatus}
-          </Alert>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export const StoreComponent = ({
-  // @ts-ignore
-  storeStatus: storeStore,
-  consoleLog = false,
-  showLoad = true,
-  loadText = "",
-  showData = true,
-  dataText = "",
-  showError = true,
-  errorText = "",
-  showFail = true,
-  failText = "",
-}) => {
-  /////////////////////////////////////////////////////////////////////////////////////////////////TODO react components
-  const storeConstant = storeStore.data.split("_")[0];
-  const {
-    load: loadStore,
-    data: dataStore,
-    error: errorStore,
-    fail: failStore,
-    // @ts-ignore
-  } = useSelector((state) => state[storeConstant]);
-  if (consoleLog) {
-    console.log(`${storeConstant}`, {
-      load: loadStore,
-      data: dataStore,
-      error: errorStore,
-      fail: failStore,
-    });
-  }
-
-  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  return (
-    <div key={storeConstant} className="m-0 p-0">
-      {showLoad && loadStore && (
-        <div className="row justify-content-center m-0 p-0">
-          {loadText ? (
-            <Alert variant={"secondary"} className="text-center m-0 p-1">
-              {loadText}
-            </Alert>
-          ) : (
-            <Spinner
-              animation="border"
-              role="status"
-              style={{
-                height: "40px",
-                width: "40px",
-                margin: "auto",
-                display: "block",
-              }}
-              className="text-center m-0 p-0"
-            >
-              <span className="sr-only m-0 p-0" />
-            </Spinner>
-          )}
-        </div>
-      )}
-      {showData && dataStore && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"success"} className="text-center m-0 p-1">
-            {dataText
-              ? dataText
-              : typeof dataStore === "string"
-              ? dataStore
-              : "произошла ошибка"}
-          </Alert>
-        </div>
-      )}
-      {showError && errorStore && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"danger"} className="text-center m-0 p-1">
-            {errorText ? errorText : errorStore}
-          </Alert>
-        </div>
-      )}
-      {showFail && failStore && (
-        <div className="row justify-content-center m-0 p-0">
-          <Alert variant={"warning"} className="text-center m-0 p-1">
-            {failText ? failText : failStore}
-          </Alert>
-        </div>
-      )}
-    </div>
-  );
-};
-
-export const StoreComponent1 = ({
-  // @ts-ignore
-  stateConstant,
-  consoleLog = false,
-  showLoad = true,
-  loadText = "",
-  showData = true,
-  dataText = "",
-  showError = true,
-  errorText = "",
-  showFail = true,
-  failText = "",
-}) => {
-  // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const Constant = stateConstant.data.split("_")[0];
-  // @ts-ignore
-  const StoreConstant = useSelector((state) => state[Constant]);
-  if (consoleLog) {
-    console.log(`${Constant}`, StoreConstant);
-  }
-
-  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  return (
-    // <div key={`${new Date().getMilliseconds()}`} className="m-0 p-0">
-    <div className="m-0 p-0">
-      {showLoad &&
-        StoreConstant.load &&
-        (loadText ? (
-          <message.Message.Secondary>{loadText}</message.Message.Secondary>
-        ) : (
-          <div className="row justify-content-center m-0 p-0">
-            <Spinner
-              animation="border"
-              role="status"
-              style={{
-                height: "40px",
-                width: "40px",
-                margin: "auto",
-                display: "block",
-              }}
-              className="text-center m-0 p-0"
-            >
-              <span className="sr-only m-0 p-0" />
-            </Spinner>
-          </div>
-        ))}
-      {showData && StoreConstant.data && (
-        <message.Message.Success>
-          {dataText
-            ? dataText
-            : typeof StoreConstant.data === "string"
-            ? StoreConstant.data
-            : "данные не подходят для отображения!"}
-        </message.Message.Success>
-      )}
-      {showError && StoreConstant.error && (
-        <message.Message.Danger>
-          {errorText ? errorText : StoreConstant.error}
-        </message.Message.Danger>
-      )}
-      {showFail && StoreConstant.fail && (
-        <message.Message.Warning>
-          {failText ? failText : StoreConstant.fail}
-        </message.Message.Warning>
-      )}
-    </div>
-  );
-};
-
-export const StoreComponent2 = ({
+export const StatusStore1 = ({
   // @ts-ignore
   slice,
   consoleLog = false,
@@ -630,19 +396,9 @@ export const StoreComponent2 = ({
           <message.Message.Secondary>{loadText}</message.Message.Secondary>
         ) : (
           <div className="row justify-content-center m-0 p-0">
-            <Spinner
-              animation="border"
-              role="status"
-              style={{
-                height: "40px",
-                width: "40px",
-                margin: "auto",
-                display: "block",
-              }}
-              className="text-center m-0 p-0"
-            >
-              <span className="sr-only m-0 p-0" />
-            </Spinner>
+            <div className="text-center m-0 p-0">
+              <loader.Loader2 />
+            </div>
           </div>
         ))}
       {showData && storeConstant.data && (
@@ -665,38 +421,6 @@ export const StoreComponent2 = ({
         </message.Message.Warning>
       )}
     </div>
-  );
-};
-
-// @ts-ignore
-export const MessageComponent = ({ variant, children }) => {
-  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  return (
-    <div className="row justify-content-center m-0 p-1">
-      <Alert variant={variant} className="text-center m-0 p-1">
-        {children}
-      </Alert>
-    </div>
-  );
-};
-
-export const LoaderComponent = () => {
-  // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  return (
-    <Spinner
-      animation="border"
-      role="status"
-      style={{
-        height: "50px",
-        width: "50px",
-        margin: "auto",
-        display: "block",
-      }}
-    >
-      ЖДИТЕ<span className="sr-only">ЖДИТЕ</span>
-    </Spinner>
   );
 };
 
@@ -725,6 +449,7 @@ export const ModulesComponent = () => {
                   module.ShowInModules && (
                     <div key={module_i} className="text-center m-0 p-1">
                       <div className="lead card-header border shadow bg-light bg-opacity-100 custom-background-transparent-hard m-0 p-0">
+                        <i className={module.ModuleIcon} />
                         {module["Header"]}
                       </div>
                       <div className="text-center custom-background-transparent-middle m-0 p-0">

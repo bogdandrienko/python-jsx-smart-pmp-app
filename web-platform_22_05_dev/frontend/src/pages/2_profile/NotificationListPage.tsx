@@ -115,12 +115,12 @@ export const NotificationListPage = () => {
           })
         }
       />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.notification.notificationReadListStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}
       />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.notification.notificationUpdateStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}
@@ -169,31 +169,16 @@ export const NotificationListPage = () => {
                       className="text-center bg-light bg-opacity-10 m-0 p-0"
                     >
                       <td className="small m-0 p-0">
-                        {util.GetCleanDateTime(
-                          notification["created_datetime_field"],
-                          true
-                        )}
+                        {util.GetCleanDateTime(notification["created"], true)}
                       </td>
                       <td className="small m-0 p-0">
-                        {
-                          notification["author_foreign_key_field"][
-                            "last_name_char_field"
-                          ]
-                        }{" "}
-                        {
-                          notification["author_foreign_key_field"][
-                            "first_name_char_field"
-                          ]
-                        }
+                        {notification["author"]["last_name"]}{" "}
+                        {notification["author"]["first_name"]}
                       </td>
+                      <td className="small m-0 p-0">{notification["name"]}</td>
+                      <td className="small m-0 p-0">{notification["place"]}</td>
                       <td className="small m-0 p-0">
-                        {notification["name_char_field"]}
-                      </td>
-                      <td className="small m-0 p-0">
-                        {notification["place_char_field"]}
-                      </td>
-                      <td className="small m-0 p-0">
-                        {notification["description_text_field"]}
+                        {notification["description"]}
                       </td>
                       <td className="small m-0 p-0">
                         <button

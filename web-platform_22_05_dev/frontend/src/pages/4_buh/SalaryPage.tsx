@@ -177,7 +177,7 @@ export const SalaryPage = () => {
         </form>
       </ul>
       <hr />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.salary.salaryReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}

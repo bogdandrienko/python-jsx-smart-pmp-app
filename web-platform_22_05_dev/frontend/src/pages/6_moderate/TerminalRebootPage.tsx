@@ -181,7 +181,7 @@ export const TerminalRebootPage = () => {
       <message.Message.Danger>
         Все Ваши действия записываются в логи!
       </message.Message.Danger>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.moderator.terminalRebootStore}
         consoleLog={constant.DEBUG_CONSTANT}
         dataText={"Успешно перезагружено(-ы)!"}

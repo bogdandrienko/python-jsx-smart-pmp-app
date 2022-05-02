@@ -71,7 +71,7 @@ export const LoginPage = () => {
                       setUser({
                         ...user,
                         username: event.target.value.replace(
-                          util.GetRegexType({
+                          util.RegularExpression.GetRegexType({
                             numbers: true,
                           }),
                           ""
@@ -103,7 +103,7 @@ export const LoginPage = () => {
                         setUser({
                           ...user,
                           password: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               latin: true,
                               lowerSpace: true,
@@ -141,7 +141,7 @@ export const LoginPage = () => {
               </div>
             </div>
             <div className="card-footer m-0 p-0">
-              <component.StoreComponent2
+              <component.StatusStore1
                 slice={slice.user.userLoginStore}
                 consoleLog={constant.DEBUG_CONSTANT}
               />

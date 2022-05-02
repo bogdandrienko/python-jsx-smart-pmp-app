@@ -18,7 +18,7 @@ def access_tag(context, path):
         user = User.objects.get(username=request.user.username)
         if user.is_superuser:
             return True
-        user = backend_models.UserModel.objects.get(user_foreign_key_field=request.user)
+        user = backend_models.UserModel.objects.get(user=request.user)
         if user and path:
             action = backend_models.ActionModel.objects.get(name_slug_field=path)
             if action:

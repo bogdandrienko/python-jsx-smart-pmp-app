@@ -1,2 +1,114 @@
 
-None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 01:20:45.700735
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:25:24.460791
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:25:24.713267
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:25:25.319148
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:25:25.512641
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-05-02 12:25:27.440692
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:25:27.588889
+
+None, 127.0.0.1, /admin/login/, POST, None, User matching query does not exist., 2022-05-02 12:25:28.641314
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:25:28.738359
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-05-02 12:25:45.760803
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:25:54.008255
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:26:41.405942
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:26:49.464317
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-05-02 12:26:51.936876
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:26:52.052868
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:28:07.726562
+
+None, 127.0.0.1, /admin/login/, GET, , User matching query does not exist., 2022-05-02 12:30:11.493275
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:30:11.683273
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:30:14.984019
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:30:15.170749
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:30:15.221747
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:30:24.017663
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:33:04.192719
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:33:19.150569
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:33:35.139109
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:33:46.316551
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:33:47.850908
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:33:58.555689
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:33:59.756054
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:03.955609
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:15.819628
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:17.068065
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:22.333570
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:23.792198
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:28.404429
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:51.506713
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:54.577974
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:59.317357
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:59.536321
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:35:59.567369
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:36:01.597335
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:36:03.750287
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:36:10.501864
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:36:24.831828
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:36:26.055232
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:36:28.297700
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:36:30.276163
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:36:32.581229
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:36:36.044527
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:37:13.635479
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:40:34.593965
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:40:35.823586
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-02 12:40:56.851166
+
+None, 127.0.0.1, /api/user/login/, GET, userLoginStore, get() returned more than one TokenModel -- it returned 3!, 2022-05-02 16:45:27.670132
+
+None, 127.0.0.1, /api/user/login/, GET, userLoginStore, 'tuple' object has no attribute 'token', 2022-05-02 16:46:02.838593
+
+None, 127.0.0.1, /api/user/login/, GET, userLoginStore, 'tuple' object has no attribute 'token', 2022-05-02 16:46:45.030717
+
+000000000000, 127.0.0.1, /api/user/detail/, GET, userDetailStore, TokenModel matching query does not exist., 2022-05-02 16:57:47.799369
+
+000000000000, 127.0.0.1, /api/user/detail/, GET, userDetailStore, 'TokenModel' object is not subscriptable, 2022-05-02 16:59:08.055393

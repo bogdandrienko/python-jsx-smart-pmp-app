@@ -34,7 +34,7 @@ export const ExportUsersPage = () => {
   // TODO return page //////////////////////////////////////////////////////////////////////////////////////////////////
   return (
     <base.Base1>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.moderator.adminExportUsersStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}

@@ -59,7 +59,7 @@ export const Captcha1 = () => {
           Вы успешно прошли проверку!
         </div>
       )}
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.captcha.captchaCheckStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}

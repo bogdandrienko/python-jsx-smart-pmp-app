@@ -171,17 +171,17 @@ export const RecoverPasswordPage = () => {
 
   return (
     <base.Base1>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.user.userRecoverPasswordStore}
         consoleLog={constant.DEBUG_CONSTANT}
         dataText={"Пользователь успешно найден или данные совпали!"}
       />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.user.userRecoverPasswordSendEmailStore}
         consoleLog={constant.DEBUG_CONSTANT}
         dataText={"Письмо успешно отправлено!"}
       />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.user.userRecoverPasswordChangePasswordStore}
         consoleLog={constant.DEBUG_CONSTANT}
         dataText={"Пароль успешно изменён!"}
@@ -217,7 +217,7 @@ export const RecoverPasswordPage = () => {
                           setRecover({
                             ...recover,
                             username: event.target.value.replace(
-                              util.GetRegexType({
+                              util.RegularExpression.GetRegexType({
                                 numbers: true,
                               }),
                               ""
@@ -325,7 +325,7 @@ export const RecoverPasswordPage = () => {
                                 setRecover({
                                   ...recover,
                                   secretAnswer: event.target.value.replace(
-                                    util.GetRegexType({
+                                    util.RegularExpression.GetRegexType({
                                       numbers: true,
                                       cyrillic: true,
                                       space: true,
@@ -481,7 +481,7 @@ export const RecoverPasswordPage = () => {
                             setUser({
                               ...user,
                               password: event.target.value.replace(
-                                util.GetRegexType({
+                                util.RegularExpression.GetRegexType({
                                   numbers: true,
                                   latin: true,
                                   lowerSpace: true,
@@ -526,7 +526,7 @@ export const RecoverPasswordPage = () => {
                             setUser({
                               ...user,
                               password2: event.target.value.replace(
-                                util.GetRegexType({
+                                util.RegularExpression.GetRegexType({
                                   numbers: true,
                                   latin: true,
                                   lowerSpace: true,

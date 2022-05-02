@@ -1,5 +1,13 @@
+// TODO download modules ///////////////////////////////////////////////////////////////////////////////////////////////
+
 import React, { FormEvent, MouseEvent, useState } from "react";
 import { Link } from "react-router-dom";
+
+// TODO custom modules /////////////////////////////////////////////////////////////////////////////////////////////////
+
+import * as base from "../../components/ui/base";
+
+// TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export function FormPage() {
   const [username, setUsername] = useState("");
@@ -14,7 +22,7 @@ export function FormPage() {
   };
 
   return (
-    <div className="text-center">
+    <base.Base1>
       <hr />
       <ul className="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-2 justify-content-center text-center shadow m-0 p-1">
         <form className="m-0 p-0" onSubmit={submit}>
@@ -449,6 +457,6 @@ export function FormPage() {
         </form>
       </ul>
       <hr />
-    </div>
+    </base.Base1>
   );
 }

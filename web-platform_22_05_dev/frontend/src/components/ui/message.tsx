@@ -83,7 +83,7 @@ export class Message {
               "card-header bg-warning bg-opacity-25 lead text-warning m-0 p-1"
             }
           >
-            ошибка!
+            внимание!
           </div>
           <div className={"card-body bg-warning bg-opacity-10 m-0 p-0"}>
             {children}

@@ -400,7 +400,7 @@ class ExamplesModelForm(forms.Form):
         localize=False,  # Локализовать ли контент принудительно
         required=True,  # Требовать ли наличие данных в поле
         label='file',  # Заголовок поля
-        help_text='<small class="text-muted underline">file</small><br>',  # Вспомогательный текст
+        help_text='<small class="text-muted underline">FileField</small><br>',  # Вспомогательный текст
         # для поля (Можно передавать html теги)
         initial='file',  # Начальное значение поля (Имеет приоритет перед "widget.attrs.value")
         widget=forms.FileInput(

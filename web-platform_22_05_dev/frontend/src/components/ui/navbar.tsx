@@ -32,7 +32,7 @@ export const NavbarComponent1 = () => {
 
   // TODO variable /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  const { title, description, access } = util.GetInfoPage(location.pathname);
+  const { title, description } = util.GetInfoPage(location.pathname);
 
   // TODO return ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -74,8 +74,7 @@ export const NavbarComponent1 = () => {
                       <NavDropdown
                         title={
                           <span>
-                            <i className="fa-solid fa-earth-asia m-0 p-0" />{" "}
-                            {module.Header}
+                            <i className={module.ModuleIcon} /> {module.Header}
                             {"  "}
                             {module.Header === "Профиль" &&
                               (notificationReadListStore.data &&

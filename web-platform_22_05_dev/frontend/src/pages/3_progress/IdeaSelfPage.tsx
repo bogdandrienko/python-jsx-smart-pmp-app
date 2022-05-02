@@ -22,6 +22,7 @@ export function IdeaSelfPage(): JSX.Element {
 
   const ideaReadStore = hook.useSelectorCustom2(slice.idea.ideaReadStore);
   const ideaUpdateStore = hook.useSelectorCustom2(slice.idea.ideaUpdateStore);
+  const userDetailStore = hook.useSelectorCustom2(slice.user.userDetailStore);
 
   // TODO hooks ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -43,25 +44,26 @@ export function IdeaSelfPage(): JSX.Element {
       moderateComment: "Автор внёс изменения",
     });
 
-  const [isModalUpdateVisible, setIsModalUpdateVisible] = useState(false);
+  const [isModalConfirmUpdateVisible, setIsModalConfirmUpdateVisible] =
+    useState(false);
 
-  const [isModalHideVisible, setIsModalHideVisible] = useState(false);
+  const [isModalConfirmHideVisible, setIsModalConfirmHideVisible] =
+    useState(false);
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (!ideaReadStore.data) {
-      dispatch(slice.idea.ideaReadStore.action({ id: Number(id) }));
-      // dispatch(action.Idea.Read(Number(id)));
+      dispatch(slice.idea.ideaReadStore.action({ idea_id: Number(id) }));
     } else {
       setIdeaUpdateObject({
         ...ideaUpdateObject,
-        subdivision: ideaReadStore.data["subdivision_char_field"],
-        sphere: ideaReadStore.data["sphere_char_field"],
-        category: ideaReadStore.data["category_char_field"],
-        name: ideaReadStore.data["name_char_field"],
-        place: ideaReadStore.data["place_char_field"],
-        description: ideaReadStore.data["description_text_field"],
+        subdivision: ideaReadStore.data["subdivision"],
+        sphere: ideaReadStore.data["sphere"],
+        category: ideaReadStore.data["category"],
+        name: ideaReadStore.data["name"],
+        place: ideaReadStore.data["place"],
+        description: ideaReadStore.data["description"],
       });
     }
   }, [ideaReadStore.data]);
@@ -91,6 +93,19 @@ export function IdeaSelfPage(): JSX.Element {
     }
   }, [ideaUpdateStore.data]);
 
+  useEffect(() => {
+    if (ideaReadStore.data) {
+      if (ideaReadStore.data["moderate_status"] !== "на доработку") {
+        navigate("/idea/self/list");
+      }
+      if (userDetailStore.data) {
+        if (ideaReadStore.data["author"]["id"] !== userDetailStore.data["id"]) {
+          navigate("/idea/self/list");
+        }
+      }
+    }
+  }, [ideaReadStore.data, userDetailStore.data]);
+
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   function HideIdea() {
@@ -113,13 +128,13 @@ export function IdeaSelfPage(): JSX.Element {
 
   function ButtonHideIdea(event: MouseEvent<any>) {
     util.EventMouse1(event, true, true, () => {
-      setIsModalHideVisible(true);
+      setIsModalConfirmHideVisible(true);
     });
   }
 
   function FormIdeaUpdateSubmit(event: FormEvent<any>) {
     util.EventForm1(event, true, true, () => {
-      setIsModalUpdateVisible(true);
+      setIsModalConfirmUpdateVisible(true);
     });
   }
 
@@ -136,14 +151,14 @@ export function IdeaSelfPage(): JSX.Element {
   return (
     <base.Base1>
       <modal.ModalConfirm1
-        isModalVisible={isModalHideVisible}
-        setIsModalVisible={setIsModalHideVisible}
+        isModalVisible={isModalConfirmHideVisible}
+        setIsModalVisible={setIsModalConfirmHideVisible}
         description={"Скрыть свою идею?"}
         callback={HideIdea}
       />
       <modal.ModalConfirm1
-        isModalVisible={isModalUpdateVisible}
-        setIsModalVisible={setIsModalUpdateVisible}
+        isModalVisible={isModalConfirmUpdateVisible}
+        setIsModalVisible={setIsModalConfirmUpdateVisible}
         description={"Заменить данные?"}
         callback={ChangeIdea}
       />
@@ -161,12 +176,17 @@ export function IdeaSelfPage(): JSX.Element {
           </button>
         )}
       </div>
-      <component.StoreComponent2
+      <component.StatusStore1
+        slice={slice.user.userDetailStore}
+        consoleLog={constant.DEBUG_CONSTANT}
+        showData={false}
+      />
+      <component.StatusStore1
         slice={slice.idea.ideaReadStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}
       />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.idea.ideaUpdateStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}
@@ -185,13 +205,13 @@ export function IdeaSelfPage(): JSX.Element {
             <div className="card shadow custom-background-transparent-low m-0 p-0">
               <div className="card-header bg-success bg-opacity-10 m-0 p-3">
                 <h6 className="lead fw-bold m-0 p-0">
-                  {ideaReadStore.data["name_char_field"]}
+                  {ideaReadStore.data["name"]}
                 </h6>
                 <h6 className="text-danger lead small m-0 p-0">
                   {"[ "}
                   {util.GetSliceString(
-                    ideaReadStore.data["comment_moderate_char_field"],
-                    30
+                    ideaReadStore.data["moderate_comment"],
+                    300
                   )}
                   {" ]"}
                 </h6>
@@ -212,7 +232,7 @@ export function IdeaSelfPage(): JSX.Element {
                         setIdeaUpdateObject({
                           ...ideaUpdateObject,
                           name: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               cyrillic: true,
                               space: true,
@@ -292,7 +312,7 @@ export function IdeaSelfPage(): JSX.Element {
                         setIdeaUpdateObject({
                           ...ideaUpdateObject,
                           place: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               cyrillic: true,
                               space: true,
@@ -382,7 +402,7 @@ export function IdeaSelfPage(): JSX.Element {
                 </div>
                 <div className="m-0 p-0">
                   <img
-                    src={util.GetStaticFile(ideaReadStore.data["image_field"])}
+                    src={util.GetStaticFile(ideaReadStore.data["image"])}
                     className="card-img-top img-fluid w-25 m-0 p-1"
                     alt="изображение отсутствует"
                   />
@@ -435,7 +455,7 @@ export function IdeaSelfPage(): JSX.Element {
                         setIdeaUpdateObject({
                           ...ideaUpdateObject,
                           description: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               cyrillic: true,
                               space: true,
@@ -454,10 +474,9 @@ export function IdeaSelfPage(): JSX.Element {
                 </div>
                 <div className="m-0 p-0">
                   <Link to={`#`} className="btn btn-sm btn-warning m-0 p-2">
-                    Автор:{" "}
-                    {ideaReadStore.data["user_model"]["last_name_char_field"]}{" "}
-                    {ideaReadStore.data["user_model"]["first_name_char_field"]}{" "}
-                    {ideaReadStore.data["user_model"]["position_char_field"]}
+                    Автор: {ideaReadStore.data["author"]["last_name"]}{" "}
+                    {ideaReadStore.data["author"]["first_name"]}{" "}
+                    {ideaReadStore.data["author"]["position"]}
                   </Link>
                 </div>
                 <div className="d-flex justify-content-between m-0 p-1">
@@ -465,7 +484,7 @@ export function IdeaSelfPage(): JSX.Element {
                     подано:{" "}
                     <p className="m-0 p-0">
                       {util.GetCleanDateTime(
-                        ideaReadStore.data["created_datetime_field"],
+                        ideaReadStore.data["created"],
                         true
                       )}
                     </p>
@@ -474,7 +493,7 @@ export function IdeaSelfPage(): JSX.Element {
                     зарегистрировано:{" "}
                     <p className="m-0 p-0">
                       {util.GetCleanDateTime(
-                        ideaReadStore.data["register_datetime_field"],
+                        ideaReadStore.data["updated"],
                         true
                       )}
                     </p>

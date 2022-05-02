@@ -34,7 +34,6 @@ export const useFetching = (callback, sort) => {
 
 // @ts-ignore
 export const useObserver = (ref, canLoad, isLoading, callback) => {
-  console.log("useObserver");
   const observer = useRef();
   useEffect(() => {
     if (isLoading) return;
@@ -111,7 +110,6 @@ export const useObserverCustom1 = ({
   // @ts-ignore
   callbackIntersecting,
 }) => {
-  console.log("useObserverCustom1", canLoad, isLoading);
   const observer = useRef();
   useEffect(() => {
     if (isLoading) {
@@ -155,9 +153,6 @@ export const useFetchingCustom1 = (callback) => {
 // @ts-ignore
 export const useDispatchCustom1 = (callback) => {
   const dispatch = useDispatch();
-
-  console.log("useDispatchCustom1: ", callback);
-
   return async function () {
     dispatch(callback);
   };

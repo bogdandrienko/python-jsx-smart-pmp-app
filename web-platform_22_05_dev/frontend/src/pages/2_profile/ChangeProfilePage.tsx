@@ -14,6 +14,7 @@ import * as util from "../../components/util";
 import * as base from "../../components/ui/base";
 import * as modal from "../../components/ui/modal";
 import * as slice from "../../components/slice";
+import * as message from "../../components/ui/message";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -35,6 +36,7 @@ export const ChangeProfilePage = () => {
     email: "",
     avatar: null,
     password: "",
+    isDangerPassword: false,
     password2: "",
   });
 
@@ -46,13 +48,11 @@ export const ChangeProfilePage = () => {
     if (userDetailStore.data && userDetailStore.data["user_model"]) {
       setUser({
         ...user,
-        secretQuestion:
-          userDetailStore.data["user_model"]["secret_question_char_field"],
-        secretAnswer:
-          userDetailStore.data["user_model"]["secret_answer_char_field"],
-        email: userDetailStore.data["user_model"]["email_field"],
-        password: userDetailStore.data["user_model"]["password_slug_field"],
-        password2: userDetailStore.data["user_model"]["password_slug_field"],
+        secretQuestion: userDetailStore.data["user_model"]["secret_question"],
+        secretAnswer: userDetailStore.data["user_model"]["secret_answer"],
+        email: userDetailStore.data["user_model"]["email"],
+        password: userDetailStore.data["user_model"]["password"],
+        password2: userDetailStore.data["user_model"]["password"],
       });
     }
   }, [userDetailStore.data]);
@@ -64,6 +64,17 @@ export const ChangeProfilePage = () => {
       }, 10);
     }
   }, [userPasswordUpdateStore.data]);
+
+  useEffect(() => {
+    if (user.password) {
+      setUser({
+        ...user,
+        isDangerPassword: user.password.match(
+          util.RegularExpression.StrongPassword()
+        ),
+      });
+    }
+  }, [user.password]);
 
   // TODO functions ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -79,7 +90,7 @@ export const ChangeProfilePage = () => {
 
   return (
     <base.Base1>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.user.userDetailStore}
         consoleLog={constant.DEBUG_CONSTANT}
         showData={false}
@@ -104,7 +115,7 @@ export const ChangeProfilePage = () => {
               перенаправлять на эту страницу постоянно!
             </div>
             <div className="card-header m-0 p-0">
-              <component.StoreComponent2
+              <component.StatusStore1
                 slice={slice.user.userPasswordUpdateStore}
                 consoleLog={constant.DEBUG_CONSTANT}
               />
@@ -124,7 +135,7 @@ export const ChangeProfilePage = () => {
                       setUser({
                         ...user,
                         secretQuestion: event.target.value.replace(
-                          util.GetRegexType({
+                          util.RegularExpression.GetRegexType({
                             numbers: true,
                             cyrillic: true,
                             space: true,
@@ -157,7 +168,7 @@ export const ChangeProfilePage = () => {
                       setUser({
                         ...user,
                         secretAnswer: event.target.value.replace(
-                          util.GetRegexType({
+                          util.RegularExpression.GetRegexType({
                             numbers: true,
                             cyrillic: true,
                             space: true,
@@ -191,7 +202,7 @@ export const ChangeProfilePage = () => {
                       setUser({
                         ...user,
                         email: event.target.value.replace(
-                          util.GetRegexType({
+                          util.RegularExpression.GetRegexType({
                             numbers: true,
                             latin: true,
                             lowerSpace: true,
@@ -219,6 +230,12 @@ export const ChangeProfilePage = () => {
                 </label>
               </div>
               <div className="m-0 p-1">
+                {!user.isDangerPassword && (
+                  <message.Message.Warning>
+                    Пароль слишком простой! Пароль должен содержать цифры,
+                    большие и маленькие буквы.
+                  </message.Message.Warning>
+                )}
                 <label className="form-control-sm text-center m-0 p-1">
                   <i className="fa-solid fa-key m-0 p-1" />
                   Введите пароль для входа в аккаунт:
@@ -234,12 +251,15 @@ export const ChangeProfilePage = () => {
                         setUser({
                           ...user,
                           password: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               latin: true,
                               lowerSpace: true,
                             }),
                             ""
+                          ),
+                          isDangerPassword: user.password.match(
+                            util.RegularExpression.StrongPassword()
                           ),
                         })
                       }
@@ -279,7 +299,7 @@ export const ChangeProfilePage = () => {
                         setUser({
                           ...user,
                           password2: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               latin: true,
                               lowerSpace: true,
@@ -309,6 +329,11 @@ export const ChangeProfilePage = () => {
                     </small>
                   </small>
                 </label>
+                {user.password !== user.password2 && (
+                  <message.Message.Danger>
+                    Пароли не совпадают!
+                  </message.Message.Danger>
+                )}
               </div>
             </div>
             <div className="card-footer m-0 p-0">

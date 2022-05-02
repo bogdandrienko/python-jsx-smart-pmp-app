@@ -95,12 +95,12 @@ export const RecoverUserPasswordPage = () => {
       <message.Message.Danger>
         Все Ваши действия записываются в логи!
       </message.Message.Danger>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.moderator.adminCheckUserStore}
         consoleLog={constant.DEBUG_CONSTANT}
         dataText={"Пользователь успешно найден!"}
       />
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.moderator.adminChangePasswordUserStore}
         consoleLog={constant.DEBUG_CONSTANT}
       />
@@ -134,7 +134,7 @@ export const RecoverUserPasswordPage = () => {
                         setUser({
                           ...user,
                           username: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                             }),
                             ""
@@ -199,59 +199,26 @@ export const RecoverUserPasswordPage = () => {
               <tr>
                 <td>Табельный номер</td>
                 <td>
-                  {
-                    adminCheckUserStore.data["user_model"][
-                      "personnel_number_slug_field"
-                    ]
-                  }
+                  {adminCheckUserStore.data["user_model"]["personnel_number"]}
                 </td>
               </tr>
               <tr>
                 <td>Ф.И.О.</td>
                 <td>
-                  {
-                    adminCheckUserStore.data["user_model"][
-                      "last_name_char_field"
-                    ]
-                  }{" "}
-                  {
-                    adminCheckUserStore.data["user_model"][
-                      "first_name_char_field"
-                    ]
-                  }{" "}
-                  {
-                    adminCheckUserStore.data["user_model"][
-                      "patronymic_char_field"
-                    ]
-                  }
+                  {adminCheckUserStore.data["user_model"]["last_name"]}{" "}
+                  {adminCheckUserStore.data["user_model"]["first_name"]}{" "}
+                  {adminCheckUserStore.data["user_model"]["patronymic"]}
                 </td>
               </tr>
               <tr>
                 <td>Должность</td>
                 <td>
-                  {
-                    adminCheckUserStore.data["user_model"][
-                      "position_char_field"
-                    ]
-                  }{" "}
-                  {" | "}{" "}
-                  {
-                    adminCheckUserStore.data["user_model"][
-                      "subdivision_char_field"
-                    ]
-                  }
+                  {adminCheckUserStore.data["user_model"]["position"]} {" | "}{" "}
+                  {adminCheckUserStore.data["user_model"]["subdivision"]}
                   {" | "}
-                  {
-                    adminCheckUserStore.data["user_model"][
-                      "department_site_char_field"
-                    ]
-                  }
+                  {adminCheckUserStore.data["user_model"]["department_site"]}
                   {" | "}
-                  {
-                    adminCheckUserStore.data["user_model"][
-                      "workshop_service_char_field"
-                    ]
-                  }
+                  {adminCheckUserStore.data["user_model"]["workshop_service"]}
                 </td>
               </tr>
               <tr>
@@ -271,13 +238,11 @@ export const RecoverUserPasswordPage = () => {
               </tr>
               <tr>
                 <td>Почта</td>
-                <td>{adminCheckUserStore.data["user_model"]["email_field"]}</td>
+                <td>{adminCheckUserStore.data["user_model"]["email"]}</td>
               </tr>
               <tr>
                 <td>Активность пользователя</td>
-                {adminCheckUserStore.data["user_model"][
-                  "activity_boolean_field"
-                ] ? (
+                {adminCheckUserStore.data["user_model"]["is_active_account"] ? (
                   <td className="text-success">активен</td>
                 ) : (
                   <td className="text-danger">неактивен</td>
@@ -285,9 +250,7 @@ export const RecoverUserPasswordPage = () => {
               </tr>
               <tr>
                 <td>Тип пароля</td>
-                {adminCheckUserStore.data["user_model"][
-                  "temp_password_boolean_field"
-                ] ? (
+                {adminCheckUserStore.data["user_model"]["is_temp_password"] ? (
                   <td className="text-danger">временный</td>
                 ) : (
                   <td className="text-success">постоянный</td>
@@ -296,12 +259,8 @@ export const RecoverUserPasswordPage = () => {
               <tr>
                 <td>Пароль</td>
                 <td>
-                  {adminCheckUserStore.data["user_model"][
-                    "temp_password_boolean_field"
-                  ]
-                    ? adminCheckUserStore.data["user_model"][
-                        "password_char_field"
-                      ]
+                  {adminCheckUserStore.data["user_model"]["is_temp_password"]
+                    ? adminCheckUserStore.data["user_model"]["password"]
                     : util.GetSliceString(
                         adminCheckUserStore.data["password"],
                         30
@@ -353,7 +312,7 @@ export const RecoverUserPasswordPage = () => {
                             setPasswords({
                               ...passwords,
                               password: event.target.value.replace(
-                                util.GetRegexType({
+                                util.RegularExpression.GetRegexType({
                                   numbers: true,
                                   latin: true,
                                   lowerSpace: true,
@@ -402,7 +361,7 @@ export const RecoverUserPasswordPage = () => {
                             setPasswords({
                               ...passwords,
                               password2: event.target.value.replace(
-                                util.GetRegexType({
+                                util.RegularExpression.GetRegexType({
                                   numbers: true,
                                   latin: true,
                                   lowerSpace: true,

@@ -5,10 +5,10 @@ from backend import models as backend_models, utils as backend_service
 
 def user_counter(request):
     try:
-        user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=User.objects.get(id=request.user.id))[0]
+        user_model = backend_models.UserModel.objects.get_or_create(user=User.objects.get(id=request.user.id))[0]
         notifications = backend_models.NotificationModel.objects.filter(
-            author_foreign_key_field=user_model,
-            visibility_boolean_field=False,
+            author=user_model,
+            is_visible=False,
         ).count()
     except Exception as error:
         backend_service.DjangoClass.LoggingClass.error(request=request, error=error)
@@ -16,7 +16,7 @@ def user_counter(request):
     try:
         errors = 0
         for log in backend_models.LoggingModel.objects.all():
-            if log.error_text_field != 'successful':
+            if log.error != 'successful':
                 errors += 1
     except Exception as error:
         backend_service.DjangoClass.LoggingClass.error(request=request, error=error)

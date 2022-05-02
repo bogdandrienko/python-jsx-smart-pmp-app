@@ -13,6 +13,7 @@ import * as slice from "../../components/slice";
 import * as component from "../../components/ui/component";
 import * as base from "../../components/ui/base";
 import * as modal from "../../components/ui/modal";
+import * as message from "../../components/ui/message";
 
 // TODO export /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -31,14 +32,17 @@ export function IdeaCreatePage(): JSX.Element {
       sphere: "",
       category: "",
       avatar: null,
+      dangerAvatar: false,
       name: "",
       place: "",
       description: "",
       moderate: "на модерации",
     });
 
-  const [isModalCreateCreateVisible, setIsModalCreateCreateVisible] =
-    useState(false);
+  const [
+    isModalConfirmCreateCreateVisible,
+    setIsModalConfirmCreateCreateVisible,
+  ] = useState(false);
 
   // TODO useEffect ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -58,6 +62,15 @@ export function IdeaCreatePage(): JSX.Element {
     dispatch({ type: slice.idea.ideaCreateStore.constant.reset });
   }, []);
 
+  useEffect(() => {
+    if (ideaCreateObject.avatar) {
+      setIdeaCreateObject({
+        ...ideaCreateObject,
+        dangerAvatar: ideaCreateObject.avatar.size > 5 * 1000000,
+      });
+    }
+  }, [ideaCreateObject.avatar]);
+
   // TODO function /////////////////////////////////////////////////////////////////////////////////////////////////////
 
   function CreateIdea() {
@@ -68,7 +81,7 @@ export function IdeaCreatePage(): JSX.Element {
 
   function FormCreateSubmit(event: FormEvent<HTMLFormElement>) {
     util.EventForm1(event, true, true, () => {
-      setIsModalCreateCreateVisible(true);
+      setIsModalConfirmCreateCreateVisible(true);
     });
   }
 
@@ -83,6 +96,18 @@ export function IdeaCreatePage(): JSX.Element {
 
   return (
     <base.Base1>
+      <modal.ModalConfirm1
+        isModalVisible={isModalConfirmCreateCreateVisible}
+        setIsModalVisible={setIsModalConfirmCreateCreateVisible}
+        description={"Отправить идею на модерацию?"}
+        callback={CreateIdea}
+      />
+      {ideaCreateObject.dangerAvatar && (
+        <message.Message.Danger>
+          Размер изображения превышает максимальный (5 мб) ! Найдите другое,
+          сделайте скрин с экрана или сожмите изображение.
+        </message.Message.Danger>
+      )}
       <component.Accordion1
         key_target={"accordion1"}
         isCollapse={false}
@@ -107,7 +132,7 @@ export function IdeaCreatePage(): JSX.Element {
           </div>
         }
       </component.Accordion1>
-      <component.StoreComponent2
+      <component.StatusStore1
         slice={slice.idea.ideaCreateStore}
         consoleLog={constant.DEBUG_CONSTANT}
       />
@@ -122,12 +147,6 @@ export function IdeaCreatePage(): JSX.Element {
               FormCreateReset(event);
             }}
           >
-            <modal.ModalConfirm1
-              isModalVisible={isModalCreateCreateVisible}
-              setIsModalVisible={setIsModalCreateCreateVisible}
-              description={"Отправить идею на модерацию?"}
-              callback={CreateIdea}
-            />
             <div className="card shadow custom-background-transparent-low m-0 p-0">
               <div className="card-header bg-success bg-opacity-10 m-0 p-2">
                 <h6 className="lead fw-bold m-0 p-0">Новая идея</h6>
@@ -143,13 +162,13 @@ export function IdeaCreatePage(): JSX.Element {
                       placeholder="введите название тут..."
                       minLength={1}
                       maxLength={200}
-                      value={ideaCreateObject.name}
                       required
+                      value={ideaCreateObject.name}
                       onChange={(event) =>
                         setIdeaCreateObject({
                           ...ideaCreateObject,
                           name: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               cyrillic: true,
                               space: true,
@@ -229,7 +248,7 @@ export function IdeaCreatePage(): JSX.Element {
                         setIdeaCreateObject({
                           ...ideaCreateObject,
                           place: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               cyrillic: true,
                               space: true,
@@ -352,7 +371,7 @@ export function IdeaCreatePage(): JSX.Element {
                         setIdeaCreateObject({
                           ...ideaCreateObject,
                           description: event.target.value.replace(
-                            util.GetRegexType({
+                            util.RegularExpression.GetRegexType({
                               numbers: true,
                               cyrillic: true,
                               space: true,
@@ -373,7 +392,11 @@ export function IdeaCreatePage(): JSX.Element {
               <div className="card-footer m-0 p-0">
                 <ul className="btn-group row nav row-cols-auto row-cols-md-auto row-cols-lg-auto justify-content-center m-0 p-0">
                   <button
-                    className="btn btn-sm btn-primary m-1 p-2"
+                    className={
+                      ideaCreateObject.dangerAvatar
+                        ? "btn btn-sm btn-primary m-1 p-2 disabled"
+                        : "btn btn-sm btn-primary m-1 p-2"
+                    }
                     type="submit"
                   >
                     <i className="fa-solid fa-circle-check m-0 p-1" />

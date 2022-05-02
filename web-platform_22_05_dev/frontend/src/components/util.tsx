@@ -131,22 +131,26 @@ export function ConstructorAction1(
             url: url,
             method: method,
             timeout: timeout,
+            timeoutErrorMessage: "timeout error",
             headers: {
-              "Content-Type": "multipart/form-data",
               // @ts-ignore
               Authorization: `Bearer ${userLogin.token}`,
             },
             data: formData,
           };
-        } catch (error) {}
+        } catch (error) {
+          dispatch({
+            type: constantStore.fail,
+            payload: ConstructorActionFail1(dispatch, error),
+          });
+        }
       } else {
         config = {
           url: url,
           method: method,
           timeout: timeout,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          timeoutErrorMessage: "timeout error",
+          headers: {},
           data: formData,
         };
       }
@@ -316,14 +320,14 @@ export const PageLogic = () => {
     if (userLoginStore.data) {
       localStorage.setItem("userToken", JSON.stringify(userLoginStore.data));
       dispatch(slice.user.userDetailStore.action({ form: {} }));
-      dispatch(
-        slice.notification.notificationReadListStore.action({
-          form: {
-            limit: 1,
-            page: 1,
-          },
-        })
-      );
+      // dispatch(
+      //   slice.notification.notificationReadListStore.action({
+      //     form: {
+      //       limit: 1,
+      //       page: 1,
+      //     },
+      //   })
+      // );
     }
   }, [userLoginStore.data]);
 
@@ -335,14 +339,12 @@ export const PageLogic = () => {
       ) {
         navigate("/");
       }
-      if (
-        userDetailStore.data["user_model"]["activity_boolean_field"] === false
-      ) {
+      if (userDetailStore.data["user_model"]["is_active_account"] === false) {
         dispatch(action.user.logout());
       }
       if (
-        (!userDetailStore.data["user_model"]["secret_question_char_field"] ||
-          !userDetailStore.data["user_model"]["secret_answer_char_field"]) &&
+        (!userDetailStore.data["user_model"]["secret_question"] ||
+          !userDetailStore.data["user_model"]["secret_answer"]) &&
         location.pathname !== "/password/change" &&
         location.pathname !== "/"
       ) {
@@ -578,55 +580,81 @@ export const ChangePasswordVisibility = (objects = [""]) => {
   }
 };
 
-export const GetRegexType = ({
-  numbers = false,
-  latin = false,
-  cyrillic = false,
-  onlyLowerLetters = false,
-  lowerSpace = false,
-  space = false,
-  punctuationMarks = false,
-  email = false,
-}) => {
-  try {
-    let regex = "";
-    if (numbers) {
-      regex = regex + "0-9";
-    }
-    if (latin) {
-      if (onlyLowerLetters) {
-        regex = regex + "a-z";
-      } else {
-        regex = regex + "A-Za-z";
-      }
-    }
-    if (cyrillic) {
-      if (onlyLowerLetters) {
-        regex = regex + "а-яё";
-      } else {
-        regex = regex + "А-ЯЁа-яё";
-      }
-    }
-    if (lowerSpace) {
-      regex = regex + "_";
-    }
-    if (space) {
-      regex = regex + " ";
-    }
-    if (punctuationMarks) {
-      regex = regex + "-:;.,!?_";
-    }
-    if (email) {
-      regex = regex + "@.";
-    }
-    return new RegExp(`[^${regex}]`, "g");
-  } catch (error) {
-    if (constant.DEBUG_CONSTANT) {
-      console.log(error);
-    }
-    return new RegExp(`[^_]`, "g");
+export class RegularExpression {
+  static haveSmallChar() {
+    return /^(?=.*[a-z])/;
   }
-};
+  static haveBigChar() {
+    return /^(?=.*[A-Z])/;
+  }
+  static haveInteger() {
+    return /^(?=.*\d)/; // /^(?=.*[0-9])/;
+  }
+  static haveSpecificChar() {
+    return /^(?=.*[!@#$%^&*])/;
+  }
+  static lengthMinAndMax() {
+    return /^(?=.{8,})/;
+  }
+  static haveSmallAndBigChars() {
+    return /^(?=.*[a-z])(?=.*[A-Z])/;
+  }
+  static StrongPassword() {
+    return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  }
+  static VeryStrongPassword() {
+    return new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})", "g");
+  }
+  static GetRegexType({
+    numbers = false,
+    latin = false,
+    cyrillic = false,
+    onlyLowerLetters = false,
+    lowerSpace = false,
+    space = false,
+    punctuationMarks = false,
+    email = false,
+  }) {
+    try {
+      let regex = "";
+      if (numbers) {
+        regex = regex + "0-9";
+      }
+      if (latin) {
+        if (onlyLowerLetters) {
+          regex = regex + "a-z";
+        } else {
+          regex = regex + "A-Za-z";
+        }
+      }
+      if (cyrillic) {
+        if (onlyLowerLetters) {
+          regex = regex + "а-яё";
+        } else {
+          regex = regex + "А-ЯЁа-яё";
+        }
+      }
+      if (lowerSpace) {
+        regex = regex + "_";
+      }
+      if (space) {
+        regex = regex + " ";
+      }
+      if (punctuationMarks) {
+        regex = regex + "-:;.,!?_";
+      }
+      if (email) {
+        regex = regex + "@.";
+      }
+      return new RegExp(`[^${regex}]`, "g");
+    } catch (error) {
+      if (constant.DEBUG_CONSTANT) {
+        console.log(error);
+      }
+      return new RegExp(`[^_]`, "g");
+    }
+  }
+}
 
 // @ts-ignore
 export const Delay = (callbackAfterDelay, time = 1000) => {

@@ -45,11 +45,11 @@ class DjangoClass:
                 if DjangoClass.DefaultSettingsClass.get_error_logging_value():
                     req_inst = DjangoClass.DRFClass.RequestClass(request=request)
                     backend_models.LoggingModel.objects.create(
-                        username_slug_field=req_inst.user,
-                        ip_genericipaddress_field=req_inst.ip,
-                        request_path_slug_field=req_inst.path,
-                        request_method_slug_field=f"ERROR | {req_inst.method} | {req_inst.action_type}",
-                        error_text_field=f'error: {error}'
+                        username=req_inst.user,
+                        ip=req_inst.ip,
+                        path=req_inst.path,
+                        method=f"ERROR | {req_inst.method} | {req_inst.action_type}",
+                        error=f'error: {error}'
                     )
                     text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type, error,
                             datetime.datetime.now()]
@@ -71,9 +71,9 @@ class DjangoClass:
 
                 if DjangoClass.DefaultSettingsClass.get_actions_logging_value():
                     backend_models.LoggingModel.objects.create(
-                        request_path_slug_field="error_local",
-                        request_method_slug_field=function_error,
-                        error_text_field=f'error: {error}'
+                        path="error_local",
+                        method=function_error,
+                        error=f'error: {error}'
                     )
                     text = ["error_local", function_error, error, datetime.datetime.now()]
                     string = ''
@@ -98,11 +98,11 @@ class DjangoClass:
                 if DjangoClass.DefaultSettingsClass.get_actions_logging_value():
                     req_inst = DjangoClass.DRFClass.RequestClass(request=request)
                     backend_models.LoggingModel.objects.create(
-                        username_slug_field=req_inst.user,
-                        ip_genericipaddress_field=req_inst.ip,
-                        request_path_slug_field=req_inst.path,
-                        request_method_slug_field=f"ACTION | {req_inst.method} | {req_inst.action_type}",
-                        error_text_field=f'-'
+                        username=req_inst.user,
+                        ip=req_inst.ip,
+                        path=req_inst.path,
+                        method=f"ACTION | {req_inst.method} | {req_inst.action_type}",
+                        error=f'-'
                     )
                     text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type,
                             datetime.datetime.now()]
@@ -128,11 +128,11 @@ class DjangoClass:
             if DjangoClass.DefaultSettingsClass.get_response_logging_value():
                 req_inst = DjangoClass.DRFClass.RequestClass(request=request)
                 backend_models.LoggingModel.objects.create(
-                    username_slug_field=req_inst.user,
-                    ip_genericipaddress_field=req_inst.ip,
-                    request_path_slug_field=req_inst.path,
-                    request_method_slug_field=f"RESPONSE | {req_inst.method} | {req_inst.action_type}",
-                    error_text_field=f'response {response}'
+                    username=req_inst.user,
+                    ip=req_inst.ip,
+                    path=req_inst.path,
+                    method=f"RESPONSE | {req_inst.method} | {req_inst.action_type}",
+                    error=f'response {response}'
                 )
                 text = [req_inst.user, req_inst.ip, req_inst.path, req_inst.method, req_inst.action_type,
                         datetime.datetime.now()]
@@ -210,7 +210,7 @@ class DjangoClass:
                     self.user = None
                 try:
                     self.user_model = \
-                        backend_models.UserModel.objects.get(user_foreign_key_field=self.user)
+                        backend_models.UserModel.objects.get(user=self.user)
                 except Exception as error:
                     self.user_model = None
                 try:
@@ -350,103 +350,103 @@ class DjangoClass:
         @staticmethod
         def check_settings(request):
             try:
-                obj = backend_models.SettingsModel.objects.filter(type_char_field="logging_action")
+                obj = backend_models.SettingsModel.objects.filter(type="logging_action")
                 if obj.count() < 1:
                     backend_models.SettingsModel.objects.create(
-                        type_char_field="logging_action",
-                        char_field="Логирование действий: вкл/выкл(boolean_field)",
-                        boolean_field=True
+                        type="logging_action",
+                        char="Логирование действий: вкл/выкл(boolean)",
+                        boolean=True
                     )
             except Exception as error:
                 print(error)
 
             try:
-                objects = backend_models.SettingsModel.objects.filter(type_char_field="print_action")
+                objects = backend_models.SettingsModel.objects.filter(type="print_action")
                 if objects.count() < 1:
                     backend_models.SettingsModel.objects.create(
-                        type_char_field="print_action",
-                        char_field="Вывод в консоль действий, вкл/выкл(boolean_field)",
-                        boolean_field=False
+                        type="print_action",
+                        char="Вывод в консоль действий, вкл/выкл(boolean)",
+                        boolean=False
                     )
             except Exception as error:
                 print(error)
 
             try:
-                objects = backend_models.SettingsModel.objects.filter(type_char_field="logging_error")
+                objects = backend_models.SettingsModel.objects.filter(type="logging_error")
                 if objects.count() < 1:
                     backend_models.SettingsModel.objects.create(
-                        type_char_field="logging_error",
-                        char_field="Логирование ошибок, вкл/выкл(boolean_field)",
-                        boolean_field=True
+                        type="logging_error",
+                        char="Логирование ошибок, вкл/выкл(boolean)",
+                        boolean=True
                     )
             except Exception as error:
                 print(error)
 
             try:
-                objects = backend_models.SettingsModel.objects.filter(type_char_field="print_error")
+                objects = backend_models.SettingsModel.objects.filter(type="print_error")
                 if objects.count() < 1:
                     backend_models.SettingsModel.objects.create(
-                        type_char_field="print_error",
-                        char_field="Вывод в консоль ошибок, вкл/выкл(boolean_field)",
-                        boolean_field=False
+                        type="print_error",
+                        char="Вывод в консоль ошибок, вкл/выкл(boolean)",
+                        boolean=False
                     )
             except Exception as error:
                 print(error)
 
             try:
-                objects = backend_models.SettingsModel.objects.filter(type_char_field="logging_response")
+                objects = backend_models.SettingsModel.objects.filter(type="logging_response")
                 if objects.count() < 1:
                     backend_models.SettingsModel.objects.create(
-                        type_char_field="logging_response",
-                        char_field="Логирование ответов, вкл/выкл(boolean_field)",
-                        boolean_field=False
+                        type="logging_response",
+                        char="Логирование ответов, вкл/выкл(boolean)",
+                        boolean=False
                     )
             except Exception as error:
                 print(error)
 
             try:
-                objects = backend_models.SettingsModel.objects.filter(type_char_field="print_response")
+                objects = backend_models.SettingsModel.objects.filter(type="print_response")
                 if objects.count() < 1:
                     backend_models.SettingsModel.objects.create(
-                        type_char_field="print_response",
-                        char_field="Вывод в консоль ответов, вкл/выкл(boolean_field)",
-                        boolean_field=False
+                        type="print_response",
+                        char="Вывод в консоль ответов, вкл/выкл(boolean)",
+                        boolean=False
                     )
             except Exception as error:
                 print(error)
 
             try:
-                objects = backend_models.SettingsModel.objects.filter(type_char_field="scheduler_personal")
+                objects = backend_models.SettingsModel.objects.filter(type="scheduler_personal")
                 if objects.count() < 1:
                     backend_models.SettingsModel.objects.create(
-                        type_char_field="scheduler_personal",
-                        char_field="Планировщик обновления персонала из 1С",
-                        text_field="http://192.168.1.10/KM_1C/hs/iden/change/ | Web_adm_1c | 159159qqww!",
-                        integer_field=360,
-                        boolean_field=True
+                        type="scheduler_personal",
+                        char="Планировщик обновления персонала из 1С",
+                        text="http://192.168.1.10/KM_1C/hs/iden/change/ | Web_adm_1c | 159159qqww!",
+                        integer=360,
+                        boolean=True
                     )
                 else:
                     obj = objects[0]
-                    if obj.boolean_field:
+                    if obj.boolean:
                         try:
                             objects = backend_models.LoggingModel.objects.filter(
-                                request_path_slug_field="/scheduler_personal/"
+                                path="/scheduler_personal/"
                             )
                             update = True
                             if objects.count() > 0:
-                                if (objects[0].created_datetime_field +
-                                    datetime.timedelta(hours=6, minutes=obj.integer_field)).strftime(
+                                if (objects[0].created +
+                                    datetime.timedelta(hours=6, minutes=obj.integer)).strftime(
                                     '%Y-%m-%d %H:%M') >= \
                                         (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M'):
                                     update = False
                             if update:
                                 req_inst = DjangoClass.DRFClass.RequestClass(request=request)
                                 backend_models.LoggingModel.objects.create(
-                                    username_slug_field=req_inst.user,
-                                    ip_genericipaddress_field=req_inst.ip,
-                                    request_path_slug_field="/scheduler_personal/",
-                                    request_method_slug_field=req_inst.method + " | SCHEDULER",
-                                    error_text_field=f'-'
+                                    username=req_inst.user,
+                                    ip=req_inst.ip,
+                                    path="/scheduler_personal/",
+                                    method=req_inst.method + " | SCHEDULER",
+                                    error=f'-'
                                 )
                                 threading.Thread(
                                     target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_personal, args=()
@@ -457,18 +457,18 @@ class DjangoClass:
                 print(error)
 
             try:
-                objects = backend_models.SettingsModel.objects.filter(type_char_field="scheduler_superuser")
+                objects = backend_models.SettingsModel.objects.filter(type="scheduler_superuser")
                 if objects.count() < 1:
                     backend_models.SettingsModel.objects.create(
-                        type_char_field="scheduler_superuser",
-                        char_field="Планировщик создания стандартных суперпользователей",
-                        text_field="000000000000, 31284bogdan | Web_adm_1c, 159159qqww!",
-                        boolean_field=True
+                        type="scheduler_superuser",
+                        char="Планировщик создания стандартных суперпользователей",
+                        text="000000000000, 31284bogdan | Web_adm_1c, 159159qqww!",
+                        boolean=True
                     )
                 else:
                     obj = objects[0]
-                    if obj.boolean_field:
-                        users_strings = str(obj.text_field).strip().split("|")
+                    if obj.boolean:
+                        users_strings = str(obj.text).strip().split("|")
                         superusers = []
                         for user_strings in users_strings:
                             superusers.append(
@@ -477,18 +477,18 @@ class DjangoClass:
                             target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_default_superusers,
                             args=(superusers,)
                         ).start()
-                        obj.boolean_field = False
+                        obj.boolean = False
                         obj.save()
             except Exception as error:
                 print(error)
 
             try:
-                objects = backend_models.SettingsModel.objects.filter(type_char_field="scheduler_group")
+                objects = backend_models.SettingsModel.objects.filter(type="scheduler_group")
                 if objects.count() < 1:
                     backend_models.SettingsModel.objects.create(
-                        type_char_field="scheduler_group",
-                        char_field="Планировщик создания стандартных групп",
-                        text_field="user, moderator, superuser, " +
+                        type="scheduler_group",
+                        char="Планировщик создания стандартных групп",
+                        text="user, moderator, superuser, " +
                                    "moderator_oit, moderator_otiz, moderator_idea, " +
 
                                    "moderator_rational, moderator_rational_atp, moderator_rational_gtk, "
@@ -496,17 +496,17 @@ class DjangoClass:
                                    "moderator_rational_energoupravlenie, " +
 
                                    "",
-                        boolean_field=True
+                        boolean=True
                     )
                 else:
                     obj = objects[0]
-                    if obj.boolean_field:
-                        groups = [str(x).strip() for x in str(obj.text_field).strip().split(",") if len(x) > 1]
+                    if obj.boolean:
+                        groups = [str(x).strip() for x in str(obj.text).strip().split(",") if len(x) > 1]
                         threading.Thread(
                             target=DjangoClass.DefaultSettingsClass.SchedulerClass.scheduler_default_groups,
                             args=(groups,)
                         ).start()
-                        obj.boolean_field = False
+                        obj.boolean = False
                         obj.save()
             except Exception as error:
                 print(error)
@@ -514,57 +514,57 @@ class DjangoClass:
         @staticmethod
         def get_actions_logging_value():
             try:
-                obj = backend_models.SettingsModel.objects.filter(type_char_field="logging_action")[0]
-                return obj.boolean_field
+                obj = backend_models.SettingsModel.objects.filter(type="logging_action")[0]
+                return obj.boolean
             except Exception as error:
                 return False
 
         @staticmethod
         def get_actions_print_value():
             try:
-                obj = backend_models.SettingsModel.objects.filter(type_char_field="print_action")[0]
-                return obj.boolean_field
+                obj = backend_models.SettingsModel.objects.filter(type="print_action")[0]
+                return obj.boolean
             except Exception as error:
                 return False
 
         @staticmethod
         def get_error_logging_value():
             try:
-                obj = backend_models.SettingsModel.objects.filter(type_char_field="logging_error")[0]
-                return obj.boolean_field
+                obj = backend_models.SettingsModel.objects.filter(type="logging_error")[0]
+                return obj.boolean
             except Exception as error:
                 return False
 
         @staticmethod
         def get_error_print_value():
             try:
-                obj = backend_models.SettingsModel.objects.filter(type_char_field="print_error")[0]
-                return obj.boolean_field
+                obj = backend_models.SettingsModel.objects.filter(type="print_error")[0]
+                return obj.boolean
             except Exception as error:
                 return False
 
         @staticmethod
         def get_response_logging_value():
             try:
-                obj = backend_models.SettingsModel.objects.filter(type_char_field="logging_response")[0]
-                return obj.boolean_field
+                obj = backend_models.SettingsModel.objects.filter(type="logging_response")[0]
+                return obj.boolean
             except Exception as error:
                 return False
 
         @staticmethod
         def get_response_print_value():
             try:
-                obj = backend_models.SettingsModel.objects.filter(type_char_field="print_response")[0]
-                return obj.boolean_field
+                obj = backend_models.SettingsModel.objects.filter(type="print_response")[0]
+                return obj.boolean
             except Exception as error:
                 return False
 
         @staticmethod
         def get_salary_value():
             try:
-                obj = backend_models.SettingsModel.objects.filter(type_char_field="scheduler_personal")[0]
+                obj = backend_models.SettingsModel.objects.filter(type="scheduler_personal")[0]
                 objects = []
-                for x in str(obj.text_field).strip().split("|"):
+                for x in str(obj.text).strip().split("|"):
                     objects.append(str(x).strip())
                 return objects
             except Exception as error:
@@ -597,13 +597,13 @@ class DjangoClass:
                     )
 
                     class Worker:
-                        def __init__(self, date_time_: str, status_: str, username_: str, last_name_: str,
+                        def __init__(self, date_time_: str, moderate_status_: str, username_: str, last_name_: str,
                                      first_name_: str,
                                      patronymic_: str, personnel_number_: str, subdivision_: str,
                                      workshop_service_: str,
                                      department_site_: str, position_: str, category_: str):
                             self.date_time_ = date_time_
-                            self.status_ = status_
+                            self.moderate_status_ = moderate_status_
                             self.username_ = username_
                             self.last_name_ = last_name_
                             self.first_name_ = first_name_
@@ -632,7 +632,7 @@ class DjangoClass:
                     for user in json_data["global_objects"]:
                         worker = Worker(
                             date_time_=Worker.get_value(dict_=json_data, user_=user, key_="Период"),
-                            status_=Worker.get_value(dict_=json_data, user_=user, key_="Статус"),
+                            moderate_status_=Worker.get_value(dict_=json_data, user_=user, key_="Статус"),
                             username_=Worker.get_value(dict_=json_data, user_=user, key_="ИИН"),
                             last_name_=Worker.get_value(dict_=json_data, user_=user, key_="Фамилия"),
                             first_name_=Worker.get_value(dict_=json_data, user_=user, key_="Имя"),
@@ -667,16 +667,16 @@ class DjangoClass:
                             new_user = True
 
                         try:
-                            user_model = backend_models.UserModel.objects.get(
-                                user_foreign_key_field=user
+                            author = backend_models.UserModel.objects.get(
+                                user=user
                             )
                         except Exception as error:
-                            user_model = backend_models.UserModel.objects.create(
-                                user_foreign_key_field=user
+                            author = backend_models.UserModel.objects.create(
+                                user=user
                             )
 
                         if new_user:
-                            user_model.password_char_field = password
+                            author.password = password
 
                         if user.last_name != worker.last_name_:
                             user.last_name = worker.last_name_
@@ -684,36 +684,36 @@ class DjangoClass:
                             user.first_name = worker.first_name_
                         user.save()
 
-                        if worker.status_ == 'created':
-                            user_model.activity_boolean_field = True
-                        elif worker.status_ == 'changed':
-                            user_model.activity_boolean_field = True
-                        elif worker.status_ == 'disabled':
-                            user_model.activity_boolean_field = False
+                        if worker.moderate_status_ == 'created':
+                            author.is_active_account = True
+                        elif worker.moderate_status_ == 'changed':
+                            author.is_active_account = True
+                        elif worker.moderate_status_ == 'disabled':
+                            author.is_active_account = False
                         else:
-                            user_model.activity_boolean_field = False
-                        if user_model.last_name_char_field != worker.last_name_:
-                            user_model.last_name_char_field = worker.last_name_
-                        if user_model.first_name_char_field != worker.first_name_:
-                            user_model.first_name_char_field = worker.first_name_
-                        if user_model.patronymic_char_field != worker.patronymic_:
-                            user_model.patronymic_char_field = worker.patronymic_
-                        if user_model.personnel_number_slug_field != worker.personnel_number_:
-                            user_model.personnel_number_slug_field = worker.personnel_number_
-                        if user_model.subdivision_char_field != worker.subdivision_:
-                            user_model.subdivision_char_field = worker.subdivision_
-                        if user_model.workshop_service_char_field != worker.workshop_service_:
-                            user_model.workshop_service_char_field = worker.workshop_service_
-                        if user_model.department_site_char_field != worker.department_site_:
-                            user_model.department_site_char_field = worker.department_site_
-                        if user_model.position_char_field != worker.position_:
-                            user_model.position_char_field = worker.position_
-                        if user_model.category_char_field != worker.category_:
-                            user_model.category_char_field = worker.category_
-                        user_model.save()
+                            author.is_active_account = False
+                        if author.last_name != worker.last_name_:
+                            author.last_name = worker.last_name_
+                        if author.first_name != worker.first_name_:
+                            author.first_name = worker.first_name_
+                        if author.patronymic != worker.patronymic_:
+                            author.patronymic = worker.patronymic_
+                        if author.personnel_number != worker.personnel_number_:
+                            author.personnel_number = worker.personnel_number_
+                        if author.subdivision != worker.subdivision_:
+                            author.subdivision = worker.subdivision_
+                        if author.workshop_service != worker.workshop_service_:
+                            author.workshop_service = worker.workshop_service_
+                        if author.department_site != worker.department_site_:
+                            author.department_site = worker.department_site_
+                        if author.position != worker.position_:
+                            author.position = worker.position_
+                        if author.category != worker.category_:
+                            author.category = worker.category_
+                        author.save()
                         try:
-                            group_model = backend_models.GroupModel.objects.get_or_create(name_slug_field="user")[0]
-                            group_model.user_many_to_many_field.add(user_model)
+                            group_model = backend_models.GroupModel.objects.get_or_create(name="user")[0]
+                            group_model.users.add(author)
                         except Exception as error_:
                             pass
                         index += 1
@@ -743,13 +743,13 @@ class DjangoClass:
                         user.last_name = "Andrienko"
                         user.first_name = "Bogdan"
                         user.save()
-                        user_model = backend_models.UserModel.objects.get_or_create(user_foreign_key_field=user)[0]
-                        user_model.password_char_field = password_
-                        user_model.last_name_char_field = "Andrienko"
-                        user_model.first_name_char_field = "Bogdan"
-                        user_model.patronymic_char_field = ""
-                        user_model.position_char_field = "Administrator"
-                        user_model.save()
+                        author = backend_models.UserModel.objects.get_or_create(user=user)[0]
+                        author.password = password_
+                        author.last_name = "Andrienko"
+                        author.first_name = "Bogdan"
+                        author.patronymic = ""
+                        author.position = "Administrator"
+                        author.save()
                     except Exception as error__:
                         DjangoClass.LoggingClass.error_local(
                             error=error__,
@@ -762,9 +762,9 @@ class DjangoClass:
                     groups = ["user", "moderator", "superuser"]
                 for grp in groups:
                     try:
-                        action_model = backend_models.ActionModel.objects.get_or_create(action_slug_field=grp)[0]
-                        group_model = backend_models.GroupModel.objects.get_or_create(name_slug_field=grp)[0]
-                        group_model.action_many_to_many_field.add(action_model)
+                        action_model = backend_models.ActionModel.objects.get_or_create(action=grp)[0]
+                        group_model = backend_models.GroupModel.objects.get_or_create(name=grp)[0]
+                        group_model.actions.add(action_model)
                         group_model.save()
                     except Exception as error:
                         DjangoClass.LoggingClass.error_local(
@@ -786,10 +786,10 @@ class DjangoClass:
             return page
 
     @staticmethod
-    def check_access(user_model, slug=""):
+    def check_access(author, slug=""):
         if backend_models.GroupModel.objects.filter(
-                user_many_to_many_field=user_model,
-                name_slug_field=slug
+                users=author,
+                name=slug
         ).count() > 0:
             return True
         else:
