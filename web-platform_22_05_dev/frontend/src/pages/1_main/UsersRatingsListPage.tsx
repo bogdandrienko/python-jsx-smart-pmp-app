@@ -282,13 +282,7 @@ export const UsersRatingsListPage = () => {
                                     "Общий балл" участника:
                                   </td>
                                   <td className="small text-end">
-                                    <i
-                                      className={
-                                        -1 > 0
-                                          ? "fa-solid fa-list-ol text-success m-0 p-1"
-                                          : "fa-solid fa-list-ol text-danger m-0 p-1"
-                                      }
-                                    >
+                                    <i className="fa-solid fa-circle-question text-muted m-0 p-1">
                                       {`  0`}
                                     </i>
                                   </td>

@@ -196,7 +196,7 @@ def index(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_user_ratings(request):
     """
     django-rest-framework
@@ -344,7 +344,7 @@ def api_user_ratings(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([AllowAny])
+# @permission_classes([AllowAny])
 def api_captcha(request):
     """
     django-rest-framework
@@ -386,7 +386,7 @@ def api_captcha(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([AllowAny])
+# @permission_classes([AllowAny])
 def api_user_login(request):
     """
     django-rest-framework
@@ -448,11 +448,7 @@ def api_user_login(request):
                             }}
 
                             token = f"{username}_{password}_{backend_utils.DateTimeUtils.get_current_date()}"
-                            print("token: ", token)
-
                             token = make_password(token)
-                            print("token: ", token)
-
                             token_obj = backend_models.TokenModel.objects.get_or_create(user=user)[0]
                             token_obj.token = token
                             token_obj.updated = timezone.now()
@@ -505,16 +501,16 @@ def api_user_detail(request):
 
     try:
 
-        try:
-            token = str(request.META.get("HTTP_AUTHORIZATION", "1 0")).split(' ')[1]
-            print("token: ", token)
-            token_obj = backend_models.TokenModel.objects.get(token=token)
-            user = token_obj.user
-            print("user: ", user)
-            response = {"response": backend_serializers.UserSerializer(user, many=False).data}
-            return Response(response)
-        except Exception as error:
-            return JSONResponse(data="error", status=status.HTTP_401_UNAUTHORIZED)
+        # try:
+        #     token = str(request.META.get("HTTP_AUTHORIZATION", "1 0")).split(' ')[1]
+        #     print("token: ", token)
+        #     token_obj = backend_models.TokenModel.objects.get(token=token)
+        #     user = token_obj.user
+        #     print("user: ", user)
+        #     response = {"response": backend_serializers.UserSerializer(user, many=False).data}
+        #     return Response(response)
+        # except Exception as error:
+        #     return JSONResponse(data="error", status=status.HTTP_401_UNAUTHORIZED)
 
         # TODO request #################################################################################################
 
@@ -531,8 +527,7 @@ def api_user_detail(request):
 
                     # TODO action ######################################################################################
 
-                    response = {"response": backend_serializers.UserSerializer(user, many=False).data}
-                    # response = {"response": backend_serializers.UserSerializer(req_inst.user, many=False).data}
+                    response = {"response": backend_serializers.UserSerializer(req_inst.user, many=False).data}
 
                     # TODO response ####################################################################################
 
@@ -550,7 +545,7 @@ def api_user_detail(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_user_password_change(request):
     """
     django-rest-framework
@@ -619,7 +614,7 @@ def api_user_password_change(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([AllowAny])
+# @permission_classes([AllowAny])
 def api_user_recover(request):
     """
     django-rest-framework
@@ -719,7 +714,7 @@ def api_user_recover(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([AllowAny])
+# @permission_classes([AllowAny])
 def api_user_recover_email(request):
     """
     django-rest-framework
@@ -815,7 +810,7 @@ def api_user_recover_email(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([AllowAny])
+# @permission_classes([AllowAny])
 def api_user_recover_password(request):
     """
     django-rest-framework
@@ -881,7 +876,7 @@ def api_user_recover_password(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_notification(request):
     """
     django-rest-framework
@@ -990,7 +985,7 @@ def api_notification(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_notification_id(request, notification_id):
     """
     django-rest-framework
@@ -1034,7 +1029,7 @@ def api_notification_id(request, notification_id):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_user(request):
     """
     django-rest-framework
@@ -1095,7 +1090,7 @@ def api_user(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_idea(request):
     """
     django-rest-framework
@@ -1273,6 +1268,14 @@ def api_idea(request):
 
                     # TODO get_value ###################################################################################
 
+                    token = str(request.META.get("HTTP_AUTHORIZATION", "1 0")).split(' ')[1]
+                    print("token: ", token)
+                    token_obj = backend_models.TokenModel.objects.get(token=token)
+                    user = token_obj.user
+                    print("user: ", user)
+                    user_model = backend_models.UserModel.objects.get(user=user)
+                    print("user_model: ", user_model)
+
                     subdivision = req_inst.get_value(key="subdivision", default="")
                     sphere = req_inst.get_value(key="sphere", default="")
                     category = req_inst.get_value(key="category", default="")
@@ -1285,7 +1288,8 @@ def api_idea(request):
                     # TODO action ######################################################################################
 
                     backend_models.IdeaModel.objects.create(
-                        author=req_inst.user_model,
+                        # author=req_inst.user_model,
+                        author=user_model,
                         subdivision=subdivision,
                         sphere=sphere,
                         category=category,
@@ -1297,7 +1301,8 @@ def api_idea(request):
                     )
 
                     backend_models.NotificationModel.objects.create(
-                        author=req_inst.user_model,
+                        # author=req_inst.user_model,
+                        author=user_model,
                         target_group_model=backend_models.GroupModel.objects.get(
                             name="moderator_idea"
                         ),
@@ -1325,7 +1330,7 @@ def api_idea(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_idea_id(request, idea_id):
     """
     django-rest-framework
@@ -1454,7 +1459,7 @@ def api_idea_id(request, idea_id):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_idea_comment(request, idea_id):
     """
     django-rest-framework
@@ -1544,7 +1549,7 @@ def api_idea_comment(request, idea_id):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_idea_comment_id(request, comment_id):
     """
     django-rest-framework
@@ -1587,7 +1592,7 @@ def api_idea_comment_id(request, comment_id):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_idea_rating(request, idea_id):
     """
     django-rest-framework
@@ -1701,7 +1706,7 @@ def api_idea_rating(request, idea_id):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_salary(request):
     """
     django-rest-framework
@@ -2359,7 +2364,7 @@ def api_salary(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_vacation(request):
     """
     django-rest-framework
@@ -2549,7 +2554,7 @@ def api_basic_admin_user_temp(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_admin_export_users(request):
     """
     django-rest-framework
@@ -2736,7 +2741,7 @@ def api_admin_export_users(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_admin_create_users(request):
     """
     django-rest-framework
@@ -2904,7 +2909,7 @@ def api_admin_create_users(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_admin_terminal_reboot(request):
     """
     django-rest-framework
@@ -2980,7 +2985,7 @@ def api_admin_terminal_reboot(request):
 
 
 @api_view(http_method_names=HTTP_METHOD_NAMES)
-@permission_classes([IsAuthenticated])
+# @permission_classes([IsAuthenticated])
 def api_admin_recover_password(request):
     """
     django-rest-framework

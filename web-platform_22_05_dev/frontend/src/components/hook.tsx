@@ -64,15 +64,25 @@ export const useSortedPosts = (posts, sort) => {
 };
 
 // @ts-ignore
-export const usePosts = (posts, sort, query) => {
-  const sortedPosts = useSortedPosts(posts, sort);
-  const sortedAndSearchedPosts = useMemo(() => {
+export const usePosts1 = (objs, type, result, isAnswer, search) => {
+  // @ts-ignore
+  const objects = Object.entries(objs[type]);
+  // @ts-ignore
+  let sortedAndSearchedPosts = objects.filter((obj) =>
     // @ts-ignore
-    return sortedPosts.filter((post) =>
-      post.title.toLowerCase().includes(query)
+    obj["1"]["Результат"].includes(result)
+  );
+  if (isAnswer) {
+    sortedAndSearchedPosts = sortedAndSearchedPosts.filter((obj) =>
+      // @ts-ignore
+      obj["1"]["Ответ"].toLowerCase().includes(search.toLowerCase())
     );
-  }, [query, sortedPosts]);
-
+  } else {
+    sortedAndSearchedPosts = sortedAndSearchedPosts.filter((obj) =>
+      // @ts-ignore
+      obj["1"]["Вопрос"].toLowerCase().includes(search.toLowerCase())
+    );
+  }
   // @ts-ignore
   return sortedAndSearchedPosts;
 };
@@ -169,4 +179,18 @@ export const useDispatchResetCustom1 = (constant, dispatch) => {
   // return async function () {
   //   dispatch(callback);
   // };
+};
+
+// @ts-ignore
+export const usePosts = (posts, sort, query) => {
+  const sortedPosts = useSortedPosts(posts, sort);
+  const sortedAndSearchedPosts = useMemo(() => {
+    // @ts-ignore
+    return sortedPosts.filter((post) =>
+      post.title.toLowerCase().includes(query)
+    );
+  }, [query, sortedPosts]);
+
+  // @ts-ignore
+  return sortedAndSearchedPosts;
 };

@@ -204,8 +204,18 @@ class DjangoClass:
                     self.method = str(self.request.method).upper()
                 except Exception as error:
                     self.method = "GET"
+                # try:
+                #     self.user = User.objects.get(username=str(self.request.user.username))
+                # except Exception as error:
+                #     self.user = None
+                # try:
+                #     self.user_model = \
+                #         backend_models.UserModel.objects.get(user=self.user)
+                # except Exception as error:
+                #     self.user_model = None
                 try:
-                    self.user = User.objects.get(username=str(self.request.user.username))
+                    token = str(self.request.META.get("HTTP_AUTHORIZATION", "1 0")).split(' ')[1]
+                    self.user = backend_models.TokenModel.objects.get(token=token).user
                 except Exception as error:
                     self.user = None
                 try:
