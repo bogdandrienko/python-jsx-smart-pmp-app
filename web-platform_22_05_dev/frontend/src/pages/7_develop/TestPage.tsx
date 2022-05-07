@@ -21,7 +21,7 @@ export const TestPage = () => {
 
   const source_objs = json_obj;
   const [filter, setFilter, resetFilter] = hook.useStateCustom1({
-    type: "Современная история Казахстана",
+    type: "Сборный тест",
     result: "",
     isAnswer: false,
     search: "",
@@ -77,9 +77,12 @@ export const TestPage = () => {
                         <option value="Современная история Казахстана">
                           Современная история Казахстана
                         </option>
-                        <option value="Нелинейные системы автоматического регулирования">
-                          Нелинейные системы автоматического регулирования
+                        <option value="Философия">Философия</option>
+                        <option value="Информационно-коммуникационные технологии">
+                          Информационно-коммуникационные технологии
                         </option>
+                        <option value="Навыки обучения">Навыки обучения</option>
+                        <option value="Сборный тест">Сборный тест</option>
                       </select>
                     </label>
                     <label className="form-control-sm text-center m-0 p-1">
@@ -192,12 +195,6 @@ export const TestPage = () => {
                     {
                       // @ts-ignore
                       obj["1"]["Ответ"]
-                    }
-                  </td>
-                  <td>
-                    {
-                      // @ts-ignore
-                      obj["1"]["Результат"]
                     }
                   </td>
                 </tr>

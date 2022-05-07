@@ -44,6 +44,7 @@ HTTP_METHOD_NAMES = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 
 # TODO viewsets ########################################################################################################
 
+
 class ExamplesModelViewSet(viewsets.ModelViewSet):
     queryset = backend_models.ExamplesModel.objects.all()
     serializer_class = backend_serializers.ExamplesModelSerializer
