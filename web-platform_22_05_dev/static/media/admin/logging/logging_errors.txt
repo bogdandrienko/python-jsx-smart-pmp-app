@@ -1,0 +1,190 @@
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-08 17:36:49.429246
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-08 17:36:49.700245
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-08 17:36:49.797245
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-08 17:36:49.904246
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-05-08 17:37:10.538097
+
+None, 127.0.0.1, /todo_list/, GET, , User matching query does not exist., 2022-05-08 17:43:11.173207
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:43:13.502194
+
+None, 127.0.0.1, /todo_list/home/, GET, , User matching query does not exist., 2022-05-08 17:44:03.176114
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:05.223627
+
+None, 127.0.0.1, /todo_list/todo/create/, GET, , User matching query does not exist., 2022-05-08 17:44:07.312562
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:09.893784
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:11.024434
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:11.542218
+
+None, 127.0.0.1, /todo_list/todo/1/, GET, , User matching query does not exist., 2022-05-08 17:44:12.425734
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:13.751208
+
+None, 127.0.0.1, /todo_list/todo/1/, GET, , User matching query does not exist., 2022-05-08 17:44:14.813617
+
+None, 127.0.0.1, /todo_list/todo/1/update/, GET, , User matching query does not exist., 2022-05-08 17:44:15.609110
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:18.329465
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:19.596652
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:20.997709
+
+None, 127.0.0.1, /todo_list/todo/create/, GET, , User matching query does not exist., 2022-05-08 17:44:21.965451
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:23.934488
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:25.169226
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:44:31.993442
+
+None, 127.0.0.1, /todo_list/todo/create/, GET, , User matching query does not exist., 2022-05-08 17:44:33.660687
+
+None, 127.0.0.1, /todo_list/home/, GET, , User matching query does not exist., 2022-05-08 17:45:49.602923
+
+None, 127.0.0.1, /todo_list/, GET, , User matching query does not exist., 2022-05-08 17:45:50.416739
+
+None, 127.0.0.1, /todo_list/home/, GET, , User matching query does not exist., 2022-05-08 17:45:52.503416
+
+None, 127.0.0.1, /todo_list/, GET, , User matching query does not exist., 2022-05-08 17:45:52.950704
+
+None, 127.0.0.1, /todo_list/, GET, , User matching query does not exist., 2022-05-08 17:46:06.613592
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-08 17:46:07.482111
+
+None, 127.0.0.1, /todo_list/, GET, , User matching query does not exist., 2022-05-08 17:46:12.713705
+
+None, 127.0.0.1, /todo_list/home/, GET, , User matching query does not exist., 2022-05-08 17:47:15.090460
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:47:19.405824
+
+None, 127.0.0.1, /todo_list/home/, GET, , User matching query does not exist., 2022-05-08 17:47:21.599750
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:47:27.561827
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:47:29.434219
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 17:47:30.210206
+
+None, 127.0.0.1, /todo_list/todo/2/, GET, , User matching query does not exist., 2022-05-08 17:47:31.212567
+
+None, 127.0.0.1, /todo_list/home/, GET, , User matching query does not exist., 2022-05-08 17:47:32.549917
+
+None, 127.0.0.1, /todo_list/home/, GET, , User matching query does not exist., 2022-05-08 17:52:26.307670
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:02:48.466052
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:03:23.015112
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:03:31.699189
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:03:57.933540
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:04:41.492593
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:05:45.955953
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:06:06.556991
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:06:31.594692
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:06:56.067379
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 18:09:51.661784
+
+None, 127.0.0.1, /todo_list/todo/create/, GET, , User matching query does not exist., 2022-05-08 18:09:53.544071
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 18:09:58.403663
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 18:10:02.998982
+
+None, 127.0.0.1, /todo_list/todo/2/, GET, , User matching query does not exist., 2022-05-08 18:10:04.235095
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-08 18:10:14.160783
+
+None, 127.0.0.1, /todo_list/todo/2/, GET, , User matching query does not exist., 2022-05-08 18:10:16.075437
+
+None, 127.0.0.1, /recepies_bank/recipe/1/, GET, , User matching query does not exist., 2022-05-08 18:11:08.418192
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-09 18:48:39.787744
+
+None, 127.0.0.1, /todo_list/, GET, , User matching query does not exist., 2022-05-09 18:48:45.388968
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:48:48.435747
+
+None, 127.0.0.1, /todo_list/todo/2/, GET, , User matching query does not exist., 2022-05-09 18:48:50.208477
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:48:51.525407
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:48:52.541714
+
+None, 127.0.0.1, /todo_list/todo/2/, GET, , User matching query does not exist., 2022-05-09 18:48:54.334007
+
+None, 127.0.0.1, /todo_list/todo/2/update/, GET, , User matching query does not exist., 2022-05-09 18:48:55.211973
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:48:56.299674
+
+None, 127.0.0.1, /todo_list/todo/create/, GET, , User matching query does not exist., 2022-05-09 18:48:57.480215
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:48:59.889870
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-05-09 18:49:00.842779
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:49:01.849266
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:49:02.988712
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:49:03.904752
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:49:04.676240
+
+None, 127.0.0.1, /todo_list/todo/2/, GET, , User matching query does not exist., 2022-05-09 18:49:13.648642
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 18:49:14.954082
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 19:19:22.504983
+
+None, 127.0.0.1, /django/idea_list/, GET, , User matching query does not exist., 2022-05-09 19:22:59.516471
+
+None, 127.0.0.1, /django/idea_list/innovation/, GET, , User matching query does not exist., 2022-05-09 19:23:05.830876
+
+None, 127.0.0.1, /django/idea_list/optimization/, GET, , User matching query does not exist., 2022-05-09 19:23:06.269383
+
+None, 127.0.0.1, /django/idea_list/industry/, GET, , User matching query does not exist., 2022-05-09 19:23:06.789865
+
+None, 127.0.0.1, /django/idea_list/other/, GET, , User matching query does not exist., 2022-05-09 19:23:07.299320
+
+None, 127.0.0.1, /django/idea_list/idea_change_visibility/, GET, , User matching query does not exist., 2022-05-09 19:23:08.130535
+
+None, 127.0.0.1, /django/idea_create/, GET, , User matching query does not exist., 2022-05-09 19:23:43.902381
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-09 19:23:59.009904
+
+None, 127.0.0.1, /todo_list/, GET, , User matching query does not exist., 2022-05-09 19:27:38.849464
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 19:27:44.517425
+
+None, 127.0.0.1, /todo_list/todo/create/, GET, , User matching query does not exist., 2022-05-09 19:27:49.068254
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 19:27:50.286290
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 19:27:53.596219
+
+None, 127.0.0.1, /todo_list/todo/create/, GET, , User matching query does not exist., 2022-05-09 19:27:54.626005
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 19:27:57.216778
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 19:29:50.080802
+
+None, 127.0.0.1, /todo_list/todo/create/, GET, , User matching query does not exist., 2022-05-09 19:29:51.205904
+
+None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 19:29:53.220684

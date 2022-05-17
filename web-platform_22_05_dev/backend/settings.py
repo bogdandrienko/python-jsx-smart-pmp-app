@@ -29,7 +29,7 @@ SQLITE = True
 if DEBUG:
     ALLOWED_HOSTS = ['*']
 else:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.157', '89.218.132.130', 'web.km.kz']
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '192.168.1.157', '192.168.1.68', '89.218.132.130', 'web.km.kz']
 CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
@@ -48,6 +48,8 @@ INSTALLED_APPS = [
 
     'backend.apps.AppAdminConfig',
     'backend_native',
+
+    'app_todo_list'
 ]
 
 MIDDLEWARE = [
@@ -67,7 +69,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'react', BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates', BASE_DIR / 'react'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,6 +80,7 @@ TEMPLATES = [
 
                 'django.template.context_processors.request',
                 'backend_native.context_processors.user_counter',
+                'app_todo_list.context_processors.todo_counter',
             ],
         },
     },
@@ -144,25 +147,27 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 if DEBUG:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = Path(BASE_DIR, 'staticroot/')
+    STATIC_URL = 'static/'
+    STATIC_ROOT = Path(BASE_DIR, 'staticroot')
     STATIC_DIR = Path(BASE_DIR, 'static')
     STATICFILES_DIRS = [
         Path(BASE_DIR, 'frontend/public/static'),
         # Path(BASE_DIR, 'frontend_test/public/static'),
-        Path(BASE_DIR, 'static')
+        Path(BASE_DIR, 'static'),
+        Path(BASE_DIR, 'static_external'),
     ]
 else:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = Path(BASE_DIR, 'static/')
+    STATIC_URL = 'static/'
+    STATIC_ROOT = Path(BASE_DIR, 'static')
     STATIC_DIR = Path(BASE_DIR, 'static')
     STATICFILES_DIRS = [
+        Path(BASE_DIR, 'static_external'),
         Path(BASE_DIR, 'react/production/static'),
         # Path(BASE_DIR, 'react/test/static'),
     ]
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = Path(BASE_DIR, 'static/media/')
+MEDIA_URL = 'media/'
+MEDIA_ROOT = Path(BASE_DIR, 'static/media')
 
 
 # Default primary key field type

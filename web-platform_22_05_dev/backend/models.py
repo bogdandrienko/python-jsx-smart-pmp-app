@@ -1799,7 +1799,7 @@ class TokenModel(models.Model):
     Модель, которая содержит токен пользователя django
     """
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         db_column='user_db_column',
         db_index=True,
         db_tablespace='user_db_tablespace',
@@ -1811,7 +1811,7 @@ class TokenModel(models.Model):
         null=True,
         default=None,
         verbose_name='Пользователь',
-        help_text='<small class="text-muted">ForeignKey</small><hr><br>',
+        help_text='<small class="text-muted">OneToOneField</small><hr><br>',
         to=User,
         on_delete=models.SET_NULL,
         related_name='token_user',
@@ -1871,8 +1871,8 @@ class TokenModel(models.Model):
 
     class Meta:
         app_label = 'backend'
-        ordering = ('-created',)
-        verbose_name = 'Лог'
+        ordering = ('-updated',)
+        verbose_name = 'Токен'
         verbose_name_plural = 'Admin 7, Токены'
         db_table = 'token_admin_model_table'
 

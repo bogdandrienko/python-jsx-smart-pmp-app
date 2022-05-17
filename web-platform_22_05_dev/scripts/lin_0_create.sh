@@ -10,7 +10,8 @@ sudo apt -y install build-essential python3-dev python3-pip python3-venv libpq-d
 sudo snap install --classic certbot
 sudo usermod -aG bogdan www-data
 # sudo usermod -aG sudo bogdan
-SETUP IP CONFIGS
+# SETUP IP CONFIGS
+sudo apt install net-tools
 sudo reboot
 
 # sudo ufw enable

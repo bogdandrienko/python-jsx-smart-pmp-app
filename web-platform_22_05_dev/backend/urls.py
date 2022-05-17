@@ -102,13 +102,15 @@ urlpatterns = [
     # TODO develop #####################################################################################################
 
     path('django/', include('backend_native.urls')),
-    
+    path('todo_list/', include('app_todo_list.urls')),
+    path('recepies_bank/', include('app_recepies_bank.urls')),
+
     path('test/', backend_views.test, name='test'),
 ]
 
 # TODO redirect from reboot react app ##################################################################################
 
-urlpatterns += [re_path(r'^.*$', lambda request: redirect('', permanent=False), name='redirect')]
+# urlpatterns += [re_path(r'^.*$', lambda request: redirect('', permanent=False), name='redirect')]
 
 # TODO default settings ################################################################################################
 

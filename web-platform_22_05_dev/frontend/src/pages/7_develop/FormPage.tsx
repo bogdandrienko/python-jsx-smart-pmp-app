@@ -13,6 +13,8 @@ export function FormPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  let username1 = "";
+
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };

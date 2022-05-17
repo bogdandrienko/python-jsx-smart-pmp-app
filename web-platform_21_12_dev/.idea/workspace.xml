@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3bbcadc-d872-4431-8ed9-561e41ab5286" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../it academy/study program.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +25,8 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)"
@@ -106,6 +108,7 @@
       <workItem from="1639723262785" duration="366000" />
       <workItem from="1648453829514" duration="636000" />
       <workItem from="1651221366533" duration="265000" />
+      <workItem from="1651940528161" duration="489000" />
     </task>
     <servers />
   </component>
