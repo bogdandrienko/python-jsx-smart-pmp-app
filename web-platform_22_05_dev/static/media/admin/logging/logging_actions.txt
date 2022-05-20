@@ -20,3 +20,13 @@ None, 127.0.0.1, /api/user/detail/, GET, userDetailStore, 2022-05-09 18:48:39.99
 None, 127.0.0.1, /, GET, , 2022-05-09 19:23:59.034536
 
 None, 127.0.0.1, /api/user/detail/, GET, userDetailStore, 2022-05-09 19:23:59.154632
+
+None, 127.0.0.1, /, GET, , 2022-05-18 14:29:10.034514
+
+None, 127.0.0.1, /api/user/detail/, GET, userDetailStore, 2022-05-18 14:29:10.208332
+
+None, 127.0.0.1, /api/captcha/, GET, captchaCheckStore, 2022-05-18 14:29:16.815404
+
+None, 127.0.0.1, /api/user/login/, GET, userLoginStore, 2022-05-18 14:29:19.841945
+
+000000000000, 127.0.0.1, /api/user/detail/, GET, userDetailStore, 2022-05-18 14:29:20.183154

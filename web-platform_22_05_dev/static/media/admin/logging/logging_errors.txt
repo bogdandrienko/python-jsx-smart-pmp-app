@@ -188,3 +188,7 @@ None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exis
 None, 127.0.0.1, /todo_list/todo/create/, GET, , User matching query does not exist., 2022-05-09 19:29:51.205904
 
 None, 127.0.0.1, /todo_list/todo/list/, GET, , User matching query does not exist., 2022-05-09 19:29:53.220684
+
+None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-05-18 14:29:10.047209
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-05-18 14:29:31.054499

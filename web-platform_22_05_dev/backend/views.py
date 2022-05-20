@@ -1130,6 +1130,7 @@ def api_idea(request):
                     # TODO action ######################################################################################
 
                     # TODO onlyMonth
+
                     ideas = backend_models.IdeaModel.objects.all().order_by("-updated")
                     if only_month:
                         now = (datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')
@@ -1752,8 +1753,6 @@ def api_salary(request):
                     h = httplib2.Http(
                         os.path.dirname(os.path.abspath('__file__')) + "/static/media/data/temp/get_salary_data"
                     )
-                    _login = 'Web_adm_1c'
-                    _password = '159159qqww!'
                     h.add_credentials(_login, _password)
                     response, content = h.request(url)
 

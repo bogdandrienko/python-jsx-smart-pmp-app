@@ -6,12 +6,12 @@ if system on VirtualBox:
 
 sudo apt-get update -y
 sudo apt upgrade -y
-sudo apt -y install build-essential python3-dev python3-pip python3-venv libpq-dev gunicorn nginx unixodbc-dev htop postgresql postgresql-contrib
-sudo snap install --classic certbot
+sudo apt -y install build-essential python3-dev python3-pip python3-venv libpq-dev gunicorn nginx unixodbc-dev htop postgresql postgresql-contrib net-tools git
+sudo snap -y install --classic certbot
+sudo snap -y install gh
 sudo usermod -aG bogdan www-data
 # sudo usermod -aG sudo bogdan
 # SETUP IP CONFIGS
-sudo apt install net-tools
 sudo reboot
 
 # sudo ufw enable
