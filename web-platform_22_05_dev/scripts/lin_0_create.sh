@@ -6,9 +6,13 @@ if system on VirtualBox:
 
 sudo apt-get update -y
 sudo apt upgrade -y
+sudo apt install openssh-server
+sudo systemctl start ssh
+sudo systemctl enable ssh
+###########
 sudo apt -y install build-essential python3-dev python3-pip python3-venv libpq-dev gunicorn nginx unixodbc-dev htop postgresql postgresql-contrib net-tools git
-sudo snap -y install --classic certbot
-sudo snap -y install gh
+sudo snap install --classic certbot
+sudo snap install gh
 sudo usermod -aG bogdan www-data
 # sudo usermod -aG sudo bogdan
 # SETUP IP CONFIGS
@@ -37,12 +41,12 @@ pip install --upgrade pip
 pip install wheel
 pip install Django gunicorn psycopg2 pyodbc django-cors-headers Pillow
 pip install -r requirements.txt
-django-admin startproject backend .
+django-admin startproject backend_settings .
 
 # DJANGO SETTINGS
 ########################################################################################################################
 
-nano backend/settings.py
+nano backend_settings/settings.py
 <file>
 ...
 DEBUG = False
@@ -53,9 +57,9 @@ ALLOWED_HOSTS = ["*"]
 python manage.py makemigrations
 python manage.py migrate
 python manage.py collectstatic
-# python manage.py createsuperuser
+# python manage.py createsuperuser --username bogdan --email bogdandrienko@gmail.com
 # python manage.py runserver 0.0.0.0:8000
-# gunicorn --bind 0.0.0.0:8000 backend.wsgi
+# gunicorn --bind 0.0.0.0:8000 backend_settings.wsgi
 
 # GUNICORN
 ########################################################################################################################

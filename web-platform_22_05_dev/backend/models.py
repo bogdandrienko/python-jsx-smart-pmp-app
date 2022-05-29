@@ -1794,6 +1794,15 @@ class UserModel(models.Model):
                f'{self.position} | {self.id} | {self.user}'
 
 
+@receiver(post_save, sender=User)
+def create_user_model(sender, instance, created, **kwargs):
+    if created:
+        try:
+            UserModel.objects.get_or_create(user=instance)
+        except Exception as error:
+            pass
+
+
 class TokenModel(models.Model):
     """
     Модель, которая содержит токен пользователя django
@@ -1878,15 +1887,6 @@ class TokenModel(models.Model):
 
     def __str__(self):
         return f"{self.user} | {self.created} | {self.updated}"
-
-
-@receiver(post_save, sender=User)
-def create_user_model(sender, instance, created, **kwargs):
-    if created:
-        try:
-            UserModel.objects.get_or_create(user=instance)
-        except Exception as error:
-            pass
 
 
 class ActionModel(models.Model):
