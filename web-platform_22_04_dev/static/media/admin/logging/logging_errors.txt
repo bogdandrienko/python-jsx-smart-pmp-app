@@ -932,3 +932,5 @@ None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-29 23:26
 None, 127.0.0.1, /admin/login/, POST, , User matching query does not exist., 2022-04-29 23:26:08.378737
 
 None, 127.0.0.1, /, GET, , User matching query does not exist., 2022-04-29 23:26:08.476015
+
+error_local, DefaultSettingsClass.SchedulerClass.scheduler_personal, [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера, 2022-06-13 15:05:33.919821
