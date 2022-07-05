@@ -34726,3 +34726,29 @@ Bogdan, 127.0.0.1, /home/, GET, 2022-04-06 14:44:10.233245
 Bogdan, 127.0.0.1, /account_generate_passwords/, GET, 2022-04-06 14:44:13.639264
 
 Bogdan, 127.0.0.1, /account_generate_passwords/, POST, 2022-04-06 14:44:37.470822
+
+, 127.0.0.1, /, GET, 2022-06-21 18:55:24.286938
+
+, 127.0.0.1, /account_login/, GET, 2022-06-21 18:55:26.977956
+
+, 127.0.0.1, /account_login/, POST, 2022-06-21 18:55:28.401022
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2022-06-21 18:55:30.760952
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2022-06-21 18:55:34.667727
+
+Bogdan, 127.0.0.1, /idea_change/1/, GET, 2022-06-21 18:55:45.639503
+
+Bogdan, 127.0.0.1, /idea_rating/, GET, 2022-06-21 18:55:58.456909
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2022-06-21 18:56:02.395959
+
+Bogdan, 127.0.0.1, /idea_list/industry/, GET, 2022-06-21 18:57:41.776321
+
+Bogdan, 127.0.0.1, /idea_view/1/, GET, 2022-06-21 18:57:48.367950
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2022-06-21 18:58:02.974934
+
+Bogdan, 127.0.0.1, /idea_create/, GET, 2022-06-21 19:00:58.053069
+
+Bogdan, 127.0.0.1, /idea_list/All/, GET, 2022-06-21 19:01:00.869954
