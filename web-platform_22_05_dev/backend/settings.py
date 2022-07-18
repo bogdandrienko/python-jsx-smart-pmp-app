@@ -179,21 +179,13 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 FROM_EMAIL = 'bogdandrienko@gmail.com'
 EMAIL_ADMIN = 'bogdandrienko@gmail.com'
 # yandex
-yandex = False
-if yandex:
-    EMAIL_HOST = 'smtp.yandex.ru'
-    EMAIL_HOST_USER = 'eevee.cycle'
-    EMAIL_HOST_PASSWORD = '31284bogdan'
-    EMAIL_PORT = 465
-    EMAIL_USE_TLS = False
-    EMAIL_USE_SSL = True
-else:
-    EMAIL_HOST = '192.168.1.100'
-    EMAIL_HOST_USER = ''
-    EMAIL_HOST_PASSWORD = ''
-    EMAIL_PORT = 25
-    EMAIL_USE_TLS = True
-    EMAIL_USE_SSL = False
+
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_HOST_USER = 'eevee.cycle'
+EMAIL_HOST_PASSWORD = '31284bogdan'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 host: EMAIL_HOST
 port: EMAIL_PORT
