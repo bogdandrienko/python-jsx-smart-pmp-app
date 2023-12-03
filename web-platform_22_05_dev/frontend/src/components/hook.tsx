@@ -100,6 +100,12 @@ export const useSelectorCustom2 = (slice) => {
   return useSelector((state) => state[slice.name]);
 };
 
+
+
+
+
+
+
 // @ts-ignore
 export const useStateCustom1 = (initialState) => {
   // @ts-ignore
@@ -110,6 +116,10 @@ export const useStateCustom1 = (initialState) => {
   }
   return [variable, setVariable, setDefault];
 };
+
+
+
+
 
 // @ts-ignore
 export const useObserverCustom1 = ({
