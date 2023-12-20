@@ -658,6 +658,9 @@ export class RegularExpression {
 
 // @ts-ignore
 export const Delay = (callbackAfterDelay, time = 1000) => {
+  /*
+
+  */
   try {
     new Promise((resolve) => setTimeout(resolve, time)).then(() => {
       callbackAfterDelay();
